@@ -5,6 +5,7 @@ import FlavorTypeArray from "../../assets/FlavorTypeArray";
 import dietaryOptions from "../../assets/Dietary";
 import flippedchef from "../../assets/images/flippedchef.png"
 import kitchen from "../../assets/images/kitchen.png"
+import cooking from "../../assets/images/cooking.svg"
 
 export default function ChefSurprise() {
     const [entree, setEntree] = useState("");
@@ -14,12 +15,14 @@ export default function ChefSurprise() {
     const [dietaryDetails, setDietaryDetails] = useState("");
     const [chatBotReply, setChatBotReply] = useState("");
     const [loading, setLoading] = useState(false)
+    const [renderMenu, setRenderMenu] =useState(false)
 
    
     const apiKey = "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"
 
 
-  async function handleOrder() {
+    async function handleOrder() {
+      setLoading(true)
     const test = `I'd like to order an ${entree} for ${
         headCount !== 1 ? 'people' : 'person'
             }, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal.`;
@@ -41,9 +44,9 @@ export default function ChefSurprise() {
                         });
                 const result = await response.json();
                 if (response.ok) {
-                    setLoading(true)
+                    setLoading(false)
                     setChatBotReply(result.choices[0].message.content)
-                // console.log(result.choices[0].message.content);
+                console.log(result.choices[0].message.content);
                 } else {
                 console.error(result);
                 }
@@ -78,36 +81,49 @@ console.log(chatBotReply);
     }
     console.log(chatBotReply)
 return (
-    <div className="dashboard-container">
+    <div className="chef-surprise-container">
         <img className="chef-background-img" src={kitchen} alt="Chef Background" />
             <div className="chef-img-div">
                 <img className="chef-img" src={flippedchef} alt="Chef" />
             </div>
                 <div className="clipboard-div">
-                    <img className="clipboard-img"
-                        src={clipboard} alt="Clipboard" />
-                <div className="menu-text-div">
-                    <h3 className="menu-text">Menu</h3>
-                 </div>  
-            <div className="menu-div">         
-            <h2 className="menu-item-text">Entree:</h2>
-                            <select
-                                onChange={handleEntree}
-                                value={entree}
-                                className="menu-list-items"
-                                >
-                                {MealTypeArray.map((item) => (
-                                    <option
-                                        value={item.name}
-                                        key={item.id}
-                                        >
-                                        {item.name}
-                                    </option>
-                                ))}
-                            </select>
-                        <h2 className="menu-item-text">
-                                HeadCount: <span className="headcount-text">{headCount} </span> {headCount != 1 ? "people" : "person"}
-                        </h2>
+                        {/* <img className="clipboard-img"
+                            src={clipboard} alt="Clipboard" /> */}
+                                <div 
+                                    className="menu-title-text-container"
+                                    >
+                                        <h3 className="menu-text">Menu</h3>
+                                            </div>
+            <img
+                className="cooking-animation"
+                src={cooking}
+                style={{ display: loading ? 'flex' : 'none' }}
+            />
+            <div
+                className="menu-items-container"
+                style={{ display: loading ? 'none' : 'flex' }}
+            >         
+                                                    <div className="entree-container">
+                                                        <h2 className="menu-item-text">Entree:</h2>
+                                                            <select
+                                                                    onChange={handleEntree}
+                                                                    value={entree}
+                                                                    className="menu-list-items"
+                                                                    >
+                                                                    {MealTypeArray.map((item) => (
+                                                            <option
+                                                                value={item.name}
+                                                                key={item.id}
+                                                                >
+                                                                {item.name}
+                                                            </option>
+                                                        ))}
+                                                            </select>
+                                                    </div>
+
+                <div className="headcount-div">
+                    <h2 className="menu-item-text"> HeadCount: </h2>
+                    <h2 className="headcount-text">{headCount}</h2>
                             <input
                                 className="headcount-slider"
                                 type="range"
@@ -118,8 +134,10 @@ return (
                                 step="1"
                                 value={headCount}
                                 onChange={(e) => handleHeadCount(e.target.value)}
-                            />
-                        <h2 className="menu-item-text">Flavor:</h2>
+                            /></div>    
+                <div className="flavor-container">
+                    
+                     <h2 className="menu-item-text">Flavor:</h2>
                             <select
                                 onChange={handleFlavorChange}
                                 value={selectedFlavor}
@@ -133,9 +151,15 @@ return (
                                         {item.name}
                                     </option>
                                 ))}
-              </select>
-            <h3 className="flavor-details-text">{flavorDetails}</h3>
-            <h2 className="menu-item-text">Dietary Preference:</h2>
+                    </select>
+                    </div>
+                    <div className="flavor-details-container">
+                          <h3 className="flavor-details-text">{flavorDetails}</h3>
+                    </div>
+          
+                        
+                <div className="dietary-container">
+                    <h2 className="menu-item-text">Focus:</h2>
                             <select
                                 onChange={handleDietaryDetails}
                                 value={dietaryDetails}
@@ -149,12 +173,14 @@ return (
                                         {item.name}
                                     </option>
                                 ))}
-            </select>
-         </div>    
+                    </select>
+                </div>           
             <div className="order-btn-div">
 
-                <button className="order-btn" onClick={handleOrder}>Send Order To Kitchen</button>
+                <button className="order-btn" onClick={handleOrder}>Order</button>
             </div>
+         </div>    
+            
                 
                                  
         </div>
