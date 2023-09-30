@@ -1,0 +1,264 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff7ed;
+	font-family: "Inter", sans-serif;
+}
+
+a {
+	text-decoration: unset;
+	color: unset;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+body {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.site-wrapper {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	height: 110px;
+	display: flex;
+	align-items: center;
+	padding-block: 10px;
+}
+
+header .site-logo {
+	color: black;
+	margin-right: auto;
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size: 35px;
+}
+
+header a {
+	text-decoration: none;
+	color: black;
+	font-weight: 600;
+	padding: 5px 40px;
+	font-size: 25px;
+}
+
+header a:hover {
+	color: #161616;
+	text-decoration: underline;
+}
+
+footer {
+	background-color: #161616;
+	color: #aaaaaa;
+	height: 74px;
+	display: flex;
+	flex-shrink: 0;
+	justify-content: center;
+	align-items: center;
+	margin-top: auto;
+	font-weight: 500;
+	position: relative;
+}
+
+.link-button:hover {
+	transform: translate(1px, 1px);
+}
+.dashboard-nav {
+	display: flex;
+	margin-bottom: 10px;
+	margin-left: 20px;
+}
+.dashboard-nav a {
+	text-decoration: none;
+	color: #4d4d4d;
+	font-weight: 500;
+	padding: 5px 20px;
+}
+
+.dashboard-nav a:hover {
+	color: #161616;
+	text-decoration: underline;
+	font-weight: 600;
+}
+
+.dashboard-container {
+	display: flex;
+	width: 1000px;
+	height: 500px;
+	position: relative;
+	background-color: aquamarine;
+	border-radius: 30px 30px 0px 0px;
+	margin-bottom: 0%;
+}
+
+.chef-background-img {
+	width: 1000px;
+	height: 600px;
+	position: absolute;
+	border-radius: 30px 30px 0px 0px;
+	object-fit: fill;
+}
+
+.chef-img {
+	padding: 0%;
+	width: 450px;
+	height: auto;
+	position: absolute;
+	bottom: -60px;
+	left: -100px;
+}
+.chef-bubble-img {
+	position: absolute;
+	width: 250px;
+	left: 140px;
+	top: -10px;
+}
+
+.blinking-cursor {
+	position: absolute;
+	width: 90px;
+	height: 100px;
+	color: black;
+	font-size: 6px;
+	animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: #333;
+	}
+}
+
+.chef-surprise-div {
+	display: flex;
+	width: auto;
+	height: auto;
+	position: absolute;
+	z-index: 1000;
+	margin-top: 10px;
+	left: 700px;
+	animation: chefSurpriseDiv 1s ease-in-out;
+	justify-content: center;
+	background: #333;
+}
+
+@keyframes chefSurpriseDiv {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.clipboard-img {
+	width: 700px;
+	height: 565px;
+	position: absolute;
+}
+
+.menu-text {
+	font-size: 30px;
+	position: absolute;
+	right: 50;
+	top: 15%;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.menu-div {
+	display: grid;
+	margin: auto;
+	margin-top: 100px;
+	width: 300px;
+	height: 400px;
+	grid-template-columns: 0fr 3fr;
+	grid-template-rows: repeat(2, 90px 10px 100px);
+	gap: 20px;
+	position: absolute;
+	align-items: center;
+	justify-content: center;
+}
+
+.menu-item-text {
+	text-align: center;
+	font-size: 19px;
+}
+
+.menu-list-items {
+	text-align: center;
+	border-radius: 10px;
+	width: 200px;
+	box-shadow: 1px 1px 1px 1px gray;
+}
+
+.menu-list-items:hover {
+	margin: auto;
+	padding: auto;
+	font-size: 16px;
+	font-style: bold;
+	font-weight: 900;
+}
+
+.headcount-slider {
+	display: flex;
+	justify-content: center;
+	width: 150px;
+}
+
+.headcount-text {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px coral;
+	color: coral;
+	width: 35px;
+	height: 35px;
+	border-radius: 100px;
+	font-weight: 900;
+}
+.flavor-details-text {
+	position: absolute;
+	font-size: 16px;
+	color: coral;
+	margin-top: 100px;
+	padding-top: 0px;
+	font-style: italic;
+}
+.button-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	height: 100px;
+	width: 400px;
+	top: 400px;
+}
+.order-btn {
+	margin-top: 60px;
+	background-color: lightcoral;
+	width: 300px;
+	height: 40px;
+	border: 0px solid white;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px 2px gray;
+	font-weight: 600;
+}
+
+.order-btn:hover {
+	color: white;
+}
