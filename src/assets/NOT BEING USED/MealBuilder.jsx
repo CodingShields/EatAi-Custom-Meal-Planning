@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import foodArray from "../assets/foodArray";
-import MealType from "./SubPages/MealType";
-import Flavor from "./SubPages/FlavorType"
-import People from "./SubPages/People"
+import foodArray from "../foodArray";
+import MealType from "../SubPages/MealType";
+import Flavor from "../SubPages/FlavorType"
+import People from "../SubPages/People"
 import deleteIMG from "../assets/images/deleteIMG.png";
 import './menu.css';
 

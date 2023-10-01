@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import DashBoard from "../Pages/Dashboard";
+import Kitchen from "../Pages/SubPage/Kitchen.jsx";
 
 export default function DashBoardLayout() {
-  const [hoveredItem, setHoveredItem] = useState(null);
-
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
     color: "#161616",
-  };
-
-  const handleHover = (item) => {
-    setHoveredItem(item);
   };
 
   return (
@@ -22,13 +16,11 @@ export default function DashBoardLayout() {
           style={({ isActive }) => isActive ? activeStyles : null}
           to="."
           end>
-          DashBoard
+          Kitchen
         </NavLink>
 
         <NavLink
           to="ChefSurprise"
-          onMouseEnter={() => handleHover("ChefSurprise")}
-          onMouseLeave={() => handleHover(null)}
           style={({ isActive }) => isActive ? activeStyles : null}
         >  
           Chef Surprise
@@ -36,8 +28,7 @@ export default function DashBoardLayout() {
 
         <NavLink
           to="EasyOrder"
-          onMouseEnter={() => handleHover("EasyOrder")}
-          onMouseLeave={() => handleHover(null)}
+
           style={({ isActive }) => isActive ? activeStyles : null}
         >
           Easy Order
@@ -45,15 +36,12 @@ export default function DashBoardLayout() {
 
         <NavLink
           to="AdvancedOrder"
-          onMouseEnter={() => handleHover("AdvancedOrder")}
-          onMouseLeave={() => handleHover(null)}
           style={({ isActive }) => isActive ? activeStyles : null}
         >
           Advanced Order
         </NavLink>
       </nav>
       <Outlet />
-      <DashBoard tabName={hoveredItem} />
     </>
   );
 }

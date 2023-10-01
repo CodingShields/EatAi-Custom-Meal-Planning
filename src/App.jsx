@@ -5,10 +5,10 @@ import About from "./Pages/About.jsx"
 import Pantry from "./Pages/Pantry.jsx"
 import Layout from "./comp/Layout.jsx"
 import DashBoardLayout from './comp/DashBoardLayout.jsx';
-import Dashboard from "./Pages/Dashboard.jsx"
-import ChefSurprise from './Pages/ChefSuprise.jsx';
-import EasyOrder from './Pages/EasyOrder.jsx';
-import AdvancedOrder from './Pages/AdvancedOrder.jsx';
+import Kitchen from "./Pages/SubPage/Kitchen.jsx"
+import ChefSurprise from './Pages/SubPage/ChefSuprise.jsx';
+import EasyOrder from './Pages/SubPage/EasyOrder.jsx'
+import AdvancedOrder from './Pages/SubPage/AdvancedOrder.jsx';
 import "./index.css"
 import './App.css'
 function App() {
@@ -20,8 +20,7 @@ function App() {
           <Route path="About" element={<About />} />
           <Route path="Pantry" element={<Pantry />} />
           <Route path="PersonalChef" element={<DashBoardLayout />}>
-            {/* Remove the index route */}
-            <Route path="DashBoard" element ={<Dashboard />} />
+            <Route index element ={<Kitchen />} />
             <Route path="ChefSurprise" element={<ChefSurprise />} />
             <Route path="EasyOrder" element={<EasyOrder />} />
             <Route path="AdvancedOrder" element={<AdvancedOrder />} />

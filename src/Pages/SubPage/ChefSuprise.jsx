@@ -1,46 +1,57 @@
 import React, { useState } from "react";
-import clipboard from "../assets/images/clipboard.png";
-import MealTypeArray from "./SubPages/MealTypeArray";
-import FlavorTypeArray from "./SubPages/FlavorTypeArray";
-import dietaryOptions from "./SubPages/Dietary";
-import * as openai from 'openai'; // Import OpenAI library
-import { process } from "/env";
+import clipboard from "../../assets/images/clipboard.png"
+import MealTypeArray from "../../assets/MealTypeArray";
+import FlavorTypeArray from "../../assets/FlavorTypeArray";
+import dietaryOptions from "../../assets/Dietary";
+import flippedchef from "../../assets/images/flippedchef.png"
+import kitchen from "../../assets/images/kitchen.png"
 
 export default function ChefSurprise() {
-  const [entree, setEntree] = useState("");
-  const [headCount, setHeadCount] = useState(1);
-  const [selectedFlavor, setSelectedFlavor] = useState("");
-  const [flavorDetails, setFlavorDetails] = useState("");
-  const [dietaryDetails, setDietaryDetails] = useState("");
-  const [chatBotReply, setChatBotReply] = useState("");
+    const [entree, setEntree] = useState("");
+    const [headCount, setHeadCount] = useState(1);
+    const [selectedFlavor, setSelectedFlavor] = useState("");
+    const [flavorDetails, setFlavorDetails] = useState("");
+    const [dietaryDetails, setDietaryDetails] = useState("");
+    const [chatBotReply, setChatBotReply] = useState("");
+    const [loading, setLoading] = useState(false)
 
-  const apiKey = process.env.OPENAI_API_KEY;
+   
+    const apiKey = "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"
 
-  // No need to create an instance, you can use openai directly
+
   async function handleOrder() {
     const test = `I'd like to order an ${entree} for ${
-      headCount !== 1 ? 'people' : 'person'
-    }, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal.`;
-
-    try {
-      const response = await openai.Completions.call({
-        model: "gpt-3.5-turbo-instruct",
-        messages: [{ role: "system", content: "You are a helpful assistant." }, { role: "user", content: test }],
-      });
-
-      // Check the response structure and access the data
-      if (response.choices && response.choices.length > 0) {
-        const chatBotReply = response.choices[0].message.content;
-        setChatBotReply(chatBotReply);
-      } else {
-        console.error("Invalid response structure from OpenAI API");
-      }
-    } catch (error) {
-      console.error("Error calling OpenAI API:", error);
-    }
-  }
-
-
+        headCount !== 1 ? 'people' : 'person'
+            }, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal.`;
+        const data = {
+            model: "gpt-3.5-turbo",
+            messages: [
+                { role: "user", content: test }
+                    ],
+                        temperature: 0.7
+                        };
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                            },
+                        body: JSON.stringify(data)
+                        });
+                const result = await response.json();
+                if (response.ok) {
+                    setLoading(true)
+                    setChatBotReply(result.choices[0].message.content)
+                // console.log(result.choices[0].message.content);
+                } else {
+                console.error(result);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+            }
+console.log(chatBotReply);
 
 
     
@@ -67,13 +78,19 @@ export default function ChefSurprise() {
     }
     console.log(chatBotReply)
 return (
-    <div className="chef-surprise-div">
-        <img className="clipboard-img"
-            src={clipboard} alt="Clipboard"
-        />
-                <h3 className="menu-text">Menu</h3>
-                    <div className="menu-div">
-                        <h2 className="menu-item-text">Entree:</h2>
+    <div className="dashboard-container">
+        <img className="chef-background-img" src={kitchen} alt="Chef Background" />
+            <div className="chef-img-div">
+                <img className="chef-img" src={flippedchef} alt="Chef" />
+            </div>
+                <div className="clipboard-div">
+                    <img className="clipboard-img"
+                        src={clipboard} alt="Clipboard" />
+                <div className="menu-text-div">
+                    <h3 className="menu-text">Menu</h3>
+                 </div>  
+            <div className="menu-div">         
+            <h2 className="menu-item-text">Entree:</h2>
                             <select
                                 onChange={handleEntree}
                                 value={entree}
@@ -133,11 +150,14 @@ return (
                                     </option>
                                 ))}
             </select>
-          
-        </div>
-         <div className="button-div">
+         </div>    
+            <div className="order-btn-div">
+
                 <button className="order-btn" onClick={handleOrder}>Send Order To Kitchen</button>
-            </div>  
+            </div>
+                
+                                 
         </div>
+    </div>
     );
 }
