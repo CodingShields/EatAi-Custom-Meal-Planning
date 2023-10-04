@@ -64,7 +64,7 @@ header a:hover {
 footer {
 	background-color: #161616;
 	color: #aaaaaa;
-	height: 74px;
+	height: 75px;
 	display: flex;
 	flex-shrink: 0;
 	justify-content: center;
@@ -73,6 +73,7 @@ footer {
 	font-weight: 500;
 	position: relative;
 	width: auto;
+	margin-top: 0px;
 }
 
 .link-button:hover {
@@ -180,48 +181,50 @@ footer {
 .chef-surprise-container {
 	display: flex;
 	width: 1000px;
-	height: 600px;
+	height: auto;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
 }
 .clipboard-div {
 	display: flex;
-	/* justify-content: center; */
+	justify-content: center;
 	flex-direction: column;
 	align-items: center;
 	margin-right: 20px;
-	margin-top: 20px;
+	margin-top: 35px;
 	margin-left: 0px;
 	width: 500px;
 	height: 535px;
 	z-index: 101;
-	background-color: gold;
 }
 
 /* need to reload image */
-/* .clipboard-img {
-	width: 700px;
-	height: 600px;
-	right: 200px;
+.clipboard-img {
+	width: 500px;
+	height: 580px;
 	position: absolute;
 	z-index: 101;
-} */
+}
 .menu-title-text-container {
-	display: none;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 60px;
 }
 .menu-text {
-	display: none;
+	display: flex;
+	padding-bottom: 10px;
 	font-size: 30px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	z-index: 102;
 }
 .menu-items-container {
-	display: none;
+	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
 	height: 525px;
 	width: 460px;
 	gap: 10px;
@@ -246,7 +249,7 @@ footer {
 	text-align: center;
 	outline: none;
 	border-radius: 10px;
-	width: 200px;
+	width: 250px;
 	height: 30px;
 	box-shadow: 1px 1px 1px 1px gray;
 	font-size: 20px;
@@ -262,7 +265,8 @@ footer {
 .headcount-div {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: center;
+	gap: 17px;
 	width: 100%;
 	height: 60px;
 }
@@ -271,18 +275,16 @@ footer {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px coral;
 	color: coral;
-	width: 35px;
-	height: 35px;
-	border: 2px solid coral;
+	width: 50px;
+	height: 50px;
+	border: 3px solid coral;
 	border-radius: 100px;
 	font-weight: 900;
 }
 
 .headcount-slider {
-	width: 180px;
-	margin-right: 50px;
+	width: 160px;
 }
 
 .flavor-container {
@@ -295,7 +297,7 @@ footer {
 
 .flavor-details-container {
 	display: flex;
-	width: 100%;
+	width: 80%;
 	height: 60px;
 }
 .flavor-details-text {
@@ -324,8 +326,8 @@ footer {
 	align-items: center;
 	background-color: lightcoral;
 	margin-bottom: 20px;
-	width: 75%;
-	height: 50%;
+	width: 400px;
+	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
 	box-shadow: 2px 1px 2px 1px black;
@@ -352,16 +354,17 @@ footer {
 	width: 380px;
 	height: auto;
 	z-index: 103;
-	margin-top: 150px;
+	margin-top: 50px;
 	border: 2px solid #ea4c89;
 	border-radius: 1000px;
 }
 
 .bot-response-container {
-	display: flex;
-	border: 1px solid black;
-	height: 500px;
-	width: 400px;
+	display: none;
+	border: 8px solid #f99a41;
+	border-radius: 10px;
+	height: 700px;
+	width: 470px;
 	z-index: 103;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -371,4 +374,61 @@ footer {
 .bot-response-text {
 	font-size: 16px;
 	color: black;
+	white-space: pre-wrap;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.download-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightcoral;
+	width: 400px;
+	height: 70px;
+	border: 0px solid white;
+	border-radius: 1000px;
+	box-shadow: 2px 1px 2px 1px black;
+	font-size: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	z-index: 1005;
+	margin-top: 20px;
+}
+
+.download-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.download-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+.reset-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightcoral;
+	width: 400px;
+	height: 70px;
+	border: 0px solid white;
+	border-radius: 1000px;
+	box-shadow: 2px 1px 2px 1px black;
+	font-size: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	z-index: 1005;
+	margin-top: 20px;
+}
+
+.reset-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.reset-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
 }

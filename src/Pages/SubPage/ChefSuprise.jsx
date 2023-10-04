@@ -16,6 +16,7 @@ export default function ChefSurprise() {
 	const [dietaryDetails, setDietaryDetails] = useState("");
 	const [chatBotReply, setChatBotReply] = useState("");
     // changes display of the clipboard to display the loading/cooking svg while the call is being made
+	const [removeMenu, setRemoveMenu] = useState(false)
 	const [loading, setLoading] = useState(false);
 	const [renderMenu, setRenderMenu] = useState(false);
 
@@ -23,6 +24,7 @@ export default function ChefSurprise() {
 
 	async function handleOrder() {
 		setLoading(true);
+		setRemoveMenu(true);
 		const test = `I'd like to order an ${entree} for ${
 			headCount !== 1 ? "people" : "person"
 		}, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal.`;
@@ -42,9 +44,11 @@ export default function ChefSurprise() {
 			});
 			const result = await response.json();
 			if (response.ok) {
-				console.log("Response object:", result)
+				// console.log("Response object:", result)
+				setLoading(false);
+				setRenderMenu(true);
 				setChatBotReply(result.choices[0].message.content);
-				console.log(result.choices[0].message.content);
+				// console.log(result.choices[0].message.content);
 			} else {
 				console.error(result);
 			}
@@ -75,26 +79,33 @@ export default function ChefSurprise() {
 		const selectedValue = event.target.value;
 		setDietaryDetails(selectedValue);
 	}
-function downloadData() {
-  // Initialize a new jsPDF instance
-  const doc = new jsPDF({
-  orientation: 'portrait', // or 'landscape'
-  unit: 'mm', // measurement unit (e.g., millimeters)
-  format: 'a4', // page format (e.g., 'a4', 'letter')
-  marginLeft: 10,
-  marginRight: 10,
-  marginTop: 10,
-  marginBottom: 10,
-});
+// function downloadData() {
+//   // Initialize a new jsPDF instance
+//   const doc = new jsPDF({
+//   orientation: 'portrait', // or 'landscape'
+//   unit: 'mm', // measurement unit (e.g., millimeters)
+//   format: 'a4', // page format (e.g., 'a4', 'letter')
+//   marginLeft: 10,
+//   marginRight: 10,
+//   marginTop: 10,
+//   marginBottom: 10,
+// });
 
-  // Add the chatBotReply data to the PDF
-  const chatreply = chatBotReply.message.content // Replace with your actual data
-  doc.text(chatreply, 10, 10); // Adjust the position as needed
-console.log("PDF TEST",chatreply    )
-  // Save the PDF with a specified file name
-  doc.save("chatReply.pdf"); // Set the desired file name
-}
+//   // Add the chatBotReply data to the PDF
+//   const chatreply = chatBotReply.message.content // Replace with your actual data
+//   doc.text(chatreply, 10, 10); // Adjust the position as needed
+// console.log("PDF TEST",chatreply    )
+//   // Save the PDF with a specified file name
+//   doc.save("chatReply.pdf"); // Set the desired file name
+// }
 
+	function resetData() {
+		setRemoveMenu(false)
+		setLoading(false);
+		setRenderMenu(false)
+
+	}
+	
 	return (
 		<div className="chef-surprise-container">
 			<img className="chef-background-img" src={kitchen} alt="Chef Background" />
@@ -103,26 +114,27 @@ console.log("PDF TEST",chatreply    )
 			</div>
             <div className="clipboard-div">
                 
-                <div className="bot-response-container">
+				<div style={{ display: renderMenu ? "flex" : "none" }}
+					className="bot-response-container">
                     <h2 className="bot-response-text">
                         {chatBotReply}
                     </h2>
             </div>
-				{/* <img className="clipboard-img"
-                            src={clipboard} alt="Clipboard" /> */}
-                
+				<img className="clipboard-img"
+                    style={{ display: renderMenu ? "none" : "flex" }}
+					src={clipboard} alt="Clipboard" />
                 <div
-                    style={{ display: loading ? "none" : "flex" }}
+                    style={{ display: removeMenu ? "none" : "flex" }}
                     className="menu-title-text-container">
 					<h3 className="menu-text">Menu</h3>
 				</div>
                 <img className="cooking-animation"
                     src={cooking}
-                    style={{ display: loading ? "flex" : "none" }}
+					style={{display: loading ? "flex" : "none",}}
                 />
                 <div
                     className="menu-items-container"
-                    style={{ display: loading ? "none" : "flex" }}
+                    style={{ display: removeMenu ? "none" : "flex" }}
                 >
 					<div className="entree-container">
 						<h2 className="menu-item-text">Entree:</h2>
@@ -179,8 +191,19 @@ console.log("PDF TEST",chatreply    )
                        
 					</div>
                 </div>
-                 <button className="order-btn" onClick={downloadData}>
+				<button
+					style={{ display: renderMenu ? "flex" : "none" }}
+					className="download-btn"
+					// onClick={downloadData}
+				>
 							Download
+				</button>
+				<button
+					style={{ display: renderMenu ? "flex" : "none" }}
+					className="reset-btn"
+					onClick={resetData}
+				>
+							Start Over
 						</button>
 			</div>
 		</div>
