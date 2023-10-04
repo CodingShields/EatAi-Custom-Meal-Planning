@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const LiveTypingText = ({ fontSize }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = "Welcome, I am Chef Maggie Bear!\nClick Chef Surprise to set Guest Size, Flavor and kind of Meal.\nOrdering made easy coming soon! \nAdvanced ordering with macro nutrients, calories coming soon!";
+  const defaultMessage = "Welcome, I am your EatAi Chef!\nClick Chef Surprise to set Guest Size, Flavor and kind of Meal.\nOrdering made easy coming soon! \nAdvanced ordering with macro nutrients, calories coming soon!";
 
   useEffect(() => {
     let charIndex = 0;
