@@ -27,7 +27,7 @@ export default function ChefSurprise() {
 		setRemoveMenu(true);
 		const test = `I'd like to order an ${entree} for ${
 			headCount !== 1 ? "people" : "person"
-		}, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal.`;
+		}, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal. Have the reponse start by saying the title of the dish generated, and not like it is a conversation.`;
 		const data = {
 			model: "gpt-3.5-turbo",
 			messages: [{ role: "user", content: test }],
@@ -79,30 +79,87 @@ export default function ChefSurprise() {
 		const selectedValue = event.target.value;
 		setDietaryDetails(selectedValue);
 	}
-// function downloadData() {
-//   // Initialize a new jsPDF instance
-//   const doc = new jsPDF({
-//   orientation: 'portrait', // or 'landscape'
-//   unit: 'mm', // measurement unit (e.g., millimeters)
-//   format: 'a4', // page format (e.g., 'a4', 'letter')
-//   marginLeft: 10,
-//   marginRight: 10,
-//   marginTop: 10,
-//   marginBottom: 10,
-// });
+function downloadData() {
+  // Check if chatBotReply is a non-empty string
+  if (chatBotReply && typeof chatBotReply === 'string') {
+    // Initialize a new jsPDF instance
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
+      marginLeft: 10,
+      marginRight: 10,
+      marginTop: 10,
+      marginBottom: 10,
+    });
 
-//   // Add the chatBotReply data to the PDF
-//   const chatreply = chatBotReply.message.content // Replace with your actual data
-//   doc.text(chatreply, 10, 10); // Adjust the position as needed
-// console.log("PDF TEST",chatreply    )
-//   // Save the PDF with a specified file name
-//   doc.save("chatReply.pdf"); // Set the desired file name
-// }
+    // Set the font size and text wrapping width
+    const fontSize = 12; // Adjust this as needed
+    const textWidth = 180; // Adjust this as needed
+    doc.setFontSize(fontSize);
+
+    // Split the chatBotReply into lines to fit within the textWidth
+    const lines = doc.splitTextToSize(chatBotReply, textWidth);
+
+    // Calculate the total height needed for the text
+    const lineHeight = fontSize * 1.5; // Adjust this as needed
+    const pageHeight = doc.internal.pageSize.height - 20; // Adjust margin as needed
+    const maxLinesPerPage = Math.floor(pageHeight / lineHeight);
+    const numPages = Math.ceil(lines.length / maxLinesPerPage);
+
+    // Loop through pages and add content
+    for (let pageNum = 0; pageNum < numPages; pageNum++) {
+      if (pageNum > 0) {
+        doc.addPage();
+      }
+      const startIndex = pageNum * maxLinesPerPage;
+      const endIndex = (pageNum + 1) * maxLinesPerPage;
+      const pageLines = lines.slice(startIndex, endIndex);
+
+      // Calculate the initial Y position for this page
+      let initialY = 20;
+      if (pageNum === 0) {
+        // On the first page, adjust the initialY to prevent a blank page
+        const remainingLines = maxLinesPerPage - pageLines.length;
+        initialY += (remainingLines * lineHeight) / 2;
+      }
+
+      // Add the title text
+      doc.text(5, initialY, 'Recipe and Instructions:', { fontWeight: 'bold' });
+      initialY += lineHeight; // Increase Y position for the next line
+
+      // Add each line of text to the PDF for this page
+      pageLines.forEach((line, index) => {
+        const y = initialY + index * lineHeight;
+        doc.text(5, y, line);
+      });
+    }
+
+    // Save the PDF with a specified file name
+    doc.save('chatReply.pdf');
+  } else {
+    // Handle the case where chatBotReply is not a valid string
+    console.error('Invalid chatBotReply data.');
+  }
+}
+
+
+
+
+
+
+
+
 
 	function resetData() {
 		setRemoveMenu(false)
 		setLoading(false);
 		setRenderMenu(false)
+		setEntree("")
+		setHeadCount(1)
+		setSelectedFlavor("")
+		setFlavorDetails("")
+		setDietaryDetails("")
 
 	}
 	
@@ -194,7 +251,7 @@ export default function ChefSurprise() {
 				<button
 					style={{ display: renderMenu ? "flex" : "none" }}
 					className="download-btn"
-					// onClick={downloadData}
+					onClick={downloadData}
 				>
 							Download
 				</button>
