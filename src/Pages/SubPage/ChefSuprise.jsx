@@ -8,6 +8,15 @@ import kitchen from "../../assets/images/kitchen.png";
 import cooking from "../../assets/images/cooking.svg";
 import jsPDF from "jspdf"
 
+
+// still need to limit certain features of this level for FREE
+// Limit Flavors
+// Limit Searches 
+// Limit DownLoads
+
+
+
+
 export default function ChefSurprise() {
 	const [entree, setEntree] = useState("");
 	const [headCount, setHeadCount] = useState(1);
@@ -79,78 +88,53 @@ export default function ChefSurprise() {
 		const selectedValue = event.target.value;
 		setDietaryDetails(selectedValue);
 	}
-function downloadData() {
-  // Check if chatBotReply is a non-empty string
-  if (chatBotReply && typeof chatBotReply === 'string') {
-    // Initialize a new jsPDF instance
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4',
-      marginLeft: 10,
-      marginRight: 10,
-      marginTop: 10,
-      marginBottom: 10,
+	function downloadData() {
+		if (chatBotReply && typeof chatBotReply === 'string') {
+			const doc = new jsPDF({
+			orientation: 'portrait',
+			unit: 'mm',
+			format: 'a4',
+			marginLeft: 10,
+			marginRight: 10,
+			marginTop: 10,
+			marginBottom: 10,
     });
-
-    // Set the font size and text wrapping width
-    const fontSize = 12; // Adjust this as needed
-    const textWidth = 180; // Adjust this as needed
-    doc.setFontSize(fontSize);
-
-    // Split the chatBotReply into lines to fit within the textWidth
-    const lines = doc.splitTextToSize(chatBotReply, textWidth);
-
-    // Calculate the total height needed for the text
-    const lineHeight = fontSize * 1.5; // Adjust this as needed
-    const pageHeight = doc.internal.pageSize.height - 20; // Adjust margin as needed
-    const maxLinesPerPage = Math.floor(pageHeight / lineHeight);
-    const numPages = Math.ceil(lines.length / maxLinesPerPage);
-
-    // Loop through pages and add content
+		const fontSize = 12;
+		const textWidth = 180; 
+		const lines = doc.splitTextToSize(chatBotReply, textWidth);
+		const lineHeight = fontSize * 1.5; 
+		const pageHeight = doc.internal.pageSize.height - 20; 
+		const maxLinesPerPage = Math.floor(pageHeight / lineHeight);
+		const numPages = Math.ceil(lines.length / maxLinesPerPage);
+			doc.setFontSize(fontSize);
+			
     for (let pageNum = 0; pageNum < numPages; pageNum++) {
-      if (pageNum > 0) {
-        doc.addPage();
-      }
-      const startIndex = pageNum * maxLinesPerPage;
-      const endIndex = (pageNum + 1) * maxLinesPerPage;
-      const pageLines = lines.slice(startIndex, endIndex);
+		if (pageNum > 0) {
+			doc.addPage();
+		}
+		const startIndex = pageNum * maxLinesPerPage;
+		const endIndex = (pageNum + 1) * maxLinesPerPage;
+		const pageLines = lines.slice(startIndex, endIndex);
 
-      // Calculate the initial Y position for this page
-      let initialY = 20;
-      if (pageNum === 0) {
-        // On the first page, adjust the initialY to prevent a blank page
+    let initialY = 20;
+    
+		if (pageNum === 0) {
         const remainingLines = maxLinesPerPage - pageLines.length;
         initialY += (remainingLines * lineHeight) / 2;
-      }
-
-      // Add the title text
-      doc.text(5, initialY, 'Recipe and Instructions:', { fontWeight: 'bold' });
-      initialY += lineHeight; // Increase Y position for the next line
-
-      // Add each line of text to the PDF for this page
-      pageLines.forEach((line, index) => {
-        const y = initialY + index * lineHeight;
-        doc.text(5, y, line);
-      });
     }
-
-    // Save the PDF with a specified file name
-    doc.save('chatReply.pdf');
-  } else {
-    // Handle the case where chatBotReply is not a valid string
+		doc.text(5, initialY, 'Recipe and Instructions:', { fontWeight: 'bold' });
+		initialY += lineHeight; 
+		pageLines.forEach((line, index) => {
+		const y = initialY + index * lineHeight;
+        doc.text(5, y, line);
+    });
+    }
+	doc.save('chatReply.pdf');
+		} else {
     console.error('Invalid chatBotReply data.');
-  }
-}
-
-
-
-
-
-
-
-
-
+		}
+	}
+	
 	function resetData() {
 		setRemoveMenu(false)
 		setLoading(false);
@@ -160,7 +144,6 @@ function downloadData() {
 		setSelectedFlavor("")
 		setFlavorDetails("")
 		setDietaryDetails("")
-
 	}
 	
 	return (
@@ -244,8 +227,7 @@ function downloadData() {
 					<div className="order-btn-div">
 						<button className="order-btn" onClick={handleOrder}>
 							Order
-                        </button>
-                       
+                        </button>                   
 					</div>
                 </div>
 				<button
