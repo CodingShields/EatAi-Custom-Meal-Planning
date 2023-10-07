@@ -12,7 +12,7 @@ export default function Header() {
 
     return (
         <header>
-            <Link  to="/">#FOODLIFE</Link>
+            <Link  to="/">EatAi</Link>
             <nav>
                 <NavLink
                     to="/About"
