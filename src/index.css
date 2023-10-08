@@ -107,15 +107,15 @@ footer {
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
 	/* max-height: calc(100vh - 185px); */
-	width: 100%;
+	width: 90%;
     height: auto;
-	max-height: calc(100vh - 110px);
-	object-fit: contain;
-    object-position: center;
+	/* max-height: calc(100vh - 110px); */
+	/* object-fit: contain;
+    object-position: center; */
     position: relative; /* Add this */
     z-index: 100; /* Lower z-index for the background image */
 	padding: 0px 0px;
-	margin: 0px 0px;
+	margin: 0px 100px;
 }
 
 .chef-background-img {
@@ -128,7 +128,7 @@ footer {
 	border-radius: 30px 30px 0px 0px;
 	position: absolute;
 	z-index: 101;
-	margin-left: 50px;
+	margin-left: 10px;
 }
 
 .chef-img-div {
@@ -136,7 +136,7 @@ footer {
 	align-items: center;
 	justify-content: flex-start;
 	height: auto;
-	width: 50%;
+	width: 60%;
 	position: relative;
 	z-index: 102;
 	padding: 0px 0px;
@@ -146,9 +146,9 @@ footer {
 .chef-img {
 	display: flex;
 	width: auto;
-	height: 200px;
-	margin-top: 4%;
+	height: 500px;
 	margin-left: 50px;
+	margin-top: 80px;
 	position: absolute;
 	left:100px;
 	object-fit: contain;
@@ -160,18 +160,21 @@ footer {
 	align-items: center;
 	width: 500px;
 	height: 600px;
-	/* margin-right: 80px; */
+	margin-right: 80px;
+	position: relative;
+	z-index: 102;
 }
 .live-text-div {
 	display: flex;
 	justify-content: center;
-	width: 400px;
-	height: 400px;
+	width: 600px;
+	height: 500px;
 	border: 10px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: 5px 5px 5px black;
 	text-shadow: 0.5px 0.5px grey;
+	position: absolute;
 }
 
 .blinking-cursor {
@@ -201,24 +204,22 @@ footer {
 		opacity: 1;
 	}
 }
-/* .kitchen-container {
+.kitchen-container {
 	display: flex;
 	width: auto;
 	height: auto;
 	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px; */
+	border-radius: 30px 30px 0px 0px;
 }
 .clipboard-div {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	margin-right: 20px;
-	margin-top: 35px;
-	margin-left: 0px;
-	width: 500px;
+	width: auto
 	height: 535px;
-	z-index: 101;
+	z-index: 102;
+	padding-left: 20px;
 }
 
 /* need to reload image */
@@ -227,6 +228,7 @@ footer {
 	height: 580px;
 	position: absolute;
 	z-index: 101;
+
 }
 .menu-title-text-container {
 	display: flex;
@@ -237,10 +239,13 @@ footer {
 }
 .menu-text {
 	display: flex;
-	padding-bottom: 10px;
-	font-size: 30px;
+	font-size: 34px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	z-index: 102;
+	margin-bottom: 0px;
+	padding-top: 10px;
+
+
 }
 .menu-items-container {
 	display: flex;
@@ -261,12 +266,6 @@ footer {
 	height: 60px;
 }
 
-/* entree item */
-.menu-item-text {
-	font-size: 22px;
-	z-index: 102;
-}
-
 /* drop down menu items */
 .menu-list-items {
 	text-align: center;
@@ -276,6 +275,7 @@ footer {
 	height: 30px;
 	box-shadow: 1px 1px 1px 1px gray;
 	font-size: 20px;
+	z-index: 102;
 }
 
 .menu-list-items:hover {
@@ -292,6 +292,7 @@ footer {
 	gap: 17px;
 	width: 100%;
 	height: 60px;
+	z-index: 102;
 }
 
 .headcount-text {
@@ -304,10 +305,12 @@ footer {
 	border: 3px solid coral;
 	border-radius: 100px;
 	font-weight: 900;
+	z-index: 102;
 }
 
 .headcount-slider {
 	width: 160px;
+	z-index: 102;
 }
 
 .flavor-container {
@@ -316,12 +319,14 @@ footer {
 	justify-content: space-evenly;
 	width: 100%;
 	height: 60px;
+	z-index: 102;
 }
 
 .flavor-details-container {
 	display: flex;
 	width: 80%;
 	height: 60px;
+	z-index: 102;
 }
 .flavor-details-text {
 	font-size: 17px;
@@ -335,13 +340,15 @@ footer {
 	justify-content: space-evenly;
 	width: 100%;
 	height: 60px;
+	z-index: 102;
 }
 .order-btn-div {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: center;
 	width: 100%;
 	height: 120px;
+	z-index: 102;
 }
 .order-btn {
 	display: flex;
@@ -386,12 +393,13 @@ footer {
 	display: none;
 	border: 8px solid #f99a41;
 	border-radius: 10px;
-	height: 700px;
+	height: 400px;
 	width: 470px;
 	z-index: 103;
 	overflow-y: auto;
 	overflow-x: auto;
 	background-color: white;
+	margin-top: 20px;
 }
 
 .bot-response-text {
@@ -408,7 +416,7 @@ footer {
 	align-items: center;
 	background-color: lightcoral;
 	width: 400px;
-	height: 70px;
+	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
 	box-shadow: 2px 1px 2px 1px black;
@@ -435,7 +443,7 @@ footer {
 	align-items: center;
 	background-color: lightcoral;
 	width: 400px;
-	height: 70px;
+	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
 	box-shadow: 2px 1px 2px 1px black;
@@ -444,6 +452,7 @@ footer {
 	transition: background-color 0.3s, transform 0.2s;
 	z-index: 1005;
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .reset-btn:hover {

@@ -14,7 +14,7 @@ export default function Kitchen() {
       <div className="chef-bubble-div">
         <div className="live-text-div">
              <LiveTypingText
-            fontSize="20px"
+            fontSize="28px"
         />
           </div>
        

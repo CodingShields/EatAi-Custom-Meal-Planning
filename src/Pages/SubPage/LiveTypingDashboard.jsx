@@ -35,10 +35,10 @@ const LiveTypingText = ({ fontSize }) => {
       className="live-text-container"
       style={{
         display: "flex",
-        fontSize: fontSize || '24px',
+        fontSize: fontSize || '48px',
         fontWeight: 'bold',
-        width: "300px",
-        height: "400px",
+        width: "500px",
+        height: "450px",
         paddingTop: '50px',
         position: 'relative',
         justifyContent: "start",
