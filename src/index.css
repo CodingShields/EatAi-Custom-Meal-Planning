@@ -324,9 +324,12 @@ footer {
 
 .flavor-details-container {
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 80%;
 	height: 60px;
 	z-index: 102;
+	margin-left: 30px;
 }
 .flavor-details-text {
 	font-size: 17px;
