@@ -10,6 +10,7 @@ body {
 	padding: 0;
 	background-color: #fff7ed;
 	font-family: "Inter", sans-serif;
+	display: flex;
 }
 
 a {
@@ -31,7 +32,7 @@ body {
 .site-wrapper {
 	display: flex;
 	flex-direction: column;
-
+	position: relative;
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
@@ -68,16 +69,12 @@ footer {
 	background-color: #161616;
 	color: #aaaaaa;
 	height: 75px;
-	/* display: flex; */
+	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* margin-top: auto; */
 	font-weight: 500;
-	/* position: absolute; */
 	bottom: 0;
-	/* margin-top: auto; */
 	width: 100%;
-	/* display: flex; */
 }
 
 .link-button:hover {
@@ -103,24 +100,35 @@ footer {
 }
 
 .dashboard-container {
-	flex-grow: 1; /* Expand to fill available vertical space */
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	flex-direction: row;
+	justify-content: flex-start;
 	align-items: center;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
-	padding: 20px;
-	max-height: calc(100vh - 185px);
+	/* max-height: calc(100vh - 185px); */
+	width: 100%;
+    height: auto;
+	max-height: calc(100vh - 110px);
+	object-fit: contain;
+    object-position: center;
+    position: relative; /* Add this */
+    z-index: 100; /* Lower z-index for the background image */
+	padding: 0px 0px;
+	margin: 0px 0px;
 }
 
 .chef-background-img {
-	width: 100%;
-	height: auto;
-	max-height: calc(100vh - 110px); /* Adjust for the header's height */
-	object-fit: contain;
-	object-position: center;
+	display: flex;
+	width: auto;
+	height: 100%;
+	/* max-height: calc(100vh - 110px); Adjust for the header's height */
+	/* object-fit: contain;
+	object-position: center; */
 	border-radius: 30px 30px 0px 0px;
+	position: absolute;
+	z-index: 101;
+	margin-left: 50px;
 }
 
 .chef-img-div {
@@ -128,14 +136,22 @@ footer {
 	align-items: center;
 	justify-content: flex-start;
 	height: auto;
-	width: 500px;
+	width: 50%;
+	position: relative;
+	z-index: 102;
+	padding: 0px 0px;
+	margin: 0px 0px;
 }
 
 .chef-img {
-	width: 500px;
-	height: auto;
-	z-index: 100;
-	margin-top: 100px;
+	display: flex;
+	width: auto;
+	height: 200px;
+	margin-top: 4%;
+	margin-left: 50px;
+	position: absolute;
+	left:100px;
+	object-fit: contain;
 }
 
 .chef-bubble-div {
@@ -144,8 +160,7 @@ footer {
 	align-items: center;
 	width: 500px;
 	height: 600px;
-	margin-right: 80px;
-	z-index: 1000;
+	/* margin-right: 80px; */
 }
 .live-text-div {
 	display: flex;
