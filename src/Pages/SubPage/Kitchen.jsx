@@ -6,20 +6,18 @@ export default function Kitchen() {
 
   
   return (
-    <div className="dashboard-container">
-      <img className="chef-background-img" src={kitchen} alt="Chef Background" />
-      <div className="chef-img-div">
+    <div className="kitchen-container">
+      <div className="chef-container">
+        <img className="chef-background-img" src={kitchen} alt="Chef Background" />
         <img className="chef-img" src={flippedchef} alt="Chef" />
       </div>
-      <div className="chef-bubble-div">
+      <div className="menu-container">
         <div className="live-text-div">
-             <LiveTypingText
+            <LiveTypingText
             fontSize="28px"
-        />
-          </div>
-       
+            />
+        </div>
       </div>
-      
     </div>
   );
 }

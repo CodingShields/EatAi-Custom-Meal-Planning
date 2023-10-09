@@ -6,16 +6,14 @@ export default function EasyOrder() {
     
     return (
         <div className="kitchen-container">
-            <img
-                className="chef-background-img"
-                src={kitchen} />
-            <div className="chef-img-div">
+            <div className="chef-container">
+                <img className="chef-background-img" src={kitchen} />
                 <img className="chef-img" src={flippedchef}/>
             </div>
-            <div className="easyorder-menu-container">
-                {/* What kind of meal?
-                    How many people? */}
+            <div className="menu-container">
+                
             </div>
+ 
         </div>
     )
 }
