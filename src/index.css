@@ -4,13 +4,8 @@
 
 html,
 body {
-	min-height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
 	background-color: #fff7ed;
 	font-family: "Inter", sans-serif;
-	display: flex;
 }
 
 a {
@@ -25,20 +20,17 @@ body::-webkit-scrollbar {
 body {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	display: flex;
-	flex-direction: column;
 }
 
 .site-wrapper {
-	display: flex;
-	flex-direction: column;
-	position: relative;
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* position: relative;
 	margin-bottom: 0%;
-	padding-bottom: 0%;
+	padding-bottom: 0%; */
 }
 
 header {
-	height: 110px;
 	display: flex;
 	align-items: center;
 	padding-block: 10px;
@@ -73,7 +65,6 @@ footer {
 	justify-content: center;
 	align-items: center;
 	font-weight: 500;
-	bottom: 0;
 	width: 100%;
 }
 
@@ -99,39 +90,40 @@ footer {
 	font-weight: 600;
 }
 
-.dashboard-container {
+.kitchen-container {
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
-	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
-	/* max-height: calc(100vh - 185px); */
-	width: 90%;
-    height: auto;
-	/* max-height: calc(100vh - 110px); */
-	/* object-fit: contain;
-    object-position: center; */
-    position: relative; /* Add this */
-    z-index: 100; /* Lower z-index for the background image */
-	padding: 0px 0px;
-	margin: 0px 100px;
+	width: auto;
+	height: auto;
+	gap: 70px;
+	background-color: #fff2b2;
+}
+
+.chef-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: auto;
 }
 
 .chef-background-img {
 	display: flex;
-	width: auto;
-	height: 100%;
-	/* max-height: calc(100vh - 110px); Adjust for the header's height */
-	/* object-fit: contain;
-	object-position: center; */
-	border-radius: 30px 30px 0px 0px;
-	position: absolute;
-	z-index: 101;
-	margin-left: 10px;
+	justify-content: flex-start;
+	width: 800px;
+	height: 600px;
 }
 
-.chef-img-div {
+.menu-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: aquamarine;
+	border-radius: 30px 30px 0px 0px;
+}
+
+/* .chef-img-div {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -141,7 +133,7 @@ footer {
 	z-index: 102;
 	padding: 0px 0px;
 	margin: 0px 0px;
-}
+} */
 
 .chef-img {
 	display: flex;
@@ -150,11 +142,9 @@ footer {
 	margin-left: 50px;
 	margin-top: 80px;
 	position: absolute;
-	left:100px;
-	object-fit: contain;
 }
 
-.chef-bubble-div {
+/* .chef-bubble-div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -163,7 +153,7 @@ footer {
 	margin-right: 80px;
 	position: relative;
 	z-index: 102;
-}
+} */
 .live-text-div {
 	display: flex;
 	justify-content: center;
@@ -174,7 +164,7 @@ footer {
 	background-color: antiquewhite;
 	box-shadow: 5px 5px 5px black;
 	text-shadow: 0.5px 0.5px grey;
-	position: absolute;
+	/* position: absolute; */
 }
 
 .blinking-cursor {
@@ -204,19 +194,13 @@ footer {
 		opacity: 1;
 	}
 }
-.kitchen-container {
-	display: flex;
-	width: auto;
-	height: auto;
-	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
-}
+
 .clipboard-div {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	width: auto
+	width: auto;
 	height: 535px;
 	z-index: 102;
 	padding-left: 20px;
@@ -228,7 +212,6 @@ footer {
 	height: 580px;
 	position: absolute;
 	z-index: 101;
-
 }
 .menu-title-text-container {
 	display: flex;
@@ -244,8 +227,6 @@ footer {
 	z-index: 102;
 	margin-bottom: 0px;
 	padding-top: 10px;
-
-
 }
 .menu-items-container {
 	display: flex;
