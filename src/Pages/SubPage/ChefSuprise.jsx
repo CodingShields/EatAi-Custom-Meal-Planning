@@ -4,7 +4,7 @@ import MealTypeArray from "../../assets/MealTypeArray";
 import FlavorTypeArray from "../../assets/FlavorTypeArray";
 import dietaryOptions from "../../assets/Dietary";
 import flippedchef from "../../assets/images/flippedchef.png";
-import kitchen from "../../assets/images/kitchen.png";
+// import kitchen from "../../assets/images/kitchen.png";
 import cooking from "../../assets/images/cooking.svg";
 import jsPDF from "jspdf"
 
@@ -148,8 +148,8 @@ export default function ChefSurprise() {
 	
 	return (
 		<div className="dashboard-container">
-			<img className="chef-background-img" src={kitchen} alt="Chef Background" />
-			<div className="chef-img-div">
+			{/* <img className="chef-background-img" src={kitchen} alt="Chef Background" /> */}
+			<div className="chef-img-container">
 				<img className="chef-img" src={flippedchef} alt="Chef" />
 			</div>
             <div className="clipboard-div">

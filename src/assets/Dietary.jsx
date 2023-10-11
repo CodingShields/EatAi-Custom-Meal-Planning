@@ -1,7 +1,6 @@
 import {nanoid} from "nanoid"
 
 const dietaryOptions = [
-  { id: nanoid(), name: 'Pick One...' },
   { id: nanoid(), name: 'No Dietary Restrictions' },
   { id: nanoid(), name: 'Mediterranean' },
   { id: nanoid(), name: 'Paleo' },

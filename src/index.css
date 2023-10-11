@@ -73,12 +73,18 @@ footer {
 	justify-content: center;
 	align-items: center;
 	font-weight: 500;
+	font-size: 36px;
 	bottom: 0;
 	width: 100%;
 }
 
 .link-button:hover {
 	transform: translate(1px, 1px);
+}
+
+main {
+	display: flex;
+	flex-direction: column;
 }
 .dashboard-nav {
 	display: flex;
@@ -106,52 +112,30 @@ footer {
 	align-items: center;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
-	/* max-height: calc(100vh - 185px); */
-	width: 90%;
-    height: auto;
-	/* max-height: calc(100vh - 110px); */
-	/* object-fit: contain;
-    object-position: center; */
-    position: relative; /* Add this */
-    z-index: 100; /* Lower z-index for the background image */
 	padding: 0px 0px;
-	margin: 0px 100px;
+	margin: 0px 10px;
 }
 
-.chef-background-img {
+/* .chef-background-img {
 	display: flex;
-	width: auto;
-	height: 100%;
-	/* max-height: calc(100vh - 110px); Adjust for the header's height */
-	/* object-fit: contain;
-	object-position: center; */
+	justify-content: flex-end;
+	align-items: flex-start;
+	flex-grow: 1;
 	border-radius: 30px 30px 0px 0px;
-	position: absolute;
-	z-index: 101;
-	margin-left: 10px;
-}
+} */
 
-.chef-img-div {
+.chef-img-container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	height: auto;
-	width: 60%;
-	position: relative;
-	z-index: 102;
-	padding: 0px 0px;
-	margin: 0px 0px;
+	width: 20%;
 }
 
 .chef-img {
 	display: flex;
 	width: auto;
 	height: 500px;
-	margin-left: 50px;
-	margin-top: 80px;
-	position: absolute;
-	left:100px;
-	object-fit: contain;
+	margin-left: 100px;
 }
 
 .chef-bubble-div {
@@ -160,9 +144,6 @@ footer {
 	align-items: center;
 	width: 500px;
 	height: 600px;
-	margin-right: 80px;
-	position: relative;
-	z-index: 102;
 }
 .live-text-div {
 	display: flex;
@@ -174,7 +155,6 @@ footer {
 	background-color: antiquewhite;
 	box-shadow: 5px 5px 5px black;
 	text-shadow: 0.5px 0.5px grey;
-	position: absolute;
 }
 
 .blinking-cursor {
@@ -204,51 +184,34 @@ footer {
 		opacity: 1;
 	}
 }
-.kitchen-container {
-	display: flex;
-	width: auto;
-	height: auto;
-	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
-}
+
 .clipboard-div {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	width: auto
-	height: 535px;
-	z-index: 102;
-	padding-left: 20px;
+	height: 600px;
 }
 
-/* need to reload image */
 .clipboard-img {
 	width: 500px;
-	height: 580px;
+	height: 585px;
 	position: absolute;
 	z-index: 101;
-
 }
+
 .menu-title-text-container {
-	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
-	height: 60px;
 }
+
 .menu-text {
-	display: flex;
 	font-size: 34px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	z-index: 102;
-	margin-bottom: 0px;
-	padding-top: 10px;
-
-
 }
+
 .menu-items-container {
-	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -258,6 +221,7 @@ footer {
 	gap: 10px;
 	z-index: 102;
 }
+
 .entree-container {
 	display: flex;
 	align-items: center;
@@ -466,4 +430,167 @@ footer {
 .reset-btn:active {
 	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+.easy-order-dashboard-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: aquamarine;
+	border-radius: 30px 30px 0px 0px;
+	padding: 0px 0px;
+	margin: 0px 10px;
+}
+
+.easy-order-live-text-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 1000px;
+	height: 550px;
+	border: 10px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: 5px 5px 5px black;
+	text-shadow: 0.5px 0.5px grey;
+	margin-right: 30px;
+}
+
+.advanced-order-begin-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightcoral;
+	width: 400px;
+	height: 50px;
+	border: 0px solid white;
+	border-radius: 1000px;
+	box-shadow: 2px 1px 2px 1px black;
+	font-size: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	animation: fadeIn 0.75s ease-in-out;
+}
+
+.advanced-order-begin-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.advanced-order-begin-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.easy-order-menu-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 900px;
+	height: 550px;
+	border: 10px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: 5px 5px 5px black;
+	text-shadow: 0.5px 0.5px grey;
+	animation: fadeIn 0.75s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.easy-order-menu-text {
+	font-size: 25px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+.courses-list-el {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	list-style-type: none;
+	gap: 45px;
+	font-size: 20px;
+	flex-wrap: wrap;
+	line-height: 15px;
+}
+
+.courses-list-el input[type="checkbox"] {
+	display: flex;
+	flex-direction: column;
+	padding-top: 15px;
+	width: 30px; /* Adjust the width as needed */
+	height: 30px; /* Adjust the height as needed */
+}
+.disabled-checkbox {
+	color: #888; /* Gray out the text */
+	pointer-events: none; /* Disable pointer events to make it unclickable */
+}
+
+.easy-order-selections-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 300px;
+	height: 550px;
+	border: 10px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: 5px 5px 5px black;
+	text-shadow: 0.5px 0.5px grey;
+	animation: fadeIn 0.75s ease-in-out;
+}
+.easy-order-selection-text{
+	font-size: 20px;
+}
+
+.easy-order-selection-change-btn{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightcoral;
+	width: 200px;
+	height: 30px;
+	border: 0px solid white;
+	border-radius: 1000px;
+	box-shadow: 2px 1px 2px 1px black;
+	font-size: 20px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background-color 0.3s, transform 0.2s;
+	animation: fadeIn 0.75s ease-in-out;
+}
+
+.easy-order-selection-change-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.easy-order-selection-change-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
 }

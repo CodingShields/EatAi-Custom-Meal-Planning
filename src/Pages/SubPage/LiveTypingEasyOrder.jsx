@@ -1,0 +1,55 @@
+import React, { useState, useEffect } from 'react';
+
+const LiveTypingEasyOrder = ({ fontSize }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const defaultMessage = 'Welcome \nto Easy Ordering!\n I am ChefAi!\n To Place and Order,\n just follow the Menu guide after\n clicking the "Begin" button below.';
+
+  useEffect(() => {
+    let charIndex = 0;
+
+    const typingInterval = setInterval(() => {
+      if (charIndex <= defaultMessage.length) {
+        setDisplayedText(defaultMessage.substring(0, charIndex));
+        charIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 50); // Adjust the delay for typing speed
+
+    return () => {
+      clearInterval(typingInterval);
+    };
+  }, []);
+
+  const renderTextWithNewlines = (text) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        <span>{line}</span>
+        <br />
+      </React.Fragment>
+    ));
+  };
+
+  return (
+    <div
+      className="live-text-container"
+      style={{
+        display: "flex",
+        fontSize: fontSize || '48px',
+        fontWeight: 'bold',
+        width: "500px",
+        height: "450px",
+        paddingTop: '30px',
+        position: 'relative',
+        justifyContent: "start",
+        alignContent: "center",
+        textAlign: "center",
+        flexDirection:"column",
+      }}
+    >
+      {renderTextWithNewlines(displayedText)}
+    </div>
+  );
+};
+
+export default LiveTypingEasyOrder;
