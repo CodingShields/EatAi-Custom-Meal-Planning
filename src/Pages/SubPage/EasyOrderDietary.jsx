@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import dietaryOptions from "../../assets/Dietary";
 
 export default function EasyOrderDietary({ checkedDietaryOptions, setCheckedDietaryOptions }) {
-
-
-
-
   const maxCheckedDietaryOptions = 3;
 
   const handleCheckboxDietaryChange = (item) => {
