@@ -440,14 +440,14 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 1000px;
-	height: 550px;
+	width: auto;
+	height: auto;
 	border: 10px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: 5px 5px 5px black;
 	text-shadow: 0.5px 0.5px grey;
-	margin-right: 30px;
+	margin-left: 80px;
 }
 
 .easy-order-begin-btn {
@@ -463,6 +463,7 @@ main {
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.2s;
 	animation: fadeIn 0.75s ease-in-out;
+	margin-bottom: 25px;
 }
 
 .easy-order-begin-btn:hover {
@@ -500,6 +501,8 @@ main {
 	animation: fadeIn 0.75s ease-in-out;
 	text-align: center;
 	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 @keyframes fadeIn {
@@ -639,4 +642,89 @@ main {
 .easy-order-selection-change-btn:active {
 	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+.head-count-container {
+	display: flex;
+}
+
+#head-count-volume,
+volume {
+	margin-top: 30px;
+	width: 400px;
+	height: auto;
+}
+.head-count-title-text {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: px;
+	font-size: 25px;
+}
+
+.head-count-data-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 35px;
+	text-decoration: none;
+	border: 3px solid #f99a41;
+	color: #f99a41;
+	border-radius: 100px;
+	height: 75px;
+	width: 75px;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-weight: 700;
+	text-shadow: none;
+	text-decoration: underline;
+}
+/* Change the color and size of the range input */
+input[type="range"] {
+	/* Set the track color and size */
+	--track-color: #ccc; /* Change to your desired color */
+	--track-height: 25px; /* Change to your desired height */
+	--track-width: 100px; /* Change to your desired width */
+
+	/* Set the thumb (button) color and size */
+	--thumb-color: #f99a41; /* Change to your desired color */
+	--thumb-height: 30px; /* Change to your desired height */
+	--thumb-width: 30px; /* Change to your desired width */
+
+	/* Remove default styles */
+	appearance: none;
+	background: transparent;
+	border: none;
+}
+
+/* Customize the track */
+input[type="range"]::-webkit-slider-runnable-track {
+	background-color: var(--track-color);
+	height: var(--track-height);
+	width: var(--track-width);
+	border-radius: 10px; /* Adjust the border radius as needed */
+}
+
+/* Customize the thumb (button) */
+input[type="range"]::-webkit-slider-thumb {
+	background-color: var(--thumb-color);
+	height: var(--thumb-height);
+	width: var(--thumb-width);
+	border-radius: 50%; /* Make it round (adjust as needed) */
+	cursor: pointer;
+	-webkit-appearance: none;
+	transform: translateY(30%); /* Center vertically */
+	margin-top: calc(var(--track-height) / 2 * -1); /* Adjust for the track height */
+}
+
+/* Handle range input when in focus */
+input[type="range"]:focus {
+	outline: none; /* Remove the focus outline (adjust as needed) */
+}
+
+/* Handle range input hover state */
+input[type="range"]:hover::-webkit-slider-thumb {
+	background-color: #ff0000; /* Change thumb color on hover (adjust as needed) */
 }
