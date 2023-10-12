@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import MealTypeArray from "./MealTypeArray";
+import MealTypeArray from "../MealTypeArray";
 
 export default function MealType() {
     

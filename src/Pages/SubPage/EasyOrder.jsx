@@ -7,21 +7,35 @@ import EasyOrderDietary from "./EasyOrderDietary";
 
 
 export default function EasyOrder() {
-    // const [easyOrderCourse, setEasyOrderCourse] = useState(false)
-    // const [easyOrderDietary, setEasyOrderDietary] = useState(false)
 
-
-
-
-        // changes display of the clipboard to display the loading/cooking svg while the call is being made
+    // changes display of the clipboard to display the loading/cooking svg while the call is being made
 	// const [removeMenu, setRemoveMenu] = useState(false)
 	// const [loading, setLoading] = useState(false);
 	// const [renderMenu, setRenderMenu] = useState(false);
     const [renderWelcomeMessage, setRenderWelcomeMessage] = useState(false)
     const [renderBeginButton, setRenderBeginButton] = useState(false)
+    // First Order
     const [checkedCourseOptions, setCheckedCourseOptions] = useState([])
+    const [renderCourseOptions, setRenderCourseOptions] = useState(false)
+    const [courseSelectionConfirmed, setCourseSelectionConfirmed] =useState(false)
+    //Second Order
     const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([])
+    const [renderDietaryOptions, setRenderDietaryOptions] = useState(false)
+    const [dietarySelectionConfirmed, setDietarySelectionConfirmed] =useState(false)
+    //Third Order
+    
 
+
+
+    const handleCourseSelectionConfirmed = () => {
+        setCourseSelectionConfirmed(true);
+        setRenderDietaryOptions(true);
+        setRenderCourseOptions(false);
+    };
+    const handleDietarySelectionConfirmed = () => {
+        setRenderDietaryOptions(true);
+        setDietarySelectionConfirmed(true)
+  };
 
     useEffect(() => {
         // Use a setTimeout to simulate text being typed and then display the button.
@@ -35,10 +49,12 @@ export default function EasyOrder() {
 
     function handleBeginBtn() {
         setRenderWelcomeMessage(true)
+        setRenderCourseOptions(true)
     }
-console.log(checkedDietaryOptions);
+    console.log(checkedDietaryOptions);
+    console.log(checkedCourseOptions)
     return (
-        <div className="easy-order-dashboard-container">
+        <div className="easy-order-container">
             <div className="chef-img-container">
 				<img className="chef-img" src={flippedchef} alt="Chef" />
             </div>
@@ -53,28 +69,44 @@ console.log(checkedDietaryOptions);
                     <button
                         onClick={handleBeginBtn}
                         style={{ display: renderWelcomeMessage ? "none" : "flex" }}
-                        className="advanced-order-begin-btn">
+                        className="easy-order-begin-btn">
                         Begin    
                     </button>
                 </div>
             </div>
-            <div className="easy-order-menu-container">
                 
-                {/* <EasyOrderCourse
+            {renderCourseOptions ?
+                (<EasyOrderCourse
                     checkedCourseOptions={checkedCourseOptions}
                     setCheckedCourseOptions={setCheckedCourseOptions}
-                /> */}
-                <EasyOrderDietary
+                    setCourseSelectionConfirmed={handleCourseSelectionConfirmed}
+                />) : ""}
+            {renderDietaryOptions ?
+                (<EasyOrderDietary
                     checkedDietaryOptions={checkedDietaryOptions}
                     setCheckedDietaryOptions={setCheckedDietaryOptions}
-                />
-       
+                    setDietarySelectionConfirmed={handleDietarySelectionConfirmed}
+                />) : ""}
+            <div
+                className="easy-order-selections-container"
+                style={{display: renderWelcomeMessage ? "flex" : "none"}}
+                >
+                <h2 className="easy-order-selection-text">Course Selection</h2>
+                {checkedCourseOptions.map((item) => (
+                    <h2 className="checked-course-options-text">{item}</h2>
+                ))}
+                <h2 className="easy-order-selection-text"></h2>
             </div>
-            <div className="easyorder-menu-container">
-                {/* What kind of meal?
-                    How many people? */}
+            <div
+                className="easy-order-selections-container"
+                style={{display: renderDietaryOptions ? "flex" : "none"}}
+            >
+                <h2 className="easy-order-selection-text">Dietary Selection</h2>
+                {checkedDietaryOptions.map((item) => (
+                    <h2 className="checked-course-options-text">{item}</h2>
+                ))}
+                <h2 className="easy-order-selection-text"></h2>
             </div>
- 
         </div>
     )
 }

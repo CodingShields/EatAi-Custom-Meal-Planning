@@ -1,8 +1,8 @@
 import React from "react"
-import proteinArray from "../assets/protein"
+import proteinArray from "./protein"
 import fruitsArray from "../assets/fruits"
 import carbsArray from "../assets/carb"
-import vegArray from "../assets/veg"
+import vegArray from "./veg"
 import fatsArray from "../assets/fat"
 import { nanoid } from "nanoid"
 

@@ -1,5 +1,5 @@
 import React from "react";
-import FlavorTypeArray from "./FlavorTypeArray"
+import FlavorTypeArray from "../FlavorTypeArray"
 
 export default function Flavor() {
 

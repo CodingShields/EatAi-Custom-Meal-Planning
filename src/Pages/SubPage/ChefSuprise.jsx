@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import clipboard from "../../assets/images/clipboard.png";
 import MealTypeArray from "../../assets/MealTypeArray";
 import FlavorTypeArray from "../../assets/FlavorTypeArray";
-import dietaryOptions from "../../assets/Dietary";
+import dietaryOptionsArray from "../../assets/DietaryOptionsArray";
 import flippedchef from "../../assets/images/flippedchef.png";
 // import kitchen from "../../assets/images/kitchen.png";
 import cooking from "../../assets/images/cooking.svg";
@@ -195,7 +195,7 @@ export default function ChefSurprise() {
 							id="volume"
 							name="volume"
 							min="1"
-							max="20"
+							max="3"
 							step="1"
 							value={headCount}
 							onChange={(e) => handleHeadCount(e.target.value)}
@@ -217,7 +217,7 @@ export default function ChefSurprise() {
 					<div className="dietary-container">
 						<h2 className="menu-item-text">Focus:</h2>
 						<select onChange={handleDietaryDetails} value={dietaryDetails} className="menu-list-items">
-							{dietaryOptions.map((item) => (
+							{dietaryOptionsArray.map((item) => (
 								<option value={item.name} key={item.id}>
 									{item.name}
 								</option>

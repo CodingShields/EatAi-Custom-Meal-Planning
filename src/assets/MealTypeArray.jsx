@@ -25,14 +25,6 @@ const MealTypeArray = [
         id: nanoid(),
         name:"Dessert"
     },
-    // {
-    //     id: nanoid(),
-    //     name:"Snacks"
-    // },
-    // {
-    //     id: nanoid(),
-    //     name:"Quick Grab and Go"
-    // },
 ]
 
 export default MealTypeArray

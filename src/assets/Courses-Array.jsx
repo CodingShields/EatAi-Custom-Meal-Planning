@@ -9,7 +9,12 @@ const courses = [
     },
     {
         id: nanoid(),
-        name: "Soup or Salad",
+        name: "Salad",
+        description: "This course may include a bowl of soup or a salad."
+    },
+    {
+        id: nanoid(),
+        name: "Soup",
         description: "This course may include a bowl of soup or a salad."
     },
     {

@@ -1,30 +1,70 @@
 import React, { useState, useEffect } from "react";
-import coursesArray from "../../assets/coursesArray";
+import coursesArray from "../../assets/Courses-Array";
 
 
-export default function EasyOrderCourse ({checkedCourseOptions, setCheckedCourseOptions}) {
-    
-    function handleCheckboxChange(item) {
-        setCheckedCourseOptions([...checkedCourseOptions, item])
+export default function EasyOrderCourse({   checkedCourseOptions,
+                                            setCheckedCourseOptions,
+                                            setCourseSelectionConfirmed }) {
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+
+    function handleCourseSelectionChild() {
+        setCourseSelectionConfirmed()
+        console.log("clicked");
+        
     }
 
+    function handleCheckboxChange(item) {
+    if (checkedCourseOptions.includes(item)) {
+      // Item is already checked, so remove it
+      setCheckedCourseOptions(checkedCourseOptions.filter((checkedItem) => checkedItem !== item));
+    } else {
+      // Item is not checked, so add it
+      setCheckedCourseOptions([...checkedCourseOptions, item]);
+    }
+  }
+
+    useEffect(() => {
+    setIsButtonDisabled(checkedCourseOptions.length === 0);
+  }, [checkedCourseOptions])
+    
     return (
-        <div className="easy-order-menu-container">
-            <h2 className="easy-order-menu-text"> Please Pick As Many Courses As You Want</h2>
-                <ul className="courses-list-el">
-                    {coursesArray.map((item) => (
-                        <li key={item.id}>
-                            <input
-                                    className="courses-items"
+        <div
+            className="easy-order-menu-container"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "550px",
+                justifyContent: "center",
+                textAlign: "center",
+                height:"500px"
+            }}
+            >
+            <h2
+                className="easy-order-menu-text"
+                style={{
+                    paddingBottom:"20px"
+                }}
+                    > Please Pick As Many Courses As You Want</h2>
+                    <ul className="courses-list-el">
+                        {coursesArray.map((item) => (
+                            <li key={item.id}>
+                                <input
+                                    className="easy-order-items-list"
                                     type="checkbox"
                                     value={item.name}
                                     checked={checkedCourseOptions.includes(item.name)}
-                              onChange={() => handleCheckboxChange(item.name)}
-                            />
-                            {courses.name}
-                        </li>
-                    ))}
+                                    onChange={() => handleCheckboxChange(item.name)}
+                                />
+                                {item.name}
+                            </li>
+                        ))}
                 </ul>
+            <button
+                className="course-make-selection-btn"
+                disabled={isButtonDisabled}
+                onClick={handleCourseSelectionChild}
+                >Make Selection</button>
         </div>
         
     )
