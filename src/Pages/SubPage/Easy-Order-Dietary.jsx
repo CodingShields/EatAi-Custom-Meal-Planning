@@ -4,16 +4,14 @@ import DietaryOptionsArray from "../../assets/Dietary-Options-Array";
 export default function EasyOrderDietary({
   checkedDietaryOptions,
   setCheckedDietaryOptions,
-  setDietarySelectionConfirmed
-})
-{
-
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  setDietarySelectionConfirmed,
+}) {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const maxCheckedDietaryOptions = 3;
 
   const handleCheckboxDietaryChange = (item) => {
-    if (item === 'No Dietary Restrictions') {
+    if (item === "No Dietary Restrictions") {
       // If "No Dietary Restrictions" is selected, unselect it and enable other options
       if (checkedDietaryOptions.includes(item)) {
         setCheckedDietaryOptions([]);
@@ -26,13 +24,15 @@ export default function EasyOrderDietary({
 
       if (isChecked) {
         // If it's checked, remove it from the array
-        setCheckedDietaryOptions(checkedDietaryOptions.filter((option) => option !== item));
+        setCheckedDietaryOptions(
+          checkedDietaryOptions.filter((option) => option !== item)
+        );
       } else if (checkedDietaryOptions.length < maxCheckedDietaryOptions) {
         // If it's not checked and the limit is not reached, add it to the array
         setCheckedDietaryOptions([...checkedDietaryOptions, item]);
 
         // Unselect "No Dietary Restrictions" if it was selected
-        if (checkedDietaryOptions.includes('No Dietary Restrictions')) {
+        if (checkedDietaryOptions.includes("No Dietary Restrictions")) {
           setCheckedDietaryOptions([]);
         }
       }
@@ -40,28 +40,31 @@ export default function EasyOrderDietary({
   };
 
   function handleDietarySelectionChild() {
-        setDietarySelectionConfirmed()
-        console.log("clicked");
-        
-    }
-
+    setDietarySelectionConfirmed();
+    console.log("clicked");
+  }
 
   useEffect(() => {
-    setIsButtonDisabled(checkedDietaryOptions.length === 0);
-  }, [checkedDietaryOptions])
-
+    setIsButtonDisabled(
+      checkedDietaryOptions.length === 0 ||
+        (checkedDietaryOptions.includes("No Dietary Restrictions") &&
+          checkedDietaryOptions.length === 1)
+    );
+  }, [checkedDietaryOptions]);
 
   return (
     <div
       className="easy-order-menu-container"
-      stlye={{
+      style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center"
-            
-          }}>
-      <h2 className="easy-order-menu-text"> Please Choose Up to 3 Dietary Options</h2>
+        justifyContent: "center",
+      }}
+    >
+      <h2 className="easy-order-menu-text">
+        Please Choose Up to 3 Dietary Options
+      </h2>
       <ul className="courses-list-el">
         {DietaryOptionsArray.map((item) => (
           <li key={item.id}>
@@ -72,17 +75,21 @@ export default function EasyOrderDietary({
               checked={checkedDietaryOptions.includes(item.name)}
               onChange={() => handleCheckboxDietaryChange(item.name)}
               // Disable checkboxes if "No Dietary Restrictions" is selected
-              disabled={item === 'No Dietary Restrictions' && checkedDietaryOptions.includes('No Dietary Restrictions')}
+              disabled={
+                item === "No Dietary Restrictions" &&
+                checkedDietaryOptions.includes("No Dietary Restrictions")
+              }
             />
             {item.name}
           </li>
         ))}
       </ul>
       <button
-                className="course-make-selection-btn"
-                disabled={isButtonDisabled}
-                onClick={handleDietarySelectionChild}
-                >Make Selection</button>
+        className={`course-make-selection-btn ${isButtonDisabled ? "disabled" : ""}`}
+        onClick={handleDietarySelectionChild}
+      >
+        Make Selection
+      </button>
     </div>
   );
 }

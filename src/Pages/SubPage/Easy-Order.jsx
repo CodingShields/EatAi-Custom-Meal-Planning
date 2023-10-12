@@ -27,9 +27,38 @@ export default function EasyOrder() {
     const [checkedEventOptions, setCheckedEventOptions] = useState([])
     const [renderEventOptions, setRenderEventOptions] = useState(false)
     const [eventSelectionConfirmed, setEventSelectionConfirmed] = useState(false)
-    //Fourth Order
-
-
+    //Fourth Order NOT COMPLETED
+    const [headCountOption, setheadCountOption] = useState()
+    const [renderHeadCount, setRenderHeadCount] = useState(false)
+    const [headCountConfirmed, setHeadCountConfirmed] = useState(false)
+    //Fifth Order NOT COMPLETED
+    const [cookTimeOption, setCookTimeOption] = useState("")
+    const [renderCookTime, setRenderCookTime] = useState(false)
+    const [cookTimeConfirmed, setCookTimeConfirmed] = useState(false)
+    //Sixth Order NOT COMPLETED (Should include what to prep with and also "on the spot, in advance or both")
+    const [howToCookOption, setHowToCookOption] = useState("")
+    const [renderHowToCook, setRenderHowToCook] = useState(false)
+    const [howToCookConfirmed, setHowToCookConfirmed] = useState(false)
+    //Seventh Order NOT COMPLETED
+    const [foodBalanceOption, setFoodBalanceOption] = useState("")
+    const [renderFoodBalance, setRenderFoodBalance] = useState(false)
+    const [foodBalanceConfirmed, setFoodBalanceConfirmed] = useState(false)
+    //Eigth Order NOT COMPLETED
+    const [dessertFlavorOption, setDesserFlavorOption] = useState("")
+    const [renderDessertFlavor, setRenderDessertFlavor] = useState(false)
+    const [dessertFlavorConfirmed, setDessertFlavorConfirmed] = useState(false)
+    //Nineth Order NOT COMPLETED
+    const [beveragesOption, setBeveragesOption] = useState("")
+    const [renderBeverages, setRenderBeverages] = useState(false)
+    const [BeveragesConfirmed, setBeveragesConfirmed] = useState(false)
+    //Tenth Order NOT COMPLETED
+    const [seasonalOption, setSeasonalOption] = useState("")
+    const [renderSeasonal, setSeasonal] = useState(false)
+    const [seasonalConfirmed, setSeasonalConfirmed] = useState(false)
+    //Eleventh Order NOT COMPLETED
+    const [flavoredDishesOption, setFlavoredDishesOption] = useState("")
+    const [renderflavoredDishes, setFlavoredDishes] = useState(false)
+    const [flavoredDishesConfirmed, setFlavoredDishesConfirmed] = useState(false)
 
     const handleCourseSelectionConfirmed = () => {
         setCourseSelectionConfirmed(true);
@@ -59,8 +88,15 @@ export default function EasyOrder() {
         setRenderWelcomeMessage(true)
         setRenderCourseOptions(true)
     }
-    console.log(checkedDietaryOptions);
-    console.log(checkedCourseOptions)
+    function handleCourseModify() {
+        setRenderCourseOptions(true)
+        setRenderDietaryOptions(false)
+    }
+    function handleDietaryModify() {
+        setRenderCourseOptions(false)
+        setRenderDietaryOptions(true)
+    }
+   
     return (
         <div className="easy-order-container">
             <div className="chef-img-container">
@@ -109,7 +145,10 @@ export default function EasyOrder() {
                 {checkedCourseOptions.map((item) => (
                     <h2 className="checked-course-options-text">{item}</h2>
                 ))}
-                <h2 className="easy-order-selection-text"></h2>
+                <button
+                    className="easy-order-modify-btn"
+                    onClick={handleCourseModify}
+                >Modify</button>
             </div>
             <div
                 className="easy-order-selections-container"
@@ -119,7 +158,10 @@ export default function EasyOrder() {
                 {checkedDietaryOptions.map((item) => (
                     <h2 className="checked-course-options-text">{item}</h2>
                 ))}
-                <h2 className="easy-order-selection-text"></h2>
+                <button
+                    className="easy-order-modify-btn"
+                    onClick = {handleDietaryModify}
+                >Modify</button>
             </div>
         </div>
     )

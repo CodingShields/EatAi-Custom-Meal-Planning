@@ -451,11 +451,10 @@ main {
 }
 
 .easy-order-begin-btn {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: lightcoral;
-	width: 400px;
+	width: 200px;
 	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
@@ -490,8 +489,9 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 900px;
-	height: 550px;
+	width: auto;
+	max-width: 700px;
+	height: auto;
 	border: 10px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
@@ -499,6 +499,7 @@ main {
 	text-shadow: 0.5px 0.5px grey;
 	animation: fadeIn 0.75s ease-in-out;
 	text-align: center;
+	padding-bottom: 20px;
 }
 
 @keyframes fadeIn {
@@ -511,7 +512,8 @@ main {
 }
 
 .easy-order-menu-text {
-	font-size: 25px;
+	font-size: 30px;
+	text-decoration: underline;
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 }
@@ -519,8 +521,6 @@ main {
 .courses-list-el {
 	display: flex;
 	flex-direction: row;
-	/* justify-content: flex-start;
-	align-items: flex-start; */
 	list-style-type: none;
 	gap: 30px;
 	font-size: 30px;
@@ -530,6 +530,8 @@ main {
 
 .courses-list-el input[type="checkbox"] {
 	margin-right: 15px;
+	height: 20px;
+	width: 20px;
 }
 
 .courses-list-el label {
@@ -582,6 +584,7 @@ main {
 	text-shadow: 0.5px 0.5px grey;
 	margin-left: 20px;
 	animation: fadeIn 0.75s ease-in-out;
+	padding-bottom: 20px;
 }
 
 @keyframes fadeIn {
@@ -594,12 +597,12 @@ main {
 }
 
 .easy-order-selection-text {
-	font-size: 25px;
+	font-size: 30px;
 	text-decoration: underline;
 }
 .checked-course-options-text {
 	/* margin-top: 5px; */
-	font-size: 20px;
+	font-size: 22px;
 	line-height: 0px;
 }
 
@@ -610,12 +613,12 @@ main {
 	font-weight: 900;
 }
 
-.easy-order-selection-change-btn {
+.easy-order-modify-btn {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: lightcoral;
-	width: 200px;
+	width: 150px;
 	height: 30px;
 	border: 0px solid white;
 	border-radius: 1000px;
@@ -625,6 +628,7 @@ main {
 	font-weight: 500;
 	transition: background-color 0.3s, transform 0.2s;
 	animation: fadeIn 0.75s ease-in-out;
+	margin-top: 15px;
 }
 
 .easy-order-selection-change-btn:hover {

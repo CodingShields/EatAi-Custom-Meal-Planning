@@ -20,7 +20,6 @@ const FlavorTypeArray = [
   { id: nanoid(), name: "Turkish", details: "Cumin, coriander, and paprika for kebabs. Pomegranate molasses for a sweet-tangy touch." },
   { id: nanoid(), name: "Ethiopian", details: "Berbere spice mix for stews like doro wat. Injera bread, a sourdough flatbread, for scooping up dishes." },
   { id: nanoid(), name: "Russian", details: "Dill, sour cream, and horseradish for traditional dishes. Blini with caviar for a luxurious appetizer." },
-  { id: nanoid(), name: "Thai", details: "Lemongrass, coconut milk, and Thai basil for curries. Fish sauce and lime for a balance of sweet, salty, sour, and spicy." },
-  { id: nanoid(), name: "Japanese", details: "Soy sauce, mirin, and miso for teriyaki dishes. Wasabi and pickled ginger for sushi." }
+  { id: nanoid(), name: "American Indian", details: "Lemongrass, coconut milk, and Thai basil for curries. Fish sauce and lime for a balance of sweet, salty, sour, and spicy." }
 ]
 export default FlavorTypeArray
