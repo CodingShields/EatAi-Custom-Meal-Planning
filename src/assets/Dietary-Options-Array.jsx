@@ -1,6 +1,6 @@
 import {nanoid} from "nanoid"
 
-const dietaryOptionsArray = [
+const DietaryOptionsArray = [
   { id: nanoid(), name: 'No Dietary Restrictions' },
   { id: nanoid(), name: 'Mediterranean' },
   { id: nanoid(), name: 'Paleo' },
@@ -14,4 +14,4 @@ const dietaryOptionsArray = [
   { id: nanoid(), name: 'Veganism' }
 ];
 
-export default dietaryOptionsArray
+export default DietaryOptionsArray

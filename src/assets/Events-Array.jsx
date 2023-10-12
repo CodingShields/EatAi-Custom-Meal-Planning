@@ -1,7 +1,11 @@
 import { nanoid } from 'nanoid'
 
 
-const eventsArray = [
+const EventsArray = [
+  {
+    id: nanoid(),
+    name: "This is not for a event.",
+  },
   {
     id: nanoid(),
     name: "Wedding",
@@ -42,16 +46,16 @@ const eventsArray = [
     name: "Barbecue",
     description: "Outdoor cookouts where people grill and enjoy various dishes."
   },
-  {
-    id: nanoid(),
-    name: "Fundraiser",
-    description: "Events to raise money for a cause often offer food to attendees."
-  },
-  {
-    id: nanoid(),
-    name: "Convention/Conference",
-    description: "Large-scale events often have catering options."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Fundraiser",
+  //   description: "Events to raise money for a cause often offer food to attendees."
+  // },
+  // {
+  //   id: nanoid(),
+  //   name: "Convention/Conference",
+  //   description: "Large-scale events often have catering options."
+  // },
   {
     id: nanoid(),
     name: "Family Reunion",
@@ -72,36 +76,41 @@ const eventsArray = [
     name: "Networking Event",
     description: "Professional events often feature food and drinks."
   },
-  {
-    id: nanoid(),
-    name: "Art Gallery Opening",
-    description: "Showcasing art with refreshments for attendees."
-  },
-  {
-    id: nanoid(),
-    name: "Sporting Event",
-    description: "Stadiums and arenas offer a variety of food options for fans."
-  },
-  {
-    id: nanoid(),
-    name: "Music Festival",
-    description: "Multi-day events with food vendors for attendees."
-  },
-  {
-    id: nanoid(),
-    name: "Movie Premiere",
-    description: "Film screenings with receptions that include food and drinks."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Art Gallery Opening",
+  //   description: "Showcasing art with refreshments for attendees."
+  // },
+  // {
+  //   id: nanoid(),
+  //   name: "Sporting Event",
+  //   description: "Stadiums and arenas offer a variety of food options for fans."
+  // },
+  // {
+  //   id: nanoid(),
+  //   name: "Music Festival",
+  //   description: "Multi-day events with food vendors for attendees."
+  // },
+  // {
+  //   id: nanoid(),
+  //   name: "Movie Premiere",
+  //   description: "Film screenings with receptions that include food and drinks."
+  // },
   {
     id: nanoid(),
     name: "Community Picnic",
     description: "Outdoor gatherings with potluck-style food sharing."
   },
+  // {
+  //   id: nanoid(),
+  //   name: "Charity Gala",
+  //   description: "Fundraising events with formal dinners or buffets."
+  // },
   {
     id: nanoid(),
-    name: "Charity Gala",
-    description: "Fundraising events with formal dinners or buffets."
+    name: "Funeral or Celebration of Life",
+    description: "Food is often served by the host family of the dearly departed."
   }
 ]
 
-export default eventsArray
+export default EventsArray

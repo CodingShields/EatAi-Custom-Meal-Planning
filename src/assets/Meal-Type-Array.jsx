@@ -15,6 +15,10 @@ const MealTypeArray = [
     },
     {
         id: nanoid(),
+        name:"Brunch"
+    },
+    {
+        id: nanoid(),
         name:"Lunch"
     },
 {

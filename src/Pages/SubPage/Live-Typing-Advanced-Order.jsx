@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const LiveTypingAdvancedOrder = ({ fontSize }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = "Welcome to Advanced Ordering!\n I am your Chef EatAi!\n Here you will be able to order\n meals based on Macro Nutrients\n that can fit your daily goals!";
+  const defaultMessage = "Welcome to Advanced Ordering!\n I am your Chef EatAi!\n Here you will be able to order\n meals based on Macro Nutrients\n that can fit your daily goals!\nMore Updates Coming Soon!";
 
   useEffect(() => {
     let charIndex = 0;

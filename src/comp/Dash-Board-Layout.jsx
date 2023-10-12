@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import Kitchen from "../Pages/SubPage/Kitchen.jsx";
 
 export default function DashBoardLayout() {
   const activeStyles = {

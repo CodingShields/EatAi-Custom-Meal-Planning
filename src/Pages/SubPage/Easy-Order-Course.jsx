@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import coursesArray from "../../assets/Courses-Array";
+import CoursesArray from "../../assets/Courses-Array";
 
 
 export default function EasyOrderCourse({   checkedCourseOptions,
@@ -47,7 +47,7 @@ export default function EasyOrderCourse({   checkedCourseOptions,
                 }}
                     > Please Pick As Many Courses As You Want</h2>
                     <ul className="courses-list-el">
-                        {coursesArray.map((item) => (
+                        {CoursesArray.map((item) => (
                             <li key={item.id}>
                                 <input
                                     className="easy-order-items-list"

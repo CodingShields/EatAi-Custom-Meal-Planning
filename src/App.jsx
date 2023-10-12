@@ -5,11 +5,11 @@ import About from "./Pages/About.jsx"
 import Pantry from "./Pages/Pantry.jsx"
 import Layout from "./comp/Layout.jsx"
 import Login from "./Pages/Login.jsx"
-import DashBoardLayout from './comp/DashBoardLayout.jsx';
+import DashBoardLayout from './comp/Dash-Board-Layout.jsx';
 import Kitchen from "./Pages/SubPage/Kitchen.jsx"
-import ChefSurprise from './Pages/SubPage/ChefSuprise.jsx';
-import EasyOrder from './Pages/SubPage/EasyOrder.jsx'
-import AdvancedOrder from './Pages/SubPage/AdvancedOrder.jsx';
+import ChefSurprise from './Pages/SubPage/Chef-Suprise.jsx';
+import EasyOrder from './Pages/SubPage/Easy-Order.jsx'
+import AdvancedOrder from './Pages/SubPage/Advanced-Order.jsx';
 import "./index.css"
 function App() {
   return (

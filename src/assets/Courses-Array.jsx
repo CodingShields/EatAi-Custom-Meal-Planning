@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
 
-const courses = [  
+const CoursesArray = [  
     {
         id: nanoid(),
         name: "Appetizer",
@@ -34,4 +34,4 @@ const courses = [
     }
 ];
 
-export default courses
+export default CoursesArray

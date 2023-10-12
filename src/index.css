@@ -519,19 +519,22 @@ main {
 .courses-list-el {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-start;
+	/* justify-content: flex-start;
+	align-items: flex-start; */
 	list-style-type: none;
-	gap: 45px;
+	gap: 30px;
 	font-size: 30px;
 	flex-wrap: wrap;
-	line-height: 15px;
+	line-height: 1.5;
 }
 
 .courses-list-el input[type="checkbox"] {
-	padding-top: 15px;
-	width: 30px;
-	height: 30px;
+	margin-right: 15px;
+}
+
+.courses-list-el label {
+	display: flex;
+	align-items: center;
 }
 .disabled-checkbox {
 	color: #888; /* Gray out the text */

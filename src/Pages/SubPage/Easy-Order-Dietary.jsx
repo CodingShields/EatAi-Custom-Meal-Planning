@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import dietaryOptionsArray from "../../assets/DietaryOptionsArray";
+import DietaryOptionsArray from "../../assets/Dietary-Options-Array";
 
 export default function EasyOrderDietary({
   checkedDietaryOptions,
@@ -52,7 +52,8 @@ export default function EasyOrderDietary({
 
 
   return (
-    <div className="easy-order-menu-container"
+    <div
+      className="easy-order-menu-container"
       stlye={{
         display: "flex",
         flexDirection: "column",
@@ -62,7 +63,7 @@ export default function EasyOrderDietary({
           }}>
       <h2 className="easy-order-menu-text"> Please Choose Up to 3 Dietary Options</h2>
       <ul className="courses-list-el">
-        {dietaryOptionsArray.map((item) => (
+        {DietaryOptionsArray.map((item) => (
           <li key={item.id}>
             <input
               className="easy-order-items-list"

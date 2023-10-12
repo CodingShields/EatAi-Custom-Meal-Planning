@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import flippedchef from "../../assets/images/flippedchef.png";
 // import kitchen from "../../assets/images/kitchen.png";
-import LiveTypingEasyOrder from "./LiveTypingEasyOrder";
-import EasyOrderCourse from "./EasyOrderCourse";
-import EasyOrderDietary from "./EasyOrderDietary";
+import LiveTypingEasyOrder from "./Live-Typing-Easy-Order";
+import EasyOrderCourse from "./Easy-Order-Course";
+import EasyOrderDietary from "./Easy-Order-Dietary";
+import EasyOrderEvents from "./Easy-Order-Events"
 
 
 export default function EasyOrder() {
@@ -23,7 +24,10 @@ export default function EasyOrder() {
     const [renderDietaryOptions, setRenderDietaryOptions] = useState(false)
     const [dietarySelectionConfirmed, setDietarySelectionConfirmed] =useState(false)
     //Third Order
-    
+    const [checkedEventOptions, setCheckedEventOptions] = useState([])
+    const [renderEventOptions, setRenderEventOptions] = useState(false)
+    const [eventSelectionConfirmed, setEventSelectionConfirmed] = useState(false)
+    //Fourth Order
 
 
 
@@ -35,6 +39,10 @@ export default function EasyOrder() {
     const handleDietarySelectionConfirmed = () => {
         setRenderDietaryOptions(true);
         setDietarySelectionConfirmed(true)
+    };
+      const handleEventSelectionConfirmed = () => {
+        setRenderEventOptions(true);
+        setEventSelectionConfirmed(true)
   };
 
     useEffect(() => {
@@ -87,6 +95,12 @@ export default function EasyOrder() {
                     setCheckedDietaryOptions={setCheckedDietaryOptions}
                     setDietarySelectionConfirmed={handleDietarySelectionConfirmed}
                 />) : ""}
+            {renderEventOptions ?
+                (<EasyOrderEvents
+                    checkedEventOptions={checkedEventOptions}
+                    setCheckedEventOptions={setCheckedEventOptions}
+                    setEventSelectionConfirmed={handleEventSelectionConfirmed}
+            />) : ""}
             <div
                 className="easy-order-selections-container"
                 style={{display: renderWelcomeMessage ? "flex" : "none"}}

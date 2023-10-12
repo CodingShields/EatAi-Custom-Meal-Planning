@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function People() {
-  const [people, setPeople] = React.useState(1);
+export default function HeadCount() {
+  const [people, setPeople] = useState(1);
 
   function handleChange(value) {
     setPeople(value);
