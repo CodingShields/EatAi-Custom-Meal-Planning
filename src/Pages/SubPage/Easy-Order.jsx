@@ -28,10 +28,10 @@ export default function EasyOrder() {
     const [checkedEventOptions, setCheckedEventOptions] = useState([])
     const [renderEventOptions, setRenderEventOptions] = useState(false)
     const [eventSelectionConfirmed, setEventSelectionConfirmed] = useState(false)
-    //Fourth Order NOT COMPLETED
-    const [headCountOption, setheadCountOption] = useState()
+    //Fourth Order 
+    const [headCountOption, setHeadCountOption] = useState()
     const [renderHeadCount, setRenderHeadCount] = useState(false)
-    const [headCountConfirmed, setHeadCountConfirmed] = useState(false)
+    const [headCountConfirmed, setHeadCountConfirmed] = useState(1)
     //Fifth Order NOT COMPLETED
     const [cookTimeOption, setCookTimeOption] = useState("")
     const [renderCookTime, setRenderCookTime] = useState(false)
@@ -67,13 +67,24 @@ export default function EasyOrder() {
         setRenderCourseOptions(false);
     };
     const handleDietarySelectionConfirmed = () => {
-        setRenderDietaryOptions(true);
+        setRenderDietaryOptions(false);
         setDietarySelectionConfirmed(true)
+        setRenderHeadCount(true)
     };
-      const handleEventSelectionConfirmed = () => {
+
+    const [people, setPeople] = useState(1);
+
+    const handleHeadCountSelection = (value) => {
+        setHeadCountOption(value);
+        setHeadCountConfirmed(value); // Set the headCountConfirmed to the selected value
+        ;
+};
+     const handleEventSelectionConfirmed = () => {
         setRenderEventOptions(true);
-        setEventSelectionConfirmed(true)
+          setEventSelectionConfirmed(true)
+          
   };
+
 
     useEffect(() => {
         // Use a setTimeout to simulate text being typed and then display the button.
@@ -92,10 +103,16 @@ export default function EasyOrder() {
     function handleCourseModify() {
         setRenderCourseOptions(true)
         setRenderDietaryOptions(false)
+        setRenderHeadCount(false)
     }
     function handleDietaryModify() {
         setRenderCourseOptions(false)
         setRenderDietaryOptions(true)
+    }
+    function handleHeadCountModify() {
+        setRenderCourseOptions(false)
+        setRenderDietaryOptions(false)
+        setRenderHeadCount(true)
     }
    
     return (
@@ -136,14 +153,20 @@ export default function EasyOrder() {
                     setCheckedEventOptions={setCheckedEventOptions}
                     setEventSelectionConfirmed={handleEventSelectionConfirmed}
                 />) : ""}
-            <HeadCount />
+            {renderHeadCount ?
+                (<HeadCount
+                    headCountOption={headCountOption}
+                    setHeadCountOption={setHeadCountOption}
+                    setHeadCountSelectionConfirmed={handleHeadCountSelection}
+                    
+                />) : ""}
             <div
                 className="easy-order-selections-container"
                 style={{display: renderWelcomeMessage ? "flex" : "none"}}
                 >
                 <h2 className="easy-order-selection-text">Course Selection</h2>
                 {checkedCourseOptions.map((item) => (
-                    <h2 className="checked-course-options-text">{item}</h2>
+                    <h2 className="confirmed-selection-text">{item}</h2>
                 ))}
                 <button
                     className="easy-order-modify-btn"
@@ -152,15 +175,31 @@ export default function EasyOrder() {
             </div>
             <div
                 className="easy-order-selections-container"
-                style={{display: renderDietaryOptions ? "flex" : "none"}}
+                style={{display: renderHeadCount ? "flex" : "none"}}
             >
                 <h2 className="easy-order-selection-text">Dietary Selection</h2>
                 {checkedDietaryOptions.map((item) => (
-                    <h2 className="checked-course-options-text">{item}</h2>
+                    <h2 className="confirmed-selection-text">{item}</h2>
                 ))}
                 <button
                     className="easy-order-modify-btn"
                     onClick = {handleDietaryModify}
+                >Modify</button>
+            </div>
+            <div
+                className="easy-order-selections-container"
+                style={{display: renderHeadCount ? "flex" : "none"}}
+            >
+            <h2 className="easy-order-selection-text">Head Count</h2>
+                <h2 className="head-count-data-text">
+                    {headCountOption}
+                </h2>
+                    <h2 className="confirmed-selection-text">
+                        {headCountOption !== 1 ? "people" : "person"}
+                    </h2>
+                <button
+                    className="easy-order-modify-btn"
+                    onClick = {handleHeadCountModify}
                 >Modify</button>
             </div>
         </div>

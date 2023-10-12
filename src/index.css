@@ -578,6 +578,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 	width: 300px;
 	height: auto;
 	border: 10px solid brown;
@@ -603,7 +604,7 @@ main {
 	font-size: 30px;
 	text-decoration: underline;
 }
-.checked-course-options-text {
+.confirmed-selection-text {
 	/* margin-top: 5px; */
 	font-size: 22px;
 	line-height: 0px;
@@ -678,8 +679,6 @@ volume {
 	margin-right: 10px;
 	margin-left: 10px;
 	font-weight: 700;
-	text-shadow: none;
-	text-decoration: underline;
 }
 /* Change the color and size of the range input */
 input[type="range"] {

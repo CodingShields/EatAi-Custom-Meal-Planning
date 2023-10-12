@@ -8,9 +8,7 @@ export default function EasyOrderCourse({   checkedCourseOptions,
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
     function handleCourseSelectionChild() {
-        setCourseSelectionConfirmed()
-        console.log("clicked");
-        
+        setCourseSelectionConfirmed()        
     }
 
     function handleCheckboxChange(item) {

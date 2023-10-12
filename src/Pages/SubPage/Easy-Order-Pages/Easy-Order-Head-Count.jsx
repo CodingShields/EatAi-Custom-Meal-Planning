@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 
-export default function HeadCount() {
-    const [people, setPeople] = useState(1);
+export default function HeadCount({
+    headCountOption,
+    setHeadCountOption,
+    setHeadCountSelectionConfirmed}) {
+    
 
-    function handleHeadCount(value) {
-    setPeople(value);
+ function handleHeadCountSelectionChild(value) {
+        setHeadCountSelectionConfirmed(value)
+        console.log("clicked");
+        
     }
-    console.log(people);
+
     return (
     <div className="easy-order-menu-container">
         <h2 className="easy-order-menu-text">How many guests will you be serving?</h2>
@@ -18,14 +23,18 @@ export default function HeadCount() {
             min="1"
             max="50"
             step="1"
-            value={people}
-            onChange={(e) => handleHeadCount(e.target.value)}
+            value={headCountOption}
+            onChange={(e) => handleHeadCountSelectionChild(e.target.value)}
         />
         <div className="head-count-container">
             <p className="head-count-title-text">
-                HeadCount:{" "}<span className="head-count-data-text">{people}</span> {people != 1 ? "people" : "person"}
+                HeadCount:{" "}<span className="head-count-data-text">{headCountOption}</span> {headCountOption != 1 ? "people" : "person"}
                 </p>
-        </div>   
+            </div>
+        <button
+                className="course-make-selection-btn"
+                onClick={handleHeadCountSelectionChild}
+                >Make Selection</button>    
     </div>
     );
 }
