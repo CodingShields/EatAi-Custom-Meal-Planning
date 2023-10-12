@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import flippedchef from "../../assets/images/flippedchef.png";
 // import kitchen from "../../assets/images/kitchen.png";
-import LiveTypingEasyOrder from "./Live-Typing-Easy-Order";
-import EasyOrderCourse from "./Easy-Order-Course";
-import EasyOrderDietary from "./Easy-Order-Dietary";
-import EasyOrderEvents from "./Easy-Order-Events"
+import LiveTypingEasyOrder from "./Live-Typing-Pages/Live-Typing-Easy-Order";
+import EasyOrderCourse from "./Easy-Order-Pages/Easy-Order-Course";
+import EasyOrderDietary from "./Easy-Order-Pages/Easy-Order-Dietary";
+import EasyOrderEvents from "./Easy-Order-Pages/Easy-Order-Events"
+import HeadCount from "./Easy-Order-Pages/Easy-Order-Head-Count";
 
 
 export default function EasyOrder() {
@@ -99,9 +100,7 @@ export default function EasyOrder() {
    
     return (
         <div className="easy-order-container">
-            <div className="chef-img-container">
 				<img className="chef-img" src={flippedchef} alt="Chef" />
-            </div>
             <div
                 style={{ display: renderWelcomeMessage ? "none" : "flex" }}
                 className="chef-bubble-div">
@@ -136,7 +135,8 @@ export default function EasyOrder() {
                     checkedEventOptions={checkedEventOptions}
                     setCheckedEventOptions={setCheckedEventOptions}
                     setEventSelectionConfirmed={handleEventSelectionConfirmed}
-            />) : ""}
+                />) : ""}
+            <HeadCount />
             <div
                 className="easy-order-selections-container"
                 style={{display: renderWelcomeMessage ? "flex" : "none"}}

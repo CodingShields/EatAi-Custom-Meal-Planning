@@ -1,5 +1,5 @@
 import React from "react";
-import LiveTypingAdvancedOrder from "./Live-Typing-Advanced-Order";
+import LiveTypingAdvancedOrder from "./Live-Typing-Pages/Live-Typing-Advanced-Order";
 import flippedchef from "../../assets/images/flippedchef.png";
 
 export default function AdvancedOrder() {

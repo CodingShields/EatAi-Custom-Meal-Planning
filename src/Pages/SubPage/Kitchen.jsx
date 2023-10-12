@@ -1,6 +1,6 @@
 import React from "react";
 import flippedchef from "../../assets/images/flippedchef.png"
-import LiveTypingKitchen from "./Live-Typing-Kitchen";
+import LiveTypingKitchen from "./Live-Typing-Pages/Live-Typing-Kitchen";
 // import kitchen from "../../assets/images/kitchen.png"
 
 

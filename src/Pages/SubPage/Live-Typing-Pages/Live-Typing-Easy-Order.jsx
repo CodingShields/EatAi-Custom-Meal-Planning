@@ -44,7 +44,9 @@ const LiveTypingEasyOrder = ({ fontSize }) => {
         justifyContent: "start",
         alignContent: "center",
         textAlign: "center",
-        flexDirection:"column",
+        flexDirection: "column",
+        marginBottom: "0px",
+        paddingBottom: "0px"
       }}
     >
       {renderTextWithNewlines(displayedText)}

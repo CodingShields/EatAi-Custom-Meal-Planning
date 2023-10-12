@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EventsArray from "../../assets/Events-Array";
+import EventsArray from "../../../assets/Data Arrays/Events-Array";
 // import CulturalHolidays from "../../assets/Cultural-Holiday-Array";
 
 export default function EasyOrderEvents({

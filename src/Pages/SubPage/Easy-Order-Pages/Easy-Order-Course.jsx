@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CoursesArray from "../../assets/Courses-Array";
+import CoursesArray from "../../../assets/Data Arrays/Courses-Array";
 
 
 export default function EasyOrderCourse({   checkedCourseOptions,

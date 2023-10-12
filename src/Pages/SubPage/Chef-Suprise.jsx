@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import clipboard from "../../assets/images/clipboard.png";
-import MealTypeArray from "../../assets/Meal-Type-Array";
-import FlavorTypeArray from "../../assets/Flavor-Type-Array";
-import DietaryOptionsArray from "../../assets/Dietary-Options-Array";
+import MealTypeArray from "../../assets/Data Arrays/Meal-Type-Array";
+import FlavorTypeArray from "../../assets/Data Arrays/Flavor-Type-Array";
+import DietaryOptionsArray from "../../assets/Data Arrays/Dietary-Options-Array";
 import flippedchef from "../../assets/images/flippedchef.png";
 // import background from "../../assets/images/background.svg";
 import cooking from "../../assets/images/cooking.svg";
