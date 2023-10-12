@@ -67,7 +67,7 @@ export default function EasyOrder() {
         setRenderCourseOptions(false);
     };
     const handleDietarySelectionConfirmed = () => {
-        setRenderDietaryOptions(false);
+        setRenderDietaryOptions(true);
         setDietarySelectionConfirmed(true)
         setRenderHeadCount(true)
     };
