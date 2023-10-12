@@ -70,16 +70,11 @@ console.log(checkedDietaryOptions);
                 />
        
             </div>
-            <div className="easy-order-selections-container">
-                <h2 className="easy-order-selection-text"> Course/s Chosen</h2>
-                <button className="easy-order-selection-change-btn">Change Course</button>
-                <h2 className="easy-order-selection-text"> Dietary Option/s</h2>
-                {checkedDietaryOptions}
-                <button className="easy-order-selection-change-btn">Change Dietary</button>
-                <h2 className="easy-order-selection-text"> Flavor Option</h2>
-                <button className="easy-order-selection-change-btn">Change Flavor</button>
-
+            <div className="easyorder-menu-container">
+                {/* What kind of meal?
+                    How many people? */}
             </div>
+ 
         </div>
     )
 }

@@ -147,7 +147,7 @@ export default function ChefSurprise() {
 	}
 	
 	return (
-		<div className="dashboard-container">
+		<div className="kitchen-container">
 			{/* <img className="chef-background-img" src={kitchen} alt="Chef Background" /> */}
 			<div className="chef-img-container">
 				<img className="chef-img" src={flippedchef} alt="Chef" />

@@ -4,13 +4,8 @@
 
 html,
 body {
-	min-height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
 	background-color: #fff7ed;
 	font-family: "Inter", sans-serif;
-	display: flex;
 }
 
 a {
@@ -25,8 +20,6 @@ body::-webkit-scrollbar {
 body {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	display: flex;
-	flex-direction: column;
 }
 
 .site-wrapper {
@@ -38,7 +31,6 @@ body {
 }
 
 header {
-	height: 110px;
 	display: flex;
 	align-items: center;
 	padding-block: 10px;
@@ -105,7 +97,7 @@ main {
 	font-weight: 600;
 }
 
-.dashboard-container {
+.kitchen-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -114,15 +106,16 @@ main {
 	border-radius: 30px 30px 0px 0px;
 	padding: 0px 0px;
 	margin: 0px 10px;
+	height:600px;
 }
 
-/* .chef-background-img {
+.chef-background-img {
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-start;
 	flex-grow: 1;
 	border-radius: 30px 30px 0px 0px;
-} */
+}
 
 .chef-img-container {
 	display: flex;
@@ -562,11 +555,11 @@ main {
 	text-shadow: 0.5px 0.5px grey;
 	animation: fadeIn 0.75s ease-in-out;
 }
-.easy-order-selection-text{
+.easy-order-selection-text {
 	font-size: 20px;
 }
 
-.easy-order-selection-change-btn{
+.easy-order-selection-change-btn {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -591,6 +584,4 @@ main {
 .easy-order-selection-change-btn:active {
 	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
-}
-
 }
