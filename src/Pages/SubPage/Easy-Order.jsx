@@ -175,7 +175,7 @@ export default function EasyOrder() {
             </div>
             <div
                 className="easy-order-selections-container"
-                style={{display: renderHeadCount ? "flex" : "none"}}
+                style={{display: renderDietaryOptions? "flex" : "none"}}
             >
                 <h2 className="easy-order-selection-text">Dietary Selection</h2>
                 {checkedDietaryOptions.map((item) => (
