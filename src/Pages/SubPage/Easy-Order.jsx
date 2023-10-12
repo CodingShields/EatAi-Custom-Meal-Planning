@@ -10,7 +10,6 @@ import HeadCount from "./Easy-Order-Pages/Easy-Order-Head-Count";
 
 export default function EasyOrder() {
 
-    // changes display of the clipboard to display the loading/cooking svg while the call is being made
 	// const [removeMenu, setRemoveMenu] = useState(false)
 	// const [loading, setLoading] = useState(false);
 	// const [renderMenu, setRenderMenu] = useState(false);
@@ -87,12 +86,9 @@ export default function EasyOrder() {
 
 
     useEffect(() => {
-        // Use a setTimeout to simulate text being typed and then display the button.
         const timer = setTimeout(() => {
             setRenderBeginButton(true);
-        }, 6000); // Adjust the delay (in milliseconds) as needed.
-
-        // Clear the timer when the component unmounts.
+        }, 6000);
         return () => clearTimeout(timer);
     }, []);
 
