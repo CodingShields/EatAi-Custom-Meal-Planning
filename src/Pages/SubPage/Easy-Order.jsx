@@ -78,11 +78,10 @@ export default function EasyOrder() {
         setHeadCountConfirmed(value); // Set the headCountConfirmed to the selected value
         ;
 };
-     const handleEventSelectionConfirmed = () => {
+    const handleEventSelectionConfirmed = () => {
         setRenderEventOptions(true);
-          setEventSelectionConfirmed(true)
-          
-  };
+        setEventSelectionConfirmed(true);
+};
 
 
     useEffect(() => {
@@ -110,7 +109,7 @@ export default function EasyOrder() {
         setRenderDietaryOptions(false)
         setRenderHeadCount(true)
     }
-   
+
     return (
         <div className="easy-order-container">
 				<img className="chef-img" src={flippedchef} alt="Chef" />
