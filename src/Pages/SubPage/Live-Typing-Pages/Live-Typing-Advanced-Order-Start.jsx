@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-const LiveTypingAdvancedOrder = ({ fontSize }) => {
+const LiveTypingAdvancedOrderStart = () => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = 'Welcome to Advanced Ordering!\n I am your Chef EatAi!\n Here you will be able to order\n meals based on Macro Nutrients\n that fit your goals!\n If you are ready, click "Begin"' ;
+  const defaultMessage = 'Welcome!\n How would you like to get started today?' ;
 
   useEffect(() => {
     let charIndex = 0;
@@ -33,15 +33,15 @@ const LiveTypingAdvancedOrder = ({ fontSize }) => {
   return (
     <div
       className="live-text-container"
-      style={{
+        style={{
         display: "flex",
-        fontSize: fontSize || '48px',
+        fontSize: "28px",
         fontWeight: 'bold',
         width: "500px",
-        height: "450px",
+        height: "225px",
         paddingTop: '50px',
         position: 'relative',
-        justifyContent: "start",
+        justifyContent: "flexStart",
         alignContent: "center",
         textAlign: "center",
         flexDirection:"column",
@@ -53,4 +53,4 @@ const LiveTypingAdvancedOrder = ({ fontSize }) => {
   );
 };
 
-export default LiveTypingAdvancedOrder;
+export default LiveTypingAdvancedOrderStart;

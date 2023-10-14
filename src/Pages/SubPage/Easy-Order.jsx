@@ -75,7 +75,7 @@ export default function EasyOrder() {
 
     const handleHeadCountSelection = (value) => {
         setHeadCountOption(value);
-        setHeadCountConfirmed(value); // Set the headCountConfirmed to the selected value
+        setHeadCountConfirmed(value); 
         ;
 };
     const handleEventSelectionConfirmed = () => {

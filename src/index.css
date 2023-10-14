@@ -117,12 +117,12 @@ main {
 	border-radius: 30px 30px 0px 0px;
 }
 
-.chef-img-container {
+/* .chef-img-container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	width: 20%;
-}
+} */
 
 .chef-img {
 	display: flex;
@@ -728,4 +728,134 @@ input[type="range"]:focus {
 /* Handle range input hover state */
 input[type="range"]:hover::-webkit-slider-thumb {
 	background-color: #ff0000; /* Change thumb color on hover (adjust as needed) */
+}
+
+.advanced-order-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: auto;
+	background-color: aquamarine;
+	border-radius: 30px 30px 0px 0px;
+	padding: 50px 20px 50px;
+}
+
+.advanced-order-live-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	/* height: auto; */
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	border: 10px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: 5px 5px 5px black;
+	text-shadow: 0.5px 0.5px grey;
+	/* margin-left: 80px; */
+}
+
+.advanced-start-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: auto;
+	height: auto;
+	border: 10px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: 5px 5px 5px black;
+	text-shadow: 0.5px 0.5px grey;
+	margin-left: 80px;
+}
+
+.advanced-start-help-btn {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: lightcoral;
+	width: auto;
+	height: 50px;
+	border: 0px solid white;
+	border-radius: 20px;
+	box-shadow: 2px 1px 2px 1px black;
+	font-size: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	animation: fadeIn 0.75s ease-in-out;
+	padding: 15px 10px;
+	margin-bottom: 25px;
+}
+
+.advanced-start-help-btn-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.advanced-start-help-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+.advanced-order-macros-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	padding: 20px 20px 20px 20px;
+	margin: 10px 10px 10px 10px;
+}
+
+.advanced-order-questions-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+}
+
+.advanced-order-macro-category-title {
+	font-size: 30px;
+}
+
+.advanced-order-macro-input{
+	height:40px;
+	width:60px;
+	margin-bottom: 10px;
+}
+
+.advanced-order-done-btn {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: lightcoral;
+	width: auto;
+	height: 50px;
+	border: 0px solid white;
+	border-radius: 20px;
+	box-shadow: 2px 1px 2px 1px black;
+	font-size: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	animation: fadeIn 0.75s ease-in-out;
+	padding: 15px 10px;
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+
+.advanced-order-done-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.advanced-order-done-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
 }
