@@ -7,7 +7,7 @@ const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(getAuth(auth), email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   return (
