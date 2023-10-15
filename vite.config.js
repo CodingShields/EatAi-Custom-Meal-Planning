@@ -10,7 +10,7 @@ export default defineConfig(({ command, mode }) => {
     plugins: [react()],
     // vite config
     define: {
-      VITE_API_APIKEY: JSON.stringify(env.VITE_API_APIKEY),  // Make the env var available to your React client-side code
+       // Make the env var available to your React client-side code
     },
   }
 })

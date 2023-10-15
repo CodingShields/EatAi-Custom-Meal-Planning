@@ -28,8 +28,8 @@ export default function ChefSurprise() {
 	const [removeMenu, setRemoveMenu] = useState(false)
 	const [loading, setLoading] = useState(false);
 	const [renderMenu, setRenderMenu] = useState(false);
-
-	const apiKey = "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";
+	console.log(import.meta.env.VITE_API_KEY);
+	const apiKey = import.meta.env.VITE_API_KEY;
 
 	async function handleOrder() {
 		setLoading(true);
