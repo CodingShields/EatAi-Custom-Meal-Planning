@@ -5,14 +5,29 @@ import LiveTypingEasyOrder from "./Live-Typing-Pages/Live-Typing-Easy-Order";
 import EasyOrderCourse from "./Easy-Order-Pages/Easy-Order-Course";
 import EasyOrderDietary from "./Easy-Order-Pages/Easy-Order-Dietary";
 import EasyOrderEvents from "./Easy-Order-Pages/Easy-Order-Events"
-import HeadCount from "./Easy-Order-Pages/Easy-Order-Head-Count";
+import EasyOrderHeadCount from "./Easy-Order-Pages/Easy-Order-Head-Count";
 
 
 export default function EasyOrder() {
-
+    
 	// const [removeMenu, setRemoveMenu] = useState(false)
 	// const [loading, setLoading] = useState(false);
-	// const [renderMenu, setRenderMenu] = useState(false);
+    // const [renderMenu, setRenderMenu] = useState(false);
+    
+//     const renderStepMap = {
+//         0:EasyOrderCourse,
+//         1:EasyOrderDietary,
+//         2:EasyOrderHeadCount,
+//         3:
+//         4:
+//         5:
+//         6:
+//         7:
+//         8:
+//         9:
+//         10:
+// }
+
     const [renderWelcomeMessage, setRenderWelcomeMessage] = useState(false)
     const [renderBeginButton, setRenderBeginButton] = useState(false)
     // First Order
@@ -76,7 +91,7 @@ export default function EasyOrder() {
     const handleHeadCountSelection = (value) => {
         setHeadCountOption(value);
         setHeadCountConfirmed(value); 
-        ;
+        
 };
     const handleEventSelectionConfirmed = () => {
         setRenderEventOptions(true);
@@ -149,11 +164,11 @@ export default function EasyOrder() {
                     setEventSelectionConfirmed={handleEventSelectionConfirmed}
                 />) : ""}
             {renderHeadCount ?
-                (<HeadCount
+                (<EasyOrderHeadCount
                     headCountOption={headCountOption}
                     setHeadCountOption={setHeadCountOption}
                     setHeadCountSelectionConfirmed={handleHeadCountSelection}
-                    
+
                 />) : ""}
             <div
                 className="easy-order-selections-container"

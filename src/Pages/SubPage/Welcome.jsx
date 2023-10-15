@@ -4,7 +4,7 @@ import LiveTypingKitchen from "./Live-Typing-Pages/Live-Typing-Kitchen";
 // import kitchen from "../../assets/images/kitchen.png"
 
 
-export default function Kitchen() {
+export default function Welcome() {
 
   
   return (

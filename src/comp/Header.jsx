@@ -1,5 +1,7 @@
 import React from "react"
 import { Link, NavLink } from "react-router-dom"
+import loginAvatar from "../assets/images/loginAvatar.png"
+
 
 export default function Header() {
     const activeStyles = {
@@ -12,7 +14,7 @@ export default function Header() {
 
     return (
         <header>
-            <Link  to="/">EatAi</Link>
+            <Link  to="/" className="site-logo">EatAi</Link>
             <nav>
                 <NavLink
                     to="/About"
@@ -21,18 +23,17 @@ export default function Header() {
                     About
                 </NavLink>
                 <NavLink
-                    to="/PersonalChef"
+                    to="/Signup"
                     style={({ isActive }) => isActive ? activeStyles : null}
                 >
-                    Personal Chef
+                    Sign Up
                 </NavLink>
                 <NavLink
-                    to="/Pantry"
+                    to="/Login"
                     style={({ isActive }) => isActive ? activeStyles : null}
                 >
-                    My Pantry
+                    Login
                 </NavLink>
-                
             </nav>
         </header>
     )

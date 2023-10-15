@@ -15,7 +15,7 @@ export default function DashBoardLayout() {
           style={({ isActive }) => isActive ? activeStyles : null}
           to="."
           end>
-          Kitchen
+          Welcome
         </NavLink>
 
         <NavLink

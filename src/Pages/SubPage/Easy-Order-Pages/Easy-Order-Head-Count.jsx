@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function HeadCount({
+export default function EasyOrderHeadCount({
     headCountOption,
     setHeadCountOption,
     setHeadCountSelectionConfirmed}) {
