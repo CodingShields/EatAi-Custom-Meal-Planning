@@ -9,9 +9,7 @@ export default function Header() {
         textDecoration: "underline",
         color: "#161616"
     }
-
-
-
+    
     return (
         <header>
             <Link  to="/" className="site-logo">EatAi</Link>
@@ -23,16 +21,10 @@ export default function Header() {
                     About
                 </NavLink>
                 <NavLink
-                    to="/Signup"
+                    to="/SignUp"
                     style={({ isActive }) => isActive ? activeStyles : null}
                 >
-                    Sign Up
-                </NavLink>
-                <NavLink
-                    to="/Login"
-                    style={({ isActive }) => isActive ? activeStyles : null}
-                >
-                    Login
+                    SignUp
                 </NavLink>
             </nav>
         </header>
