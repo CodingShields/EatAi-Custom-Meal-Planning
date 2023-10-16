@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import LoginChef from "../assets/images/LoginChef.png"
+import LoginChef from "../assets/images/LoginChef.png";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState(""); // Add first name state
+  const [lastName, setLastName] = useState(""); // Add last name state
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
-  const createUser = UserAuth(); 
+
+  const navigate = useNavigate();
+
+  const { createUser } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, password);
-      navigate("/Account")
+      // Pass first name and last name to createUser function
+      await createUser(email, password, firstName, lastName);
+      navigate("/Account");
+      console.log("You are Signed Up");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -23,31 +29,45 @@ const SignUp = () => {
   };
   return (
     <div className="login-container">
-      <img src={LoginChef} className="login-chef-img"></img>
+      <img src={LoginChef} className="login-chef-img" alt="Chef" />
       <h1 className="signup-title">Sign Up for a FREE Account</h1>
       <form onSubmit={handleSubmit} className="login-form">
+        <input
+          name="firstName"
+          onChange={(e) => setFirstName(e.target.value)}
+          type="text"
+          placeholder="First Name"
+          required
+        />
+        <input
+          name="lastName"
+          onChange={(e) => setLastName(e.target.value)}
+          type="text"
+          placeholder="Last Name"
+          required
+        />
         <input
           name="email"
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="Email address"
+          required
         />
         <input
           name="password"
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="Password"
+          required
         />
-        <button type="submit">
-           Sign Up
-        </button>
+        <button type="submit">Sign Up</button>
       </form>
       <button
-        onClick={() => navigate("/Login")}
-        className="member-link"
+        onClick={() => navigate("/SignIn")}
+        className="current-member-link"
         style={{ textDecoration: "underline" }}
       >
-        Already A Member? Login 
+        Already A Member? Login
       </button>
     </div>
   );

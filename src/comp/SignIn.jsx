@@ -1,25 +1,23 @@
 import React, { useState } from "react";
-// import { useNavigate} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
 import LoginChef from "../assets/images/LoginChef.png";
 
-const Login = () => {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const loginUser = UserAuth(); // Use the authentication function from your context
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await loginUser(email, password); // Use your authentication function
-     ;
-      console.log("click");
+      await signIn(email, password);
+      navigate("account");
     } catch (e) {
-      setError(e.message);
-      console.log(e.message);
+      setError("Invalid credentials. Please try again.");
+      console.log("Invalid credentials. Please try again.");
     }
   };
 
@@ -34,18 +32,27 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="Email address"
+          required
         />
         <input
           name="password"
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="Password"
+          required
         />
         <button type="submit">Sign In</button>
+      {error && <p className="error-message">{error}</p>}
       </form>
-      
+      <button
+        onClick={() => navigate("/SignUp")}
+        className="current-member-link"
+        style={{ textDecoration: "underline" }}
+      >
+        Not A Member? Sign-Up for Free!
+      </button>
     </div>
   );
 };
 
-export default Login;
+export default SignIn;

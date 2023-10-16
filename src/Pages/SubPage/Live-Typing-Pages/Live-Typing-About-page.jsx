@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-const LiveTypingHomePage = ({ fontSize }) => {
+const LiveTypingAboutPage = ({ fontSize }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = "Welcome, I am your Chef!\n I am the World's 1st and Best Menu Chef!\n Come explore cook with me to learn NEW and TASTY foods locally and from all over the World!"
+  const defaultMessage = 'Here at the ChefAi Kitchen we have many options for you.\n We offer a "Chef Surprise" where you can quickly get a Menu and Grocery list on quick notice.\n We have "Easy Ordering" which will ask more detailed questions to get you a more personalized menu and grocery list.\n We also have "Advanced Order" where we can balance a menu down the exact gram of nutrient you need!'
 
   useEffect(() => {
     let charIndex = 0;
@@ -14,7 +14,7 @@ const LiveTypingHomePage = ({ fontSize }) => {
       } else {
         clearInterval(typingInterval);
       }
-    }, 50); // Adjust the delay for typing speed
+    }, 30); // Adjust the delay for typing speed
 
     return () => {
       clearInterval(typingInterval);
@@ -35,10 +35,9 @@ const LiveTypingHomePage = ({ fontSize }) => {
       className="live-text-container"
       style={{
         display: "flex",
-        fontSize: fontSize || '36px',
+        fontSize: fontSize || '24px',
         fontWeight: 'bold',
         width: "500px",
-        height: "450px",
         paddingTop: '50px',
         justifyContent: "start",
         alignContent: "center",
@@ -51,4 +50,4 @@ const LiveTypingHomePage = ({ fontSize }) => {
   );
 };
 
-export default LiveTypingHomePage;
+export default LiveTypingAboutPage;

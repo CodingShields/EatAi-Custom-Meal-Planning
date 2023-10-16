@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const LiveTypingAdvancedOrder = ({ fontSize }) => {
+const LiveTypingAboutPage = ({ fontSize }) => {
   const [displayedText, setDisplayedText] = useState('');
   const defaultMessage = 'Welcome to Advanced Ordering!\n I am your Chef EatAi!\n Here you will be able to order\n meals based on Macro Nutrients\n that fit your goals!\n If you are ready, click "Begin"' ;
 
@@ -53,4 +53,4 @@ const LiveTypingAdvancedOrder = ({ fontSize }) => {
   );
 };
 
-export default LiveTypingAdvancedOrder;
+export default LiveTypingAboutPage;

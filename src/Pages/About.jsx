@@ -1,11 +1,17 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import flippedchef from "../assets/images/flippedchef.png"
+import LiveTypingAboutPage from "./SubPage/Live-Typing-Pages/Live-Typing-About-page.jsx"
 
 export default function About() {
     return (
-        <div className="about-container">
-            <h1> Welcome to ChefAi! Let the Chef help you with what most people struggle with, what to eat! Feel free to click around on the tabs to learn more!</h1>
-           
+        <div className="about-page-container">
+            <div className="chef-img-container">
+                <img className="about-page-chef-img" src={flippedchef}></img>
+            </div>
+            <div className="about-live-text-container">
+                <LiveTypingAboutPage />
+            </div>
         </div>
     )
 };

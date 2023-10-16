@@ -12,13 +12,19 @@ export default function Header() {
     
     return (
         <header>
-            <Link  to="/" className="site-logo">EatAi</Link>
+            <Link  to="/Home" className="site-logo">EatAi</Link>
             <nav>
                 <NavLink
                     to="/About"
                     style={({ isActive }) => isActive ? activeStyles : null}
                 >
                     About
+                </NavLink>
+                <NavLink
+                    to="/SignIn"
+                    style={({ isActive }) => isActive ? activeStyles : null}
+                >
+                    Login
                 </NavLink>
                 <NavLink
                     to="/SignUp"

@@ -89,7 +89,7 @@ footer {
 
 main {
 	display: flex;
-	flex-direction: column;
+	/* flex-direction: column; */
 	justify-content: center;
 	align-items: center;
 }
@@ -112,19 +112,6 @@ main {
 	font-weight: 600;
 }
 
-.Account-container {
-	display: flex;
-	border: 4px solid brown;
-	border-radius: 20px;
-	width: auto;
-	max-width: fit-content;
-	height: fit-content;
-	max-height: fit-content;
-	flex-direction: column;
-	align-items: center;
-	padding-inline: 27px;
-	margin: 40px 0px 40px;
-}
 .login-container {
 	display: flex;
 	border: 10px solid brown;
@@ -199,19 +186,6 @@ main {
 	height: 200px;
 }
 
-.logout-btn {
-	background-color: #ff8c38;
-	font-size: 20px;
-	text-shadow: #333 1px 1px 1px;
-	border: none;
-	border-radius: 6px;
-	height: 55px;
-	margin-top: 22px;
-	margin-bottom: 15px;
-	color: white;
-	font-family: "Inter", sans-serif;
-	transition: background-color 0.3s, transform 0.2s;
-}
 .login-form > button:hover {
 	color: white;
 	background-color: rebeccapurple;
@@ -226,7 +200,7 @@ main {
 	font-size: 20px;
 }
 
-.member-link {
+.current-member-link {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	font-size: 20px;
@@ -235,7 +209,7 @@ main {
 	background: none;
 }
 
-.member-link:hover {
+.current-member-link:hover {
 	font-weight: 700;
 	color: blue;
 }
@@ -247,6 +221,7 @@ main {
 	width: auto;
 	margin-top: 40px;
 }
+
 .chef-img-container {
 	display: flex;
 }
@@ -266,11 +241,96 @@ main {
 	box-shadow: 5px 5px 5px black;
 	text-shadow: 0.5px 0.5px grey;
 }
+.about-page-container {
+	display: flex;
+	flex-direction: row;
+	height: auto;
+	width: auto;
+	margin-top: 40px;
+}
 
-.account-container {
+.about-page-chef-img {
+	height: auto;
+	width: auto;
+	height: 600px;
+}
+.about-live-text-container {
 	display: flex;
 	justify-content: center;
-	width: 500px;
+	width: 600px;
+	height: 550px;
+	border: 4px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: 5px 5px 5px black;
+	text-shadow: 0.5px 0.5px grey;
+}
+.Account-container {
+	display: flex;
+	border: 4px solid brown;
+	border-radius: 20px;
+	width: auto;
+	flex-direction: column;
+	align-items: center;
+	padding-inline: 27px;
+	margin: 40px 0px 40px;
+}
+.account-title {
+	display: flex;
+	align-items: flex-start;
+	text-decoration: underline;
+}
+.account-data-container {
+	display: flex;
+	flex-direction: row;
+}
+.account-details {
+	text-transform: capitalize;
+	font-weight: 600;
+}
+.account-details-title-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: end;
+	width: auto;
+	margin-right: 20px;
+}
+.account-details-data-container {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	width: auto;
+	margin-right: 20px;
+}
+
+.logout-btn {
+	background-color: #ff8c38;
+	font-size: 20px;
+	text-shadow: #333 1px 1px 1px;
+	width: 50%;
+	border: none;
+	border-radius: 6px;
+	height: 55px;
+	margin-top: 22px;
+	margin-bottom: 15px;
+	color: white;
+	font-family: "Inter", sans-serif;
+	transition: background-color 0.3s, transform 0.2s;
+}
+.logout-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.logout-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+.error-message {
+	color: red;
+	font-size: 20px;
 }
 
 .kitchen-container {
@@ -318,7 +378,7 @@ main {
 	display: flex;
 	justify-content: center;
 	width: 600px;
-	height: 500px;
+	height: 600px;
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
