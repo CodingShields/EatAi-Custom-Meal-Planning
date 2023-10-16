@@ -34,29 +34,35 @@ header {
 	display: flex;
 	justify-content: center;
 	padding-block: 10px;
+	margin-top: 20px;
 }
 
 header .site-logo {
-	color: black;
-	text-transform: uppercase;
+	color: #4d4d4d;
 	font-weight: 900;
-	font-size: 50px;
-	border: 1px solid black;
+	font-size: 70px;
+	border: 1px solid grey;
 	margin-right: 5%;
+}
+header .site-logo:hover {
+	color: #161616;
+	text-decoration: underline;
+	border: 3px solid black;
+	font-size: 75px;
 }
 
 header a {
-	text-transform: uppercase;
 	text-decoration: none;
-	color: black;
+	color: #4d4d4d;
 	font-weight: 600;
 	padding: 5px 30px;
-	font-size: 25px;
+	font-size: 32px;
 }
 
 header a:hover {
 	color: #161616;
 	text-decoration: underline;
+	font-size: 36px;
 }
 
 .login-icon {
@@ -89,14 +95,16 @@ footer {
 
 main {
 	display: flex;
-	/* flex-direction: column; */
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin: auto;
 }
 .dashboard-nav {
 	display: flex;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	margin-left: 20px;
+	margin-top: 40px;
 }
 .dashboard-nav a {
 	text-decoration: none;
@@ -114,10 +122,9 @@ main {
 
 .login-container {
 	display: flex;
-	border: 10px solid brown;
+	border: 4px solid brown;
 	border-radius: 20px;
-	width: auto;
-	max-width: fit-content;
+	width: 500px;
 	height: fit-content;
 	max-height: fit-content;
 	flex-direction: column;
@@ -196,7 +203,7 @@ main {
 	transform: scale(0.95); /* Button scale down when clicked */
 }
 
-.signup-title {
+.sign-up-title {
 	font-size: 20px;
 }
 
@@ -224,6 +231,7 @@ main {
 
 .chef-img-container {
 	display: flex;
+	margin-right: 40px;
 }
 .home-page-chef-img {
 	height: auto;
@@ -342,7 +350,9 @@ main {
 	border-radius: 30px 30px 0px 0px;
 	padding: 0px 0px;
 	margin: 0px 10px;
-	height: 600px;
+	height: 700px;
+	width: 1200px;
+	box-shadow: #333 1px 5px 10px 5px;
 }
 
 .chef-background-img {
@@ -382,8 +392,9 @@ main {
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
+	margin-left: 80px;
 }
 
 .blinking-cursor {
@@ -416,17 +427,17 @@ main {
 
 .clipboard-div {
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	height: 600px;
-}
-
-.clipboard-img {
-	width: 500px;
-	height: 585px;
-	position: absolute;
-	z-index: 101;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	border: 4px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: #333 1px 5px 10px 5px;
+	text-shadow: 0.5px 0.5px grey;
+	margin-left: 80px;
 }
 
 .menu-title-text-container {
@@ -556,7 +567,7 @@ main {
 	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
-	box-shadow: 2px 1px 2px 1px black;
+	box-shadow: 3px 3px 3px 1px black;
 	font-size: 30px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.2s;
@@ -615,7 +626,7 @@ main {
 	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
-	box-shadow: 2px 1px 2px 1px black;
+	box-shadow: 3px 3px 3px 1px black;
 	font-size: 30px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.2s;
@@ -666,10 +677,12 @@ main {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	width: auto;
+	height: auto;
+	width: 1200px;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
 	padding: 50px 20px 50px;
+	box-shadow: #333 1px 5px 10px 5px;
 }
 
 .easy-order-live-text-div {
@@ -682,7 +695,7 @@ main {
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
 	margin-left: 80px;
 }
@@ -695,7 +708,7 @@ main {
 	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
-	box-shadow: 2px 1px 2px 1px black;
+	box-shadow: 3px 3px 3px 1px black;
 	font-size: 30px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.2s;
@@ -733,7 +746,7 @@ main {
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
 	animation: fadeIn 0.75s ease-in-out;
 	text-align: center;
@@ -793,7 +806,7 @@ main {
 	height: 50px;
 	border: 0px solid white;
 	border-radius: 1000px;
-	box-shadow: 2px 1px 2px 1px black;
+	box-shadow: 3px 3px 3px 1px black;
 	font-size: 30px;
 	cursor: pointer;
 	font-weight: 500;
@@ -822,7 +835,7 @@ main {
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
 	margin-left: 20px;
 	animation: fadeIn 0.75s ease-in-out;
@@ -971,10 +984,12 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	width: auto;
+	height: 700px;
+	width: 1200px;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
 	padding: 50px 20px 50px;
+	box-shadow: #333 1px 5px 10px 5px;
 }
 
 .advanced-order-live-container {
@@ -989,9 +1004,9 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
-	/* margin-left: 80px; */
+	margin-left: 80px;
 }
 
 .advanced-start-container {
@@ -1004,7 +1019,7 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: #333 1px 3px 7px 3px;
 	text-shadow: 0.5px 0.5px grey;
 	margin-left: 80px;
 }
@@ -1018,7 +1033,7 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	height: 50px;
 	border: 0px solid white;
 	border-radius: 20px;
-	box-shadow: 2px 1px 2px 1px black;
+	box-shadow: 3px 3px 3px 1px black;
 	font-size: 30px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.2s;

@@ -1,6 +1,6 @@
 import React from "react";
 import flippedchef from "../../assets/images/flippedchef.png"
-import LiveTypingKitchen from "./Live-Typing-Pages/Live-Typing-Kitchen";
+import LiveTypingWelcome from "./Live-Typing-Pages/Live-Typing-Welcome";
 // import kitchen from "../../assets/images/kitchen.png"
 
 
@@ -15,7 +15,7 @@ export default function Welcome() {
       </div>
       <div className="menu-container">
         <div className="live-text-div">
-             <LiveTypingKitchen
+             <LiveTypingWelcome
             fontSize="28px"
             />
         </div>

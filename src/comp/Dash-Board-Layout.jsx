@@ -12,33 +12,46 @@ export default function DashBoardLayout() {
     <>
       <nav className="dashboard-nav">
         <NavLink
-          style={({ isActive }) => isActive ? activeStyles : null}
-          to="."
-          end>
-          Welcome
-        </NavLink>
+  to="/MembersArea/Welcome"
+  end
+  style={({ isActive }) => isActive ? activeStyles : null}
+>
+  Welcome
+</NavLink>
 
-        <NavLink
-          to="ChefSurprise"
-          style={({ isActive }) => isActive ? activeStyles : null}
-        >  
-          Chef Surprise
-        </NavLink>
+<NavLink
+  to="/MembersArea/ChefSurprise"
+  style={({ isActive }) => isActive ? activeStyles : null}
+>  
+  Chef Surprise
+</NavLink>
 
-        <NavLink
-          to="EasyOrder"
+<NavLink
+  to="/MembersArea/EasyOrder"
+  style={({ isActive }) => isActive ? activeStyles : null}
+>
+  Easy Order
+</NavLink>
 
-          style={({ isActive }) => isActive ? activeStyles : null}
-        >
-          Easy Order
-        </NavLink>
+<NavLink
+  to="/MembersArea/AdvancedOrder"
+  style={({ isActive }) => isActive ? activeStyles : null}
+>
+  Advanced Order
+</NavLink>
+<NavLink
+  to="/MembersArea/Pantry"
+  style={({ isActive }) => isActive ? activeStyles : null}
+>
+  Pantry
+</NavLink>
+<NavLink
+  to="/MembersArea/Account"
+  style={({ isActive }) => isActive ? activeStyles : null}
+>
+  Account
+</NavLink>
 
-        <NavLink
-          to="AdvancedOrder"
-          style={({ isActive }) => isActive ? activeStyles : null}
-        >
-          Advanced Order
-        </NavLink>
       </nav>
       <Outlet />
     </>

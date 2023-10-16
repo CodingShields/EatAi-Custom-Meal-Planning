@@ -6,11 +6,11 @@ export default function Account() {
     
     const { user, logout } = UserAuth()
     const [error, setError] = useState(null);
-    const navigate =useNavigate()
+    const navigate = useNavigate()
     const handleLogOut = async () => {
         try {
             await logout()
-            navigate("/Home")
+            navigate("/SignIn")
             console.log("You are Logged Out");
         }catch (e) {
         setError(e.message);

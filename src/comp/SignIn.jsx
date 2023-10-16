@@ -3,7 +3,10 @@ import { Link, useNavigate} from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
 import LoginChef from "../assets/images/LoginChef.png";
 
+
 const SignIn = () => {
+  const {signIn} = UserAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -14,7 +17,7 @@ const SignIn = () => {
     setError("");
     try {
       await signIn(email, password);
-      navigate("account");
+      navigate("/MembersArea/Welcome");
     } catch (e) {
       setError("Invalid credentials. Please try again.");
       console.log("Invalid credentials. Please try again.");

@@ -20,7 +20,7 @@ const SignUp = () => {
     try {
       // Pass first name and last name to createUser function
       await createUser(email, password, firstName, lastName);
-      navigate("/Account");
+      navigate("/MembersArea/Welcome");
       console.log("You are Signed Up");
     } catch (e) {
       setError(e.message);
@@ -30,7 +30,7 @@ const SignUp = () => {
   return (
     <div className="login-container">
       <img src={LoginChef} className="login-chef-img" alt="Chef" />
-      <h1 className="signup-title">Sign Up for a FREE Account</h1>
+      <h1 className="sign-up-title">Sign Up for a FREE Account</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <input
           name="firstName"

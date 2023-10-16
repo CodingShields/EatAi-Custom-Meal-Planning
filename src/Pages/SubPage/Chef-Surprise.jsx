@@ -160,9 +160,7 @@ export default function ChefSurprise() {
                         {chatBotReply}
                     </h2>
             </div>
-				<img className="clipboard-img"
-                    style={{ display: renderMenu ? "none" : "flex" }}
-					src={clipboard} alt="Clipboard" />
+				
                 <div
                     style={{ display: removeMenu ? "none" : "flex" }}
                     className="menu-title-text-container">
