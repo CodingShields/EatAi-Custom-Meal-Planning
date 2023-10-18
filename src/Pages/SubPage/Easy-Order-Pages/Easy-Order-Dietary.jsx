@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import DietaryOptionsArray from "../../../assets/Data Arrays/Dietary-Options-Array";
 
-export default function EasyOrderDietary({
-  checkedDietaryOptions,
-  setCheckedDietaryOptions,
-  setDietarySelectionConfirmed,
-}) {
+export default function EasyOrderDietary() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([])
+    const [renderDietaryOptions, setRenderDietaryOptions] = useState(false)
+    const [dietarySelectionConfirmed, setDietarySelectionConfirmed] =useState(false)
 
   const maxCheckedDietaryOptions = 3;
 

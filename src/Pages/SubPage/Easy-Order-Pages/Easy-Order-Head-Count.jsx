@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-export default function EasyOrderHeadCount({
-    headCountOption,
-    setHeadCountOption,
-    setHeadCountSelectionConfirmed}) {
-    
+export default function EasyOrderHeadCount() {
+    const [headCountOption, setHeadCountOption] = useState()
+    const [renderHeadCount, setRenderHeadCount] = useState(false)
+    const [headCountConfirmed, setHeadCountConfirmed] = useState(1)
 
  function handleHeadCountSelectionChild(value) {
         setHeadCountSelectionConfirmed(value)
