@@ -10,7 +10,7 @@ export default function Account() {
     const handleLogOut = async () => {
         try {
             await logout()
-            navigate("/SignIn")
+            navigate("/")
             console.log("You are Logged Out");
         }catch (e) {
         setError(e.message);
@@ -35,7 +35,8 @@ export default function Account() {
                 
             <button
                 onClick = {handleLogOut}
-                className="logout-btn"> Logout </button>
+                className="logout-btn"
+            > Logout </button>
         </div>
     )
 }

@@ -1,9 +1,9 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
-import Header from "./Header"
-import Footer from "./Footer"
+import Header from "../comp/Header"
+import Footer from "../comp/Footer"
 
-export default function Layout() {
+export default function HomeLayout() {
     return (
         <div className="site-wrapper">
             <Header />

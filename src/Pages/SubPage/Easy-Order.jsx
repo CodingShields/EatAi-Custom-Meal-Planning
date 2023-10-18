@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import flippedchef from "../../assets/images/flippedchef.png";
 // import kitchen from "../../assets/images/kitchen.png";
-import LiveTypingEasyOrder from "./Live-Typing-Pages/Live-Typing-Easy-Order";
+import EasyOrderBegin from "./Easy-Order-Pages/Easy-Order-Begin"
 import EasyOrderCourse from "./Easy-Order-Pages/Easy-Order-Course";
 import EasyOrderDietary from "./Easy-Order-Pages/Easy-Order-Dietary";
 import EasyOrderEvents from "./Easy-Order-Pages/Easy-Order-Events"
@@ -10,30 +10,25 @@ import EasyOrderHeadCount from "./Easy-Order-Pages/Easy-Order-Head-Count";
 
 export default function EasyOrder() {
     
-	// const [removeMenu, setRemoveMenu] = useState(false)
-	// const [loading, setLoading] = useState(false);
+    // const [removeMenu, setRemoveMenu] = useState(false)
+    // const [loading, setLoading] = useState(false);
     // const [renderMenu, setRenderMenu] = useState(false);
     
-//     const renderStepMap = {
-//         0:EasyOrderCourse,
-//         1:EasyOrderDietary,
-//         2:EasyOrderHeadCount,
-//         3:
-//         4:
-//         5:
-//         6:
-//         7:
-//         8:
-//         9:
-//         10:
-// }
+ const renderStepMap = {
+    0: <EasyOrderBegin />,
+    1: <EasyOrderCourse />,
+    2: <EasyOrderDietary />,
+    3:<EasyOrderHeadCount />,
+    }
 
+    function handleNextStep() {
+       renderStepMap[0] 
+    }
+    
     const [renderWelcomeMessage, setRenderWelcomeMessage] = useState(false)
     const [renderBeginButton, setRenderBeginButton] = useState(false)
     // First Order
-    const [checkedCourseOptions, setCheckedCourseOptions] = useState([])
-    const [renderCourseOptions, setRenderCourseOptions] = useState(false)
-    const [courseSelectionConfirmed, setCourseSelectionConfirmed] =useState(false)
+    
     //Second Order
     const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([])
     const [renderDietaryOptions, setRenderDietaryOptions] = useState(false)
@@ -75,101 +70,22 @@ export default function EasyOrder() {
     const [renderflavoredDishes, setFlavoredDishes] = useState(false)
     const [flavoredDishesConfirmed, setFlavoredDishesConfirmed] = useState(false)
 
-    const handleCourseSelectionConfirmed = () => {
-        setCourseSelectionConfirmed(true);
-        setRenderDietaryOptions(true);
-        setRenderCourseOptions(false);
-    };
-    const handleDietarySelectionConfirmed = () => {
-        setRenderDietaryOptions(true);
-        setDietarySelectionConfirmed(true)
-        setRenderHeadCount(true)
-    };
 
-    const [people, setPeople] = useState(1);
-
-    const handleHeadCountSelection = (value) => {
-        setHeadCountOption(value);
-        setHeadCountConfirmed(value); 
-        
-};
-    const handleEventSelectionConfirmed = () => {
-        setRenderEventOptions(true);
-        setEventSelectionConfirmed(true);
-};
-
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setRenderBeginButton(true);
-        }, 6000);
-        return () => clearTimeout(timer);
-    }, []);
-
-    function handleBeginBtn() {
-        setRenderWelcomeMessage(true)
-        setRenderCourseOptions(true)
-    }
-    function handleCourseModify() {
-        setRenderCourseOptions(true)
-        setRenderDietaryOptions(false)
-        setRenderHeadCount(false)
-    }
-    function handleDietaryModify() {
-        setRenderCourseOptions(false)
-        setRenderDietaryOptions(true)
-    }
-    function handleHeadCountModify() {
-        setRenderCourseOptions(false)
-        setRenderDietaryOptions(false)
-        setRenderHeadCount(true)
-    }
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setRenderBeginButton(true);
+    //     }, 6000);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
     return (
         <div className="easy-order-container">
 				<img className="chef-img" src={flippedchef} alt="Chef" />
             <div
-                style={{ display: renderWelcomeMessage ? "none" : "flex" }}
                 className="chef-bubble-div">
-                <div
-                    className="easy-order-live-text-div">
-                    <LiveTypingEasyOrder
-                        fontSize="28px"    
-                    />
-                    <button
-                        onClick={handleBeginBtn}
-                        style={{ display: renderWelcomeMessage ? "none" : "flex" }}
-                        className="easy-order-begin-btn">
-                        Begin    
-                    </button>
-                </div>
+                {renderStepMap[0]}
             </div>
-                
-            {renderCourseOptions ?
-                (<EasyOrderCourse
-                    checkedCourseOptions={checkedCourseOptions}
-                    setCheckedCourseOptions={setCheckedCourseOptions}
-                    setCourseSelectionConfirmed={handleCourseSelectionConfirmed}
-                />) : ""}
-            {renderDietaryOptions ?
-                (<EasyOrderDietary
-                    checkedDietaryOptions={checkedDietaryOptions}
-                    setCheckedDietaryOptions={setCheckedDietaryOptions}
-                    setDietarySelectionConfirmed={handleDietarySelectionConfirmed}
-                />) : ""}
-            {renderEventOptions ?
-                (<EasyOrderEvents
-                    checkedEventOptions={checkedEventOptions}
-                    setCheckedEventOptions={setCheckedEventOptions}
-                    setEventSelectionConfirmed={handleEventSelectionConfirmed}
-                />) : ""}
-            {renderHeadCount ?
-                (<EasyOrderHeadCount
-                    headCountOption={headCountOption}
-                    setHeadCountOption={setHeadCountOption}
-                    setHeadCountSelectionConfirmed={handleHeadCountSelection}
-
-                />) : ""}
+{/*                 
             <div
                 className="easy-order-selections-container"
                 style={{display: renderWelcomeMessage ? "flex" : "none"}}
@@ -211,7 +127,7 @@ export default function EasyOrder() {
                     className="easy-order-modify-btn"
                     onClick = {handleHeadCountModify}
                 >Modify</button>
-            </div>
+            </div> */}
         </div>
     )
 }

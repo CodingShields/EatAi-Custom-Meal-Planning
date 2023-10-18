@@ -29,8 +29,8 @@ const SignUp = () => {
   };
   return (
     <div className="login-container">
-      <img src={LoginChef} className="login-chef-img" alt="Chef" />
       <h1 className="sign-up-title">Sign Up for a FREE Account</h1>
+      <img src={LoginChef} className="login-chef-img" alt="Chef" />
       <form onSubmit={handleSubmit} className="login-form">
         <input
           name="firstName"
@@ -63,7 +63,7 @@ const SignUp = () => {
         <button type="submit">Sign Up</button>
       </form>
       <button
-        onClick={() => navigate("/SignIn")}
+        onClick={() => navigate("/")}
         className="current-member-link"
         style={{ textDecoration: "underline" }}
       >

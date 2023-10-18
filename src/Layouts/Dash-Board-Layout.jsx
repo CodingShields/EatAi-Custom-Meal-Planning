@@ -1,62 +1,54 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
-const  DashBoardLayout = () => {
+export default function DashBoardLayout(){
   
-  const[test, setTest] = React.useState("")
     
     const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
     color: "#161616",
   }
-console.log(test);
   return (
       <>
       <nav className="dashboard-nav">
         <NavLink
-          to="/MembersArea/Welcome"
+          to="Welcome"
           end
           style={({ isActive }) => isActive ? activeStyles : null}
-          onClick={(e) => setTest(e.target) }
       >
       Welcome
       </NavLink>
 
       <NavLink
-      to="/MembersArea/ChefSurprise"
+      to="ChefSurprise"
       style={({ isActive }) => isActive ? activeStyles : null}
-      onClick={(e) => setTest(e.target) }
         >  
       Chef Surprise
       </NavLink>
 
       <NavLink
-      to="/MembersArea/EasyOrder"
+      to="EasyOrder"
       style={({ isActive }) => isActive ? activeStyles : null}
-      onClick={(e) => setTest(e.target) }
         >
       Easy Order
       </NavLink>
 
       <NavLink
-      to="/MembersArea/AdvancedOrder"
+      to="AdvancedOrder"
       style={({ isActive }) => isActive ? activeStyles : null}
-      onClick={(e) => setTest(e.target) }
         >
       Advanced Order
       </NavLink>
       <NavLink
-      to="/MembersArea/Pantry"
+      to="Pantry"
       style={({ isActive }) => isActive ? activeStyles : null}
-      onClick={(e) => setTest(e.target) }
         >
       Pantry
       </NavLink>
       <NavLink
-      to="/MembersArea/Account"
+      to="Account"
       style={({ isActive }) => isActive ? activeStyles : null}
-      onClick={(e) => setTest(e.target) }
         >
       Account
       </NavLink>
@@ -66,4 +58,4 @@ console.log(test);
       </>
       );
 }
-export default DashBoardLayout
+

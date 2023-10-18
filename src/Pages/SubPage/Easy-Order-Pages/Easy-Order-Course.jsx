@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import CoursesArray from "../../../assets/Data Arrays/Courses-Array";
-
-
-export default function EasyOrderCourse({   checkedCourseOptions, setCheckedCourseOptions, setCourseSelectionConfirmed }) {
+export default function EasyOrderCourse() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-
+    const [checkedCourseOptions, setCheckedCourseOptions] = useState([])
+    const [renderCourseOptions, setRenderCourseOptions] = useState(false)
+    const [courseSelectionConfirmed, setCourseSelectionConfirmed] = useState(false)
+    
     function handleCourseSelectionChild() {
         setCourseSelectionConfirmed()        
     }

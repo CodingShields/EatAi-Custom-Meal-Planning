@@ -25,7 +25,7 @@ body {
 .site-wrapper {
 	display: flex;
 	flex-direction: column;
-	position: relative;
+	/* position: relative; */
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
@@ -185,8 +185,8 @@ main {
 }
 
 .login-form > button:active {
-	background-color: #003580; /* Color change on click */
-	transform: scale(0.95); /* Button scale down when clicked */
+	background-color: #003580;
+	transform: scale(0.95); 
 }
 
 .login-chef-img {
@@ -199,12 +199,12 @@ main {
 }
 
 .login-form > button:active {
-	background-color: #003580; /* Color change on click */
-	transform: scale(0.95); /* Button scale down when clicked */
+	background-color: #003580; 
+	transform: scale(0.95); 
 }
 
 .sign-up-title {
-	font-size: 20px;
+	font-size: 30px;
 }
 
 .current-member-link {
