@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import EventsArray from "../../../assets/Data Arrays/Events-Array";
+import EventsArray from "../../../assets/dataArrays/Events-Array";
 import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
-// import CulturalHolidays from "../../assets/Cultural-Holiday-Array";
-
 export default function EasyOrderEvents() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checked, setChecked] = useState([])

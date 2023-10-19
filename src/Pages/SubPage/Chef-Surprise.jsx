@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import MealTypeArray from "../../assets/Data Arrays/Meal-Type-Array";
-import FlavorTypeArray from "../../assets/Data Arrays/Flavor-Type-Array";
-import DietaryOptionsArray from "../../assets/Data Arrays/Dietary-Options-Array";
+import MealTypeArray from "../../assets/dataArrays/Meal-Type-Array";
+import FlavorTypeArray from "../../assets/dataArrays/Flavor-Type-Array";
+import DietaryOptionsArray from "../../assets/dataArrays/Dietary-Options-Array";
 import flippedchef from "../../assets/images/flippedchef.png";
 import cooking from "../../assets/images/cooking.svg";
 import jsPDF from "jspdf"

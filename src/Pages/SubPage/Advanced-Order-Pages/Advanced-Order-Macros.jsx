@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import AdvancedOrderMacroQuestions from "../../../assets/Data Arrays/Advanced-Order-Macros-Questions";
-
+import AdvancedOrderMacroQuestions from "../../../assets/dataArrays/Advanced-Order-Macro-Questions";
 export default function AdvancedOrderMacros() {
     const [macroData, setMacroData] = useState({
         calories:"",

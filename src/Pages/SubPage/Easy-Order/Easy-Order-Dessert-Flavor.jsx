@@ -1,33 +1,35 @@
-import React from "react";  
-import BeverageOptionsArray from "../../../../assets/dataArrays/Beverage-Options-Array";
-export default function EasyOrderBeverage() {  
+import React from "react";
+import DessertFlavor from "../../../assets/dataArrays/Dessert-Flavor-Array";
+import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+
+export default function EasyOrderDessertFlavor() {  
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checkedBeverage, setCheckedBeverage] = useState("")
+    const [checkedDessert, setCheckedDessert] = useState("")
 
  function handleCheckbox(item) {
-    if (checkedBeverage.includes(item)) {
+    if (checkedDessert.includes(item)) {
       // Item is already checked, so remove it
-      setCheckedBeverage(checkedBeverage.filter((checkedBeverage) => checkedBeverage !== item));
+      setCheckedDessert(checkedDessert.filter((checkedDessert) => checkedDessert !== item));
     } else {
       // Item is not checked, so add it
-      setCheckedBeverage([...checkedBeverage, item]);
+      setCheckedDessert([...checkedDessert, item]);
     }
   }
 
     useEffect(() => {
-    setIsButtonDisabled(checkedBeverage.length === 0);
-  }, [checkedBeverage])
+    setIsButtonDisabled(checkedDessert.length === 0);
+  }, [checkedDessert])
     return (
         <>
             <h1>Dessert Flavor</h1>
             <ul className="courses-list-el">
-                        {BeverageOptionsArray.map((item) => (
+                        {DessertFlavor.map((item) => (
                             <li key={item.id}>
                                 <input
                                     className="easy-order-items-list"
                                     type="checkbox"
                                     value={item.name}
-                                    checked={checkedBeverage.includes(item.name)}
+                                    checked={checkedDessert.includes(item.name)}
                                     onChange={() => handleCheckbox(item.name)}
                                 />
                                 {item.name}

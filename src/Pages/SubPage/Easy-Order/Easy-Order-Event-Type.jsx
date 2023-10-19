@@ -1,33 +1,36 @@
-import React from "react";  
-import BeverageOptionsArray from "../../../../assets/dataArrays/Beverage-Options-Array";
-export default function EasyOrderBeverage() {  
+import React from "react"
+import EventsArray from "../../../assets/Data Arrays/Events-Array"
+import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+
+export default function EasyOrderEvents() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checkedBeverage, setCheckedBeverage] = useState("")
+    const [checkedEvents, setCheckedEvents] = useState("")
 
  function handleCheckbox(item) {
-    if (checkedBeverage.includes(item)) {
+    if (checkedEvents.includes(item)) {
       // Item is already checked, so remove it
-      setCheckedBeverage(checkedBeverage.filter((checkedBeverage) => checkedBeverage !== item));
+      setCheckedEvents(checkedEvents.filter((checkedEvents) => checkedEvents !== item));
     } else {
       // Item is not checked, so add it
-      setCheckedBeverage([...checkedBeverage, item]);
+      setCheckedEvents([...checkedEvents, item]);
     }
   }
 
     useEffect(() => {
-    setIsButtonDisabled(checkedBeverage.length === 0);
-  }, [checkedBeverage])
+    setIsButtonDisabled(checkedEvents.length === 0);
+  }, [checkedEvents])
+    
     return (
         <>
-            <h1>Dessert Flavor</h1>
-            <ul className="courses-list-el">
-                        {BeverageOptionsArray.map((item) => (
+            <h2 className="easy-order-menu-text"> Please Pick As Many Courses As You Want</h2>
+                    <ul className="courses-list-el">
+                        {EventsArray.map((item) => (
                             <li key={item.id}>
                                 <input
                                     className="easy-order-items-list"
                                     type="checkbox"
                                     value={item.name}
-                                    checked={checkedBeverage.includes(item.name)}
+                                    checked={checkedEvents.includes(item.name)}
                                     onChange={() => handleCheckbox(item.name)}
                                 />
                                 {item.name}
@@ -36,5 +39,6 @@ export default function EasyOrderBeverage() {
                 </ul>
             {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
         </>
+        
     )
 }

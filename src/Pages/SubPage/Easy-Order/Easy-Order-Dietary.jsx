@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import DietaryOptionsArray from "../../../assets/Data Arrays/Dietary-Options-Array";
+import DietaryOptionsArray from "../../../assets/dataArrays/Dietary-Options-Array";
 import EasyOrderSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderDietary() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([])
-    const [renderDietaryOptions, setRenderDietaryOptions] = useState(false)
     const [dietarySelectionConfirmed, setDietarySelectionConfirmed] =useState(false)
 
   const maxCheckedDietaryOptions = 3;

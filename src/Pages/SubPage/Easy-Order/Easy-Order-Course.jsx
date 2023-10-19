@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
-import CoursesArray from "../../../assets/Data Arrays/Courses-Array";
+import CoursesArray from "../../../assets/dataArrays/Courses-Array";
 import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderCourse() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checkedCourseOptions, setCheckedCourseOptions] = useState([])
-  
-    
-    function handleCourseSelectionChild() {
-        setCourseSelectionConfirmed()        
-    }
 
     function handleCheckboxChange(item) {
     if (checkedCourseOptions.includes(item)) {

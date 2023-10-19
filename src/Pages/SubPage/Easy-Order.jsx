@@ -9,12 +9,12 @@ import EasyOrderBackButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Back-B
 import EasyOrderUserSelection from "./Easy-Order/Easy-Order-Comps/Easy-Order-User-Selection";
 import EasyOrderEvents from "./Easy-Order/Easy-Order-Events";
 import EasyOrderBeverage from "./Easy-Order/Need To Build Out/Easy-Order-Beverage";
-import EasyOrderCookTime from "./Easy-Order/Need To Build Out/Easy-Order-Cook-Time";
-import EasyOrderDessertFlavor from "./Easy-Order/Need To Build Out/Easy-Order-Dessert-Flavor";
-import EasyOrderFlavoredRecommend from "./Easy-Order/Need To Build Out/Easy-Order-Flavored-Recommend";
-import EasyOrderFoodBalance from "./Easy-Order/Need To Build Out/Easy-Order-Food-Balance";
-import EasyOrderHowToCook from "./Easy-Order/Need To Build Out/Easy-Order-How-To-Cook";
-import EasyOrderSeasonalOptions from "./Easy-Order/Need To Build Out/Easy-Order-Seasonal-Options";
+import EasyOrderCookTime from "./Easy-Order/Easy-Order-Cook-Time";
+import EasyOrderDessertFlavor from "./Easy-Order/Easy-Order-Dessert-Flavor";
+import EasyOrderFlavoredRecommend from "./Easy-Order/Easy-Order-Flavored-Recommend";
+import EasyOrderMealBalance from "./Easy-Order/Easy-Order-Meal-Balance";
+import EasyOrderHowToCook from "./Easy-Order/Easy-Order-How-To-Cook";
+import EasyOrderSeasonalOptions from "./Easy-Order/Easy-Order-Seasonal-Options";
 import { useAppStore } from "../../store/appStore";
 
 const EasyOrder = () => {
@@ -31,9 +31,10 @@ const EasyOrder = () => {
             6: <EasyOrderCookTime />,
             7: <EasyOrderDessertFlavor />,
             8: <EasyOrderFlavoredRecommend />,
-            9: <EasyOrderFoodBalance />,
+            9: <EasyOrderMealBalance />,
             10: <EasyOrderHowToCook />, 
-            11: <EasyOrderSeasonalOptions />,   
+            11: <EasyOrderSeasonalOptions />, //DONE 
+            12: <EasyOrderCulturalOptions/>
         }
 
         const RenderCompFromStep = renderStepMap[step]
