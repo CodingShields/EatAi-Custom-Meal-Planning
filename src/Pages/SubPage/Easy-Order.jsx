@@ -39,7 +39,7 @@ const EasyOrder = () => {
         }
 
         const RenderCompFromStep = renderStepMap[step]
-
+// in the api call need to add a summary 
         return (
             <div className="easy-order-container">
                 <div className="easy-order-chef-img-container">
