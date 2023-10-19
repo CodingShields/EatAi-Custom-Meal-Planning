@@ -1,15 +1,15 @@
 import React from "react";
 import flippedchef from "../../assets/images/flippedchef.png";
-import EasyOrderBegin from "./Easy-Order-Pages/Easy-Order-Begin"
-import EasyOrderCourse from "./Easy-Order-Pages/Easy-Order-Course";
-import EasyOrderDietary from "./Easy-Order-Pages/Easy-Order-Dietary";
-import EasyOrderHeadCount from "./Easy-Order-Pages/Easy-Order-Head-Count"; // You also need to import EasyOrderHeadCount
-import EasyOrderStartOverButton from "./Easy-Order-Pages/Easy-Order-Start-Over-Button"
-import EasyOrderBackButton from "./Easy-Order-Pages/Easy-Order-Back-Button";
+import EasyOrderBegin from "./Easy-Order/Easy-Order-Begin"
+import EasyOrderCourse from "./Easy-Order/Easy-Order-Course";
+import EasyOrderDietary from "./Easy-Order/Easy-Order-Dietary";
+import EasyOrderHeadCount from "./Easy-Order/Easy-Order-Head-Count"; // You also need to import EasyOrderHeadCount
+import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Start-Over-Button"
+import EasyOrderBackButton from "./Easy-Order/Easy-Order-Back-Button";
 import { useAppStore } from "../../store/appStore";
 
 const EasyOrder = () => {
-    const step = useAppStore((state) => state.step[0]);
+    const step = useAppStore((state) => state.step);
    
 
         const renderStepMap = {
@@ -31,11 +31,10 @@ const EasyOrder = () => {
             <div className="easy-order-container">
                 <img className="chef-img" src={flippedchef} alt="Chef" />
                 <div className="chef-bubble-div">
-                    <h1>test</h1>
                     {RenderCompFromStep}
                     <div className="easy-order-btn-div">
-                        {/* <EasyOrderStartOverButton />
-                        <EasyOrderBackButton/> */}
+                        <EasyOrderStartOverButton />
+                        <EasyOrderBackButton/>
                     </div>
                 </div>
                 
