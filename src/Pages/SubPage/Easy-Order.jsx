@@ -3,7 +3,7 @@ import flippedchef from "../../assets/images/flippedchef.png";
 import EasyOrderBegin from "./Easy-Order/Easy-Order-Begin"
 import EasyOrderCourse from "./Easy-Order/Easy-Order-Course";
 import EasyOrderDietary from "./Easy-Order/Easy-Order-Dietary";
-import EasyOrderHeadCount from "./Easy-Order/Easy-Order-Head-Count"; // You also need to import EasyOrderHeadCount
+import EasyOrderHeadCount from "./Easy-Order/Easy-Order-Head-Count"; 
 import EasyOrderEvents from "./Easy-Order/Easy-Order-Events";
 import EasyOrderBeverage from "./Easy-Order/Easy-Order-Beverage";
 import EasyOrderCookTime from "./Easy-Order/Easy-Order-Cook-Time";
