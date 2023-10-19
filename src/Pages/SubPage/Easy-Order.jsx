@@ -4,17 +4,18 @@ import EasyOrderBegin from "./Easy-Order/Easy-Order-Begin"
 import EasyOrderCourse from "./Easy-Order/Easy-Order-Course";
 import EasyOrderDietary from "./Easy-Order/Easy-Order-Dietary";
 import EasyOrderHeadCount from "./Easy-Order/Easy-Order-Head-Count"; // You also need to import EasyOrderHeadCount
-import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Start-Over-Button"
-import EasyOrderBackButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Back-Button";
-import EasyOrderUserSelection from "./Easy-Order/Easy-Order-Comps/Easy-Order-User-Selection";
 import EasyOrderEvents from "./Easy-Order/Easy-Order-Events";
-import EasyOrderBeverage from "./Easy-Order/Need To Build Out/Easy-Order-Beverage";
+import EasyOrderBeverage from "./Easy-Order/Easy-Order-Beverage";
 import EasyOrderCookTime from "./Easy-Order/Easy-Order-Cook-Time";
 import EasyOrderDessertFlavor from "./Easy-Order/Easy-Order-Dessert-Flavor";
 import EasyOrderFlavoredRecommend from "./Easy-Order/Easy-Order-Flavored-Recommend";
 import EasyOrderMealBalance from "./Easy-Order/Easy-Order-Meal-Balance";
 import EasyOrderHowToCook from "./Easy-Order/Easy-Order-How-To-Cook";
 import EasyOrderSeasonalOptions from "./Easy-Order/Easy-Order-Seasonal-Options";
+import EasyOrderCulturalOptions from "./Easy-Order/Easy-Order-Cultural-Options";
+import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Start-Over-Button"
+import EasyOrderBackButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Back-Button";
+import EasyOrderUserSelection from "./Easy-Order/Easy-Order-Comps/Easy-Order-User-Selection";
 import { useAppStore } from "../../store/appStore";
 
 const EasyOrder = () => {
@@ -33,7 +34,7 @@ const EasyOrder = () => {
             8: <EasyOrderFlavoredRecommend />,
             9: <EasyOrderMealBalance />,
             10: <EasyOrderHowToCook />, 
-            11: <EasyOrderSeasonalOptions />, //DONE 
+            11: <EasyOrderSeasonalOptions />, 
             12: <EasyOrderCulturalOptions/>
         }
 

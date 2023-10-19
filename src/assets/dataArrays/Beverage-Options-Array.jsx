@@ -14,3 +14,4 @@ const BeverageOptions = [
         name:"Alchoholic Beverages"
     },
 ]
+export default BeverageOptions;

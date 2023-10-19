@@ -1,5 +1,6 @@
-import React from "react";  
-import BeverageOptionsArray from "../../../../assets/dataArrays/Beverage-Options-Array";
+import React, { useState, useEffect} from "react";  
+import BeverageOptionsArray from "../../../assets/dataArrays/Beverage-Options-Array";
+import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 export default function EasyOrderBeverage() {  
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checkedBeverage, setCheckedBeverage] = useState("")

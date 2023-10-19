@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid"
 
-const CulturalHolidays = [
+const EasyOrderCulturalOptions = [
     {
     id: nanoid(),
     name: "This not for a Cultural Celebration",
@@ -108,4 +108,4 @@ const CulturalHolidays = [
 ];
 
 
-export default CulturalHolidays
+export default EasyOrderCulturalOptions

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 import CookTimes from "../../../assets/dataArrays/Cook-Times-Array";
 export default function EasyOrderCookTime() {    
@@ -25,7 +25,7 @@ export default function EasyOrderCookTime() {
                         className="easy-order-items-list"
                         type="checkbox"
                         value={item.name}
-                        checked={checkedCourseOptions.includes(item.name)}
+                        checked={checkedCookTime.includes(item.name)}
                         onChange={() => handleCheckboxChange(item.name)}
                     />
                     {item.name}
