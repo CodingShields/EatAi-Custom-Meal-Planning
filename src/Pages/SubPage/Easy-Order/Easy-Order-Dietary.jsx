@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DietaryOptionsArray from "../../../assets/Data Arrays/Dietary-Options-Array";
+import EasyOrderSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderDietary() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -52,7 +53,7 @@ export default function EasyOrderDietary() {
   }, [checkedDietaryOptions]);
 
   return (
-    <div className="easy-order-menu-container">
+    <>
       <h2 className="easy-order-menu-text">
         Please Choose Up to 3 Dietary Options
       </h2>
@@ -75,12 +76,7 @@ export default function EasyOrderDietary() {
           </li>
         ))}
       </ul>
-      <button
-        className={`course-make-selection-btn ${isButtonDisabled ? "disabled" : ""}`}
-        onClick={handleDietarySelectionChild}
-      >
-        Make Selection
-      </button>
-    </div>
+    <EasyOrderSelectionButton />
+    </>
   );
 }

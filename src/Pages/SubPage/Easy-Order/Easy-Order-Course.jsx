@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import CoursesArray from "../../../assets/Data Arrays/Courses-Array";
+import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+
 export default function EasyOrderCourse() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checkedCourseOptions, setCheckedCourseOptions] = useState([])
-    const [renderCourseOptions, setRenderCourseOptions] = useState(false)
-    const [courseSelectionConfirmed, setCourseSelectionConfirmed] = useState(false)
+  
     
     function handleCourseSelectionChild() {
         setCourseSelectionConfirmed()        
@@ -25,24 +26,8 @@ export default function EasyOrderCourse() {
   }, [checkedCourseOptions])
     
     return (
-        <div
-            className="easy-order-menu-container"
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "550px",
-                justifyContent: "center",
-                textAlign: "center",
-                height:"500px"
-            }}
-            >
-            <h2
-                className="easy-order-menu-text"
-                style={{
-                    paddingBottom:"20px"
-                }}
-                    > Please Pick As Many Courses As You Want</h2>
+        <>
+            <h2 className="easy-order-menu-text"> Please Pick As Many Courses As You Want</h2>
                     <ul className="courses-list-el">
                         {CoursesArray.map((item) => (
                             <li key={item.id}>
@@ -57,12 +42,8 @@ export default function EasyOrderCourse() {
                             </li>
                         ))}
                 </ul>
-            <button
-                className="course-make-selection-btn"
-                disabled={isButtonDisabled}
-                onClick={handleCourseSelectionChild}
-                >Make Selection</button>
-        </div>
+            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
+        </>
         
     )
 }

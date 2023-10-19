@@ -1,4 +1,4 @@
-import { useAppStore } from "../../../store/appStore"
+import { useAppStore } from "../../../../store/appStore"
 
 export const EasyOrderBackButton = () => {
     const previousStep = useAppStore(state => state.previousStep);

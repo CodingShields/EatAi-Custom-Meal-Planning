@@ -11,7 +11,7 @@ const DietaryOptionsArray = [
   { id: nanoid(), name: 'Lactose Intolerance' },
   { id: nanoid(), name: 'Gluten-Free' },
   { id: nanoid(), name: 'Vegetarian' },
-  { id: nanoid(), name: 'Veganism' }
+  { id: nanoid(), name: 'Vegan' }
 ];
 
 export default DietaryOptionsArray

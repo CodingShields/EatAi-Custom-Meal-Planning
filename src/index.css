@@ -28,6 +28,8 @@ body {
 	/* position: relative; */
 	margin-bottom: 0%;
 	padding-bottom: 0%;
+	/* height: auto; */
+	height: 100vh;
 }
 
 header {
@@ -85,7 +87,6 @@ footer {
 	align-items: center;
 	font-weight: 500;
 	font-size: 36px;
-	bottom: 0;
 	width: 100%;
 }
 
@@ -186,7 +187,7 @@ main {
 
 .login-form > button:active {
 	background-color: #003580;
-	transform: scale(0.95); 
+	transform: scale(0.95);
 }
 
 .login-chef-img {
@@ -199,8 +200,8 @@ main {
 }
 
 .login-form > button:active {
-	background-color: #003580; 
-	transform: scale(0.95); 
+	background-color: #003580;
+	transform: scale(0.95);
 }
 
 .sign-up-title {
@@ -348,10 +349,11 @@ main {
 	align-items: center;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
-	padding: 0px 0px;
+	padding: 50px 50px;
 	margin: 0px 10px;
-	height: 700px;
-	width: 1200px;
+	height: 70vh;
+	width: auto;
+	max-width: fit-content;
 	box-shadow: #333 1px 5px 10px 5px;
 }
 
@@ -373,28 +375,28 @@ main {
 .chef-img {
 	display: flex;
 	width: auto;
-	height: 500px;
-	margin-left: 100px;
+	height: 50vh;
 }
 
 .chef-bubble-div {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 500px;
-	height: 600px;
+	width: auto;
+	height: auto;
 }
 .live-text-div {
 	display: flex;
 	justify-content: center;
-	width: 600px;
-	height: 600px;
+	width: auto;
+	height: auto;
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
-	margin-left: 80px;
+	padding: 50px;
 }
 
 .blinking-cursor {
@@ -430,14 +432,13 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: auto;
+	width: 55vh;
 	height: auto;
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
-	margin-left: 80px;
 }
 
 .menu-title-text-container {
@@ -446,20 +447,20 @@ main {
 }
 
 .menu-text {
-	font-size: 34px;
+	font-size: 60px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-	z-index: 102;
+	text-decoration: underline;
 }
 
 .menu-items-container {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
-	height: 525px;
-	width: 460px;
+	padding-left: 50px;
+	padding-right: 50px;
+	height: auto;
+	width: 70vh;
 	gap: 10px;
-	z-index: 102;
 }
 
 .entree-container {
@@ -492,11 +493,9 @@ main {
 .headcount-div {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 17px;
-	width: 100%;
+	justify-content: space-between;
+	width: 43vh;
 	height: 60px;
-	z-index: 102;
 }
 
 .headcount-text {
@@ -509,12 +508,10 @@ main {
 	border: 3px solid coral;
 	border-radius: 100px;
 	font-weight: 900;
-	z-index: 102;
 }
 
 .headcount-slider {
 	width: 160px;
-	z-index: 102;
 }
 
 .flavor-container {
@@ -523,7 +520,6 @@ main {
 	justify-content: space-evenly;
 	width: 100%;
 	height: 60px;
-	z-index: 102;
 }
 
 .flavor-details-container {
@@ -675,29 +671,49 @@ main {
 .easy-order-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+	justify-content: space-evenly;
 	height: auto;
-	width: 1200px;
+	width: auto;
 	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
-	padding: 50px 20px 50px;
+	border-radius: 30px;
+	padding: 50px;
 	box-shadow: #333 1px 5px 10px 5px;
+	margin-bottom: 20px;
+	gap: 40px;
 }
 
-.easy-order-live-text-div {
+.easy-order-chef-bubble-container {
 	display: flex;
+	text-align: center;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: auto;
-	height: auto;
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
-	margin-left: 80px;
+	padding: 20px;
+	width: auto;
+	height: auto;
+	max-width: 700px;
+}
+
+.easy-order-user-selection-container {
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 4px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: #333 1px 5px 10px 5px;
+	text-shadow: 0.5px 0.5px grey;
+	padding: 20px;
+	width: auto;
+	height: auto;
+	max-width: 700px;
 }
 
 .easy-order-begin-btn {
@@ -724,6 +740,48 @@ main {
 .easy-order-begin-btn:active {
 	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
+}
+.easy-order-make-selection-btn {
+	justify-content: center;
+	align-items: center;
+	background-color: lightcoral;
+	width: 300px;
+	height: 50px;
+	border: 0px solid white;
+	border-radius: 1000px;
+	box-shadow: 3px 3px 3px 1px black;
+	font-size: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	animation: fadeIn 0.75s ease-in-out;
+	margin-bottom: 25px;
+}
+
+.easy-order-make-selection-btn:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
+
+.easy-order-make-selection-btn:active {
+	background-color: #003580; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+.easy-order-chef-img-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.easy-order-btn-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+	gap: 15px;
 }
 
 @keyframes fadeIn {

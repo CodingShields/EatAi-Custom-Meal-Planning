@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderHeadCount() {
-    const [headCountOption, setHeadCountOption] = useState()
-    const [renderHeadCount, setRenderHeadCount] = useState(false)
-    const [headCountConfirmed, setHeadCountConfirmed] = useState(1)
-
- function handleHeadCountSelectionChild(value) {
-        setHeadCountSelectionConfirmed(value)
+    const [headCount, setHeadCount] = useState(1)
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+ 
+    function handleHeadCount(value) {
+        setHeadCount(value)
         console.log("clicked");
         
     }
 
+ useEffect(() => {
+    setIsButtonDisabled(false);
+  }, [])
+
+
     return (
-    <div className="easy-order-menu-container">
+    <>
         <h2 className="easy-order-menu-text">How many guests will you be serving?</h2>
         <input
             className="easy-order-headcount-slider"
@@ -22,18 +27,15 @@ export default function EasyOrderHeadCount() {
             min="1"
             max="50"
             step="1"
-            value={headCountOption}
-            onChange={(e) => handleHeadCountSelectionChild(e.target.value)}
+            value={headCount}
+            onChange={(e) => handleHeadCount(e.target.value)}
         />
         <div className="head-count-container">
             <p className="head-count-title-text">
-                HeadCount:{" "}<span className="head-count-data-text">{headCountOption}</span> {headCountOption != 1 ? "people" : "person"}
+                HeadCount:{" "}<span className="head-count-data-text">{headCount}</span> {headCount != 1 ? "people" : "person"}
                 </p>
             </div>
-        <button
-                className="course-make-selection-btn"
-                onClick={handleHeadCountSelectionChild}
-                >Make Selection</button>    
-    </div>
+        {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
+    </>
     );
 }
