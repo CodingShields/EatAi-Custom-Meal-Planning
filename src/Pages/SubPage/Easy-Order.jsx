@@ -36,7 +36,10 @@ const EasyOrder = () => {
             10: <EasyOrderHowToCook />, 
             11: <EasyOrderSeasonalOptions />, 
             12: <EasyOrderCulturalOptions/>
-        }
+    }
+    // need a "How to Measure" component
+    // need some other variables that are going to setup the questions better
+    // get chat gtp to build a prompt for the user input 
 
         const RenderCompFromStep = renderStepMap[step]
 
