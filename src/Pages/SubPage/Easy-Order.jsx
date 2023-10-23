@@ -8,7 +8,6 @@ import EasyOrderEvents from "./Easy-Order/Easy-Order-Events";
 import EasyOrderBeverage from "./Easy-Order/Easy-Order-Beverage";
 import EasyOrderCookTime from "./Easy-Order/Easy-Order-Cook-Time";
 import EasyOrderDessertFlavor from "./Easy-Order/Easy-Order-Dessert-Flavor";
-import EasyOrderFlavoredRecommend from "./Easy-Order/Easy-Order-Flavored-Recommend";
 import EasyOrderMealBalance from "./Easy-Order/Easy-Order-Meal-Balance";
 import EasyOrderHowToCook from "./Easy-Order/Easy-Order-How-To-Cook";
 import EasyOrderSeasonalOptions from "./Easy-Order/Easy-Order-Seasonal-Options";
@@ -32,10 +31,9 @@ const EasyOrderForm = () => {
             6: <EasyOrderMealBalance />,
             7: <EasyOrderCookTime />,
             8: <EasyOrderHowToCook />, 
-            9: <EasyOrderFlavoredRecommend />,
+            9: <EasyOrderSeasonalOptions />,
             10: <EasyOrderDessertFlavor />,
-            11: <EasyOrderSeasonalOptions />,
-            12: <EasyOrderBeverage />,
+            11: <EasyOrderBeverage />,
         }
  // need a "How to Measure" component
     // need some other variables that are going to setup the questions better
@@ -50,8 +48,8 @@ const EasyOrderForm = () => {
                 <div className="easy-order-chef-bubble-container">
                     {RenderCompFromStep}
                     <div className="easy-order-btn-container">
-                        {RenderCompFromStep[step] !== 0 ? <EasyOrderStartOverButton/> : ""}
-                        {RenderCompFromStep[step] !== 0 ? <EasyOrderBackButton/> : ""}
+                        <EasyOrderStartOverButton/>
+                        <EasyOrderBackButton/>
                         
                     </div>
                 </div>

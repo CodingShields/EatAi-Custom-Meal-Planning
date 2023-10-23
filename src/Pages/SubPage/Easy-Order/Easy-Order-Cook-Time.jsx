@@ -1,37 +1,52 @@
-import React, { useState, useEffect } from "react";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+import React, { useState} from "react";
 import CookTimes from "../../../assets/dataArrays/Cook-Times-Array";
-export default function EasyOrderCookTime() {    
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+
+
+const EasyOrderCookTime = () => {    
+    const { setCookTime } = useEasyOrderStoreActions()
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checkedCookTime, setCheckedCookTime] = useState([])
-    const maxCheckedCookTimeOptions = 1;
+    const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
+    const [isChecked, setIsChecked] = useState(false)
+    const [checkedItem, setCheckedItem] = useState("")
     
-    function handleCheckboxChange(item) {
-    if (checkedCookTime.includes(item)) {
-      // Item is already checked, so remove it
-      setCheckedCourseOptions(checkedCookTime.filter((checkedCookTime) => checkedCookTime !== item));
-    } else {
-      // Item is not checked, so add it
-      setCheckedCookTime([...checkedCookTime, item]);
-    }
+    const handleChange = (itemName) => {
+      setIsChecked(itemName)
+      setCheckedItem(itemName)
+      setIsButtonDisabled(true)
+      console.log(itemName);
+  };
+    
+    const handleClick = () => {
+    setCookTime(checkedItem);
+      increaseStep();
+      setIsButtonDisabled(false);
   }
+
 
     return (
         <>
-            <h1>What is your preferred amount of time to cook?</h1>
-            {CookTimes.map((item) => (
-                <div key={item.id}>
-                    <input
-                        className="easy-order-items-list"
-                        type="checkbox"
-                        value={item.name}
-                        checked={checkedCookTime.includes(item.name)}
-                        onChange={() => handleCheckboxChange(item.name)}
-                    />
-                    {item.name}
-                </div>
-            ))}
-            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
-        </>
+            <h1>Dessert Flavor</h1>
+            <ul className="easy-order-list">
+                        {CookTimes.map((item) => (
+                            <li key={item.id}>
+                                <label>
+                                  <input
+                                    type="radio"
+                                    value={item.name}
+                                    checked={isChecked === item.name} // This controls the checked state
+                                    onChange={() => handleChange(item.name)} // Handle changes
+                                  />
+                                  {item.name}
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>:""}
+  </>
     )
 }
+export default EasyOrderCookTime;

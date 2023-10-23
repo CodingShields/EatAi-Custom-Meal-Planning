@@ -1,9 +1,7 @@
 import React from "react"
 import EventsArray from "../../../assets/Data Arrays/Events-Array"
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderEvents() {
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checkedEvents, setCheckedEvents] = useState("")
 
  function handleCheckbox(item) {
@@ -37,7 +35,6 @@ export default function EasyOrderEvents() {
                             </li>
                         ))}
                 </ul>
-            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
         </>
         
     )

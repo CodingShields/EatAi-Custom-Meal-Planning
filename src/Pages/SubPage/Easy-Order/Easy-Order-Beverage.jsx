@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from "react";  
 import BeverageOptionsArray from "../../../assets/dataArrays/Beverage-Options-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 export default function EasyOrderBeverage() {  
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+    // const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checkedBeverage, setCheckedBeverage] = useState("")
 
  function handleCheckbox(item) {
@@ -21,7 +20,7 @@ export default function EasyOrderBeverage() {
     return (
         <>
             <h1>Dessert Flavor</h1>
-            <ul className="courses-list-el">
+            <ul className="easy-order-items-list">
                         {BeverageOptionsArray.map((item) => (
                             <li key={item.id}>
                                 <input
@@ -35,7 +34,6 @@ export default function EasyOrderBeverage() {
                             </li>
                         ))}
                 </ul>
-            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
         </>
     )
 }

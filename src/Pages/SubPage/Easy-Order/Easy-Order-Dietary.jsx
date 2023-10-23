@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import DietaryOptionsArray from "../../../assets/dataArrays/Dietary-Options-Array";
-import EasyOrderSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
-export default function EasyOrderDietary() {
+const EasyOrderDietary = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([])
-    const [dietarySelectionConfirmed, setDietarySelectionConfirmed] =useState(false)
-
+  const { setDietary } = useEasyOrderStoreActions()
+  const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
   const maxCheckedDietaryOptions = 3;
 
-  const handleCheckboxDietaryChange = (item) => {
+  const handleCheckbox = (item) => {
+    setIsButtonDisabled(true)
     if (item === "No Dietary Restrictions") {
       // If "No Dietary Restrictions" is selected, unselect it and enable other options
       if (checkedDietaryOptions.includes(item)) {
@@ -37,35 +39,27 @@ export default function EasyOrderDietary() {
       }
     }
   };
-
-  function handleDietarySelectionChild() {
-    setDietarySelectionConfirmed();
-    console.log("clicked");
+  const handleClick = () => {
+    setDietary(checkedDietaryOptions);
+    increaseStep();
+    setIsButtonDisabled(false);
   }
 
-  useEffect(() => {
-    setIsButtonDisabled(
-      checkedDietaryOptions.length === 0 ||
-        (checkedDietaryOptions.includes("No Dietary Restrictions") &&
-          checkedDietaryOptions.length === 1)
-    );
-  }, [checkedDietaryOptions]);
+
 
   return (
     <>
       <h2 className="easy-order-menu-text">
         Please Choose Up to 3 Dietary Options
       </h2>
-      <ul className="courses-list-el">
+      <ul className="easy-order-list">
         {DietaryOptionsArray.map((item) => (
           <li key={item.id}>
             <input
-              className="easy-order-items-list"
               type="checkbox"
               value={item.name}
               checked={checkedDietaryOptions.includes(item.name)}
-              onChange={() => handleCheckboxDietaryChange(item.name)}
-              // Disable checkboxes if "No Dietary Restrictions" is selected
+              onChange={() => handleCheckbox(item.name)}
               disabled={
                 item === "No Dietary Restrictions" &&
                 checkedDietaryOptions.includes("No Dietary Restrictions")
@@ -75,7 +69,11 @@ export default function EasyOrderDietary() {
           </li>
         ))}
       </ul>
-    <EasyOrderSelectionButton />
+      {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>:""}
     </>
   );
 }
+
+export default EasyOrderDietary;

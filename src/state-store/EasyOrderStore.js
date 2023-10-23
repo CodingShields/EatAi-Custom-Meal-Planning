@@ -2,7 +2,6 @@ import { create } from 'zustand';
 
 const initializeState = {
     Event: "",
-    EventIsChecked:false,
     Culture: "",
     HeadCount: "",
     Courses: "",
@@ -10,30 +9,30 @@ const initializeState = {
     Balance: "",
     CookTime: "",
     HowToCook: "",
-    Flavor: "",
     Dessert: "",
     Seasonal: "",
     Beverage: "",
+    BotResponse: "",
 };
 
 export const useEasyOrderStore = create((set, get) => ({
     ...initializeState,
     actions: {
         getEasyOrderStore: () => {
-            const { Event, Culture, HeadCount, Courses, Dietary, Balance, CookTime, HowToCook, Flavor, Dessert, Seasonal, Beverage } = get();
-            return {
-                Event: Event,
-                Culture: Culture,
-                HeadCount: HeadCount,
-                Courses: Courses,
-                Dietary: Dietary,
-                Balance: Balance,
-                CookTime: CookTime,
-                HowToCook: HowToCook,
-                Flavor: Flavor,
-                Dessert: Dessert,
-                Seasonal: Seasonal,
-                Beverage: Beverage,
+            const state = get()
+            return{
+                Event: state.Event,
+                Culture: state.Culture,
+                HeadCount: state.HeadCount,
+                Courses: state.Courses,
+                Dietary: state.Dietary,
+                Balance: state.Balance,
+                CookTime: state.CookTime,
+                HowToCook: state.HowToCook,
+                Dessert: state.Dessert,
+                Seasonal: state.Seasonal,
+                Beverage: state.Beverage,
+                BotResponse: state.BotResponse,
             };
         },
         resetForm: () => set(initializeState),
@@ -45,10 +44,10 @@ export const useEasyOrderStore = create((set, get) => ({
         setBalance: (str) => set({ Balance: str }),
         setCookTime: (str) => set({ CookTime: str }),
         setHowToCook: (str) => set({ HowToCook: str }),
-        setFlavor: (str) => set({ Flavor: str }),
         setDessert: (str) => set({ Dessert: str }),
         setSeasonal: (str) => set({ Seasonal: str }),
         setBeverage: (str) => set({ Beverage: str }),
+        setBotResponse: (str) => set({ BotResponse: str }),
     },
 }));
 

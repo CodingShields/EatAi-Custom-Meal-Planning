@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import DessertFlavor from "../../../assets/dataArrays/Dessert-Flavor-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderDessertFlavor() {  
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+    // const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [checkedDessert, setCheckedDessert] = useState("")
 
  function handleCheckbox(item) {
@@ -36,7 +35,6 @@ export default function EasyOrderDessertFlavor() {
                             </li>
                         ))}
                 </ul>
-            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
         </>
     )
 }

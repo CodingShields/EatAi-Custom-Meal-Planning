@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+import React, { useState } from "react";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
-export default function EasyOrderHeadCount() {
-    const [headCount, setHeadCount] = useState(1)
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+const EasyOrderHeadCount = () => {
+    const [count, setCount] = useState(1)
+    const { setHeadCount } = useEasyOrderStoreActions()
+    const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
  
-    function handleHeadCount(value) {
+    const handleHeadCount = (value) => {
+        setCount(value)
         setHeadCount(value)
-        console.log("clicked");
         
     }
 
- useEffect(() => {
-    setIsButtonDisabled(false);
-  }, [])
-
+ const handleClick = () => {
+    setHeadCount(count);
+     increaseStep();
+     setIsButtonDisabled(false);
+  }
 
     return (
     <>
@@ -27,15 +30,18 @@ export default function EasyOrderHeadCount() {
             min="1"
             max="50"
             step="1"
-            value={headCount}
+            value={count}
             onChange={(e) => handleHeadCount(e.target.value)}
         />
         <div className="head-count-container">
             <p className="head-count-title-text">
-                HeadCount:{" "}<span className="head-count-data-text">{headCount}</span> {headCount != 1 ? "people" : "person"}
+                HeadCount:{" "}<span className="head-count-data-text">{count}</span> {count != 1 ? "people" : "person"}
                 </p>
             </div>
-        {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
+            <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>
     </>
     );
 }
+export default EasyOrderHeadCount;

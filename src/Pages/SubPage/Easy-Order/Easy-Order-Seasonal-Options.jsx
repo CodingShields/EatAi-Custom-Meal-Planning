@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState} from "react";
 import SeasonalArray from "../../../assets/dataArrays/Seasonal-Options-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
-export default function EasyOrderSeasonalOptions() {
+const EasyOrderSeasonalOptions = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [checkedSeasonal, setCheckedSeasonal] = useState([])
+    const { setSeasonal } = useEasyOrderStoreActions()
+    const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
 
     const maxCheckedSeasonalOptions = 1;
 
     const handleCheckboxChange = (item) => {
+        setIsButtonDisabled(true)
         if (item === "No Preference") {
         if (checkedSeasonal.includes(item)) {
             setCheckedSeasonal([]);
@@ -30,17 +34,23 @@ export default function EasyOrderSeasonalOptions() {
             }
         }
     }
-};
+    };
+    const handleClick = () => {
+        setSeasonal(checkedSeasonal);
+        increaseStep();
+        setIsButtonDisabled(false);
+    }
 
     return (
         <>
             <h1>Seasonal Options</h1>
             <ul className="courses-list-el">
         {SeasonalArray.map((item) => (
-            <li key={item.id}>
+            <li
+                className="easy-order-list"
+                key={item.id}>
                 <input
-                        className="easy-order-items-list"
-                        type="checkbox"
+                        type="radio"
                         value={item.name}
                         checked={checkedSeasonal.includes(item.name)}
                         onChange={() => handleCheckboxChange(item.name)}
@@ -52,8 +62,11 @@ export default function EasyOrderSeasonalOptions() {
             {item.name}
         </li>
         ))}
-    </ul>
-        {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
+            </ul>
+            {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>:""}
         </>
     )
 } 
+export default EasyOrderSeasonalOptions;

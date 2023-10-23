@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import FlavoredDishes from "../../../assets/dataArrays/Flavor-Dishes-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
 export default function EasyOrderFlavoredRecommend() {
     const initialRegion = 'Italian'; // You can set the default region here
@@ -43,7 +42,6 @@ return (
             <p>{selectedDish}</p>
             </div>
             )}
-        <EasyOrderMakeSelectionButton /> 
         </>
         );
         }

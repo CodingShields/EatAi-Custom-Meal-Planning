@@ -1,42 +1,51 @@
-import React from "react";
+import React, { useState} from "react";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 import CulturalHolidayArray from "../../../assets/dataArrays/Cultural-Holiday-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
 
-export default function EasyOrderCulturalOptions() {  
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checkedCulturalOptions, setCheckedCulturalOptions] = useState("")
-
- function handleCheckbox(item) {
-    if (checkedCulturalOptions.includes(item)) {
-      // Item is already checked, so remove it
-      setCheckedCulturalOptions(checkedCulturalOptions.filter((checkedCulturalOptions) => checkedCulturalOptions !== item));
-    } else {
-      // Item is not checked, so add it
-      setCheckedCulturalOptions([...checkedCulturalOptions, item]);
-    }
+const EasyOrderCulturalOptions = () => {  
+  const { setCulture } = useEasyOrderStoreActions()
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+    const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
+    const [isChecked, setIsChecked] = useState(false)
+    const [checkedItem, setCheckedItem] = useState("")
+    
+    const handleChange = (itemName) => {
+      setIsChecked(itemName)
+      setCheckedItem(itemName)
+      setIsButtonDisabled(true)
+      console.log(itemName);
+  };
+    
+    const handleClick = () => {
+    setCulture(checkedItem);
+      increaseStep();
+      setIsButtonDisabled(false);
   }
 
-    useEffect(() => {
-    setIsButtonDisabled(checkedCulturalOptions.length === 0);
-  }, [CulturalOptions])
+
     return (
         <>
             <h1>Dessert Flavor</h1>
-            <ul className="courses-list-el">
+            <ul className="easy-order-list">
                         {CulturalHolidayArray.map((item) => (
                             <li key={item.id}>
-                                <input
-                                    className="easy-order-items-list"
-                                    type="checkbox"
+                                <label>
+                                  <input
+                                    type="radio"
                                     value={item.name}
-                                    checked={checkedCulturalOptions.includes(item.name)}
-                                    onChange={() => handleCheckbox(item.name)}
-                                />
-                                {item.name}
+                                    checked={isChecked === item.name} // This controls the checked state
+                                    onChange={() => handleChange(item.name)} // Handle changes
+                                  />
+                                  {item.name}
+                                </label>
                             </li>
                         ))}
-                </ul>
-            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
-        </>
+                    </ul>
+        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>:""}
+  </>
     )
 }
+export default EasyOrderCulturalOptions;

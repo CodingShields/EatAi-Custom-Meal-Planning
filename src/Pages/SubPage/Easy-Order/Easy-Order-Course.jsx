@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import CoursesArray from "../../../assets/dataArrays/Courses-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
-export default function EasyOrderCourse() {
+const EasyOrderCourse = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checkedCourseOptions, setCheckedCourseOptions] = useState([])
+    const [checkedCourseOptions, setCheckedCourseOptions] = useState("")
+    const { setCourses } = useEasyOrderStoreActions()
+    const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
 
-    function handleCheckboxChange(item) {
+
+
+  const handleCheckboxChange = (item)=> {
+      setIsButtonDisabled(true)
     if (checkedCourseOptions.includes(item)) {
       // Item is already checked, so remove it
       setCheckedCourseOptions(checkedCourseOptions.filter((checkedItem) => checkedItem !== item));
@@ -15,19 +21,20 @@ export default function EasyOrderCourse() {
       setCheckedCourseOptions([...checkedCourseOptions, item]);
     }
   }
+  const handleClick = () => {
+    setCourses(checkedCourseOptions);
+    increaseStep();
+    setIsButtonDisabled(false);
+  }
 
-    useEffect(() => {
-    setIsButtonDisabled(checkedCourseOptions.length === 0);
-  }, [checkedCourseOptions])
     
     return (
         <>
             <h2 className="easy-order-menu-text"> Please Pick As Many Courses As You Want</h2>
-                    <ul className="courses-list-el">
+                    <ul className="easy-order-list">
                         {CoursesArray.map((item) => (
                             <li key={item.id}>
                                 <input
-                                    className="easy-order-items-list"
                                     type="checkbox"
                                     value={item.name}
                                     checked={checkedCourseOptions.includes(item.name)}
@@ -36,9 +43,12 @@ export default function EasyOrderCourse() {
                                 {item.name}
                             </li>
                         ))}
-                </ul>
-            {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
+        </ul>
+        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>:""}
         </>
         
     )
 }
+export default EasyOrderCourse;

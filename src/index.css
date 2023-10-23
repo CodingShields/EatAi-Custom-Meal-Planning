@@ -671,7 +671,6 @@ main {
 .easy-order-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
 	height: auto;
 	width: auto;
 	background-color: aquamarine;
@@ -702,9 +701,8 @@ main {
 .easy-order-user-selection-container {
 	display: flex;
 	text-align: center;
+	align-items: flex-start;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
@@ -713,7 +711,29 @@ main {
 	padding: 20px;
 	width: auto;
 	height: auto;
-	max-width: 700px;
+	max-width: 400px;
+}
+.user-selection-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+}
+.easy-order-selection-title {
+	font-size: 30px;
+	font-weight: 400;
+	text-decoration: underline;
+}
+
+.confirmed-selection-text {
+	margin-top: 5px;
+	font-size: 22px;
+	line-height: 0px;
+	font-weight: 400;
+}
+.user-input-text {
+	font-weight: 400;
+	color: lightcoral;
 }
 
 .easy-order-begin-btn {
@@ -793,7 +813,7 @@ main {
 	}
 }
 
-.easy-order-menu-container {
+/* .easy-order-menu-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -812,16 +832,16 @@ main {
 	padding-left: 20px;
 	padding-right: 20px;
 	margin-right: 20px;
-}
+} */
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
 	from {
 		opacity: 0;
 	}
 	to {
 		opacity: 2;
 	}
-}
+} */
 
 .easy-order-menu-text {
 	font-size: 30px;
@@ -830,17 +850,22 @@ main {
 	margin-bottom: 0px;
 }
 
-.courses-list-el {
+.easy-order-list {
 	display: flex;
 	flex-direction: row;
 	list-style-type: none;
 	gap: 30px;
-	font-size: 30px;
+	font-size: 22px;
 	flex-wrap: wrap;
 	line-height: 1.5;
 }
 
-.courses-list-el input[type="checkbox"] {
+.easy-order-list input[type="radio"] {
+	margin-right: 15px;
+	height: 20px;
+	width: 20px;
+}
+.easy-order-list input[type="checkbox"] {
 	margin-right: 15px;
 	height: 20px;
 	width: 20px;
@@ -854,7 +879,7 @@ main {
 	color: #888; /* Gray out the text */
 	pointer-events: none;
 }
-.flavor-recommend-list-items{
+.flavor-recommend-list-items {
 	text-align: center;
 	outline: none;
 	border-radius: 10px;
@@ -895,74 +920,14 @@ main {
 
 .easy-order-selections-container {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+	align-items: flex-start;
 	width: 300px;
 	height: auto;
-	border: 4px solid brown;
+	border: 2px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
-	margin-left: 20px;
-	animation: fadeIn 0.75s ease-in-out;
-	padding-bottom: 20px;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 5;
-	}
-}
-
-.easy-order-selection-text {
-	font-size: 30px;
-	text-decoration: underline;
-}
-.confirmed-selection-text {
-	/* margin-top: 5px; */
-	font-size: 22px;
-	line-height: 0px;
-}
-
-.easy-order-selection-text:hover {
-	display: flex;
-	font-size: 16px;
-	font-style: bold;
-	font-weight: 900;
-}
-
-.easy-order-modify-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: lightcoral;
-	width: 150px;
-	height: 30px;
-	border: 0px solid white;
-	border-radius: 1000px;
-	box-shadow: 2px 1px 2px 1px black;
-	font-size: 20px;
-	cursor: pointer;
-	font-weight: 500;
-	transition: background-color 0.3s, transform 0.2s;
-	animation: fadeIn 0.75s ease-in-out;
-	margin-top: 15px;
-}
-
-.easy-order-selection-change-btn:hover {
-	color: white;
-	background-color: rebeccapurple;
-}
-
-.easy-order-selection-change-btn:active {
-	background-color: #003580; /* Color change on click */
-	transform: scale(0.95); /* Button scale down when clicked */
 }
 
 .head-count-container {
