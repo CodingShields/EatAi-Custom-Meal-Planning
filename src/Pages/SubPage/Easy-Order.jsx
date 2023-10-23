@@ -16,33 +16,38 @@ import EasyOrderCulturalOptions from "./Easy-Order/Easy-Order-Cultural-Options";
 import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Start-Over-Button"
 import EasyOrderBackButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Back-Button";
 import EasyOrderUserSelection from "./Easy-Order/Easy-Order-Comps/Easy-Order-User-Selection";
-import { useAppStore } from "../../store/appStore";
+import { useEasyOrderRenderStore } from "../../state-store/RenderStore";
 
-const EasyOrder = () => {
-    const step = useAppStore((state) => state.step);
+const EasyOrderForm = () => {
+    const step = useEasyOrderRenderStore((state) => state.step);
    
 
         const renderStepMap = {
             0: <EasyOrderBegin />,
-            1: <EasyOrderCourse />,
-            2: <EasyOrderDietary />,
+            1: <EasyOrderEvents />,
+            2: <EasyOrderCulturalOptions/>,
             3: <EasyOrderHeadCount />,
-            4: <EasyOrderEvents />,
-            5: <EasyOrderBeverage />,
-            6: <EasyOrderCookTime />,
-            7: <EasyOrderDessertFlavor />,
-            8: <EasyOrderFlavoredRecommend />,
-            9: <EasyOrderMealBalance />,
-            10: <EasyOrderHowToCook />, 
+            4: <EasyOrderCourse />,
+            5: <EasyOrderDietary />,
+            6: <EasyOrderMealBalance />,
+            7: <EasyOrderCookTime />,
+            8: <EasyOrderHowToCook />, 
+            9: <EasyOrderFlavoredRecommend />,
+            10: <EasyOrderDessertFlavor />,
             11: <EasyOrderSeasonalOptions />, 
+<<<<<<< HEAD
             12: <EasyOrderCulturalOptions/>
     }
     // need a "How to Measure" component
     // need some other variables that are going to setup the questions better
     // get chat gtp to build a prompt for the user input 
+=======
+            12: <EasyOrderBeverage />,
+        }
+>>>>>>> fb43b9231bef98f6c15b40ab7addf103549ec38c
 
         const RenderCompFromStep = renderStepMap[step]
-
+// in the api call need to add a name summary 
         return (
             <div className="easy-order-container">
                 <div className="easy-order-chef-img-container">
@@ -62,4 +67,4 @@ const EasyOrder = () => {
             </div>
         )
     }
-export default EasyOrder
+export default EasyOrderForm

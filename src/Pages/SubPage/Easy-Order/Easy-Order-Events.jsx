@@ -1,68 +1,55 @@
 import React, { useState, useEffect } from "react";
 import EventsArray from "../../../assets/dataArrays/Events-Array";
-import EasyOrderMakeSelectionButton from "./Easy-Order-Comps/Easy-Order-Make-Selection-btn";
-export default function EasyOrderEvents() {
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checked, setChecked] = useState([])
-    const maxChecked = 1;
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStore, useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
-    const handleCheckboxChange = (item) => {
-    if (item === "This is not for a event.") {
-      if (checked.includes(item)) {
-        setChecked([]);
-      } else {
-        setChecked([item]);
-      }
-    } else {
-      const isChecked = checked.includes(item);
-      if (isChecked) {
-        setChecked(checked.filter((option) => option !== item));
-      } else if (checked.length < maxChecked) {
-        setChecked([...checked, item]);
-      if (checked.includes("This is not for a event.")) {
-          setChecked([]);
-        }
-      }
-    }
+  const  EasyOrderEvents = () =>{
+    
+      // const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+      // const [checked, setChecked] = useState([])
+      const { setEvent } = useEasyOrderStoreActions((state) =>  ({ event: state.event }));
+      const { event } = useEasyOrderStore((state) =>  ({ event: state.event }));
+      const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
+  
+
+   
+    
+    const handleChange = ({ target }) => {
+    setEvent(target.value);
   };
   
-  useEffect(() => {
-    setIsButtonDisabled(checked.length === 0);
-  }, [checked])
-
-
-    return (
-      <>
-            <h2 className="easy-order-menu-text">Is this for a Special Event?</h2>
-        <ul
-          className="courses-list-el"
-          style={{
-            fontSize:"22px"
-          }}
-        >
-        
+  // useEffect(() => {
+  //   setIsButtonDisabled(checked.length === 0);
+  // }, [checked])
+    
+   return (
+    <>
+      <h2 className="easy-order-menu-text">Is this for a Special Event?</h2>
+      <ul className="courses-list-el" style={{ fontSize: "22px" }}>
         {EventsArray.map((item) => (
           <li key={item.id}>
             <label>
-            <input
-              className="easy-order-items-list"
-              type="checkbox"
-              value={item.name}
-              checked={checked.includes(item.name)}
-              onChange={() => handleCheckboxChange(item.name)}
-              // Disable checkboxes if "No Dietary Restrictions" is selected
-              disabled={item === "This is not for a event." && checked.includes("This is not for a event.")}
-            />
+              <input
+                className="easy-order-items-list"
+                type="radio"
+                value={item.name}
+                checked={event === item.name} // This controls the checked state
+                onChange={handleChange} // Handle changes
+              />
               {item.name}
-              </label>
+            </label>
           </li>
         ))}
-        </ul>
-      {!isButtonDisabled ? <EasyOrderMakeSelectionButton /> : ""}
+      </ul>
+      <button
+        className="easy-order-make-selection-btn"
+        onClick={increaseStep}
+        // disabled={isButtonDisabled}
+      >
+        Make Selection
+      </button>
+    </>
+  );
+};
 
-        </>
-
-
-
-    )
-}
+export default EasyOrderEvents;

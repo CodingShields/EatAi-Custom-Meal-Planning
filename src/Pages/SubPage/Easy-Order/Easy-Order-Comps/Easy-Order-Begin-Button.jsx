@@ -1,8 +1,8 @@
-import { useAppStore } from "../../../../store/appStore"
+import { useEasyOrderRenderStore } from "../../../../state-store/RenderStore"
 
 
 export const EasyOrderBeginButton = () => {
-    const {increaseStep} =useAppStore()
+    const {increaseStep} =useEasyOrderRenderStore()
     return (
         <button className="easy-order-begin-btn"
             onClick={increaseStep}
