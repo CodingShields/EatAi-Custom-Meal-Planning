@@ -1,14 +1,10 @@
-import { useAppStore } from "../../../../store/appStore"
+import { useEasyOrderRenderStore } from "../../../../state-store/RenderStore"
 
 
 export const EasyOrderMakeSelectionButton = () => {
-    const {increaseStep} =useAppStore()
+    
     return (
-        <button className="easy-order-make-selection-btn"
-            onClick={increaseStep}
-        >
-            Make Selection
-        </button>
+        <di></di>
     )
 }
 export default EasyOrderMakeSelectionButton

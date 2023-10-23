@@ -18,6 +18,10 @@ const CookTimes = [
         id: nanoid(),
         name:"More than 45 minutes"
     },
+    {
+        id: nanoid(),
+        name:"Doesn't Matter"
+    },
 ]
 
 export default CookTimes

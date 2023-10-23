@@ -96,11 +96,11 @@ const EventsArray = [
   //   name: "Movie Premiere",
   //   description: "Film screenings with receptions that include food and drinks."
   // },
-  {
-    id: nanoid(),
-    name: "Community Picnic",
-    description: "Outdoor gatherings with potluck-style food sharing."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Community Picnic",
+  //   description: "Outdoor gatherings with potluck-style food sharing."
+  // },
   // {
   //   id: nanoid(),
   //   name: "Charity Gala",
