@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 const initializeState = {
     Event: "",
+    EventIsChecked:false,
     Culture: "",
     HeadCount: "",
     Courses: "",
