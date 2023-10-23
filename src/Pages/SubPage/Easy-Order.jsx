@@ -34,18 +34,12 @@ const EasyOrderForm = () => {
             8: <EasyOrderHowToCook />, 
             9: <EasyOrderFlavoredRecommend />,
             10: <EasyOrderDessertFlavor />,
-            11: <EasyOrderSeasonalOptions />, 
-<<<<<<< HEAD
-            12: <EasyOrderCulturalOptions/>
-    }
-    // need a "How to Measure" component
-    // need some other variables that are going to setup the questions better
-    // get chat gtp to build a prompt for the user input 
-=======
+            11: <EasyOrderSeasonalOptions />,
             12: <EasyOrderBeverage />,
         }
->>>>>>> fb43b9231bef98f6c15b40ab7addf103549ec38c
-
+ // need a "How to Measure" component
+    // need some other variables that are going to setup the questions better
+    // get chat gtp to build a prompt for the user input 
         const RenderCompFromStep = renderStepMap[step]
 // in the api call need to add a name summary 
         return (
