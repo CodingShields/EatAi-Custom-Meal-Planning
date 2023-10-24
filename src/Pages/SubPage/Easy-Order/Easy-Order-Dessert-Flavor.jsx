@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import DessertFlavor from "../../../assets/dataArrays/Dessert-Flavor-Array";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
-export default function EasyOrderDessertFlavor() {  
-    // const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const [checkedDessert, setCheckedDessert] = useState("")
+const EasyOrderDessertFlavor = () => {  
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const { setDessert } = useEasyOrderStoreActions()
+  const [checkedDessert, setCheckedDessert] = useState("")
+  const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
 
- function handleCheckbox(item) {
+  function handleCheckbox(item) {
+   setIsButtonDisabled(true);
     if (checkedDessert.includes(item)) {
       // Item is already checked, so remove it
       setCheckedDessert(checkedDessert.filter((checkedDessert) => checkedDessert !== item));
@@ -15,18 +20,28 @@ export default function EasyOrderDessertFlavor() {
     }
   }
 
-    useEffect(() => {
-    setIsButtonDisabled(checkedDessert.length === 0);
-  }, [checkedDessert])
+  const handleClick = () => { 
+    increaseStep();
+    setDessert(checkedDessert);
+    setIsButtonDisabled(false);
+    localStorage.setItem("selectedDessertFlavor", checkedDessert);
+  }
+
+  useEffect(() => {
+    const savedCheckedItem = localStorage.getItem("selectedDessertFlavor");
+    if (savedCheckedItem) {
+      setCheckedDessert(savedCheckedItem);
+      setIsButtonDisabled(checkedDessert.length === 0);
+    }
+  }, [])
     return (
         <>
             <h1>Dessert Flavor</h1>
-            <ul className="courses-list-el">
+            <ul className="easy-order-list">
                         {DessertFlavor.map((item) => (
                             <li key={item.id}>
                                 <input
-                                    className="easy-order-items-list"
-                                    type="checkbox"
+                                    type="radio"
                                     value={item.name}
                                     checked={checkedDessert.includes(item.name)}
                                     onChange={() => handleCheckbox(item.name)}
@@ -34,7 +49,11 @@ export default function EasyOrderDessertFlavor() {
                                 {item.name}
                             </li>
                         ))}
-                </ul>
+        </ul>
+        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      >Make Selection
+    </button>:""}
         </>
     )
 }
+export default EasyOrderDessertFlavor;

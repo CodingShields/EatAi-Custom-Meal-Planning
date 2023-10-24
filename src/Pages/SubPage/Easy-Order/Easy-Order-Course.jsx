@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import CoursesArray from "../../../assets/dataArrays/Courses-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
@@ -25,13 +25,22 @@ const EasyOrderCourse = () => {
     setCourses(checkedCourseOptions);
     increaseStep();
     setIsButtonDisabled(false);
+    localStorage.setItem("selectedCourses", checkedCourseOptions);
   }
-
+  useEffect(() => {
+    const savedCheckedItem = localStorage.getItem("selectedCourses");
+    if (savedCheckedItem) {
+      setCheckedCourseOptions(savedCheckedItem);
+      setIsButtonDisabled(true);
+    }
+  }, []);
     
     return (
-        <>
-            <h2 className="easy-order-menu-text"> Please Pick As Many Courses As You Want</h2>
-                    <ul className="easy-order-list">
+      <>
+        <div className="easy-order-menu-title-container">
+          <h2 className="easy-order-menu-text"> Please Pick As Many Courses As You Want</h2>
+          </div>
+                    <ul className="easy-order-list-big">
                         {CoursesArray.map((item) => (
                             <li key={item.id}>
                                 <input

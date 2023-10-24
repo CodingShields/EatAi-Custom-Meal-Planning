@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import EventsArray from "../../../assets/dataArrays/Events-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
@@ -18,16 +18,28 @@ import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
   };
     
     const handleClick = () => {
-    setEvent(checkedItem);
+      setEvent(checkedItem);
       increaseStep();
       setIsButtonDisabled(false);
-  }
+      localStorage.setItem("selectedEvent", checkedItem);
+    }
+    useEffect(() => {
+    // Check if there's a selected option in local storage
+    const savedCheckedItem = localStorage.getItem("selectedEvent");
+    if (savedCheckedItem) {
+      setIsChecked(savedCheckedItem); // Set isChecked to the saved value
+      setCheckedItem(savedCheckedItem);
+      setIsButtonDisabled(true);
+    }
+  }, []);
 
 
    return (
-    <>
-      <h2 className="easy-order-menu-text">Is this for a Special Event?</h2>
-      <ul className="easy-order-list">
+     <>
+       <div className="easy-order-menu-title-container">
+         <h2 className="easy-order-menu-text">Is this for a Special Event?</h2>
+       </div>
+      <ul className="easy-order-list-big">
         {EventsArray.map((item) => (
           <li key={item.id}>
             <label>
@@ -41,7 +53,7 @@ import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
             </label>
           </li>
         ))}
-      </ul>
+         </ul>
       {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
       >Make Selection
     </button>:""}

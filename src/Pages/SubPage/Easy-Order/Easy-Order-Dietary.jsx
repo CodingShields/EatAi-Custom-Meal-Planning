@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import DietaryOptionsArray from "../../../assets/dataArrays/Dietary-Options-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
@@ -11,48 +11,64 @@ const EasyOrderDietary = () => {
   const maxCheckedOptions = 3;
 
   const handleCheckbox = (item) => {
-    setIsButtonDisabled(true)
-    if (item === "No Dietary Restrictions") {
-      // If "No Dietary Restrictions" is selected, unselect it and enable other options
-      if (checkedDietaryOptions.includes(item)) {
-        setCheckedDietaryOptions([]);
-      } else {
-        setCheckedDietaryOptions([item]);
-      }
+  setIsButtonDisabled(true);
+
+  if (item === "No Dietary Restrictions") {
+    // If "No Dietary Restrictions" is selected, unselect it and enable other options
+    if (checkedDietaryOptions.includes(item)) {
+      setCheckedDietaryOptions([]);
     } else {
-      // Check if it's checked
-      const isChecked = checkedDietaryOptions.includes(item);
+      setCheckedDietaryOptions([item]);
+    }
+  } else {
+    // Check if it's checked
+    const isChecked = checkedDietaryOptions.includes(item);
 
-      if (isChecked) {
-        // If it's checked, remove it from the array
-        setCheckedDietaryOptions(
-          checkedDietaryOptions.filter((option) => option !== item)
+    if (isChecked) {
+      // If it's checked, remove it from the array
+      setCheckedDietaryOptions(
+        checkedDietaryOptions.filter((option) => option !== item)
+      );
+    } else if (checkedDietaryOptions.length < maxCheckedOptions) {
+      // If it's not checked and the limit is not reached, add it to the array
+      setCheckedDietaryOptions([...checkedDietaryOptions, item]);
+
+      // Check if "No Dietary Restrictions" is selected and deselect it
+      if (checkedDietaryOptions.includes("No Dietary Restrictions")) {
+        const updatedOptions = checkedDietaryOptions.filter(
+          (option) => option !== "No Dietary Restrictions"
         );
-      } else if (checkedDietaryOptions.length < maxCheckedOptions) {
-        // If it's not checked and the limit is not reached, add it to the array
-        setCheckedDietaryOptions([...checkedDietaryOptions, item]);
-
-        // Unselect "No Dietary Restrictions" if it was selected
-        if (checkedDietaryOptions.includes("No Dietary Restrictions")) {
-          setCheckedDietaryOptions([]);
-        }
+        setCheckedDietaryOptions(updatedOptions);
       }
     }
-  };
+  }
+};
+
   const handleClick = () => {
     setDietary(checkedDietaryOptions);
     increaseStep();
     setIsButtonDisabled(false);
+    localStorage.setItem("selectedDietary", checkedDietaryOptions);
   }
+  useEffect(() => {
+    // Check if there's a selected option in local storage
+    const savedCheckedItem = localStorage.getItem("selectedDietary");
+    if (savedCheckedItem) {
+      setCheckedDietaryOptions(savedCheckedItem);
+      setIsButtonDisabled(true);
+    }
+  }, []);
 
 
 
   return (
     <>
+      <div className="easy-order-menu-title-container">
       <h2 className="easy-order-menu-text">
         Please Choose Up to 3 Dietary Options
       </h2>
-      <ul className="easy-order-list">
+    </div>
+      <ul className="easy-order-list-big">
         {DietaryOptionsArray.map((item) => (
           <li key={item.id}>
             <input
@@ -68,7 +84,7 @@ const EasyOrderDietary = () => {
             {item.name}
           </li>
         ))}
-      </ul>
+        </ul>
       {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
       >Make Selection
     </button>:""}

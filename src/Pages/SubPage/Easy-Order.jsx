@@ -15,6 +15,7 @@ import EasyOrderCulturalOptions from "./Easy-Order/Easy-Order-Cultural-Options";
 import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Start-Over-Button"
 import EasyOrderBackButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Back-Button"
 import EasyOrderUserSelection from "./Easy-Order/Easy-Order-User-Selection"
+import EasyOrderMeasure from "./Easy-Order/Easy-Order-Measure"
 import { useEasyOrderRenderStore } from "../../state-store/RenderStore";
 
 const EasyOrderForm = () => {
@@ -30,7 +31,8 @@ const EasyOrderForm = () => {
             5: <EasyOrderDietary />,
             6: <EasyOrderMealBalance />,
             7: <EasyOrderCookTime />,
-            8: <EasyOrderHowToCook />, 
+            8: <EasyOrderHowToCook />,
+            9: <EasyOrderMeasure />,
             9: <EasyOrderSeasonalOptions />,
             10: <EasyOrderDessertFlavor />,
             11: <EasyOrderBeverage />,

@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
 const EasyOrderHeadCount = () => {
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(0)
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const { setHeadCount } = useEasyOrderStoreActions()
     const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
- 
+
     const handleHeadCount = (value) => {
+        setIsButtonDisabled(true);
         setCount(value)
         setHeadCount(value)
-        
     }
 
- const handleClick = () => {
-    setHeadCount(count);
-     increaseStep();
-     setIsButtonDisabled(false);
-  }
+    const handleClick = () => {
+        setHeadCount(count);
+        increaseStep();
+        setIsButtonDisabled(false);
+        localStorage.setItem("selectedCount", count);
+    }
+
+    useEffect(() => {
+        const savedCheckedItem = localStorage.getItem("selectedCount");
+        if (savedCheckedItem) {
+            setCount(savedCheckedItem);
+            setIsButtonDisabled(true);
+        }
+    }, []);
 
     return (
     <>
@@ -35,12 +45,14 @@ const EasyOrderHeadCount = () => {
         />
         <div className="head-count-container">
             <p className="head-count-title-text">
-                HeadCount:{" "}<span className="head-count-data-text">{count}</span> {count != 1 ? "people" : "person"}
+                HeadCount:{" "}<span className="head-count-data-text">{count}</span> 
+
                 </p>
             </div>
-            <button className="easy-order-make-selection-btn" onClick={handleClick}
-      >Make Selection
-    </button>
+            {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+            >
+                Make Selection
+            </button> : ""}
     </>
     );
 }

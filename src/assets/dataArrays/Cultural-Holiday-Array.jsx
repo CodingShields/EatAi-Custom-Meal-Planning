@@ -3,7 +3,7 @@ import { nanoid } from "nanoid"
 const EasyOrderCulturalOptions = [
     {
     id: nanoid(),
-    name: "This not for a Cultural Celebration",
+    name: "None",
     },
     {
     id: nanoid(),

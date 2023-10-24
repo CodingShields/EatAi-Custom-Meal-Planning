@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HowToCook from "../../../assets/dataArrays/How-To-Cook-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
@@ -11,29 +11,29 @@ const EasyOrderHowToCook = () => {
   const maxCheckedOptions = 3;
 
   const handleCheckbox = (item) => {
-    setIsButtonDisabled(true)
+    setIsButtonDisabled(true);
     if (item === "No Preference") {
       // If "No Dietary Restrictions" is selected, unselect it and enable other options
-      if (checkedDietaryOptions.includes(item)) {
+      if (checkedHowToCook.includes(item)) {
         setCheckedHowToCook([]);
       } else {
         setCheckedHowToCook([item]);
       }
     } else {
       // Check if it's checked
-      const isChecked = setCheckedHowToCook.includes(item);
+      const isChecked = checkedHowToCook.includes(item);
 
       if (isChecked) {
         // If it's checked, remove it from the array
         setCheckedHowToCook(
-          setCheckedHowToCook.filter((option) => option !== item)
+          checkedHowToCook.filter((option) => option !== item)
         );
-      } else if (setCheckedHowToCook.length < maxCheckedOptions) {
+      } else if (checkedHowToCook.length < maxCheckedOptions) {
         // If it's not checked and the limit is not reached, add it to the array
-        setCheckedHowToCook([...setCheckedHowToCook, item]);
+        setCheckedHowToCook([...checkedHowToCook, item]);
 
         // Unselect "No Dietary Restrictions" if it was selected
-        if (setCheckedHowToCook.includes("No Preference")) {
+        if (checkedHowToCook.includes("No Preference")) {
           setCheckedHowToCook([]);
         }
       }
@@ -44,30 +44,40 @@ const EasyOrderHowToCook = () => {
     setHowToCook(checkedHowToCook);
     increaseStep();
     setIsButtonDisabled(false);
+    localStorage.setItem("selectedCook", JSON.stringify(checkedHowToCook));
   };
+
+  useEffect(() => {
+    // Check if there's a selected option in local storage
+    const savedCheckedItem = localStorage.getItem("selectedCook");
+    if (savedCheckedItem) {
+      setCheckedHowToCook(JSON.parse(savedCheckedItem));
+      setIsButtonDisabled(true);
+    }
+  }, []);
 
   return (
     <>
-      <h1>Please Select 3 Different Cooking Styles</h1>
-      <div className="easy-order-options-container">
-      <ul className="easy-order-list">
-        {HowToCook.map((item) => (
-          <li key={item.id}>
-            <input
-              type="checkbox"
-              value={item.name}
-              checked={checkedHowToCook.includes(item.name)}
-              onChange={() => handleCheckbox(item.name)}
-              disabled={
-                item === "No Preference" &&
-                checkedHowToCook.includes("No Preference")
-              }
-            />
-            {item.name}
-          </li>
-        ))}
-        </ul>
+      <div className="easy-order-menu-title-container">
+        <h1>Please Select 3 Different Cooking Styles</h1>
         </div>
+        <ul className="easy-order-list-big">
+          {HowToCook.map((item) => (
+            <li key={item.id}>
+              <input
+                type="checkbox"
+                value={item.name}
+                checked={checkedHowToCook.includes(item.name)}
+                onChange={() => handleCheckbox(item.name)}
+                disabled={
+                  item.name === "No Preference" &&
+                  checkedHowToCook.includes("No Preference")
+                }
+              />
+              {item.name}
+            </li>
+          ))}
+        </ul>
       {isButtonDisabled ? (
         <button className="easy-order-make-selection-btn" onClick={handleClick}>
           Make Selection

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import SeasonalArray from "../../../assets/dataArrays/Seasonal-Options-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
@@ -39,7 +39,16 @@ const EasyOrderSeasonalOptions = () => {
         setSeasonal(checkedSeasonal);
         increaseStep();
         setIsButtonDisabled(false);
+        localStorage.setItem("selectedSeasonal", checkedSeasonal);
     }
+useEffect(() => {
+    // Check if there's a selected option in local storage
+    const savedCheckedItem = localStorage.getItem("selectedSeasonal");
+    if (savedCheckedItem) {
+      setCheckedSeasonal(savedCheckedItem);
+      setIsButtonDisabled(true);
+    }
+  }, []);
 
     return (
         <>

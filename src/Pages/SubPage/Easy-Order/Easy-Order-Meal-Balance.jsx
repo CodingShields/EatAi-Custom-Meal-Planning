@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MealBalance from "../../../assets/dataArrays/Meal-Balance-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
@@ -15,7 +15,6 @@ const EasyOrderMealBalance = () => {
       // Item is already checked, so remove it
       setCheckedMealBalance(checkedMealBalance.filter((checkedMealBalance) => checkedMealBalance !== item));
     } else {
-      // Item is not checked, so add it
       setCheckedMealBalance([...checkedMealBalance, item]);
     }
   };
@@ -24,11 +23,23 @@ const EasyOrderMealBalance = () => {
     setBalance(checkedMealBalance);
     increaseStep();
     setIsButtonDisabled(false);
+    localStorage.setItem("selectedBalance", checkedMealBalance);
   };
+      useEffect(() => {
+    // Check if there's a selected option in local storage
+    const savedCheckedItem = localStorage.getItem("selectedBalance");
+    if (savedCheckedItem) {
+      setCheckedMealBalance(savedCheckedItem);
+      setIsButtonDisabled(true);
+    }
+  }, []);
 
   return (
     <>
-      <h1>Food Balance</h1>
+      <div className="easy-order-menu-title-container">
+        <h1>Food Balance</h1>
+      </div>
+      <div className="easy-order-options-container-big">
       {MealBalance.map((item) => (
         <ul className="easy-order-list" key={item.id}>
           <input
@@ -40,6 +51,7 @@ const EasyOrderMealBalance = () => {
           {item.name}
         </ul>
       ))}
+        </div>
       {isButtonDisabled ? (
         <button className="easy-order-make-selection-btn" onClick={handleClick}>
           Make Selection

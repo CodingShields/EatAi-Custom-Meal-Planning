@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 import CulturalHolidayArray from "../../../assets/dataArrays/Cultural-Holiday-Array";
@@ -6,9 +6,9 @@ import CulturalHolidayArray from "../../../assets/dataArrays/Cultural-Holiday-Ar
 const EasyOrderCulturalOptions = () => {  
   const { setCulture } = useEasyOrderStoreActions()
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
-    const [isChecked, setIsChecked] = useState(false)
-    const [checkedItem, setCheckedItem] = useState("")
+  const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
+  const [isChecked, setIsChecked] = useState(false)
+  const [checkedItem, setCheckedItem] = useState("")
     
     const handleChange = (itemName) => {
       setIsChecked(itemName)
@@ -21,27 +21,37 @@ const EasyOrderCulturalOptions = () => {
     setCulture(checkedItem);
       increaseStep();
       setIsButtonDisabled(false);
+      localStorage.setItem("selectedCulture", checkedItem);
   }
-
+    useEffect(() => {
+    // Check if there's a selected option in local storage
+    const savedCheckedItem = localStorage.getItem("selectedCulture");
+    if (savedCheckedItem) {
+      setCheckedItem(savedCheckedItem);
+      setIsButtonDisabled(true);
+    }
+  }, []);
 
     return (
-        <>
-            <h1>Dessert Flavor</h1>
-            <ul className="easy-order-list">
+      <>
+        <div className="easy-order-menu-title-container">
+          <h1>Is This For A Cultural Holiday?</h1>
+        </div>
+            <ul className="easy-order-list-big">
                         {CulturalHolidayArray.map((item) => (
-                            <li key={item.id}>
+                          <li key={item.id}>
                                 <label>
                                   <input
                                     type="radio"
                                     value={item.name}
-                                    checked={isChecked === item.name} // This controls the checked state
+                                    checked={checkedItem === item.name} // This controls the checked state
                                     onChange={() => handleChange(item.name)} // Handle changes
                                   />
                                   {item.name}
                                 </label>
                             </li>
                         ))}
-                    </ul>
+          </ul>
         {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
