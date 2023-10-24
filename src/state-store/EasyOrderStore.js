@@ -32,7 +32,6 @@ export const useEasyOrderStore = create((set, get) => ({
                 Dessert: state.Dessert,
                 Seasonal: state.Seasonal,
                 Beverage: state.Beverage,
-                BotResponse: state.BotResponse,
             };
         },
         resetForm: () => set(initializeState),
