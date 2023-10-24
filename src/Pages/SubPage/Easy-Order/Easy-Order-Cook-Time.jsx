@@ -27,7 +27,7 @@ const EasyOrderCookTime = () => {
 
     return (
         <>
-            <h1>Dessert Flavor</h1>
+            <h1>Cook Time</h1>
             <ul className="easy-order-list">
                         {CookTimes.map((item) => (
                             <li key={item.id}>

@@ -8,7 +8,7 @@ const EasyOrderDietary = () => {
   const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([])
   const { setDietary } = useEasyOrderStoreActions()
   const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
-  const maxCheckedDietaryOptions = 3;
+  const maxCheckedOptions = 3;
 
   const handleCheckbox = (item) => {
     setIsButtonDisabled(true)
@@ -28,7 +28,7 @@ const EasyOrderDietary = () => {
         setCheckedDietaryOptions(
           checkedDietaryOptions.filter((option) => option !== item)
         );
-      } else if (checkedDietaryOptions.length < maxCheckedDietaryOptions) {
+      } else if (checkedDietaryOptions.length < maxCheckedOptions) {
         // If it's not checked and the limit is not reached, add it to the array
         setCheckedDietaryOptions([...checkedDietaryOptions, item]);
 

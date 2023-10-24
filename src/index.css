@@ -698,6 +698,13 @@ main {
 	max-width: 700px;
 }
 
+.easy-order-options-container{
+display: grid;
+  grid-template-columns: repeat(4, fr); /* Two columns */
+  gap: 10px; /* Adjust the spacing between columns and items */
+
+}
+
 .easy-order-user-selection-container {
 	display: flex;
 	text-align: center;
@@ -853,6 +860,8 @@ main {
 .easy-order-list {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
 	list-style-type: none;
 	gap: 30px;
 	font-size: 22px;

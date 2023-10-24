@@ -12,9 +12,9 @@ import EasyOrderMealBalance from "./Easy-Order/Easy-Order-Meal-Balance";
 import EasyOrderHowToCook from "./Easy-Order/Easy-Order-How-To-Cook";
 import EasyOrderSeasonalOptions from "./Easy-Order/Easy-Order-Seasonal-Options";
 import EasyOrderCulturalOptions from "./Easy-Order/Easy-Order-Cultural-Options";
-import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Start-Over-Button"
-import EasyOrderBackButton from "./Easy-Order/Easy-Order-Comps/Easy-Order-Back-Button";
-import EasyOrderUserSelection from "./Easy-Order/Easy-Order-Comps/Easy-Order-User-Selection";
+import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Start-Over-Button"
+import EasyOrderBackButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Back-Button"
+import EasyOrderUserSelection from "./Easy-Order/Easy-Order-User-Selection"
 import { useEasyOrderRenderStore } from "../../state-store/RenderStore";
 
 const EasyOrderForm = () => {

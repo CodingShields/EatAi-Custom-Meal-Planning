@@ -23,7 +23,7 @@ const HowToCook =[
   },
   {
     id: nanoid(),
-    name: "Sautéing",
+    name: "Sautee",
     description: "Cooking food quickly in a small amount of oil or butter in a hot pan, stirring or flipping frequently."
   },
   {
@@ -56,11 +56,11 @@ const HowToCook =[
     name: "Blanching",
     description: "Briefly boiling food, then quickly cooling it in ice water to preserve color and texture."
   },
-  {
-    id: nanoid(),
-    name: "Frying",
-    description: "Cooking food by submerging it in hot oil, often used for foods like fried chicken and french fries."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Frying",
+  //   description: "Cooking food by submerging it in hot oil, often used for foods like fried chicken and french fries."
+  // },
   {
     id: nanoid(),
     name: "Deep Frying",
@@ -78,7 +78,7 @@ const HowToCook =[
   },
   {
     id: nanoid(),
-    name: "Griddling",
+    name: "Flat Top Grilling",
     description: "Cooking food on a flat, heated surface, such as a griddle or flat-top grill."
   },
   {
@@ -91,16 +91,16 @@ const HowToCook =[
     name: "Smoking",
     description: "Cooking food by exposing it to smoke from wood chips or other aromatic sources."
   },
-  {
-    id: nanoid(),
-    name: "Curing",
-    description: "Preserving and flavoring food by treating it with salt, sugar, and other seasonings."
-  },
-  {
-    id: nanoid(),
-    name: "Fermenting",
-    description: "Allowing foods to undergo controlled microbial growth, as in the case of yogurt, cheese, and sourdough bread."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Curing",
+  //   description: "Preserving and flavoring food by treating it with salt, sugar, and other seasonings."
+  // },
+  // {
+  //   id: nanoid(),
+  //   name: "Fermenting",
+  //   description: "Allowing foods to undergo controlled microbial growth, as in the case of yogurt, cheese, and sourdough bread."
+  // },
   {
     id: nanoid(),
     name: "Sous Vide",

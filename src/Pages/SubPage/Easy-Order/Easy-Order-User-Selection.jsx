@@ -1,5 +1,5 @@
 import React from "react";
-import { useEasyOrderStore } from "../../../../state-store/easyOrderStore";
+import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
 
 const EasyOrderUserSelection = () => {
   const culture = useEasyOrderStore((state) => state.Culture);
