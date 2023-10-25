@@ -31,7 +31,7 @@ export default function DashBoardLayout(){
       to="EasyOrder"
       style={({ isActive }) => isActive ? activeStyles : null}
         >
-      Easy Order
+      Group Order (Easy Order/ Need To Change Names)
       </NavLink>
 
       <NavLink

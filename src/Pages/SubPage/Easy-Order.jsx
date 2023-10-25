@@ -20,45 +20,44 @@ import { useEasyOrderRenderStore } from "../../state-store/RenderStore";
 
 const EasyOrderForm = () => {
     const step = useEasyOrderRenderStore((state) => state.step);
-   
 
-        const renderStepMap = {
-            0: <EasyOrderBegin />,
-            1: <EasyOrderEvents />,
-            2: <EasyOrderCulturalOptions/>,
-            3: <EasyOrderHeadCount />,
-            4: <EasyOrderCourse />,
-            5: <EasyOrderDietary />,
-            6: <EasyOrderMealBalance />,
-            7: <EasyOrderCookTime />,
-            8: <EasyOrderHowToCook />,
-            9: <EasyOrderMeasure />,
-            9: <EasyOrderSeasonalOptions />,
-            10: <EasyOrderDessertFlavor />,
-            11: <EasyOrderBeverage />,
-        }
- // need a "How to Measure" component
+
+    const renderStepMap = {
+            
+        0: <EasyOrderBegin />,
+        1: <EasyOrderEvents />,
+        2: <EasyOrderCulturalOptions />,
+        3: <EasyOrderHeadCount />,
+        4: <EasyOrderCourse />,
+        5: <EasyOrderDietary />,
+        6: <EasyOrderMealBalance />,
+        7: <EasyOrderCookTime />,
+        8: <EasyOrderHowToCook />,
+        9: <EasyOrderMeasure />,
+        10: <EasyOrderSeasonalOptions />,
+        11: <EasyOrderDessertFlavor />,
+        12: <EasyOrderBeverage />,
+            
+    }
     // need some other variables that are going to setup the questions better
     // get chat gtp to build a prompt for the user input 
-        const RenderCompFromStep = renderStepMap[step]
-// in the api call need to add a name summary 
-        return (
-            <div className="easy-order-container">
-                <div className="easy-order-chef-img-container">
+    const RenderCompFromStep = renderStepMap[step]
+    // in the api call need to add a name summary 
+    return (
+        <div className="easy-order-container">
+            <div className="easy-order-chef-img-container">
                 <img className="chef-img" src={flippedchef} alt="Chef" />
-                </div>
-                <div className="easy-order-chef-bubble-container">
-                    {RenderCompFromStep}
-                    <div className="easy-order-btn-container">
-                        <EasyOrderStartOverButton/>
-                        <EasyOrderBackButton/>
-                        
-                    </div>
-                </div>
-                <div className="easy-order-user-selection-container">
-                <EasyOrderUserSelection />
+            </div>
+            <div className="easy-order-chef-bubble-container">
+                    
+                        {RenderCompFromStep}
+                        <div className="easy-order-btn-container">
+                            <EasyOrderStartOverButton />
+                            <EasyOrderBackButton />
                 </div>
             </div>
-        )
-    }
+            <EasyOrderUserSelection />
+        </div>
+    );
+}
 export default EasyOrderForm

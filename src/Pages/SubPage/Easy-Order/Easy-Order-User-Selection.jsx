@@ -15,7 +15,7 @@ const EasyOrderUserSelection = () => {
   const seasonal = useEasyOrderStore((state) => state.Seasonal);
   const beverage = useEasyOrderStore((state) => state.Beverage);
   const measure = useEasyOrderStore((state) => state.Measure);
-  const state = useEasyOrderStore(state => state)
+  // const state = useEasyOrderStore(state => state)
   const formatCoursesOptions = () => {
     if (Array.isArray(courses)) {
       // Join the selected options into a comma-separated string
@@ -72,7 +72,7 @@ const EasyOrderUserSelection = () => {
         </>
         <h2 className="confirmed-selection-text">Measurement:</h2>
         <>
-        {/* <span className="user-input-text">{Measure}</span> */}
+        <span className="user-input-text">{measure}</span>
         </>
         <h2 className="confirmed-selection-text">Seasonal:</h2>
         <>

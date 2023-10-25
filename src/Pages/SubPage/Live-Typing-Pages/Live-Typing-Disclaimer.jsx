@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 
-const LiveTypingWelcome = ({ fontSize }) => {
+const LiveTypingDisClaimer = ({ fontSize }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = "Welcome, I am your EatAi Chef!\nClick Chef Surprise to set Guest Size, Flavor and kind of Meal.\nOrdering made easy coming soon! \nAdvanced ordering with macro nutrients, calories coming soon!";
+  const defaultMessage = "Welcome, I am your EatAi Chef!\nBefore we get started, please take a moment to review and sign our disclaimer.\n Thanks and see you in the Kitchen!";
 
   useEffect(() => {
     let charIndex = 0;
@@ -39,7 +40,7 @@ const LiveTypingWelcome = ({ fontSize }) => {
         fontWeight: 'bold',
         width: "500px",
         height: "450px",
-        paddingTop: '20px',
+        paddingTop: '50px',
         position: 'relative',
         justifyContent: "start",
         alignContent: "center",
@@ -52,4 +53,4 @@ const LiveTypingWelcome = ({ fontSize }) => {
   );
 };
 
-export default LiveTypingWelcome;
+export default LiveTypingDisClaimer;

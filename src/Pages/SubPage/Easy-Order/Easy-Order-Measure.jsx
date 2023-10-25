@@ -1,34 +1,77 @@
 import React, { useState, useEffect } from "react";
-// import Measure from "../../../assets/dataArrays/Measure-Options";
-// import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
-// import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import Measure from "../../../assets/dataArrays/Measure-Options";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
 const EasyOrderMeasure = () => {
-  //   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-  //   const { setMeasure } = useEasyOrderStoreActions()
-  //   const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
-  //   const [isChecked, setIsChecked] = useState(false)
-  //   const [checkedItem, setCheckedItem] = useState("")
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const { setMeasure } = useEasyOrderStoreActions();
+  const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
+  const [checkedItems, setCheckedItems] = useState([]);
 
-  //  const handleChange = (itemName) => {
-  //     setIsChecked(itemName)
-  //     setCheckedItem(itemName)
-  //     setIsButtonDisabled(true)
-  //     console.log(itemName);
-  // };
-    
-  //   const handleClick = () => {
-  //   setMeasure(checkedItem);
-  //     increaseStep();
-  //     setIsButtonDisabled(false);
-  // }
+  const handleChange = (itemName) => {
+    setIsButtonDisabled(true);
 
+    if (checkedItems.includes(itemName)) {
+      // Item is already checked, so remove it
+      setCheckedItems(checkedItems.filter((item) => item !== itemName));
+    } else {
+      // Item is not checked, so add it
+      setCheckedItems([...checkedItems, itemName]);
+    }
+    console.log(checkedItems);
+  };
 
+  const handleClick = () => {
+    setMeasure(checkedItems);
+    increaseStep();
+    setIsButtonDisabled(false);
+    localStorage.setItem("selectedMeasure", checkedItems);
 
-    return (
-        <>
-      <h1>Need To Build</h1>
+  };
+
+  useEffect(() => {
+    const savedCheckedItem = localStorage.getItem("selectedMeasure");
+    if (savedCheckedItem) {
+      setCheckedItems(JSON.parse(savedCheckedItem));
+      setIsButtonDisabled(true);
+    }
+  }, []);
+
+  return (
+    <>
+      <div className="easy-order-menu-title-container">
+        <h1>How Would You Like Your Measurements?</h1>
+      </div>
+      <ul className="easy-order-list">
+        {Measure.map((item) => (
+          <li key={item.id}>
+            <label>
+              <input
+                type="radio"
+                name="measure"
+                value={item.name}
+                checked={checkedItems.includes(item.name)}
+                onChange={() => handleChange(item.name)}
+              />
+              <span className="measure-span-text">{item.name}</span>
+            </label>
+            <p>{item.data}</p>
+          </li>
+        ))}
+      </ul>
+      {isButtonDisabled ? (
+        <button
+          className="easy-order-make-selection-btn"
+          onClick={handleClick}
+        >
+          Make Selection
+        </button>
+      ) : (
+        ""
+      )}
     </>
-    );
-}
+  );
+};
+
 export default EasyOrderMeasure;

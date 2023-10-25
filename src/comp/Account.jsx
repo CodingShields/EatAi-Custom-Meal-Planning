@@ -24,12 +24,16 @@ export default function Account() {
                 <div className="account-details-title-container">
                     <p className="account-details">Display Name:</p>
                     <p className="account-details">User Email:</p>
+                    <p className="account-details">User Phone:</p>
                     <p className="account-details">User ID:</p>
+                    <p className="account-details">Disclaimer:</p>
                 </div>
                 <div className="account-details-data-container">
                     <p className="account-details-data">{user && user.displayName}</p>
                     <p className="account-details-data">{user && user.email}</p>
-                    <p className="account-details-data">{user && user.uid }</p>
+                    <p className="account-details-data">{user && user.phoneNumber}</p>
+                    <p className="account-details-data">{user && user.uid}</p>
+                    <p className="account-details-data">Not Signed</p>
                 </div>
             </div>
                 

@@ -8,11 +8,14 @@ export const AuthContextProvider = ({ children }) => {
   
   const [user, setUser] = useState({});
   
-  const createUser = async (email, password, firstName, lastName) => {
+  const createUser = async (email, password, firstName, lastName, phone) => {
     try {
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
       // Update user's display name with first and last name
-      await updateProfile(authUser.user, { displayName: `${firstName} ${lastName}` });
+      await updateProfile(authUser.user, {
+        displayName: `${firstName} ${lastName}`,
+        phoneNumber: phone,
+      });
     } catch (error) {
       // Handle any errors here
       console.error("Error creating user:", error);
