@@ -35,7 +35,7 @@ const EasyOrderUserSelection = () => {
   console.log("eventData", event);
   
   return (
-    <>
+    <div className="easy-order-user-selection-container">
       <h1 className="easy-order-selection-title">Current Selections</h1>
       <div className="user-selection-container">
         <h2 className="confirmed-selection-text">Event:</h2>
@@ -88,7 +88,7 @@ const EasyOrderUserSelection = () => {
         </>
       </div>
       
-    </>
+    </div>
   );
 }
 export default EasyOrderUserSelection;
