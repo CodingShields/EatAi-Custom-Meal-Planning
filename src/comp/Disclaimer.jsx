@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useDisclaimerStore } from "../state-store/DisclaimerStore";
-import LiveTypingDisClaimerForm from "../Pages/SubPage/Live-Typing-Pages/Live-Typing-Dislaimer-Form";
-import LiveDate from "./liveDate";
-import { useNavigate } from "react-router-dom";
-import { useDisclaimerStoreActions } from "../state-store/DisclaimerStore";
-
+import LiveTypingDisClaimerForm from "../Pages/SubPage/Live-Typing-Pages/Live-Typing-Disclaimer-Form";
+import { useNewUserStoreActions} from "../state-store/NewUserStore"
+import { useNewUserStore } from "../state-store/NewUserStore";
+import LiveDate from "./LiveDate";
 
 const Disclaimer = () => {
     const [renderDisclaimer, setRenderDisclaimer] = useState(false);
     const [renderLiveTyping, setRenderLiveTyping] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
-    const [date, setDate] = useState(new Date());
-    const {setDisclaimer} = useDisclaimerStoreActions()
-    const disclaimerState = useDisclaimerStore((state) => state.Disclaimer)
+    const { setDisclaimer } =  useNewUserStoreActions()
+  
+    
+    
+    const disclaimerState = useNewUserStore((state) => state.disclaimer)
 
-
+// need to update State Names and variables
     
     const handleOnClick =  () => {
-        setDisclaimer(true);
-            setRenderDisclaimer(true);
-        setRenderLiveTyping(false);
-        console.log("disclaimerStateclicked", disclaimerState)
+      setDisclaimer(true);
+      setRenderDisclaimer(true);
+      setRenderLiveTyping(false);
     };
-    console.log("disclaimerState", disclaimerState)
 
   const handleOnChange = (e) => {
       setIsChecked(e.target.checked);
   };
 
   useEffect(() => {
-      setRenderLiveTyping(true);
+    setRenderLiveTyping(true);
   }, []);
 
     return (

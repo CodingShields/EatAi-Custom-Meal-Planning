@@ -1,9 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import disclaimerForm from '../../../assets/Docs/disclaimerForm';
 
-const LiveTypingDisClaimerForm = () => {
-  // const [displayedText, setDisplayedText] = useState('');
+const LiveTypingDisclaimerForm = () => {
   const defaultMessage = disclaimerForm[0];
 
   const renderTextWithNewlines = (text) => {
@@ -44,4 +43,4 @@ const LiveTypingDisClaimerForm = () => {
   );
 };
 
-export default LiveTypingDisClaimerForm;
+export default LiveTypingDisclaimerForm;
