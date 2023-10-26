@@ -5,34 +5,31 @@ import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 
 const EasyOrderMealBalance = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [checkedMealBalance, setCheckedMealBalance] = useState([]);
+  const [selectedBalance, setSelectedBalance] = useState("");
   const { setBalance } = useEasyOrderStoreActions()
   const increaseStep = useEasyOrderRenderStore((state) => state.increaseStep);
 
-  const handleCheckboxChange = (item) => {
+  const handleChange = (item) => {
     setIsButtonDisabled(true);
-    if (checkedMealBalance.includes(item)) {
-      // Item is already checked, so remove it
-      setCheckedMealBalance(checkedMealBalance.filter((checkedMealBalance) => checkedMealBalance !== item));
-    } else {
-      setCheckedMealBalance([...checkedMealBalance, item]);
-    }
+    setSelectedBalance(item);
+
   };
 
   const handleClick = () => {
-    setBalance(checkedMealBalance);
+    setBalance(selectedBalance);
     increaseStep();
     setIsButtonDisabled(false);
-    localStorage.setItem("selectedBalance", checkedMealBalance);
+    localStorage.setItem("selectedBalance", selectedBalance);
   };
-      useEffect(() => {
-    // Check if there's a selected option in local storage
-    const savedCheckedItem = localStorage.getItem("selectedBalance");
-    if (savedCheckedItem) {
-      setCheckedMealBalance(savedCheckedItem);
-      setIsButtonDisabled(true);
-    }
-  }, []);
+    useEffect(() => {
+  // Check if there's a selected option in local storage
+  const savedSelectedItem = localStorage.getItem("selectedBalance");
+  if (savedSelectedItem) {
+    setSelectedBalance(savedSelectedItem); // Update the selectedBalance state
+    setIsButtonDisabled(true);
+  }
+}, []);
+
 
   return (
     <>
@@ -40,17 +37,21 @@ const EasyOrderMealBalance = () => {
         <h1>Food Balance</h1>
       </div>
       <div className="easy-order-options-container-big">
+        <ul className="easy-order-list" >
       {MealBalance.map((item) => (
-        <ul className="easy-order-list" key={item.id}>
+        <li key={item.id}>
+          <label>
           <input
             type="radio"
             value={item.name}
-            checked={checkedMealBalance.includes(item.name)}
-            onChange={() => handleCheckboxChange(item.name)}
+            checked={selectedBalance.includes(item.name)}
+            onChange={() => handleChange(item.name)}
           />
-          {item.name}
-        </ul>
+            {item.name}
+            </label>
+        </li>
       ))}
+        </ul>
         </div>
       {isButtonDisabled ? (
         <button className="easy-order-make-selection-btn" onClick={handleClick}>

@@ -11,14 +11,8 @@ const EasyOrderCookTime = () => {
     const [checkedItem, setCheckedItem] = useState("")
     
     const handleChange = (item) => {
-    setIsButtonDisabled(true);
-    if (checkedItem.includes(item)) {
-      // Item is already checked, so remove it
-      setCheckedItem(checkedItem.filter((checkedItem) => checkedItem !== item));
-    } else {
-      // Item is not checked, so add it
-      setCheckedItem([...checkedItem, item]);
-    }
+      setIsButtonDisabled(true);
+      setCheckedItem(item);
   }
     
     const handleClick = () => {
