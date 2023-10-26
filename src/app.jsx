@@ -5,7 +5,7 @@ import About from './Pages/About.jsx';
 import Pantry from './Pages/Pantry.jsx';
 import HomeLayout from './Layouts/Home-Layout.jsx';
 import SignIn from './comp/SignIn.jsx';
-import SignUp from './comp/SignUp.jsx';
+import SignUp from './comp/NewSignUp.jsx';
 import Account from './Pages/SubPage/Account.jsx';
 import DashBoardLayout from './Layouts/Dash-Board-Layout.jsx';
 import Welcome from './Pages/SubPage/Welcome.jsx';

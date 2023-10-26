@@ -23,6 +23,7 @@ export const AuthContextProvider = ({ children }) => {
         displayName: `${firstNameState} ${lastNameState}`,
         phoneNumber: `${phoneState}`,
       });
+      setUserId(authUser.user.uid);
       
     } catch (error) {
       // Handle any errors here
@@ -43,10 +44,9 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // User is authenticated
-      setUserId(currentUser.uid);
+      // setUserId(currentUser.uid);
       setUser(currentUser);
       console.log("current", currentUser);
-      console.log("set user id", currentUser.uid);
       // User is not authenticated
       setUserId(null); // Optionally reset the user ID or take appropriate action
       setUser(null); // Optionally reset the user state or take appropriate action

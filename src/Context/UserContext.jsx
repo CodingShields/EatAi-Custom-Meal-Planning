@@ -15,23 +15,28 @@ export const UserContextProvider = ({ children }) => {
     
 
 
-    const createUserDb = async () =>
-        await setDoc(doc(db, "users", user.uid), {
-                first: firstNameState,
-                last: lastNameState,
-                phone: phoneState,
-                email: emailState,
-                membership: false,
-                uid: userIdState,
-                disclaimer: disclaimerState,
-                signUpDate: Timestamp.now(),
+    const createUserDb = async (user) => {
+        try {
+            await setDoc(doc(db, "users", user.uid), {
+            first: firstNameState,
+            last: lastNameState,
+            phone: phoneState,
+            email: emailState,
+            membership: false,
+            uid: userIdState,
+            disclaimer: disclaimerState,
+            signUpDate: Timestamp.now(),
             });
-    
-        return (
-            <UserContext.Provider value={{createUserDb}}> 
-                {children}
-            </UserContext.Provider>
-        );
+        } catch (error) {
+            console.error("Error creating user document:", error);
+            throw error; // Re-throw the error to be caught in the caller (handleSubmit)
+        }
+    };
+    return (
+        <UserContext.Provider value={{createUserDb}}> 
+            {children}
+        </UserContext.Provider>
+    );
 }
 
 export const UserDb = () => {

@@ -20,6 +20,7 @@ export default function Account() {
     return (
         <div className="Account-container">
             <h1 className="account-title">Account</h1>
+            <h1> Need to add another nav bar in here. one for strict pref etc...</h1>
             <div className="account-data-container">
                 <div className="account-details-title-container">
                     <p className="account-details">Display Name:</p>

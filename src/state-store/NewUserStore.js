@@ -5,9 +5,9 @@ const initializeState = {
   last:"",
   email:"",
   phone:"",
-  membership:false,
   userId:"",
-  disclaimer: false, 
+  disclaimer: false,
+  membership:false,
 };
 
 export const useNewUserStore = create((set, get) => ({

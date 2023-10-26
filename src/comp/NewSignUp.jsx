@@ -36,21 +36,21 @@ const SignUp = () => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    if (disclaimerState) {
-      try {
-        await createUser(password);
-        await createUserDb();
-        navigate("/MembersArea/Welcome");
-      } catch (e) {
-        setError(e.message);
-      }
-    } else {
-      setError("Please accept the disclaimer before signing up.");
+  if (disclaimerState) {
+    try {
+      const userCredential = await createUser(password); // Assuming createUser returns user credentials
+      await createUserDb(userCredential.user); // Pass the user object to createUserDb
+      navigate("/MembersArea/Welcome");
+    } catch (e) {
+      setError(e.message);
     }
-  };
+  } else {
+    setError("Please accept the disclaimer before signing up.");
+  }
+};
 
   useEffect(() => {
     setRenderSubmit(false)
