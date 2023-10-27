@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite"
 import 'firebase/auth';
 
 // Initialize Firebase with your Firebase config
@@ -14,7 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
 
 export async function loginUser(creds) {
     const res = await fetch("/api/login",

@@ -7,6 +7,7 @@ import { useNewUserStore } from "../state-store/NewUserStore";
 import Disclaimer from "./Disclaimer";
 import LoginChef from "../assets/images/LoginChef.png";
 
+
 const SignUp = () => {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLasName] = useState("");
@@ -21,7 +22,7 @@ const SignUp = () => {
   const { setEmail } =  useNewUserStoreActions()
   const { setPhone } =  useNewUserStoreActions()
   const { createUser } = UserAuth();
-  const { createUserDb } = UserDb();
+  const { createUserDb } = useContext(UserDb)
 
   const navigate = useNavigate();
 
@@ -41,8 +42,8 @@ const SignUp = () => {
 
   if (disclaimerState) {
     try {
-      const userCredential = await createUser(password); // Assuming createUser returns user credentials
-      await createUserDb(userCredential.user); // Pass the user object to createUserDb
+      await createUser(password);
+      await createUserDb(); 
       navigate("/MembersArea/Welcome");
     } catch (e) {
       setError(e.message);

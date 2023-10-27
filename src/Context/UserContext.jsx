@@ -1,8 +1,9 @@
-import React, { createContext, useContext} from "react";
+import React, { createContext, useContext, useEffect} from "react";
 import { useNewUserStore } from "../state-store/NewUserStore";
-import { doc, setDoc,Timestamp} from "firebase/firestore";
+import { doc, setDoc,Timestamp,addDoc } from "firebase/firestore";
+import {db} from "../Firebase/firebaseConfig"
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
 
@@ -12,12 +13,14 @@ export const UserContextProvider = ({ children }) => {
     const emailState = useNewUserStore((state) => state.email)
     const phoneState = useNewUserStore((state) => state.phone)
     const userIdState = useNewUserStore((state) => state.userId)    
+    const userData = useNewUserStore((state) => state)
     
-
-
-    const createUserDb = async (user) => {
+console.log("working?");
+    const createUserDb = async (e) => {
+        e.preventdefault()
+        console.log("testy")
         try {
-            await setDoc(doc(db, "users", user.uid), {
+            const docRef = await addDoc(doc(db, "users"), {
             first: firstNameState,
             last: lastNameState,
             phone: phoneState,
@@ -26,12 +29,16 @@ export const UserContextProvider = ({ children }) => {
             uid: userIdState,
             disclaimer: disclaimerState,
             signUpDate: Timestamp.now(),
+            
             });
+            console.log("testy2", user, docRef.id)
         } catch (error) {
-            console.error("Error creating user document:", error);
+            console.error("Error creating user document:", e);
             throw error; // Re-throw the error to be caught in the caller (handleSubmit)
         }
     };
+ 
+
     return (
         <UserContext.Provider value={{createUserDb}}> 
             {children}
@@ -39,6 +46,6 @@ export const UserContextProvider = ({ children }) => {
     );
 }
 
-export const UserDb = () => {
+export const useUserContext = () => {
     return useContext(UserContext);
 };
