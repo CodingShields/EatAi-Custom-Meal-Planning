@@ -1,40 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import {UserDb} from "../Context/UserContext";
-import { useNewUserStoreActions } from "../state-store/NewUserStore";
 import { useNewUserStore } from "../state-store/NewUserStore";
-import Disclaimer from "./Disclaimer";
+import Disclaimer from "./Disclaimer.jsx";
 import LoginChef from "../assets/images/LoginChef.png";
 
 
 const SignUp = () => {
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLasName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phone, setPhone] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [renderSubmit, setRenderSubmit] = useState(false); 
   const [error, setError] = useState(null);
   const disclaimerState = useNewUserStore((state) => state.disclaimer)
-  const { setFirst } =  useNewUserStoreActions()
-  const { setLast } =  useNewUserStoreActions()
-  const { setEmail } =  useNewUserStoreActions()
-  const { setPhone } =  useNewUserStoreActions()
   const { createUser } = UserAuth();
-  const { createUserDb } = useContext(UserDb)
 
   const navigate = useNavigate();
-
-
-
 
   const handleClick = () => {
     setRenderSubmit(true)
     console.log("clicked");
-    console.log(renderSubmit);
   };
-
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -42,8 +30,8 @@ const SignUp = () => {
 
   if (disclaimerState) {
     try {
-      await createUser(password);
-      await createUserDb(); 
+      await createUser(firstName, lastName, email, phone, password);
+      console.log("done creating user");
       navigate("/MembersArea/Welcome");
     } catch (e) {
       setError(e.message);
@@ -54,6 +42,7 @@ const SignUp = () => {
 };
 
   useEffect(() => {
+    console.log("Component unmounted or reset renderSubmit");
     setRenderSubmit(false)
   }, [])
 
@@ -66,14 +55,14 @@ const SignUp = () => {
       <form onSubmit={handleSubmit} className="login-form">
         <input
           name="firstName"
-          onChange={(e) => setFirst(e.target.value)}
+          onChange={(e) => setFirstName(e.target.value)}
           type="text"
           placeholder="First Name"
           required
         />
         <input
           name="lastName"
-          onChange={(e) => setLast(e.target.value)}
+          onChange={(e) => setLastName(e.target.value)}
           type="text"
           placeholder="Last Name"
           required

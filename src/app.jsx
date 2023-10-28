@@ -5,7 +5,7 @@ import About from './Pages/About.jsx';
 import Pantry from './Pages/Pantry.jsx';
 import HomeLayout from './Layouts/Home-Layout.jsx';
 import SignIn from './comp/SignIn.jsx';
-import SignUp from './comp/NewSignUp.jsx';
+import SignUp from './comp/SignUp.jsx';
 import Account from './Pages/SubPage/Account.jsx';
 import DashBoardLayout from './Layouts/Dash-Board-Layout.jsx';
 import Welcome from './Pages/SubPage/Welcome.jsx';
@@ -15,13 +15,11 @@ import AdvancedOrder from './Pages/SubPage/Advanced-Order.jsx';
 import { AuthContextProvider } from './Context/AuthContext.jsx';
 import ProtectedRoute from './comp/ProtectedRoute.jsx';
 import './index.css';
-import { UserContextProvider } from './Context/UserContext.jsx';
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <UserContextProvider>
           <Routes>
             <Route path="/" element={<HomeLayout />}>
               <Route index element={<SignIn />} />
@@ -40,7 +38,6 @@ function App() {
               </Route>
             </Route>
           </Routes>
-        </UserContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   );

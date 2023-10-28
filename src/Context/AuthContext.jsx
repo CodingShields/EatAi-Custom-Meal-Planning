@@ -1,33 +1,42 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile} from "firebase/auth";
-import { auth } from "../Firebase/firebaseConfig"
+import { auth, db} from "../Firebase/firebaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
 import { useNewUserStoreActions } from "../state-store/NewUserStore";
+import { collection, addDoc } from "firebase/firestore/lite"; 
 
-const UserContext = createContext();
+
+const UserContext= createContext();
 
 export const AuthContextProvider = ({ children }) => {
   
   const [user, setUser] = useState({});
+  const disclaimerState = useNewUserStore((state) => state.disclaimer)  
   const { setUserId } = useNewUserStoreActions()
-  const firstNameState = useNewUserStore((state) => state.firstName)
-  const lastNameState = useNewUserStore((state) => state.lastName)
-  const emailState = useNewUserStore((state) => state.email)
-  const phoneState = useNewUserStore((state) => state.phone)
   
-  const createUser = async (password) => {
+  const createUser = async (firstName, lastName, email, phone, password) => {
+    console.log("email", email);
     try {
-      const authUser = await createUserWithEmailAndPassword(auth, emailState, password);
+      const authUser = await createUserWithEmailAndPassword(auth, email, password);
       // Update user's display name with first and last name
       await updateProfile(authUser.user, {
-        displayName: `${firstNameState} ${lastNameState}`,
-        phoneNumber: `${phoneState}`,
+        displayName: `${firstName} ${lastName}`,
+        phoneNumber: phone
       });
-      setUserId(authUser.user.uid);
-      
-    } catch (error) {
+         const usersCollection = collection(db, "users");
+            await addDoc(usersCollection, {
+              first: firstName,
+              last: lastName,
+              email: email,
+              phone: phone,
+              membership: false,
+              disclaimer: disclaimerState,
+              signUpDate: new Date(),
+              uid: authUser.user.uid
+            });
+        } catch (error) {
       // Handle any errors here
-      console.error("Error creating user:", error);
+          console.error("Error creating user:", error);
     }
   };
   
@@ -44,12 +53,11 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // User is authenticated
-      // setUserId(currentUser.uid);
       setUser(currentUser);
       console.log("current", currentUser);
       // User is not authenticated
-      setUserId(null); // Optionally reset the user ID or take appropriate action
-      setUser(null); // Optionally reset the user state or take appropriate action
+      setUserId(null); 
+      setUser(null);
     });
 
   return () => {
@@ -65,7 +73,8 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
-
 export const UserAuth = () => {
   return useContext(UserContext);
 };
+
+

@@ -1,12 +1,15 @@
 import React, {useState} from "react"
 import { UserAuth } from "../../Context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { useNewUserStore } from "../../state-store/NewUserStore"
 
 export default function Account() {
     
     const { user, logout } = UserAuth()
     const [error, setError] = useState(null);
+    const disclaimerState = useNewUserStore((state) => state.disclaimer)
     const navigate = useNavigate()
+
     const handleLogOut = async () => {
         try {
             await logout()
@@ -17,6 +20,7 @@ export default function Account() {
         console.log(e.message);
         }
     }
+    console.log(disclaimerState);
     return (
         <div className="Account-container">
             <h1 className="account-title">Account</h1>
@@ -34,7 +38,7 @@ export default function Account() {
                     <p className="account-details-data">{user && user.email}</p>
                     <p className="account-details-data">{user && user.phoneNumber}</p>
                     <p className="account-details-data">{user && user.uid}</p>
-                    <p className="account-details-data">Not Signed</p>
+                    <p className="account-details-data">{disclaimerState}</p>
                 </div>
             </div>
                 
