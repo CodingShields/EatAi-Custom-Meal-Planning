@@ -32,7 +32,10 @@ const SignUp = () => {
     try {
       await createUser(firstName, lastName, email, phone, password);
       console.log("done creating user");
-      navigate("/MembersArea/Welcome");
+      setTimeout(() => {
+        navigate("/MembersArea/Welcome");
+      }, 500);
+
     } catch (e) {
       setError(e.message);
     }

@@ -2,8 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile} from "firebase/auth";
 import { auth, db} from "../Firebase/firebaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
-import { useNewUserStoreActions } from "../state-store/NewUserStore";
 import { collection, addDoc } from "firebase/firestore/lite"; 
+
 
 
 const UserContext= createContext();
@@ -12,7 +12,6 @@ export const AuthContextProvider = ({ children }) => {
   
   const [user, setUser] = useState({});
   const disclaimerState = useNewUserStore((state) => state.disclaimer)  
-  const { setUserId } = useNewUserStoreActions()
   
   const createUser = async (firstName, lastName, email, phone, password) => {
     console.log("email", email);
@@ -48,15 +47,12 @@ export const AuthContextProvider = ({ children }) => {
     return signOut(auth);
   }
 
-
-
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // User is authenticated
       setUser(currentUser);
       console.log("current", currentUser);
       // User is not authenticated
-      setUserId(null); 
       setUser(null);
     });
 
