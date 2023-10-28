@@ -4,17 +4,15 @@ import { auth, db} from "../Firebase/firebaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
 import { collection, addDoc } from "firebase/firestore/lite"; 
 
-
-
 const UserContext= createContext();
 
 export const AuthContextProvider = ({ children }) => {
   
   const [user, setUser] = useState({});
+  
   const disclaimerState = useNewUserStore((state) => state.disclaimer)  
   
   const createUser = async (firstName, lastName, email, phone, password) => {
-    console.log("email", email);
     try {
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
       // Update user's display name with first and last name
@@ -22,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
         displayName: `${firstName} ${lastName}`,
         phoneNumber: phone
       });
-         const usersCollection = collection(db, "users");
+        const usersCollection = collection(db, "users");
             await addDoc(usersCollection, {
               first: firstName,
               last: lastName,
@@ -33,6 +31,8 @@ export const AuthContextProvider = ({ children }) => {
               signUpDate: new Date(),
               uid: authUser.user.uid
             });
+        console.log("User document added successfully");
+
         } catch (error) {
       // Handle any errors here
           console.error("Error creating user:", error);

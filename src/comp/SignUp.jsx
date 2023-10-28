@@ -6,6 +6,7 @@ import Disclaimer from "./Disclaimer.jsx";
 import LoginChef from "../assets/images/LoginChef.png";
 
 
+
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,6 +17,7 @@ const SignUp = () => {
   const [error, setError] = useState(null);
   const disclaimerState = useNewUserStore((state) => state.disclaimer)
   const { createUser } = UserAuth();
+  const {createUserDb} = UserAuth();
 
   const navigate = useNavigate();
 
@@ -32,11 +34,12 @@ const SignUp = () => {
     try {
       await createUser(firstName, lastName, email, phone, password);
       console.log("done creating user");
-      setTimeout(() => {
-        navigate("/MembersArea/Welcome");
-      }, 500);
-
-    } catch (e) {
+      await createUserDb();
+      console.log("done creating user db");
+        console.log("Before navigate");
+        navigate("/MembersArea/Account");
+        console.log("After navigate");
+    } catch (e) {P
       setError(e.message);
     }
   } else {
@@ -44,10 +47,13 @@ const SignUp = () => {
   }
 };
 
-  useEffect(() => {
-    console.log("Component unmounted or reset renderSubmit");
-    setRenderSubmit(false)
-  }, [])
+// useEffect(() => {
+//   console.log("Component unmounted or reset renderSubmit");
+//   if (renderSubmit) {
+//     navigate("/MembersArea/Account");
+//   }
+// }, []);
+
 
   return (
     <div
