@@ -23,7 +23,7 @@ export default function Account() {
     }
 
     const handleGetData = async () => {
-        const colRef = collection(db, "collection_name")
+        const colRef = collection(db, "users")
         const docRef = doc(colRef, user.uid)
         const docSnap = await getDoc(docRef)
         if (docSnap.exists()) {
@@ -36,9 +36,6 @@ export default function Account() {
     
     
     }
-
-    
-
 
 
     return (
