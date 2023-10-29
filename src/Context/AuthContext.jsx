@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile} from "firebase/auth";
 import { auth, db} from "../Firebase/firebaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
-import { collection, addDoc, setDoc, doc} from "firebase/firestore/lite"; 
+import { setDoc, doc } from "firebase/firestore"; 
 
 const UserContext= createContext();
 
@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   
   const disclaimerState = useNewUserStore((state) => state.disclaimer)  
   
-  const createUser = async ({firstName, lastName, email, phone, password}) => {
+   const createUser = async ({firstName, lastName, email, phone, password}) => {
     try {
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
       // Update user's display name with first and last name

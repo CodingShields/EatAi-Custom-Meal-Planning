@@ -24,7 +24,6 @@ const SignUp = () => {
 
   const handleClick = () => {
     setRenderSubmit(true)
-    console.log("clicked");
   };
 
   const handleSubmit = async (e) => {
@@ -34,12 +33,7 @@ const SignUp = () => {
   if (disclaimerState) {
     try {
       await createUser(form);
-      console.log("done creating user");
-      // await createUserDb();
-      console.log("done creating user db");
-        console.log("Before navigate");
-        navigate("/MembersArea/Account");
-        console.log("After navigate");
+          navigate("/MembersArea/Welcome");
     } catch (e) {
       setError(e.message);
     }
