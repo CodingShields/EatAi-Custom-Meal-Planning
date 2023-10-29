@@ -8,16 +8,17 @@ import LoginChef from "../assets/images/LoginChef.png";
 
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    firstName:"",
+    lastName:"",
+    phone:"",
+    email:"",
+    password:"",
+  });
   const [renderSubmit, setRenderSubmit] = useState(false); 
   const [error, setError] = useState(null);
   const disclaimerState = useNewUserStore((state) => state.disclaimer)
   const { createUser } = UserAuth();
-  const {createUserDb} = UserAuth();
 
   const navigate = useNavigate();
 
@@ -32,28 +33,20 @@ const SignUp = () => {
 
   if (disclaimerState) {
     try {
-      await createUser(firstName, lastName, email, phone, password);
+      await createUser(form);
       console.log("done creating user");
-      await createUserDb();
+      // await createUserDb();
       console.log("done creating user db");
         console.log("Before navigate");
         navigate("/MembersArea/Account");
         console.log("After navigate");
-    } catch (e) {P
+    } catch (e) {
       setError(e.message);
     }
   } else {
     setError("Please accept the disclaimer before signing up.");
   }
-};
-
-// useEffect(() => {
-//   console.log("Component unmounted or reset renderSubmit");
-//   if (renderSubmit) {
-//     navigate("/MembersArea/Account");
-//   }
-// }, []);
-
+  };
 
   return (
     <div
@@ -64,35 +57,40 @@ const SignUp = () => {
       <form onSubmit={handleSubmit} className="login-form">
         <input
           name="firstName"
-          onChange={(e) => setFirstName(e.target.value)}
+          value = {form.firstName}
+          onChange={e => {setForm({...form, firstName:e.target.value})}}
           type="text"
           placeholder="First Name"
           required
         />
         <input
           name="lastName"
-          onChange={(e) => setLastName(e.target.value)}
+          value={form.lastName}
+          onChange={e=>{setForm({...form, lastName:e.target.value})}}
           type="text"
           placeholder="Last Name"
           required
         />
         <input
           name="email"
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={e=>{setForm({...form, email:e.target.value})}}
           type="email"
           placeholder="Email address"
           required
         />
         <input
           name="phone"
-          onChange={(e) => setPhone(e.target.value)}
+          value={form.phone}
+          onChange={e=>{setForm({...form, phone:e.target.value})}}
           type="phone"
           placeholder="Cell Phone Number"
           required
         />
         <input
           name="password"
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={e=>{setForm({...form, password:e.target.value})}}
           type="password"
           placeholder="Password"
           required

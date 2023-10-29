@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile} from "firebase/auth";
 import { auth, db} from "../Firebase/firebaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
-import { collection, addDoc } from "firebase/firestore/lite"; 
+import { collection, addDoc, setDoc, doc} from "firebase/firestore/lite"; 
 
 const UserContext= createContext();
 
@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   
   const disclaimerState = useNewUserStore((state) => state.disclaimer)  
   
-  const createUser = async (firstName, lastName, email, phone, password) => {
+  const createUser = async ({firstName, lastName, email, phone, password}) => {
     try {
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
       // Update user's display name with first and last name
@@ -20,17 +20,17 @@ export const AuthContextProvider = ({ children }) => {
         displayName: `${firstName} ${lastName}`,
         phoneNumber: phone
       });
-        const usersCollection = collection(db, "users");
-            await addDoc(usersCollection, {
-              first: firstName,
-              last: lastName,
-              email: email,
-              phone: phone,
-              membership: false,
-              disclaimer: disclaimerState,
-              signUpDate: new Date(),
-              uid: authUser.user.uid
-            });
+        const userDocRef = doc(db, "users", authUser.user.uid);
+      await setDoc(userDocRef, {
+        first: firstName,
+        last: lastName,
+        email: email,
+        phone: phone,
+        membership: false,
+        disclaimer: disclaimerState,
+        signUpDate: new Date(),
+        uid: authUser.user.uid
+      });
         console.log("User document added successfully");
 
         } catch (error) {
@@ -49,11 +49,15 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // User is authenticated
+    // User is authenticated
+    if (currentUser) {
       setUser(currentUser);
       console.log("current", currentUser);
+    } else  {
       // User is not authenticated
-      setUser(null);
+    setUser(null);
+      console.log("logged out", currentUser);
+    }
     });
 
   return () => {
