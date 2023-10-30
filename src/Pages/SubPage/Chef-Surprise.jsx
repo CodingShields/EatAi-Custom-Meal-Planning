@@ -7,14 +7,6 @@ import cooking from "../../assets/images/cooking.svg";
 import jsPDF from "jspdf"
 
 
-// still need to limit certain features of this level for FREE
-// Limit Flavors
-// Limit Searches 
-// Limit DownLoads
-
-
-
-
 export default function ChefSurprise() {
 	const [entree, setEntree] = useState("");
 	const [headCount, setHeadCount] = useState(1);
@@ -27,7 +19,7 @@ export default function ChefSurprise() {
 	const [loading, setLoading] = useState(false);
 	const [renderMenu, setRenderMenu] = useState(false);
 
-	const apiKey = "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";
+	const apiKey = "";
 
 	async function handleOrder() {
 		setLoading(true);

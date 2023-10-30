@@ -23,7 +23,6 @@ import { useEasyOrderRenderStore } from "../../state-store/RenderStore"
 const EasyOrderForm = () => {
     const step = useEasyOrderRenderStore((state) => state.step);
 
-
     const renderStepMap = {
             
         0: <EasyOrderBegin />,
