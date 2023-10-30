@@ -31,6 +31,11 @@ const CoursesArray = [
         id: nanoid(),
         name: "Dessert",
         description: "Typically, a sweet course served at the end of the meal."
+    },
+    {
+        id: nanoid(),
+        name: "Beverages",
+        description: "These will include alcholic and non-alcoholic beverages based on your menu selections."
     }
 ];
 

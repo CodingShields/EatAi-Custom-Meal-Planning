@@ -1,6 +1,7 @@
 import React from "react";
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
-import Measure from "../../../assets/dataArrays/Measure-Options";
+
+
 
 const EasyOrderUserSelection = () => {
   const culture = useEasyOrderStore((state) => state.Culture);
@@ -15,7 +16,7 @@ const EasyOrderUserSelection = () => {
   const seasonal = useEasyOrderStore((state) => state.Seasonal);
   const beverage = useEasyOrderStore((state) => state.Beverage);
   const measure = useEasyOrderStore((state) => state.Measure);
-  // const state = useEasyOrderStore(state => state)
+  const state = useEasyOrderStore(state => state)
   const formatCoursesOptions = () => {
     if (Array.isArray(courses)) {
       // Join the selected options into a comma-separated string
@@ -39,10 +40,11 @@ const EasyOrderUserSelection = () => {
       <h1 className="easy-order-selection-title">Current Selections</h1>
       <div className="user-selection-container">
         <h2 className="confirmed-selection-text">Event:</h2>
-          <>
+        <>
           <span className="user-input-text">{event}</span>
-          </>
-        <h2 className="confirmed-selection-text">Cultural:</h2>
+        </>
+        <h2
+          className="confirmed-selection-text">Cultural:</h2>
         <>
           <span className="user-input-text">{culture}</span>
         </>
@@ -57,6 +59,10 @@ const EasyOrderUserSelection = () => {
         <h2 className="confirmed-selection-text">Dietary:</h2>
         <>
         <span className="user-input-text">{formatDietaryOptions()}</span>
+        </>
+        <h2 className="confirmed-selection-text">Desired Flavor:</h2>
+        <>
+          <span className="user-input-text">{state.HowToFlavor}</span>
         </>
         <h2 className="confirmed-selection-text">Meal Balance:</h2>
         <>

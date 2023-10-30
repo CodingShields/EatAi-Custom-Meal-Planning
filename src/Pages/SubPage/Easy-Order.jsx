@@ -16,7 +16,9 @@ import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order
 import EasyOrderBackButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Back-Button"
 import EasyOrderUserSelection from "./Easy-Order/Easy-Order-User-Selection"
 import EasyOrderMeasure from "./Easy-Order/Easy-Order-Measure"
-import { useEasyOrderRenderStore } from "../../state-store/RenderStore";
+import EasyOrderHowToFlavor from "./Easy-Order/Easy-Order-How-To-Flavor"
+import EasyOrderConfirmOrder from "./Easy-Order/Easy-Order-Confirm-Order";
+import { useEasyOrderRenderStore } from "../../state-store/RenderStore"
 
 const EasyOrderForm = () => {
     const step = useEasyOrderRenderStore((state) => state.step);
@@ -30,13 +32,15 @@ const EasyOrderForm = () => {
         3: <EasyOrderHeadCount />,
         4: <EasyOrderCourse />,
         5: <EasyOrderDietary />,
-        6: <EasyOrderMealBalance />,
-        7: <EasyOrderCookTime />,
-        8: <EasyOrderHowToCook />,
-        9: <EasyOrderMeasure />,
-        10: <EasyOrderSeasonalOptions />,
-        11: <EasyOrderDessertFlavor />,
-        12: <EasyOrderBeverage />,
+        6: <EasyOrderHowToFlavor/>,
+        7: <EasyOrderMealBalance />,
+        8: <EasyOrderCookTime />,
+        9: <EasyOrderHowToCook />,
+        10: <EasyOrderMeasure />,
+        11: <EasyOrderSeasonalOptions />,
+        12: <EasyOrderDessertFlavor />,
+        13: <EasyOrderBeverage />,
+        14: <EasyOrderConfirmOrder />
             
     }
     // need some other variables that are going to setup the questions better
