@@ -27,7 +27,6 @@ body {
 	padding-bottom: 0px;
 }
 
-
 header {
 	display: flex;
 	justify-content: center;
@@ -744,12 +743,15 @@ main {
 	text-decoration: underline;
 }
 
-.confirmed-selection-text {
-	font-size: 22px;
+.confirmed-selection-button {
+	border: 0px solid antiquewhite;
+	background-color: antiquewhite;
+	font-size: 20px;
 	line-height: 0.5px;
-	font-weight: 400;
+	font-weight: 600;
 	margin: 5px;
 	padding-top: 20px;
+	text-decoration: underline;
 }
 .user-input-text {
 	font-size: 20px;

@@ -18,6 +18,7 @@ import EasyOrderUserSelection from "./Easy-Order/Easy-Order-User-Selection"
 import EasyOrderMeasure from "./Easy-Order/Easy-Order-Measure"
 import EasyOrderHowToFlavor from "./Easy-Order/Easy-Order-How-To-Flavor"
 import EasyOrderConfirmOrder from "./Easy-Order/Easy-Order-Confirm-Order";
+import EasyOrderFulfilled from "./Easy-Order/Easy-Order-Fulfilled"
 import { useEasyOrderRenderStore } from "../../state-store/RenderStore"
 
 const EasyOrderForm = () => {
@@ -39,7 +40,8 @@ const EasyOrderForm = () => {
         11: <EasyOrderSeasonalOptions />,
         12: <EasyOrderDessertFlavor />,
         13: <EasyOrderBeverage />,
-        14: <EasyOrderConfirmOrder />
+        14: <EasyOrderConfirmOrder />,
+        15: <EasyOrderFulfilled />
             
     }
     // need some other variables that are going to setup the questions better

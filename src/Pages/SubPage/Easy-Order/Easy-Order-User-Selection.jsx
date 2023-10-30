@@ -1,9 +1,12 @@
 import React from "react";
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
+import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import { Navigate } from "react-router-dom";
 
 
 
 const EasyOrderUserSelection = () => {
+
   const culture = useEasyOrderStore((state) => state.Culture);
   const event = useEasyOrderStore((state) => state.Event);
   const headcount  = useEasyOrderStore((state) => state.HeadCount);
@@ -17,6 +20,8 @@ const EasyOrderUserSelection = () => {
   const beverage = useEasyOrderStore((state) => state.Beverage);
   const measure = useEasyOrderStore((state) => state.Measure);
   const state = useEasyOrderStore(state => state)
+  // const navigate = Navigate()
+
   const formatCoursesOptions = () => {
     if (Array.isArray(courses)) {
       // Join the selected options into a comma-separated string
@@ -39,59 +44,63 @@ const EasyOrderUserSelection = () => {
     <div className="easy-order-user-selection-container">
       <h1 className="easy-order-selection-title">Current Selections</h1>
       <div className="user-selection-container">
-        <h2 className="confirmed-selection-text">Event:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 1 })}>Event:</button>
         <>
           <span className="user-input-text">{event}</span>
         </>
-        <h2
-          className="confirmed-selection-text">Cultural:</h2>
+        <button
+          className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 2 })}>Cultural:</button>
         <>
           <span className="user-input-text">{culture}</span>
         </>
-        <h2 className="confirmed-selection-text">HeadCount:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 3 })}>HeadCount:</button>
         <>
         <span className="user-input-text">{headcount} </span>
         </>
-        <h2 className="confirmed-selection-text">Courses:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 4 })}>Courses:</button>
         <>
         <span className="user-input-text">{formatCoursesOptions()}</span>
         </>
-        <h2 className="confirmed-selection-text">Dietary:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 5 })}>Dietary:</button>
         <>
         <span className="user-input-text">{formatDietaryOptions()}</span>
         </>
-        <h2 className="confirmed-selection-text">Desired Flavor:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 6 })}>Desired Flavor:</button>
         <>
           <span className="user-input-text">{state.HowToFlavor}</span>
         </>
-        <h2 className="confirmed-selection-text">Meal Balance:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 7 })}>Meal Balance:</button>
         <>
         <span className="user-input-text">{mealBalance}</span>
         </>
-        <h2 className="confirmed-selection-text">Cook Time:</h2> 
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 8 })}>Cook Time:</button> 
         <>
         <span className="user-input-text">{cookTime}</span>
         </>
-        <h2 className="confirmed-selection-text">How To Cook:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 9 })}>How To Cook:</button>
         <>
         <span className="user-input-text">{howToCook}</span>
         </>
-        <h2 className="confirmed-selection-text">Measurement:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 10 })}>Measurement:</button>
         <>
         <span className="user-input-text">{measure}</span>
         </>
-        <h2 className="confirmed-selection-text">Seasonal:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 11 })}>Seasonal:</button>
         <>
         <span className="user-input-text">{seasonal}</span>
         </>
-        <h2 className="confirmed-selection-text">Dessert:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 12 })}>Dessert:</button>
         <>
         <span className="user-input-text">{dessert}</span>
         </>
-        <h2 className="confirmed-selection-text">Beverages:</h2>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 13 })}>Beverages:</button>
         <>
         <span className="user-input-text">{beverage}</span>
         </>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 14 })}>Review Order</button>
+        <>
+          <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 15 })}>Order Fulfillment</button>
+          </>
       </div>
       
     </div>
