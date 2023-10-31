@@ -5,7 +5,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../../Firebase/firebaseConfig"
 
 
-export default function Account() {
+export default function Profile() {
     const { user, logout } = UserAuth()
     const [error, setError] = useState(null);
     const navigate = useNavigate()

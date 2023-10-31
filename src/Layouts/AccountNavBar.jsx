@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
-export default function AccountLayout(){
+export default function AccountNavBar(){
   
     
     const activeStyles = {
@@ -12,39 +12,40 @@ export default function AccountLayout(){
   return (
       <>
       <nav className="dashboard-nav">
-        <NavLink
-          to="Profile"
-          end
-          style={({ isActive }) => isActive ? activeStyles : null}
+      <NavLink
+      to="AccountHome"
+      end
+      style={({ isActive }) => isActive ? activeStyles : null}
       >
-      Welcome
+      Account Home  
+      </NavLink>
+      <NavLink
+      to="Profile"
+      end
+      style={({ isActive }) => isActive ? activeStyles : null}
+      >
+      Profile 
       </NavLink>
 
       <NavLink
-      to="PastOrders"
+      to="PastChefSurprise"
       style={({ isActive }) => isActive ? activeStyles : null}
         >  
-      Chef Surprise
+       Past Chef Surprise
       </NavLink>
 
       <NavLink
-      to="EasyOrder"
+      to="PastEasyOrder"
       style={({ isActive }) => isActive ? activeStyles : null}
         >
       Group Order (Easy Order/ Need To Change Names)
       </NavLink>
 
       <NavLink
-      to="AdvancedOrder"
+      to="PastAdvancedOrder"
       style={({ isActive }) => isActive ? activeStyles : null}
         >
-      Advanced Order
-      </NavLink>
-      <NavLink
-      to="Pantry"
-      style={({ isActive }) => isActive ? activeStyles : null}
-        >
-      Pantry
+       Past Advanced Order
       </NavLink>
       <NavLink
       to="Account"
@@ -52,7 +53,6 @@ export default function AccountLayout(){
         >
       Account
       </NavLink>
-
       </nav>
       <Outlet />
       </>

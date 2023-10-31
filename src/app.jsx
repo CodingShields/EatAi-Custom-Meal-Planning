@@ -1,19 +1,27 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// MainPage
+import HomeLayout from './Layouts/Home-Layout.jsx';
 import Support from './Pages/Support.jsx';
 import About from './Pages/About.jsx';
 import Pantry from './Pages/Pantry.jsx';
-import HomeLayout from './Layouts/Home-Layout.jsx';
-import SignIn from './comp/SignIn.jsx';
-import SignUp from './comp/SignUp.jsx';
-import Account from './Pages/SubPage/Account.jsx';
+// Sub Pages
 import DashBoardLayout from './Layouts/Dash-Board-Layout.jsx';
 import Welcome from './Pages/SubPage/Welcome.jsx';
 import ChefSurprise from './Pages/SubPage/Chef-Surprise.jsx';
 import EasyOrder from './Pages/SubPage/Easy-Order.jsx';
 import AdvancedOrder from './Pages/SubPage/Advanced-Order.jsx';
+// Account Pages
+import AccountNavBar from './Layouts/AccountNavBar.jsx';
+import AccountHome from './Pages/SubPage/Account-Comps/AccountHome.jsx';
+import Profile from './Pages/SubPage/Profile.jsx';
+
+// Other Comps and Imports
 import { AuthContextProvider } from './Context/AuthContext.jsx';
 import ProtectedRoute from './comp/ProtectedRoute.jsx';
+import SignIn from './comp/SignIn.jsx';
+import SignUp from './comp/SignUp.jsx';
 import './index.css';
 
 function App() {
@@ -33,7 +41,12 @@ function App() {
                   <Route path="EasyOrder" element={<EasyOrder />} />
                   <Route path="AdvancedOrder" element={<AdvancedOrder />} />
                   <Route path="Pantry" element={<Pantry />} />
-                  <Route path="Account" element={<Account />} />
+                  <Route path="DashBoard" element={<AccountNavBar />} >
+                  <Route path="AccountHome" element={<AccountHome />} />
+                  <Route path="Profile" element={<Profile />} />  
+                  
+                
+                </Route>
                 </Route>
               </Route>
             </Route>
