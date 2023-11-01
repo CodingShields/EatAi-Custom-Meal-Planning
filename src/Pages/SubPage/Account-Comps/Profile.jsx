@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react"
-import { UserAuth } from "../../Context/AuthContext"
+import { UserAuth } from "../../../Context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { collection, doc, getDoc } from "firebase/firestore"; 
-import { db } from "../../Firebase/firebaseConfig"
+import { db } from "../../../Firebase/firebaseConfig"
 
 
 export default function Profile() {

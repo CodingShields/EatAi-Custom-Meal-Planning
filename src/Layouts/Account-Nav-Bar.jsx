@@ -11,9 +11,9 @@ export default function AccountNavBar(){
   }
   return (
       <>
-      <nav className="dashboard-nav">
+      <nav className="account-nav">
       <NavLink
-      to="AccountHome"
+      to="/MembersArea/AccountHome"
       end
       style={({ isActive }) => isActive ? activeStyles : null}
       >
@@ -28,30 +28,17 @@ export default function AccountNavBar(){
       </NavLink>
 
       <NavLink
-      to="PastChefSurprise"
+      to="EasyOrderPantry"
       style={({ isActive }) => isActive ? activeStyles : null}
-        >  
-       Past Chef Surprise
+        >
+      Easy Order Pantry
       </NavLink>
 
       <NavLink
-      to="PastEasyOrder"
+      to="AdvancedOrderPantry"
       style={({ isActive }) => isActive ? activeStyles : null}
         >
-      Group Order (Easy Order/ Need To Change Names)
-      </NavLink>
-
-      <NavLink
-      to="PastAdvancedOrder"
-      style={({ isActive }) => isActive ? activeStyles : null}
-        >
-       Past Advanced Order
-      </NavLink>
-      <NavLink
-      to="Account"
-      style={({ isActive }) => isActive ? activeStyles : null}
-        >
-      Account
+      Advanced Order Pantry
       </NavLink>
       </nav>
       <Outlet />

@@ -31,7 +31,7 @@ export default function DashBoardLayout(){
       to="EasyOrder"
       style={({ isActive }) => isActive ? activeStyles : null}
         >
-      Group Order (Easy Order/ Need To Change Names)
+      Easy Order
       </NavLink>
 
       <NavLink
@@ -47,12 +47,11 @@ export default function DashBoardLayout(){
       Pantry
       </NavLink>
       <NavLink
-      to="Account"
+      to="AccountHome"
       style={({ isActive }) => isActive ? activeStyles : null}
         >
       Account
       </NavLink>
-
       </nav>
       <Outlet />
       </>

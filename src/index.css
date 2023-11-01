@@ -1191,3 +1191,145 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	margin-bottom: 10px;
 	text-decoration: underline;
 }
+
+/*  Account Nav Bar */
+.account-nav {
+	display: flex;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-top: 5px;
+}
+.account-nav a {
+	text-decoration: none;
+	color: #4d4d4d;
+	font-weight: 500;
+	padding: 5px 20px;
+	font-size: 25px;
+}
+
+.account-nav a:hover {
+	color: #161616;
+	text-decoration: underline;
+	font-weight: 600;
+}
+
+/* Account Pages */
+
+/* Account Home */
+
+/* Profile */
+
+/* Easy Order Pantry */
+.easy-order-pantry-container {
+	width: auto;
+	height: auto;
+}
+.easy-order-pantry-details-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.easy-order-pantry-date-container {
+	display: flex;
+	width: 200px;
+	flex-direction: column;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
+}
+
+.easy-order-pantry-menu-item-container {
+	display: flex;
+	width: 250px;
+	flex-direction: column;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
+}
+
+.easy-order-pantry-score-container {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
+}
+
+.easy-order-star-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.easy-order-score-star {
+	height: 60px;
+	width: 60px;
+}
+
+.easy-order-pantry-delete-container {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+.easy-order-pantry-delete-btn {
+	height: 40px;
+	width: 100px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+}
+/* Advanced Order Pantry */
+.advanced-order-pantry-container {
+	width: auto;
+	height: auto;
+}
+.advanced-order-pantry-details-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.advanced-order-pantry-date-container {
+	display: flex;
+	width: 200px;
+	flex-direction: column;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
+}
+
+.advanced-order-pantry-menu-item-container {
+	display: flex;
+	width: 250px;
+	flex-direction: column;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
+}
+
+.advanced-order-pantry-score-container {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
+}
+
+.advanced-order-star-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.advanced-order-score-star {
+	height: 60px;
+	width: 60px;
+}
+
+.advanced-order-pantry-delete-container {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+.advanced-order-pantry-delete-btn {
+	height: 40px;
+	width: 100px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+}
