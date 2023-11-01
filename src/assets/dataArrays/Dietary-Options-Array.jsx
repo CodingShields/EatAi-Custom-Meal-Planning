@@ -4,14 +4,14 @@ const DietaryOptionsArray = [
   { id: nanoid(), name: 'No Dietary Restrictions' },
   { id: nanoid(), name: 'Mediterranean' },
   { id: nanoid(), name: 'Paleo' },
-  { id: nanoid(), name: 'Halal' },
-  { id: nanoid(), name: 'Kosher' },
-  { id: nanoid(), name: 'Nut Allergy' },
-  { id: nanoid(), name: 'Shellfish Allergy' },
-  { id: nanoid(), name: 'Lactose Intolerance' },
-  { id: nanoid(), name: 'Gluten-Free' },
-  { id: nanoid(), name: 'Vegetarian' },
-  { id: nanoid(), name: 'Vegan' }
+  { id: nanoid(), name: 'Just Halal' },
+  { id: nanoid(), name: 'Just Kosher' },
+  { id: nanoid(), name: 'No Nuts' },
+  { id: nanoid(), name: 'No Shellfish' },
+  { id: nanoid(), name: 'No Lactose' },
+  { id: nanoid(), name: 'No Gluten' },
+  { id: nanoid(), name: 'Just Vegetarian' },
+  { id: nanoid(), name: 'Just Vegan' }
 ];
 
 export default DietaryOptionsArray

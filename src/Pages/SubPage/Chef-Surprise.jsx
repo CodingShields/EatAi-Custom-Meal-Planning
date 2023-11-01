@@ -19,7 +19,7 @@ export default function ChefSurprise() {
 	const [loading, setLoading] = useState(false);
 	const [renderMenu, setRenderMenu] = useState(false);
 
-	const apiKey = "";
+	const apiKey = "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";
 
 	async function handleOrder() {
 		setLoading(true);

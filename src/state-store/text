@@ -1,0 +1,12 @@
+
+I would like the prompt to say, " I want you to think like a 5 star chef cooking for ${event} event with the ${culture} thoughts to the menu. There will be ${headcount} guests with these courses to think about ${courses}. 
+There are Dietary preferences of ${dietary}. The menu you should reflect the dietary preference in the ${courses}.
+The main course if listed should have a ${howtoflavor} twist.
+Each menu item would like a desired cook time of ${cooktime}.
+The preferred way to cook would be ${howtocook}.
+The dessert should have a flavor of ${Dessert}
+All courses should have ${Seasonal} seasonal twist.
+There should be ${beverages}.
+The menu should be diverse within the limits of the request while keeping the preferences as a priority.
+There should be directions on how to cook as desired with instructions of measurement in ${measure}.
+Please add a short summary of the entire request.

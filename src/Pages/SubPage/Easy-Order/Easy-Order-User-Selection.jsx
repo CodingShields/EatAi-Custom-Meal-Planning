@@ -12,6 +12,7 @@ const EasyOrderUserSelection = () => {
   const headcount  = useEasyOrderStore((state) => state.HeadCount);
   const courses = useEasyOrderStore((state) => state.Courses);
   const dietary = useEasyOrderStore((state) => state.Dietary);
+  const howToFlavor = useEasyOrderStore((state) => state.HowToFlavor);
   const mealBalance = useEasyOrderStore((state) => state.Balance);
   const cookTime = useEasyOrderStore((state) => state.CookTime);
   const howToCook = useEasyOrderStore((state) => state.HowToCook);
@@ -67,7 +68,7 @@ const EasyOrderUserSelection = () => {
         </>
         <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 6 })}>Desired Flavor:</button>
         <>
-          <span className="user-input-text">{state.HowToFlavor}</span>
+          <span className="user-input-text">{howToFlavor}</span>
         </>
         <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 7 })}>Meal Balance:</button>
         <>
