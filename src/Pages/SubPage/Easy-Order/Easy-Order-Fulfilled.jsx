@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
 import cooking from "../../../assets/images/cooking.svg"
-import db from "../../../firebase"
+import {nanoid} from "nanoid"
 
 const EasyOrderFulfilled = () => {
 
@@ -23,21 +23,23 @@ const EasyOrderFulfilled = () => {
     const beverage = useEasyOrderStore((state) => state.Beverage);
     const measure = useEasyOrderStore((state) => state.Measure);
 
-    const apiKey = "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"
+    const apiKey = "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"
     
     useEffect(() => {
     const fetchData = async () => {
         const test = ` I want you to think like a 5 star chef cooking for ${event} event with the ${culture} thoughts to the menu. There will be ${headcount} guests with these courses to think about ${courses}. 
                         There are Dietary preferences of ${dietary}. The menu you should reflect the dietary preference in the ${courses}.
-                        The main course if listed should have a ${flavor} twist and the meal should be
+                        The main course if listed should have a ${flavor} twist and the meal should be have a layout of ${mealBalance}.
                         Each menu item would like a desired cook time of ${cookTime}.
                         The preferred way to cook would be ${howToCook}.
                         The dessert should have a flavor of ${dessert}
                         All courses should have ${seasonal} seasonal twist.
                         There should be ${beverage}.
-                        The menu should be diverse within the limits of the request while keeping the preferences as a priority.
-                        There should be directions on how to cook as desired with instructions of measurement in ${measure}.
-                        Please add a short summary of the entire request.`;
+                        There should be directions on how to cook as desired with instructions of measurement in ${measure} format.
+                        The cooking instructions should be in a step by step format for each dish on preparation and cooking for temperature, time and measurement of each ingredient.
+                        There should be a grocery list should reflect the exact quantity of food needed to buy to match ${headcount} guests.
+                        Your response should be a "Title" for the menu, with a very short summary of the menu.
+                        `;
         const data = {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: test }],
@@ -69,15 +71,7 @@ const EasyOrderFulfilled = () => {
     fetchData();
 }, []);
 
-    console.log(response);
-    
-
-    const handleSaveOrder = () => {
-        
-        const userDb = 
-
-    }
-
+    console.log(response)
 
 
     return (

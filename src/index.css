@@ -746,18 +746,24 @@ main {
 .confirmed-selection-button {
 	border: 0px solid antiquewhite;
 	background-color: antiquewhite;
-	font-size: 20px;
+	font-size: 24px;
 	line-height: 0.5px;
-	font-weight: 600;
+	font-weight: 400;
 	margin: 5px;
 	padding-top: 20px;
 	text-decoration: underline;
 }
+
+.confirmed-selection-button:hover {
+	color: blue;
+	font-weight: 600;
+	font-size: 26px;
+}
 .user-input-text {
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 400;
-	color: lightcoral;
-	text-shadow: 0.75px 0.75px 0.75px gray;
+	color: black;
+	/* text-shadow: 0.75px 0.75px 0.75px gray; */
 }
 
 .easy-order-begin-btn {
@@ -1264,18 +1270,30 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	width: 60px;
 }
 
-.easy-order-pantry-delete-container {
+.easy-order-pantry-btn-container {
 	display: flex;
 	flex-direction: row;
 	align-items: flex-end;
+	border-bottom: 1px solid black;
+	margin-bottom: 5px;
 }
 
-.easy-order-pantry-delete-btn {
+.easy-order-pantry-btn {
 	height: 40px;
 	width: 100px;
-	margin-bottom: 20px;
+	font-weight: 600;
 	margin-left: 20px;
+	margin-bottom: 20px;
+	border: 0px none antiquewhite;
+	background-color: #fff7ed;
 }
+
+.easy-order-pantry-btn:hover {
+	color: blue;
+	text-decoration: underline;
+	font-size: 20px;
+}
+
 /* Advanced Order Pantry */
 .advanced-order-pantry-container {
 	width: auto;
@@ -1319,6 +1337,11 @@ input[type="range"]:hover::-webkit-slider-thumb {
 .advanced-order-score-star {
 	height: 60px;
 	width: 60px;
+}
+
+.advanced-order-score-star:hover {
+	height: 80px;
+	width: 80px;
 }
 
 .advanced-order-pantry-delete-container {

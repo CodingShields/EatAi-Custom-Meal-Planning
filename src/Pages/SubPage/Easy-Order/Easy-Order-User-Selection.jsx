@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 
 const EasyOrderUserSelection = () => {
 
+
   const culture = useEasyOrderStore((state) => state.Culture);
   const event = useEasyOrderStore((state) => state.Event);
   const headcount  = useEasyOrderStore((state) => state.HeadCount);
@@ -20,8 +21,6 @@ const EasyOrderUserSelection = () => {
   const seasonal = useEasyOrderStore((state) => state.Seasonal);
   const beverage = useEasyOrderStore((state) => state.Beverage);
   const measure = useEasyOrderStore((state) => state.Measure);
-  const state = useEasyOrderStore(state => state)
-  // const navigate = Navigate()
 
   const formatCoursesOptions = () => {
     if (Array.isArray(courses)) {
@@ -45,7 +44,8 @@ const EasyOrderUserSelection = () => {
     <div className="easy-order-user-selection-container">
       <h1 className="easy-order-selection-title">Current Selections</h1>
       <div className="user-selection-container">
-        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 1 })}>Event:</button>
+        <button
+          className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 1 })}>Event:</button>
         <>
           <span className="user-input-text">{event}</span>
         </>

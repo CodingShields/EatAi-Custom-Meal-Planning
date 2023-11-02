@@ -30,11 +30,12 @@ export default function EasyOrderPantry() {
                         <img src={star} className="easy-order-score-star" />
                         <img src={star} className="easy-order-score-star" />
                         <img src={star} className="easy-order-score-star" />
-                        <img src={star} className="easy-order-score-star" />
                     </div>    
                 </div>
-                <div className="easy-order-pantry-delete-container">
-                        <button className="easy-order-pantry-delete-btn">Delete</button>
+                <div className="easy-order-pantry-btn-container">
+                    <button className="easy-order-pantry-btn">Delete</button>
+                    <button className="easy-order-pantry-btn">Download</button>
+                    <button className="easy-order-pantry-btn">Share</button>
                     </div>
             </div>
             

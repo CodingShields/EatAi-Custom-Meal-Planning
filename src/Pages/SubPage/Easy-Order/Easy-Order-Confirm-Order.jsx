@@ -19,6 +19,7 @@ const EasyOrderConfirmOrder = () => {
                     If you see anything you would like to change,
                     just click on the Option Title to go back and change.
                     If You are ready to send it off to the Chef, just click "Order Now".</h2>
+                <h1> Need To Add Option to exclude previous searches</h1>
                 <button onClick ={()=>increaseStep()}> Order Now</button>
             </div>
         </>
