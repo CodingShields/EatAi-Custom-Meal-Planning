@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
-import cooking from "../../../assets/images/cooking.svg"
-import {nanoid} from "nanoid"
-
+// import cooking from "../../../assets/images/cooking.svg"
+import { nanoid } from "nanoid"
+import { db, auth } from "../../../Firebase/fireBaseConfig"
+import { doc, getDoc, query, collection, onSnapshot } from "firebase/firestore";
+import {UserAuth} from "../../../Context/AuthContext"
 const EasyOrderFulfilled = () => {
 
     const [response, setResponse] = useState([])
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
     const state = useEasyOrderStore(state => state)
 
     const culture = useEasyOrderStore((state) => state.Culture);
@@ -22,7 +24,7 @@ const EasyOrderFulfilled = () => {
     const seasonal = useEasyOrderStore((state) => state.Seasonal);
     const beverage = useEasyOrderStore((state) => state.Beverage);
     const measure = useEasyOrderStore((state) => state.Measure);
-
+    const user = UserAuth();
     const apiKey = "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"
     
     useEffect(() => {
@@ -73,12 +75,38 @@ const EasyOrderFulfilled = () => {
 
     console.log(response)
 
+    const handleSave = async () => {
+        const userDocRef = doc(db, "users", user.user.uid);
+        const unsubscribe = onSnapshot(userDocRef, (doc) => {
+            console.log("Current data: ", doc.data());
+        });
+
+        console.log(userDocRef);
+            console.log(user.user.uid);
+}
+    // const userDocRef = doc(db, "users", user.uid);
+
+    // try {
+    //     const docSnapshot = await getDoc(userDocRef);
+
+    //     if (docSnapshot.exists()) {
+    //         // Get the document data and log it
+    //         const userData = docSnapshot.data();
+    //         console.log(userData);
+    //     } else {
+    //         console.log("Document does not exist");
+    //     }
+    // } catch (error) {
+    //     console.error("Error getting document:", error);
+    // }
+
+
 
     return (
         <>
             <h1> test </h1>
-            {loading? <img src={cooking} className="cooking-image" /> : ""}
-            <button> Save To Pantry</button>
+            {/* {loading? <img src={cooking} className="cooking-image" /> : ""} */}
+            <button onClick={handleSave}> Save To Pantry</button>
             <h1 style={{
                 fontSize: "20px",
             }}>{response}</h1>

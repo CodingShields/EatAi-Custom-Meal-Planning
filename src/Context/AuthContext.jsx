@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile} from "firebase/auth";
-import { auth, db} from "../Firebase/firebaseConfig"
+import { auth, db} from "../Firebase/fireBaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
 import { setDoc, doc } from "firebase/firestore"; 
+import { nanoid } from "nanoid";
 
 const UserContext= createContext();
 
@@ -22,6 +23,7 @@ export const AuthContextProvider = ({ children }) => {
       });
         const userDocRef = doc(db, "users", authUser.user.uid);
       await setDoc(userDocRef, {
+        profile :{
         first: firstName,
         last: lastName,
         email: email,
@@ -30,7 +32,21 @@ export const AuthContextProvider = ({ children }) => {
         disclaimer: disclaimerState,
         signUpDate: new Date(),
         uid: authUser.user.uid
-      });
+        },
+        easyOrderPantry: {
+          date: "",
+          menuItem: "",
+          data:"",
+          score: ""
+        },
+        advancedOrderPantry: {
+          date: "",
+          menuItem: "",
+          data:"",
+          score: ""
+        },
+      },
+      );
         console.log("User document added successfully");
 
         } catch (error) {
