@@ -31,16 +31,17 @@ const EasyOrderFulfilled = () => {
     const beverage = useEasyOrderStore((state) => state.Beverage);
     const measure = useEasyOrderStore((state) => state.Measure);
     const user = UserAuth();
-    const apiKey = "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"
+    const apiKey = "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"
     
     useEffect(() => {
         const fetchData = async () => {
-        const persona = "I want you to think like a 5 Star Chef and create a menu for me."
-        const title = `I need you to title the menu based on the flavor ${flavor} and dietary preferences ${dietary}.`
-        const menu = `Create the menu based on the ${courses} courses.`
-        const summary = `Create a summary of the menu in less than 20 words`
-        const groceryList = `Create a grocery list for the menu based on ${headcount} people.`
-        const instructions = `Create instructions on food preparation and cooking for the menu based on ${cookTime} minutes, ${mealBalance} and ${measure} measurements`
+            
+            const persona = "I want you to think like a 5 Star Chef and create a menu for me."
+            const title = `I need you to title the menu based on the flavor ${flavor} and dietary preferences ${dietary}.`
+            const menu = `Create the menu based on the ${courses} courses.`
+            const summary = `Create a summary of the menu in less than 20 words`
+            const groceryList = `Create a grocery list for the menu based on ${headcount} people.`
+            const instructions = `Create instructions on food preparation and cooking for the menu based on ${cookTime} minutes, ${mealBalance} and ${measure} measurements`
 
         const data = {
             model: "gpt-3.5-turbo",
@@ -84,23 +85,23 @@ const EasyOrderFulfilled = () => {
 
     console.log(response)
 
-    const handleSave = async () => {
-        const userDocRef = doc(db, "users", user.user.uid);
-        const unsubscribe = onSnapshot(userDocRef, (doc) => {
-            console.log("Current data: ", doc.data());
-        });
+//     const handleSave = async () => {
+//         const userDocRef = doc(db, "users", user.user.uid);
+//         const unsubscribe = onSnapshot(userDocRef, (doc) => {
+//             console.log("Current data: ", doc.data());
+//         });
 
-        console.log(userDocRef);
-            console.log(user.user.uid);
-}
+//         console.log(userDocRef);
+//             console.log(user.user.uid);
+// }
 
     return (
         <>
             <h1> test </h1>
             {/* {loading? <img src={cooking} className="cooking-image" /> : ""} */}
-            <button onClick={handleSave}> Save To Pantry</button>
+            {/* <button onClick={handleSave}> Save To Pantry</button> */}
             <h1 style={{
-                fontSize: "20px",
+                fontSize: "14px",
             }}>{response}</h1>
         </>       
     )
