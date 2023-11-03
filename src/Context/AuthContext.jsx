@@ -23,30 +23,18 @@ export const AuthContextProvider = ({ children }) => {
       });
         const userDocRef = doc(db, "users", authUser.user.uid);
       await setDoc(userDocRef, {
-        profile :{
-        first: firstName,
-        last: lastName,
-        email: email,
-        phone: phone,
-        membership: false,
-        disclaimer: disclaimerState,
-        signUpDate: new Date(),
-        uid: authUser.user.uid
-        },
-        easyOrderPantry: {
-          date: "",
-          menuItem: "",
-          data:"",
-          score: ""
-        },
-        advancedOrderPantry: {
-          date: "",
-          menuItem: "",
-          data:"",
-          score: ""
-        },
-      },
-      );
+  profile: {
+    first: firstName,
+    last: lastName,
+    email: email,
+    phone: phone,
+    membership: false,
+    disclaimer: disclaimerState,
+    signUpDate: new Date(),
+    uid: authUser.user.uid
+  }
+});
+
         console.log("User document added successfully");
 
         } catch (error) {

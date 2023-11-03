@@ -7,8 +7,14 @@ import { doc, getDoc, query, collection, onSnapshot } from "firebase/firestore";
 import {UserAuth} from "../../../Context/AuthContext"
 const EasyOrderFulfilled = () => {
 
-    const [response, setResponse] = useState([])
-    // const [loading, setLoading] = useState(true)
+    const [response, setResponse] = useState({
+        title: "",
+        summary: "",
+        menu: "",
+        groceryList: "",
+        instructions: "",
+    })
+    const [loading, setLoading] = useState(true)
     const state = useEasyOrderStore(state => state)
 
     const culture = useEasyOrderStore((state) => state.Culture);
@@ -25,26 +31,27 @@ const EasyOrderFulfilled = () => {
     const beverage = useEasyOrderStore((state) => state.Beverage);
     const measure = useEasyOrderStore((state) => state.Measure);
     const user = UserAuth();
-    const apiKey = "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"
+    const apiKey = "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"
     
     useEffect(() => {
-    const fetchData = async () => {
-        const test = ` I want you to think like a 5 star chef cooking for ${event} event with the ${culture} thoughts to the menu. There will be ${headcount} guests with these courses to think about ${courses}. 
-                        There are Dietary preferences of ${dietary}. The menu you should reflect the dietary preference in the ${courses}.
-                        The main course if listed should have a ${flavor} twist and the meal should be have a layout of ${mealBalance}.
-                        Each menu item would like a desired cook time of ${cookTime}.
-                        The preferred way to cook would be ${howToCook}.
-                        The dessert should have a flavor of ${dessert}
-                        All courses should have ${seasonal} seasonal twist.
-                        There should be ${beverage}.
-                        There should be directions on how to cook as desired with instructions of measurement in ${measure} format.
-                        The cooking instructions should be in a step by step format for each dish on preparation and cooking for temperature, time and measurement of each ingredient.
-                        There should be a grocery list should reflect the exact quantity of food needed to buy to match ${headcount} guests.
-                        Your response should be a "Title" for the menu, with a very short summary of the menu.
-                        `;
+        const fetchData = async () => {
+        const persona = "I want you to think like a 5 Star Chef and create a menu for me."
+        const title = `I need you to title the menu based on the flavor ${flavor} and dietary preferences ${dietary}.`
+        const menu = `Create the menu based on the ${courses} courses.`
+        const summary = `Create a summary of the menu in less than 20 words`
+        const groceryList = `Create a grocery list for the menu based on ${headcount} people.`
+        const instructions = `Create instructions on food preparation and cooking for the menu based on ${cookTime} minutes, ${mealBalance} and ${measure} measurements`
+
         const data = {
             model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: test }],
+            messages: [
+                { role: "user", content: persona },
+                { role: "user", content: title },
+                { role: "user", content: menu },
+                { role: "user", content: summary },
+                { role: "user", content: groceryList },
+                { role: "user", content: instructions },
+            ],
             temperature: 0.7,
         };
         
@@ -60,8 +67,10 @@ const EasyOrderFulfilled = () => {
             const result = await response.json();
             
             if (response.ok) {
-                setLoading(false);
+                
+                // setLoading(false);
                 setResponse(result.choices[0].message.content);
+                console.log(data);
             } else {
                 console.error(result);
             }
@@ -84,23 +93,6 @@ const EasyOrderFulfilled = () => {
         console.log(userDocRef);
             console.log(user.user.uid);
 }
-    // const userDocRef = doc(db, "users", user.uid);
-
-    // try {
-    //     const docSnapshot = await getDoc(userDocRef);
-
-    //     if (docSnapshot.exists()) {
-    //         // Get the document data and log it
-    //         const userData = docSnapshot.data();
-    //         console.log(userData);
-    //     } else {
-    //         console.log("Document does not exist");
-    //     }
-    // } catch (error) {
-    //     console.error("Error getting document:", error);
-    // }
-
-
 
     return (
         <>

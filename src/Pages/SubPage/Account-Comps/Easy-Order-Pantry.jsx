@@ -55,19 +55,23 @@ export default function EasyOrderPantry() {
                 <h3>Menu Item</h3>
                 <h3>Score</h3>
                 </div>
-                    {easyOrderPantry.map((item) => {
-                        return (
+                    {/* {easyOrderPantry.map((item) => {
+                        return ( */}
                             <div
-                                key={item[0]}
+                                // key={item[0]}
                                 className="easy-order-pantry-details-container">
                                 <div className="easy-order-pantry-date-container">
-                                    <h3 >{item.easyOrderPantry.date}</h3>
+                                    <h3 >
+                                        {/* {item.easyOrderPantry.date} */}
+                                    </h3>
                                 </div>
                                 <div className="easy-order-pantry-menu-item-container">
-                                    <h3>{item.easyOrderPantry.menuItem}</h3>
+                                    <h3>
+                                        {/* {item.easyOrderPantry.menuItem} */}
+                                    </h3>
                                 </div>
                                 <div className="easy-order-pantry-score-container">
-                                    {renderStars(item.easyOrderPantry.score)}
+                                    {/* {renderStars(item.easyOrderPantry.score)} */}
                                 </div>
                                 <div className="easy-order-pantry-btn-container">
                                 <button className="easy-order-pantry-btn">Delete</button>
@@ -76,8 +80,7 @@ export default function EasyOrderPantry() {
                                 </div>
                                 
                                 </div>
-                        )})
-                    }
+ 
                     
              
                     
