@@ -38,7 +38,6 @@ header .site-logo {
 	color: #4d4d4d;
 	font-weight: 900;
 	font-size: 70px;
-	border: 1px solid grey;
 	margin-right: 5%;
 }
 header .site-logo:hover {
@@ -83,6 +82,7 @@ footer {
 	font-weight: 500;
 	font-size: 36px;
 	width: 100%;
+	position: bottom;
 }
 
 .link-button:hover {
@@ -92,8 +92,8 @@ footer {
 main {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	/* justify-content: center;
+	align-items: center; */
 	margin: auto;
 }
 .dashboard-nav {
@@ -1201,7 +1201,7 @@ input[type="range"]:hover::-webkit-slider-thumb {
 /*  Account Nav Bar */
 .account-nav {
 	display: flex;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	margin-left: 20px;
 	margin-top: 5px;
 }
@@ -1227,42 +1227,72 @@ input[type="range"]:hover::-webkit-slider-thumb {
 
 /* Easy Order Pantry */
 .easy-order-pantry-container {
-	width: auto;
+	width: 700px;
 	height: auto;
+	justify-content: flex-start;
+	align-items: flex-start;
+	text-align: center;
+	margin-top: 0px;
+	margin-left: 125px;
+	padding-top: 0px;
+}
+
+.easy-order-pantry-title-container {
+	display: flex;
+	width: 600px;
+	flex-direction: row;
+	/* border-bottom: 1px solid black; */
+	margin-right: 40px;
+	margin-left: 20px;
+	justify-content: flex-start;
+	padding-left: 30px;
+	gap: 150px;
 }
 .easy-order-pantry-details-container {
 	display: flex;
+	width: 600px;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-start;
+	/* border-bottom: 1px solid black; */
+	margin-bottom: 5px;
 }
+
 .easy-order-pantry-date-container {
 	display: flex;
-	width: 200px;
-	flex-direction: column;
-	border-bottom: 1px solid black;
+	margin-left: 20px;
+	flex-direction: row;
+	justify-content: flex-start;
 	margin-bottom: 5px;
+	border-left: 1px solid black;
+	padding-right: 115px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	background-color: antiquewhite;
+	border-radius:20px 0px 0px 20px;
+	padding-left: 20px;
 }
 
 .easy-order-pantry-menu-item-container {
 	display: flex;
-	width: 250px;
-	flex-direction: column;
-	border-bottom: 1px solid black;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding-right: 140px;
 	margin-bottom: 5px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	background-color: antiquewhite;
+	padding-left: 20px;
 }
 
 .easy-order-pantry-score-container {
 	display: flex;
-	flex-direction: column;
-	border-bottom: 1px solid black;
-	margin-bottom: 5px;
-}
-
-.easy-order-star-container {
-	display: flex;
 	flex-direction: row;
-	align-items: center;
+	justify-content: flex-start;
+	padding-right: 40px;
 	margin-bottom: 5px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	background-color: antiquewhite;
 }
 
 .easy-order-score-star {
@@ -1273,25 +1303,40 @@ input[type="range"]:hover::-webkit-slider-thumb {
 .easy-order-pantry-btn-container {
 	display: flex;
 	flex-direction: row;
-	align-items: flex-end;
-	border-bottom: 1px solid black;
+	justify-content: center;
+	align-items: center;
+	padding-top: 10px;
+	padding-right: 10px;
 	margin-bottom: 5px;
+	border-right: black 1px solid;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	background-color: antiquewhite;
+	border-radius:0px 20px 20px 0px;
 }
 
 .easy-order-pantry-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 40px;
-	width: 100px;
+	width: 120px;
 	font-weight: 600;
-	margin-left: 20px;
 	margin-bottom: 20px;
-	border: 0px none antiquewhite;
-	background-color: #fff7ed;
+	border: 1px solid black;
+	border-radius: 1000px;
+	background-color: antiquewhite;
+	cursor: pointer;
+	margin-right: 10px;
+	box-shadow: grey 3px 1px 1px;
 }
 
 .easy-order-pantry-btn:hover {
 	color: blue;
 	text-decoration: underline;
-	font-size: 20px;
+	border: 2px solid blue;
+	font-size: 18px;
+	box-shadow: grey 4px 1px 1px;
 }
 
 /* Advanced Order Pantry */
@@ -1302,36 +1347,11 @@ input[type="range"]:hover::-webkit-slider-thumb {
 .advanced-order-pantry-details-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-}
-.advanced-order-pantry-date-container {
-	display: flex;
-	width: 200px;
-	flex-direction: column;
-	border-bottom: 1px solid black;
-	margin-bottom: 5px;
-}
-
-.advanced-order-pantry-menu-item-container {
-	display: flex;
-	width: 250px;
-	flex-direction: column;
-	border-bottom: 1px solid black;
-	margin-bottom: 5px;
-}
-
-.advanced-order-pantry-score-container {
-	display: flex;
-	flex-direction: column;
-	border-bottom: 1px solid black;
-	margin-bottom: 5px;
-}
-
-.advanced-order-star-container {
-	display: flex;
+	width: 600px;
 	flex-direction: row;
-	align-items: center;
-	margin-bottom: 5px;
+	justify-content: space-evenly;
+	border-bottom: 1px solid black;
+	margin: 60px;
 }
 
 .advanced-order-score-star {
@@ -1342,12 +1362,6 @@ input[type="range"]:hover::-webkit-slider-thumb {
 .advanced-order-score-star:hover {
 	height: 80px;
 	width: 80px;
-}
-
-.advanced-order-pantry-delete-container {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
 }
 
 .advanced-order-pantry-delete-btn {
