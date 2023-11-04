@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import { UserAuth } from "../../../Context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { collection, doc, getDoc } from "firebase/firestore"; 
-import { db } from "../../../Firebase/firebaseConfig"
+import { db } from "../../../Firebase/fireBaseConfig"
 
 
 export default function Profile() {
@@ -42,13 +42,13 @@ useEffect(() => {
         console.log("Document data:", docSnap.data());
 
         setProfileData({
-            first: docSnap.data().first,
-            last: docSnap.data().last,
-            uid: docSnap.data().uid,
-            email: docSnap.data().email,
-            phone: docSnap.data().phone,
-            disclaimer: docSnap.data().disclaimer,
-            signUpDate: docSnap.data().signUpDate.toDate().toDateString(),
+            first: docSnap.data().profile.first,
+            last: docSnap.data().profile.last,
+            uid: docSnap.data().profile.uid,
+            email: docSnap.data().profile.email,
+            phone: docSnap.data().profile.phone,
+            disclaimer: docSnap.data().profile.disclaimer,
+            signUpDate: docSnap.data().profile.signUpDate.toDate().toDateString(),
             
         });
           ;
