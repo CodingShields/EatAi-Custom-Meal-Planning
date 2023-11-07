@@ -35,7 +35,6 @@ const EasyOrderFulfilled = () => {
     
     useEffect(() => {
         const apiKey = "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"
-        const systemPrompt = "Return each user prompt data in its own object. "
         const personaPrompt = "I want you to think like a 5 star chef" 
         const titlePrompt = `I want you to create a menu based of the user input ${flavor} flavor. It should have a Title and a Summary.`
         const eventPrompt = `This menu is for a ${event}.`
@@ -43,8 +42,8 @@ const EasyOrderFulfilled = () => {
         const coursesPrompt = `The menu should include a ${courses}.` 
         const mealBalancePrompt = `The menu should have ${mealBalance}.`
         const dietaryPrompt = `The menu should have a dietary preference of ${dietary}.`
-        const headcountPrompt = `There should be a detailed grocery list on how much food to buy that reflects ${headcount} people attending.`
-        const instructionsPrompt = `There should be a step by step instructions in how to cook, how long to cook, what temps to cook, how to prepare all food prior to cooking, and how to serve. All instructions should be in ${measure} measurement.`    
+        const groceryPrompt = `Grocery: should be a detailed grocery list on quantities  and amounts of foods and ingredients needed  to cook for ${headcount} people.`
+        const instructionsPrompt = `Instructions: should include detailed step by step instructions on how to cook, how long to cook, what temps to cook, how to prepare all food prior to cooking, and how to serve. All instructions should be in ${measure} measurement.`    
         const promptsToInclude = [];
 
         if (culturePrompt !== "none") {
@@ -70,12 +69,10 @@ const EasyOrderFulfilled = () => {
         } else {
             promptsToInclude.push(dietaryPrompt);
         }
-        if (headcountPrompt) {
-            promptsToInclude.push(headcountPrompt);
-        }
-       
-         const fetchData = async () => {
 
+
+        const fetchData = async () => {
+            
         const data = {
             model: "gpt-3.5-turbo",
             messages: [
@@ -83,7 +80,8 @@ const EasyOrderFulfilled = () => {
                 { role: "user", content: personaPrompt },
                 { role: "user", content: titlePrompt},
                 { role: "user", content: promptsToInclude.join(" ") },
-                { role: "user" , content: instructionsPrompt},
+                { role: "user", content: instructionsPrompt },
+                { role: "user", content: groceryPrompt },
             ],
             temperature: 0.7,
         };
@@ -98,25 +96,25 @@ const EasyOrderFulfilled = () => {
                 body: JSON.stringify(data),
             });
             const result = await response.json();
-
+            console.log("result", result);
              if (response.ok) {
                 const messageContent = result.choices[0].message.content;
 
                 // Use regular expressions to extract information
-                const titleMatch = messageContent.match(/Title:(.*?)Summary:/s);
-                const summaryMatch = messageContent.match(/Summary:(.*?)Menu:/s);
-                const menuMatch = messageContent.match(/Menu:(.*?)Grocery List:/s);
-                const groceryListMatch = messageContent.match(/Grocery List:(.*?)Instructions:/s);
-                const instructionsMatch = messageContent.match(/Instructions:(.*?)$/s);
+                const titleMatch = messageContent.match(/Title:/s);
+                const summaryMatch = messageContent.match(/Summary:/s);
+                const menuMatch = messageContent.match(/Menu:/s);
+                const groceryListMatch = messageContent.match(/Grocery:/s);
+                const instructionsMatch = messageContent.match(/Instructions:/s);
 
                 // Extract the matched content and trim whitespace
-                const titleResponse = titleMatch ? titleMatch[1].trim() : "";
-                const summaryResponse = summaryMatch ? summaryMatch[1].trim() : "";
-                const menuResponse = menuMatch ? menuMatch[1].trim() : "";
-                const groceryListResponse = groceryListMatch ? groceryListMatch[1].trim() : "";
-                const instructionsResponse = instructionsMatch ? instructionsMatch[1].trim() : "";
+                const titleResponse = titleMatch[1].trim() 
+                const summaryResponse = summaryMatch[1].trim() 
+                const menuResponse = menuMatch[1].trim() 
+                const groceryListResponse = groceryListMatch[1].trim() 
+                const instructionsResponse = instructionsMatch[1].trim() 
 
-                setBotResponse(...botResponse,{
+                setBotResponse({...botResponse,
                     title: titleResponse,
                     summary: summaryResponse,
                     menu: menuResponse,
