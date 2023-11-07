@@ -35,7 +35,7 @@ const CoursesArray = [
     {
         id: nanoid(),
         name: "Beverages",
-        description: "These will include alcholic and non-alcoholic beverages based on your menu selections."
+        description: "These will include alcoholic and non-alcoholic beverages based on your menu selections."
     }
 ];
 

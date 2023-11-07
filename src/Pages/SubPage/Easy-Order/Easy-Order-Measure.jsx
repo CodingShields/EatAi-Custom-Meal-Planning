@@ -33,7 +33,7 @@ const EasyOrderMeasure = () => {
   useEffect(() => {
     const savedCheckedItem = localStorage.getItem("selectedMeasure");
     if (savedCheckedItem) {
-      setCheckedItems(JSON.parse(savedCheckedItem));
+      setCheckedItems((savedCheckedItem));
       setIsButtonDisabled(true);
     }
   }, []);

@@ -5,12 +5,12 @@ import EasyOrderCourse from "./Easy-Order/Easy-Order-Course";
 import EasyOrderDietary from "./Easy-Order/Easy-Order-Dietary";
 import EasyOrderHeadCount from "./Easy-Order/Easy-Order-Head-Count"; 
 import EasyOrderEvents from "./Easy-Order/Easy-Order-Events";
-import EasyOrderBeverage from "./Easy-Order/Easy-Order-Beverage";
-import EasyOrderCookTime from "./Easy-Order/Easy-Order-Cook-Time";
-import EasyOrderDessertFlavor from "./Easy-Order/Easy-Order-Dessert-Flavor";
+// import EasyOrderBeverage from "./Easy-Order/Easy-Order-Beverage";
+// import EasyOrderCookTime from "./Easy-Order/Easy-Order-Cook-Time";
+// import EasyOrderDessertFlavor from "./Easy-Order/Easy-Order-Dessert-Flavor";
 import EasyOrderMealBalance from "./Easy-Order/Easy-Order-Meal-Balance";
-import EasyOrderHowToCook from "./Easy-Order/Easy-Order-How-To-Cook";
-import EasyOrderSeasonalOptions from "./Easy-Order/Easy-Order-Seasonal-Options";
+// import EasyOrderHowToCook from "./Easy-Order/Easy-Order-How-To-Cook";
+// import EasyOrderSeasonalOptions from "./Easy-Order/Easy-Order-Seasonal-Options";
 import EasyOrderCulturalOptions from "./Easy-Order/Easy-Order-Cultural-Options";
 import EasyOrderStartOverButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Start-Over-Button"
 import EasyOrderBackButton from "./Easy-Order/Easy-Order-Buttons/Easy-Order-Back-Button"
@@ -34,14 +34,14 @@ const EasyOrderForm = () => {
         5: <EasyOrderDietary />,
         6: <EasyOrderHowToFlavor/>,
         7: <EasyOrderMealBalance />,
-        8: <EasyOrderCookTime />,
-        9: <EasyOrderHowToCook />,
-        10: <EasyOrderMeasure />,
-        11: <EasyOrderSeasonalOptions />,
-        12: <EasyOrderDessertFlavor />,
-        13: <EasyOrderBeverage />,
-        14: <EasyOrderConfirmOrder />,
-        15: <EasyOrderFulfilled />
+        // 8: <EasyOrderCookTime />,
+        // 9: <EasyOrderHowToCook />,
+        8: <EasyOrderMeasure />,
+        // 11: <EasyOrderSeasonalOptions />,
+        // 12: <EasyOrderDessertFlavor />,
+        // 13: <EasyOrderBeverage />,
+        9: <EasyOrderConfirmOrder />,
+        10: <EasyOrderFulfilled />
             
     }
     // need some other variables that are going to setup the questions better

@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   
   const disclaimerState = useNewUserStore((state) => state.disclaimer)  
   
-   const createUser = async ({firstName, lastName, email, phone, password}) => {
+  const createUser = async ({firstName, lastName, email, phone, password}) => {
     try {
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
       // Update user's display name with first and last name
@@ -23,18 +23,27 @@ export const AuthContextProvider = ({ children }) => {
       });
         const userDocRef = doc(db, "users", authUser.user.uid);
       await setDoc(userDocRef, {
-  profile: {
-    first: firstName,
-    last: lastName,
-    email: email,
-    phone: phone,
-    membership: false,
-    disclaimer: disclaimerState,
-    signUpDate: new Date(),
-    uid: authUser.user.uid
-  }
-});
-
+        profile :{
+        first: firstName,
+        last: lastName,
+        email: email,
+        phone: phone,
+        membership: false,
+        disclaimer: disclaimerState,
+        signUpDate: new Date(),
+        uid: authUser.user.uid
+        },
+        easyOrderPantry: [
+          {
+            id: nanoid(),
+            date: "",
+            menuItem: "",
+            data: "",
+            score: ""
+          }
+        ]
+      },
+      );
         console.log("User document added successfully");
 
         } catch (error) {

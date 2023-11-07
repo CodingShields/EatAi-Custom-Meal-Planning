@@ -34,7 +34,7 @@ const HowToFlavor = () => {
     useEffect(() => {
     const savedSelectedOption = localStorage.getItem("selectedFlavor");
     if (savedSelectedOption) {
-      setCheckedItemsS(savedSelectedOption);
+      setSelectedOption(savedSelectedOption);
       setIsButtonDisabled(true);
     }
   }, []);

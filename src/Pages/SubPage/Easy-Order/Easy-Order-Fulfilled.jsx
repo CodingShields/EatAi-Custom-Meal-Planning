@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react"
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
-// import cooking from "../../../assets/images/cooking.svg"
+import cooking from "../../../assets/images/cooking.svg"
 import { nanoid } from "nanoid"
 import { db, auth } from "../../../Firebase/fireBaseConfig"
 import { doc, getDoc, query, collection, onSnapshot } from "firebase/firestore";
-import {UserAuth} from "../../../Context/AuthContext"
+import { UserAuth } from "../../../Context/AuthContext"
+// import OpenAI from "openai";
+
+
 const EasyOrderFulfilled = () => {
 
-    const [response, setResponse] = useState({
+    const [botResponse, setBotResponse] = useState({
         title: "",
         summary: "",
         menu: "",
@@ -16,7 +19,6 @@ const EasyOrderFulfilled = () => {
     })
     const [loading, setLoading] = useState(true)
     const state = useEasyOrderStore(state => state)
-
     const culture = useEasyOrderStore((state) => state.Culture);
     const event = useEasyOrderStore((state) => state.Event);
     const headcount  = useEasyOrderStore((state) => state.HeadCount);
@@ -25,33 +27,63 @@ const EasyOrderFulfilled = () => {
     const flavor = useEasyOrderStore((state) => state.HowToFlavor);
     const mealBalance = useEasyOrderStore((state) => state.Balance);
     const cookTime = useEasyOrderStore((state) => state.CookTime);
-    const howToCook = useEasyOrderStore((state) => state.HowToCook);
-    const dessert = useEasyOrderStore((state) => state.Dessert);
-    const seasonal = useEasyOrderStore((state) => state.Seasonal);
-    const beverage = useEasyOrderStore((state) => state.Beverage);
     const measure = useEasyOrderStore((state) => state.Measure);
     const user = UserAuth();
-    const apiKey = "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"
+
+    
+    
     
     useEffect(() => {
-        const fetchData = async () => {
-            
-            const persona = "I want you to think like a 5 Star Chef and create a menu for me."
-            const title = `I need you to title the menu based on the flavor ${flavor} and dietary preferences ${dietary}.`
-            const menu = `Create the menu based on the ${courses} courses.`
-            const summary = `Create a summary of the menu in less than 20 words`
-            const groceryList = `Create a grocery list for the menu based on ${headcount} people.`
-            const instructions = `Create instructions on food preparation and cooking for the menu based on ${cookTime} minutes, ${mealBalance} and ${measure} measurements`
+        const apiKey = "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"
+        const systemPrompt = "Return each user prompt data in its own object. "
+        const personaPrompt = "I want you to think like a 5 star chef" 
+        const titlePrompt = `I want you to create a menu based of the user input ${flavor} flavor. It should have a Title and a Summary.`
+        const eventPrompt = `This menu is for a ${event}.`
+        const culturePrompt = `There is culture preference of ${culture}.` 
+        const coursesPrompt = `The menu should include a ${courses}.` 
+        const mealBalancePrompt = `The menu should have ${mealBalance}.`
+        const dietaryPrompt = `The menu should have a dietary preference of ${dietary}.`
+        const headcountPrompt = `There should be a detailed grocery list on how much food to buy that reflects ${headcount} people attending.`
+        const instructionsPrompt = `There should be a step by step instructions in how to cook, how long to cook, what temps to cook, how to prepare all food prior to cooking, and how to serve. All instructions should be in ${measure} measurement.`    
+        const promptsToInclude = [];
+
+        if (culturePrompt !== "none") {
+        } else {
+            promptsToInclude.push(culturePrompt);
+        }
+        
+        if (coursesPrompt) {
+            promptsToInclude.push(coursesPrompt);
+        }
+        
+        if (eventPrompt !== "none") {
+        } else {
+            promptsToInclude.push(eventPrompt);
+        }
+
+        if (mealBalancePrompt !== "none") {
+        } else {
+            promptsToInclude.push(mealBalancePrompt);
+        }
+
+        if (dietaryPrompt !== "none") {
+        } else {
+            promptsToInclude.push(dietaryPrompt);
+        }
+        if (headcountPrompt) {
+            promptsToInclude.push(headcountPrompt);
+        }
+       
+         const fetchData = async () => {
 
         const data = {
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "user", content: persona },
-                { role: "user", content: title },
-                { role: "user", content: menu },
-                { role: "user", content: summary },
-                { role: "user", content: groceryList },
-                { role: "user", content: instructions },
+                
+                { role: "user", content: personaPrompt },
+                { role: "user", content: titlePrompt},
+                { role: "user", content: promptsToInclude.join(" ") },
+                { role: "user" , content: instructionsPrompt},
             ],
             temperature: 0.7,
         };
@@ -66,12 +98,34 @@ const EasyOrderFulfilled = () => {
                 body: JSON.stringify(data),
             });
             const result = await response.json();
-            
-            if (response.ok) {
-                
+
+             if (response.ok) {
+                const messageContent = result.choices[0].message.content;
+
+                // Use regular expressions to extract information
+                const titleMatch = messageContent.match(/Title:(.*?)Summary:/s);
+                const summaryMatch = messageContent.match(/Summary:(.*?)Menu:/s);
+                const menuMatch = messageContent.match(/Menu:(.*?)Grocery List:/s);
+                const groceryListMatch = messageContent.match(/Grocery List:(.*?)Instructions:/s);
+                const instructionsMatch = messageContent.match(/Instructions:(.*?)$/s);
+
+                // Extract the matched content and trim whitespace
+                const titleResponse = titleMatch ? titleMatch[1].trim() : "";
+                const summaryResponse = summaryMatch ? summaryMatch[1].trim() : "";
+                const menuResponse = menuMatch ? menuMatch[1].trim() : "";
+                const groceryListResponse = groceryListMatch ? groceryListMatch[1].trim() : "";
+                const instructionsResponse = instructionsMatch ? instructionsMatch[1].trim() : "";
+
+                setBotResponse(...botResponse,{
+                    title: titleResponse,
+                    summary: summaryResponse,
+                    menu: menuResponse,
+                    groceryList: groceryListResponse,
+                    instructions: instructionsResponse,
+                });
+                console.log(botResponse);
+                console.log(messageContent);
                 // setLoading(false);
-                setResponse(result.choices[0].message.content);
-                console.log(data);
             } else {
                 console.error(result);
             }
@@ -82,9 +136,11 @@ const EasyOrderFulfilled = () => {
 
     fetchData();
 }, []);
-
-    console.log(response)
-
+   console.log(botResponse);
+    
+    
+            
+          
 //     const handleSave = async () => {
 //         const userDocRef = doc(db, "users", user.user.uid);
 //         const unsubscribe = onSnapshot(userDocRef, (doc) => {
@@ -100,9 +156,7 @@ const EasyOrderFulfilled = () => {
             <h1> test </h1>
             {/* {loading? <img src={cooking} className="cooking-image" /> : ""} */}
             {/* <button onClick={handleSave}> Save To Pantry</button> */}
-            <h1 style={{
-                fontSize: "14px",
-            }}>{response}</h1>
+
         </>       
     )
 }

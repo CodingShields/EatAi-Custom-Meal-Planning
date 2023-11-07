@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 const EventsArray = [
   {
     id: nanoid(),
-    name: "This is not for a event.",
+    name: "None",
   },
   {
     id: nanoid(),
