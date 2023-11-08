@@ -9,11 +9,7 @@ const AccountHome = () => {
     
         <div className="easy-order-container">
             <h1> Account Home Goes Here</h1>
-            <h1> Account Home Goes Here</h1>
-            <h1> Account Home Goes Here</h1>
-            <h1> Account Home Goes Here</h1>
-            <h1> Account Home Goes Here</h1>
-            <h1> Account Home Goes Here</h1>
+
             
         </div>
 )

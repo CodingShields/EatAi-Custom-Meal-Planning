@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const LiveTypingWelcome = ({ fontSize }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = "Welcome, I am your EatAi Chef!\nClick Chef Surprise to set Guest Size, Flavor and kind of Meal.\nOrdering made easy coming soon! \nAdvanced ordering with macro nutrients, calories coming soon!";
+  const defaultMessage = "Welcome!\n I am your EatAi Chef!\nClick Chef Surprise to set Guest Size, Flavor and kind of Meal.\nOrdering made easy coming soon! \nAdvanced ordering with macro nutrients, calories coming soon!";
 
   useEffect(() => {
     let charIndex = 0;
@@ -14,7 +14,7 @@ const LiveTypingWelcome = ({ fontSize }) => {
       } else {
         clearInterval(typingInterval);
       }
-    }, 50); // Adjust the delay for typing speed
+    }, 25); // Adjust the delay for typing speed
 
     return () => {
       clearInterval(typingInterval);
@@ -32,17 +32,14 @@ const LiveTypingWelcome = ({ fontSize }) => {
 
   return (
     <div
-      className="live-text-container"
+      // className="live-text-container"
       style={{
         display: "flex",
-        fontSize: fontSize || '48px',
+        fontSize: "30px",
         fontWeight: 'bold',
-        width: "500px",
-        height: "450px",
-        paddingTop: '20px',
-        position: 'relative',
-        justifyContent: "start",
-        alignContent: "center",
+        width: "auto",
+        height: "auto",
+        padding: '30px',
         textAlign: "center",
         flexDirection: "column",
       }}

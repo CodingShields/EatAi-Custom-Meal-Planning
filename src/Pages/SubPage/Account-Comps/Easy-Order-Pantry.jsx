@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import star from "../../../assets/images/star.svg"
 import emptyStar from "../../../assets/images/emptyStar.svg"
 import { db } from "../../../Firebase/fireBaseConfig"
-import {doc, query, collection, getDoc, onSnapshot, where, updateDoc, setDoc} from "firebase/firestore"
+import {doc, query, collection, getDoc, onSnapshot, where, updateDoc, setDoc, deleteField} from "firebase/firestore"
 import {UserAuth} from "../../../Context/AuthContext"
 
 export default function EasyOrderPantry() {
@@ -33,9 +33,8 @@ export default function EasyOrderPantry() {
       data[0]?.pantry.easyOrder.forEach((item) => {
         initialStarScores[item.id] = item.score || 0;
       });
-      setStarScores(initialStarScores);
-
-      setLoading(false); // Data has been fetched successfully
+        setStarScores(initialStarScores);
+        setLoading(false); // Data has been fetched successfully
     } catch (error) {
       setError(error); // Handle any errors that occur during data retrieval
       setLoading(false); // Set loading to false even in case of errors

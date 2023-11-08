@@ -14,8 +14,12 @@ const EasyOrderFulfilled = () => {
         summary: "",
         menu: "",
         groceryList: "",
+        data:"",
     })
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState({
+        cooking: false,
+        saveBtn: false,
+    })
 
     const userStateData = useEasyOrderStore((state) => state)
     const promptData = {
@@ -115,15 +119,15 @@ const EasyOrderFulfilled = () => {
                 const menuResponse = menuMatch ? menuMatch[1].trim() : "";
                 const groceryListResponse = groceryListMatch ? groceryListMatch[1].trim() : "";
                 // console.log(result.choices[0].message.content);
-
-                setLoading(false);
+                setLoading({cooking: false})
                 setBotResponse((prevResponse) => ({
                     ...prevResponse,
                     title: titleResponse,
                     summary: summaryResponse,
                     menu: menuResponse,
                     groceryList: groceryListResponse,
-                    score:0,
+                    score: 0,
+                    data: result.choices[0].message.content,
                 }));
                 console.log(botResponse);
             } else {
@@ -152,7 +156,8 @@ const EasyOrderFulfilled = () => {
             summary: botResponse.summary,
             menu: botResponse.menu,
             groceryList: botResponse.groceryList,
-            score:0,
+            score: 0,
+            data: botResponse.data,
         }
         
         await updateDoc(userDocRef, {
@@ -171,13 +176,20 @@ const EasyOrderFulfilled = () => {
             <h1> test </h1>
             <h1> need to setup state to control the save to pantry button when it is successfully added</h1>
             {loading? <img src={newCooking} className="cooking-image" /> : ""}
-            <button onClick={handleSave}> Save To Pantry</button>
+            {loading({ saveButton: true })
+                ?
+                <button
+                    className="easy-order-begin-btn"
+                    onClick={handleSave}
+                >
+                    Save To Pantry
+                </button>
+                :
+                null}
             <p>{botResponse.title}</p>
             <p>{botResponse.summary}</p>
             <p>{botResponse.menu}</p>
             <p>{botResponse.groceryList}</p>
-            {/* <p>{botResponse.instructions}</p> */}
-
         </>       
     )
 }

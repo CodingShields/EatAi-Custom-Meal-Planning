@@ -4,9 +4,6 @@
 
 html,
 body {
-	height: 100%; /* Set the body and HTML to fill the viewport height */
-	margin: 0px;
-	padding: 0px;
 	background-color: #fff7ed;
 	font-family: "Inter", sans-serif;
 }
@@ -86,10 +83,8 @@ footer {
 	font-weight: 500;
 	font-size: 36px;
 	width: 100%;
-	position: relative;
 	bottom: 0;
-	margin-bottom: 0px;
-	padding-bottom: 0px;
+	position: fixed;
 }
 
 .link-button:hover {
@@ -106,6 +101,8 @@ main {
 }
 .dashboard-nav {
 	display: flex;
+	height: 0px;
+	padding: 0px;
 	margin-bottom: 20px;
 	margin-left: 20px;
 	margin-top: 40px;
@@ -353,19 +350,6 @@ main {
 	font-size: 20px;
 }
 
-.kitchen-container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
-	padding: 50px 50px;
-	margin: 0px 10px;
-	height: fit-content;
-	width: auto;
-	box-shadow: #333 1px 5px 10px 5px;
-}
-
 .chef-background-img {
 	display: flex;
 	justify-content: flex-end;
@@ -436,133 +420,10 @@ main {
 	}
 }
 
-.clipboard-div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: auto;
-	height: auto;
-	border: 4px solid brown;
-	border-radius: 20px;
-	background-color: antiquewhite;
-	box-shadow: #333 1px 5px 10px 5px;
-	text-shadow: 0.5px 0.5px grey;
-}
-
-.menu-title-text-container {
-	justify-content: center;
-	align-items: center;
-}
-
-.menu-text {
-	font-size: 35px;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-	text-decoration: underline;
-}
-
-.menu-item-text {
-	font-size: 20px;
-	text-decoration: underline;
-}
-
-.menu-items-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	padding-left: 10px;
-	padding-right: 10px;
-	height: auto;
-	width: 70vh;
-	gap: 5px;
-}
-
-.entree-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 60px;
-}
-
-/* drop down menu items */
-.menu-list-items {
-	text-align: center;
-	outline: none;
-	border-radius: 10px;
-	width: 250px;
-	height: 30px;
-	box-shadow: 1px 1px 1px 1px gray;
-	font-size: 20px;
-}
-
-.menu-list-items:hover {
-	display: flex;
-	font-size: 16px;
-	font-style: bold;
-	font-weight: 900;
-}
-
-.headcount-div {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 60px;
-}
-
-.headcount-text {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: coral;
-	width: 50px;
-	height: 50px;
-	border: 2px solid coral;
-	border-radius: 100px;
-	font-weight: 600;
-}
-
-.headcount-slider {
-	width: 160px;
-}
-
-.flavor-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 60px;
-}
-
-.flavor-details-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 80%;
-	height: 60px;
-	margin-left: 30px;
-}
-.flavor-details-text {
-	font-size: 17px;
-	color: coral;
-	font-style: italic;
-}
-
-.dietary-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 60px;
-}
 .order-btn-div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
-	height: 120px;
 }
 .order-btn {
 	display: flex;
@@ -570,8 +431,7 @@ main {
 	align-items: center;
 	background-color: lightcoral;
 	margin-bottom: 20px;
-	width: 400px;
-	height: 50px;
+
 	border: 0px solid white;
 	border-radius: 1000px;
 	box-shadow: 3px 3px 3px 1px black;
@@ -953,8 +813,8 @@ input[type="range"] {
 
 	/* Set the thumb (button) color and size */
 	--thumb-color: #f99a41; /* Change to your desired color */
-	--thumb-height: 30px; /* Change to your desired height */
-	--thumb-width: 30px; /* Change to your desired width */
+	--thumb-height: 18px; /* Change to your desired height */
+	--thumb-width: 18px; /* Change to your desired width */
 
 	/* Remove default styles */
 	appearance: none;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MealBalance from "../../../assets/dataArrays/Meal-Balance-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
-import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/EasyOrderStore";
 
 const EasyOrderMealBalance = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);

@@ -1,0 +1,164 @@
+.chef-surprise-container-main {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	background-color: aquamarine;
+	border-radius: 30px 30px 30px 30px;
+	padding: 20px 50px;
+	box-shadow: #333 0px 5px 10px 1px;
+	height: fit-content;
+	margin-top: 20px;
+}
+
+.chef-surprise-chef-img {
+	padding-top: 60px;
+	height: 500px;
+	padding-right: 30px;
+}
+
+.chef-surprise-menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	width: 450px;
+	height: 600px;
+	border: 4px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: #333 1px 5px 10px 5px;
+}
+
+.chef-surprise-menu-title-text-container {
+	justify-content: center;
+	align-items: center;
+    padding: 0px 0px 0px 0px;
+    margin:10px 0px 0px 0px;
+    
+}
+
+.chef-surprise-menu-title-text {
+	text-align: center;
+    font-size: 42px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	text-decoration: underline;
+    padding: 0px 0px 0px 0px;
+    margin:0px 0px 0px 0px;
+}
+
+.chef-surprise-menu-items-container{
+    display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 200px;
+	width: 400px;
+    border-bottom: #333 1px solid;
+}
+
+.chef-surprise-menu-item-text {
+	font-size: 20px;
+	text-decoration: underline;
+    width: 200px;
+}
+
+.chef-surprise-drop-down-text{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    text-align: center;
+	outline: none;
+	border-radius: 10px;
+	width: 200px;
+	height: 30px;
+	box-shadow: 1px 1px 1px 1px gray;
+	font-size: 20px;
+}
+
+.easy-order-headcount-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+	height: 30px;
+    padding: 0px 0px 0px 0px;
+}
+
+.easy-order-headcount-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: coral;
+	width: 50px;
+	height: 40px;
+    font-size: 24px;
+	border: 2px solid coral;
+	border-radius: 1000px;
+    margin: 0px 20px 0px 0px;
+}
+
+.easy-oder-headcount-slider {
+	width: 160px;
+    height: 30px;
+}
+
+.easy-oder-headcount-slider[type="range"] {
+	/* Set the track color and size */
+	--track-color: #ccc; /* Change to your desired color */
+	--track-height: 15px; /* Change to your desired height */
+	--track-width: 100px; /* Change to your desired width */
+
+	/* Set the thumb (button) color and size */
+	--thumb-color: coral; /* Change to your desired color */
+	--thumb-height: 18px; /* Change to your desired height */
+	--thumb-width: 18px; /* Change to your desired width */
+
+	/* Remove default styles */
+	appearance: none;
+	background: transparent;
+	border: none;
+    
+}
+
+/* Customize the track */
+.easy-oder-headcount-slider[type="range"]::-webkit-slider-runnable-track {
+	background-color: var(--track-color);
+	height: var(--track-height);
+	width: var(--track-width);
+	border-radius: 10px; /* Adjust the border radius as needed */
+}
+
+/* Customize the thumb (button) */
+.easy-oder-headcount-slider[type="range"]::-webkit-slider-thumb {
+	background-color: var(--thumb-color);
+	height: var(--thumb-height);
+	width: var(--thumb-width);
+	border-radius: 50%; /* Make it round (adjust as needed) */
+	cursor: pointer;
+	-webkit-appearance: none;
+	transform: translateY(30%); /* Center vertically */
+	margin-top: calc(var(--track-height) / 2 * -1); /* Adjust for the track height */
+}
+
+/* Handle range input when in focus */
+.easy-oder-headcount-slider[type="range"]:focus {
+	outline: none; /* Remove the focus outline (adjust as needed) */
+}
+
+/* Handle range input hover state */
+.easy-oder-headcount-slider[type="range"]:hover::-webkit-slider-thumb {
+	background-color: #ff0000; /* Change thumb color on hover (adjust as needed) */
+}
+
+.easy-order-flavor-details-text{
+    font-size: 17px;
+    font-style: italic;
+    color: black;
+    text-shadow: none;
+    width: 200px;
+	text-align: center;
+
+}
