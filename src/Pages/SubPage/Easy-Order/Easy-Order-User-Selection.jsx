@@ -12,7 +12,7 @@ const EasyOrderUserSelection = () => {
   const headcount  = useEasyOrderStore((state) => state.HeadCount);
   const courses = useEasyOrderStore((state) => state.Courses);
   const dietary = useEasyOrderStore((state) => state.Dietary);
-  const howToFlavor = useEasyOrderStore((state) => state.HowToFlavor);
+  const flavor = useEasyOrderStore((state) => state.Flavor);
   const mealBalance = useEasyOrderStore((state) => state.Balance);
   // const cookTime = useEasyOrderStore((state) => state.CookTime);
   // const howToCook = useEasyOrderStore((state) => state.HowToCook);
@@ -37,7 +37,6 @@ const EasyOrderUserSelection = () => {
       return ""; // or some other default value if courses is not an array
     }
   };
-  console.log("eventData", event);
   
   return (
     <div className="easy-order-user-selection-container">
@@ -67,7 +66,7 @@ const EasyOrderUserSelection = () => {
         </>
         <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 6 })}>Desired Flavor:</button>
         <>
-          <span className="user-input-text">{howToFlavor}</span>
+          <span className="user-input-text">{flavor}</span>
         </>
         <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 7 })}>Meal Balance:</button>
         <>

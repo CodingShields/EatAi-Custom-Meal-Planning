@@ -7,14 +7,13 @@ const initializeState = {
     Courses: "",
     Dietary: "",
     Balance: "",
-    HowToFlavor: "",    
+    Flavor: "",    
     // CookTime: "",
     // HowToCook: "",
     Measure:"",
     // Dessert: "",
     // Seasonal: "",
     // Beverage: "",
-    BotResponse: "",
 };
 
 export const useEasyOrderStore = create((set, get) => ({
@@ -29,14 +28,13 @@ export const useEasyOrderStore = create((set, get) => ({
                 Courses: state.Courses,
                 Dietary: state.Dietary,
                 Balance: state.Balance,
-                HowToFlavor: state.HowToFlavor,
+                Flavor: state.Flavor,
                 // CookTime: state.CookTime,
                 // HowToCook: state.HowToCook,
                 Measure:state.Measure,
                 // Dessert: state.Dessert,
                 // Seasonal: state.Seasonal,
                 // Beverage: state.Beverage,
-                BotResponse: state.BotResponse,
                 
             };
         },
@@ -46,7 +44,7 @@ export const useEasyOrderStore = create((set, get) => ({
         setHeadCount: (str) => set({ HeadCount: str }),
         setCourses: (str) => set({ Courses: str }),
         setDietary: (str) => set({ Dietary: str }),
-        setHowToFlavor: (str) => set({ HowToFlavor: str }),
+        setFlavor: (str) => set({ Flavor: str }),
         setBalance: (str) => set({ Balance: str }),
         // setCookTime: (str) => set({ CookTime: str }),
         // setHowToCook: (str) => set({ HowToCook: str }),
@@ -54,7 +52,6 @@ export const useEasyOrderStore = create((set, get) => ({
         // setDessert: (str) => set({ Dessert: str }),
         // setSeasonal: (str) => set({ Seasonal: str }),
         // setBeverage: (str) => set({ Beverage: str }),
-        setBotResponse: (str) => set({ BotResponse: str }),
     },
 }));
 

@@ -4,7 +4,7 @@ import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 
 const HowToFlavor = () => {
-    const { setHowToFlavor } = useEasyOrderStoreActions();
+    const { setFlavor } = useEasyOrderStoreActions();
     const [selectedOption, setSelectedOption] = useState("");
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [flavorDetails, setFlavorDetails] = useState("")
@@ -25,7 +25,7 @@ const HowToFlavor = () => {
     };
 
     const handleClick = () => { 
-        setHowToFlavor(selectedOption);
+        setFlavor(selectedOption);
         increaseStep();
         setIsButtonDisabled(false);
         localStorage.setItem("selectedFlavor", selectedOption);

@@ -3,7 +3,6 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 import { auth, db} from "../Firebase/fireBaseConfig"
 import { useNewUserStore } from "../state-store/NewUserStore";
 import { setDoc, doc } from "firebase/firestore"; 
-import { nanoid } from "nanoid";
 
 const UserContext= createContext();
 
@@ -33,15 +32,13 @@ export const AuthContextProvider = ({ children }) => {
         signUpDate: new Date(),
         uid: authUser.user.uid
         },
-        easyOrderPantry: [
-          {
-            id: nanoid(),
-            date: "",
-            menuItem: "",
-            data: "",
-            score: ""
-          }
-        ]
+        pantry: {
+          easyOrder: {
+            
+          },
+          advancedOrder: {
+          },
+        }
       },
       );
         console.log("User document added successfully");

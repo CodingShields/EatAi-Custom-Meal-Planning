@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import star from "../../../assets/images/star.svg"
-import blankStar from "../../../assets/images/blank-star.svg"
 
 export default function AdvancedOrderPantry() {
 
@@ -22,11 +21,6 @@ export default function AdvancedOrderPantry() {
                 <div className="advanced-order-pantry-score-container">
                     <h3>Score</h3>
                     <div className="advanced-order-star-container">
-                        <img src={star} className="advanced-order-score-star" />
-                        <img src={star} className="advanced-order-score-star" />
-                        <img src={star} className="advanced-order-score-star" />
-                        <img src={star} className="advanced-order-score-star" />
-                        <img src={star} className="advanced-order-score-star" />
                     </div>    
                 </div>
                 <div className="advanced-order-pantry-delete-container">
