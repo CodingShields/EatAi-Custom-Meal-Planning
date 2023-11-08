@@ -19,7 +19,7 @@ const EasyOrderFulfilled = () => {
 
     const userStateData = useEasyOrderStore((state) => state)
     const promptData = {
-        flavor: userStateData.HowToFlavor,
+        flavor: userStateData.Flavor,
         culture: userStateData.Culture,
         event: userStateData.Event,
         headCount: userStateData.HeadCount,
@@ -28,18 +28,7 @@ const EasyOrderFulfilled = () => {
         dietary: userStateData.Dietary,
         measure: userStateData.Measure,
     }
-    // const culture = useEasyOrderStore((state) => state.Culture);
-    // const event = useEasyOrderStore((state) => state.Event);
-    // const headcount  = useEasyOrderStore((state) => state.HeadCount);
-    // const courses = useEasyOrderStore((state) => state.Courses);
-    // const dietary = useEasyOrderStore((state) => state.Dietary);
-    // const flavor = useEasyOrderStore((state) => state.HowToFlavor);
-    // const mealBalance = useEasyOrderStore((state) => state.Balance);
-    // const measure = useEasyOrderStore((state) => state.Measure);
     const user = UserAuth();
-
-    
-    
     
     useEffect(() => {
 
@@ -110,10 +99,10 @@ const EasyOrderFulfilled = () => {
                 body: JSON.stringify(data),
             });
             const result = await response.json();
-
+            
             if (response.ok) {
                 const messageContent = result.choices[0].message.content;
-
+                console.log("messageContent", messageContent);
                 // Use regular expressions to extract information
                 const titleMatch = messageContent.match(/Title:(.*?)Summary:/s);
                 const summaryMatch = messageContent.match(/Summary:(.*?)Grocery List:/s);
@@ -136,7 +125,7 @@ const EasyOrderFulfilled = () => {
                     groceryList: groceryListResponse,
                     score:0,
                 }));
-                
+                console.log(botResponse);
             } else {
                 console.error(result);
             }

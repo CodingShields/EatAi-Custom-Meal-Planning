@@ -11,6 +11,7 @@ export default function EasyOrderPantry() {
     const [loading, setLoading] = useState(false)
     const [selectedSummary, setSelectedSummary] = useState(null)
     const [summaryRender, setSummaryRender] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const user = UserAuth();
     const userId = user.user.uid;
     const [starScores, setStarScores] = useState({});
@@ -18,24 +19,32 @@ export default function EasyOrderPantry() {
 
 
     useEffect(() => {
-    const q = query(collection(db, "users"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        try {
-        let data = [];
-        querySnapshot.forEach((doc) => {
-            data.push({ ...doc.data(), id: doc.id });
-        });
-            setEasyOrderPantry(data[0]?.pantry.easyOrder || []);
-            console.log("data",data);
-        setLoading(false); // Data has been fetched successfully
-        } catch (error) {
-        setError(error); // Handle any errors that occur during data retrieval
-        setLoading(false); // Set loading to false even in case of errors
-        }
-    });
+  const q = query(collection(db, "users"));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    try {
+      let data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      setEasyOrderPantry(data[0]?.pantry.easyOrder || []);
 
-    return unsubscribe;
-    }, []);
+      // Initialize starScores based on fetched data
+      const initialStarScores = {};
+      data[0]?.pantry.easyOrder.forEach((item) => {
+        initialStarScores[item.id] = item.score || 0;
+      });
+      setStarScores(initialStarScores);
+
+      setLoading(false); // Data has been fetched successfully
+    } catch (error) {
+      setError(error); // Handle any errors that occur during data retrieval
+      setLoading(false); // Set loading to false even in case of errors
+    }
+  });
+
+  return unsubscribe;
+}, []);
+
 
     console.log(easyOrderPantry);
 const renderStars = (itemId, score, index) => {
@@ -71,8 +80,11 @@ const renderStars = (itemId, score, index) => {
     
     const handleModalRender = (summary) => {
         setSelectedSummary(summary)
-        setSummaryRender(true)
+        setIsModalOpen(true)
+
+        document.body.classList.add("blur-body");
     }
+
  // Assuming itemId represents the index
 
     const handleStarScore = async (itemId, score, index) => {
@@ -119,7 +131,6 @@ const renderStars = (itemId, score, index) => {
                                         >
                                         Menu Item
                                     </h3>
-                                        {item.id}
                                         {item.title}
                                     </div>
                                         <div className="easy-order-pantry-summary-container">
@@ -151,16 +162,17 @@ const renderStars = (itemId, score, index) => {
                     }
                     )
             }
-            {summaryRender ?
-                <div className="easy-order-summary-text-modal">
-                    {selectedSummary}
-                    <button
-                        className="easy-order-pantry--modal-btn"
-                    onClick={() => setSummaryRender(false)}
-                    >Close Summary</button>
-            </div> : null}
-
+            {isModalOpen && (
+        <div className="easy-order-summary-text-modal">
+          {selectedSummary}
+          <button
+            className="easy-order-pantry--modal-btn"
+            onClick={()=>{setIsModalOpen(false)}}
+          >
+            Close Summary
+          </button>
         </div>
-        
-    )
+      )}
+    </div>
+  );
 }

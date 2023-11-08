@@ -4,6 +4,9 @@
 
 html,
 body {
+	height: 100%; /* Set the body and HTML to fill the viewport height */
+	margin: 0px;
+	padding: 0px;
 	background-color: #fff7ed;
 	font-family: "Inter", sans-serif;
 }
@@ -20,6 +23,7 @@ body::-webkit-scrollbar {
 body {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
+	margin: 0;
 }
 
 .site-wrapper {
@@ -75,14 +79,17 @@ nav {
 footer {
 	background-color: #161616;
 	color: #aaaaaa;
-	height: 75px;
+	height: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-weight: 500;
 	font-size: 36px;
 	width: 100%;
-	position: bottom;
+	position: relative;
+	bottom: 0;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
 }
 
 .link-button:hover {
@@ -90,6 +97,7 @@ footer {
 }
 
 main {
+	flex-grow: 1; /* Allow main content to grow and push footer to the bottom */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -348,17 +356,14 @@ main {
 .kitchen-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
 	align-items: center;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
 	padding: 50px 50px;
 	margin: 0px 10px;
-	height: 70vh;
+	height: fit-content;
 	width: auto;
-	max-width: fit-content;
 	box-shadow: #333 1px 5px 10px 5px;
-	z-index: 999;
 }
 
 .chef-background-img {
@@ -400,7 +405,7 @@ main {
 	background-color: antiquewhite;
 	box-shadow: #333 1px 5px 10px 5px;
 	text-shadow: 0.5px 0.5px grey;
-	padding: 50px;
+	padding: 20px;
 }
 
 .blinking-cursor {
@@ -436,7 +441,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 55vh;
+	width: auto;
 	height: auto;
 	border: 4px solid brown;
 	border-radius: 20px;
@@ -451,20 +456,26 @@ main {
 }
 
 .menu-text {
-	font-size: 60px;
+	font-size: 35px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	text-decoration: underline;
 }
 
+.menu-item-text {
+	font-size: 20px;
+	text-decoration: underline;
+}
+
 .menu-items-container {
+	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding-left: 50px;
-	padding-right: 50px;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding-left: 10px;
+	padding-right: 10px;
 	height: auto;
 	width: 70vh;
-	gap: 10px;
+	gap: 5px;
 }
 
 .entree-container {
@@ -484,7 +495,6 @@ main {
 	height: 30px;
 	box-shadow: 1px 1px 1px 1px gray;
 	font-size: 20px;
-	z-index: 102;
 }
 
 .menu-list-items:hover {
@@ -497,8 +507,8 @@ main {
 .headcount-div {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	width: 43vh;
+	justify-content: space-evenly;
+	width: 100%;
 	height: 60px;
 }
 
@@ -509,9 +519,9 @@ main {
 	color: coral;
 	width: 50px;
 	height: 50px;
-	border: 3px solid coral;
+	border: 2px solid coral;
 	border-radius: 100px;
-	font-weight: 900;
+	font-weight: 600;
 }
 
 .headcount-slider {
@@ -532,7 +542,6 @@ main {
 	align-items: center;
 	width: 80%;
 	height: 60px;
-	z-index: 102;
 	margin-left: 30px;
 }
 .flavor-details-text {
@@ -547,7 +556,6 @@ main {
 	justify-content: space-evenly;
 	width: 100%;
 	height: 60px;
-	z-index: 102;
 }
 .order-btn-div {
 	display: flex;
@@ -555,7 +563,6 @@ main {
 	justify-content: center;
 	width: 100%;
 	height: 120px;
-	z-index: 102;
 }
 .order-btn {
 	display: flex;
@@ -571,7 +578,6 @@ main {
 	font-size: 30px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.2s;
-	z-index: 1005;
 }
 
 .order-btn:hover {
@@ -1239,7 +1245,7 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	display: flex;
 	width: auto;
 	flex-direction: row;
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
 
 .easy-order-pantry-date-container {
@@ -1306,18 +1312,20 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	background-color: #fff;
 	border: 1px solid #999;
 	border-radius: 100px;
-	position: absolute;
 	padding: 50px;
 	width: 600px;
-	filter: blur(0px);
 	position: fixed;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.75);
 	top: 50%; /* 50% from the top of the viewport */
 	left: 50%; /* 50% from the left of the viewport */
 	transform: translate(-50%, -50%);
 	box-shadow: black 2px 2px 2px;
+	pointer-events: auto;
+	color: white;
+	text-shadow: #161616 1px 1px 1px;
 }
 
 .easy-order-pantry--modal-btn {
@@ -1327,10 +1335,13 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	width: 300px;
 	font-weight: 600;
 	border: 0px solid white;
-	background-color: white;
 	cursor: pointer;
 	text-decoration: underline;
-	padding: 30px;
+	padding-top: 20px;
+	background: rgba(0, 0, 0, 0);
+	color: white;
+	text-shadow: #161616 1px 1px 1px;
+	z-index: 9999;
 }
 
 .easy-order-pantry-score-container {
@@ -1353,6 +1364,7 @@ input[type="range"]:hover::-webkit-slider-thumb {
 	padding-top: 17px;
 }
 .easy-order-score-star {
+	display: inline-block;
 	margin: 0px;
 	height: 45px;
 	width: 50px;
