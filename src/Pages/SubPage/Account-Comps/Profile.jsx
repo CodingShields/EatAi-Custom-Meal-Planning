@@ -36,7 +36,10 @@ useEffect(() => {
     try {
       const colRef = collection(db, "users");
       const docRef = doc(colRef, user.uid);
-      const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc(docRef);
+        console.log("colRef", colRef);
+        console.log("docRef", docRef);
+        console.log("docSnap", docSnap);
 
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());

@@ -16,11 +16,11 @@ const EventsArray = [
     name: "Birthday Party",
     description: "Celebrants often provide food for their friends and family."
   },
-  {
-    id: nanoid(),
-    name: "Corporate Meeting",
-    description: "Businesses may cater lunches or snacks for meetings and conferences."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Corporate Meeting",
+  //   description: "Businesses may cater lunches or snacks for meetings and conferences."
+  // },
   {
     id: nanoid(),
     name: "Baby Shower",
@@ -28,7 +28,7 @@ const EventsArray = [
   },
   {
     id: nanoid(),
-    name: "Anniversary Party",
+    name: "Anniversary",
     description: "Commemorating milestones in marriage with a meal."
   },
   {
@@ -71,11 +71,11 @@ const EventsArray = [
     name: "Cocktail Party",
     description: "Offering appetizers and drinks for social gatherings."
   },
-  {
-    id: nanoid(),
-    name: "Networking Event",
-    description: "Professional events often feature food and drinks."
-  },
+  // {
+  //   id: nanoid(),
+  //   name: "Networking Event",
+  //   description: "Professional events often feature food and drinks."
+  // },
   // {
   //   id: nanoid(),
   //   name: "Art Gallery Opening",
