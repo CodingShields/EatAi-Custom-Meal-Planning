@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 import CulturalHolidayArray from "../../../assets/dataArrays/Cultural-Holiday-Array";
+import "../../.././css/EasyOrder.css"; 
 
 const EasyOrderCulturalOptions = () => {  
   const { setCulture } = useEasyOrderStoreActions()
@@ -52,7 +53,7 @@ const EasyOrderCulturalOptions = () => {
                             </li>
                         ))}
           </ul>
-        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+        {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
   </>

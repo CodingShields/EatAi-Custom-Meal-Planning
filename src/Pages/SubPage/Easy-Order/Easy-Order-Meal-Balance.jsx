@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import MealBalance from "../../../assets/dataArrays/Meal-Balance-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
-import { useEasyOrderStoreActions } from "../../../state-store/EasyOrderStore";
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
+
 
 const EasyOrderMealBalance = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -54,7 +56,7 @@ const EasyOrderMealBalance = () => {
         </ul>
         </div>
       {isButtonDisabled ? (
-        <button className="easy-order-make-selection-btn" onClick={handleClick}>
+        <button className="easy-order-btn" onClick={handleClick}>
           Make Selection
         </button>
       ) : (

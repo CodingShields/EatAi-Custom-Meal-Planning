@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BeverageOptionsArray from "../../../assets/dataArrays/Beverage-Options-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
 
 export default function EasyOrderBeverage() {
   const [checkedBeverage, setCheckedBeverage] = useState("");
@@ -55,7 +56,7 @@ export default function EasyOrderBeverage() {
           </li>
         ))}
       </ul>
-      {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
     </>

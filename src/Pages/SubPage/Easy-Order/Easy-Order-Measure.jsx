@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Measure from "../../../assets/dataArrays/Measure-Options";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
 
 const EasyOrderMeasure = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -62,7 +63,7 @@ const EasyOrderMeasure = () => {
       </ul>
       {isButtonDisabled ? (
         <button
-          className="easy-order-make-selection-btn"
+          className="easy-order-btn"
           onClick={handleClick}
         >
           Make Selection

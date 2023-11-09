@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import CookTimes from "../../../assets/dataArrays/Cook-Times-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
 
 
 const EasyOrderCookTime = () => {    
@@ -53,7 +54,7 @@ const EasyOrderCookTime = () => {
                         ))}
           </ul>
         </div>
-        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+        {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
   </>

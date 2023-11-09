@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
-import newCooking from "../../../assets/images/newCooking.svg"
+import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import cookingAnimated from "../../../assets/images/cookingAnimated.svg";
+import makeSureToSaveYourOrder from "../../../assets/images/makeSureToSaveYourOrder.svg";
+import waitForOrder from "../../../assets/images/waitForOrder.svg";
 import { db, auth } from "../../../Firebase/fireBaseConfig"
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { UserAuth } from "../../../Context/AuthContext"
 import { nanoid } from 'nanoid'
+import "../../.././css/EasyOrder.css"; 
 
 const EasyOrderFulfilled = () => {
 
@@ -19,9 +23,11 @@ const EasyOrderFulfilled = () => {
     const [loading, setLoading] = useState({
         cooking: false,
         saveBtn: false,
+        renderResponse: false,
     })
 
     const userStateData = useEasyOrderStore((state) => state)
+    
     const promptData = {
         flavor: userStateData.Flavor,
         culture: userStateData.Culture,
@@ -34,9 +40,11 @@ const EasyOrderFulfilled = () => {
     }
     const user = UserAuth();
     
+    const { resetForm } = useEasyOrderStoreActions((actions) => actions);
+    
     useEffect(() => {
 
-        setLoading(true)
+        setLoading({cooking: true, saveBtn: false, renderResponse: false})
         const apiKey = "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"
         const personaPrompt = "I want you to think like a 5 star chef and fulfill the following order and user requests." 
         const titlePrompt = `Create a 'Title:" of a menu based of the user input ${promptData.flavor} flavor.`
@@ -119,7 +127,7 @@ const EasyOrderFulfilled = () => {
                 const menuResponse = menuMatch ? menuMatch[1].trim() : "";
                 const groceryListResponse = groceryListMatch ? groceryListMatch[1].trim() : "";
                 // console.log(result.choices[0].message.content);
-                setLoading({cooking: false})
+                setLoading({cooking: false , saveBtn: true, renderResponse: true})
                 setBotResponse((prevResponse) => ({
                     ...prevResponse,
                     title: titleResponse,
@@ -162,36 +170,48 @@ const EasyOrderFulfilled = () => {
         
         await updateDoc(userDocRef, {
             "pantry.easyOrder": arrayUnion(easyOrderItem),
+            
         });
-
+        resetForm();
+        setLoading({saveBtn: false})
         console.log("Document successfully updated!");
     } catch (error) {
         console.error("Error updating document:", error);
     }
-};
-
+    };
+    
+    const formatResponse = () => {
+        const displayData = botResponse.data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        return displayData;
+    }
+       
 
     return (
-        <>
-            <h1> test </h1>
-            <h1> need to setup state to control the save to pantry button when it is successfully added</h1>
-            {loading? <img src={newCooking} className="cooking-image" /> : ""}
-            {loading({ saveButton: true })
-                ?
-                <button
-                    className="easy-order-begin-btn"
-                    onClick={handleSave}
-                >
-                    Save To Pantry
-                </button>
-                :
-                null}
-            <p>{botResponse.title}</p>
-            <p>{botResponse.summary}</p>
-            <p>{botResponse.menu}</p>
-            <p>{botResponse.groceryList}</p>
-        </>       
-    )
+			<>
+            <h1 className='easy-order-bot-title'>
+                </h1>
+            <img src={loading.renderResponse ? { waitForOrder } : { makeSureToSaveYourOrder }} />
+				{loading.cooking ? <img src={cookingAnimated} className='cooking-image' /> : null}
+				{loading.saveBtn ? (
+					<button className='easy-order-btn' onClick={handleSave}>
+						Save To Pantry
+					</button>
+				) : null}
+				<div
+					style={{ display: loading.renderResponse ? "flex" : "none" }}
+					className='easy-order-bot-response-container'
+				>
+					<h4 className='easy-order-bot-response-title'>Title:</h4>
+					<h3 className='easy-order-bot-response-data'>{botResponse.title}</h3>
+					<h4 className='easy-order-bot-response-title'>Summary:</h4>
+					<p className='easy-order-bot-response-data'>{botResponse.summary}</p>
+					<h4 className='easy-order-bot-response-title'>Menu Guide:</h4>
+					<p className='easy-order-bot-response-data'>{botResponse.menu}</p>
+					<h4 className='easy-order-bot-response-title'>Grocery List:</h4>
+					<p className='easy-order-bot-response-data'>{botResponse.groceryList}</p>
+				</div>
+			</>
+		);
 }
 
 export default EasyOrderFulfilled

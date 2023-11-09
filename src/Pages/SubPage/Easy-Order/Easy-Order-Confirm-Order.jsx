@@ -4,6 +4,7 @@ import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore"
 import EasyOrderStartOverButton from "./Easy-Order-Buttons/Easy-Order-Start-Over-Button"
 import EasyOrderBackButton from "./Easy-Order-Buttons/Easy-Order-Back-Button"
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore"
+import "../../.././css/EasyOrder.css"; 
 
 
 
@@ -15,12 +16,14 @@ const EasyOrderConfirmOrder = () => {
     return (
         <>
             <div>
-                <h2> Double Check Your Order Details On The Right.
+                <h4 className="easy-order-confirmOrder-text"> Double Check Your Order Details On The Right.
                     If you see anything you would like to change,
                     just click on the Option Title to go back and change.
-                    If You are ready to send it off to the Chef, just click "Order Now".</h2>
-                <h1> Need To Add Option to exclude previous searches</h1>
-                <button onClick ={()=>increaseStep()}> Order Now</button>
+                    If You are ready to send it off to the Chef, just click "Order Now".</h4>
+                <h1> Need To Add Option to exclude previous searches??</h1>
+                <button
+                    className="easy-order-btn"
+                    onClick={() => increaseStep()}> Order Now</button>
             </div>
         </>
 

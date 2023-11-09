@@ -1,6 +1,7 @@
 import React from "react";
 import { useEasyOrderStore } from "../../../state-store/easyOrderStore";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import "../../.././css/EasyOrder.css"; 
 
 
 
@@ -80,7 +81,7 @@ const EasyOrderUserSelection = () => {
         <>
         <span className="user-input-text">{howToCook}</span>
         </> */}
-        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 10 })}>Measurement:</button>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 8 })}>Measurement:</button>
         <>
         <span className="user-input-text">{measure}</span>
         </>
@@ -96,9 +97,9 @@ const EasyOrderUserSelection = () => {
         <>
         <span className="user-input-text">{beverage}</span>
         </> */}
-        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 14 })}>Review Order</button>
+        <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 9 })}>Review Order</button>
         <>
-          <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 15 })}>Order Fulfillment</button>
+          <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 10 })}>Order Fulfillment</button>
           </>
       </div>
       

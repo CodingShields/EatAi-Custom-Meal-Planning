@@ -2,6 +2,7 @@ import React, { useEffect, useState} from "react";
 import DietaryOptionsArray from "../../../assets/dataArrays/Dietary-Options-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
 
 const EasyOrderDietary = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -85,7 +86,7 @@ const EasyOrderDietary = () => {
           </li>
         ))}
         </ul>
-      {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+      {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
     </>

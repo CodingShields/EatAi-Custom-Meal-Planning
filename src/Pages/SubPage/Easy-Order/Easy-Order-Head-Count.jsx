@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
 
 const EasyOrderHeadCount = () => {
     const [count, setCount] = useState(0)
@@ -49,9 +50,8 @@ const EasyOrderHeadCount = () => {
 
                 </p>
             </div>
-            {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
-            >
-                Make Selection
+            {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
+            >Make Selection
             </button> : ""}
     </>
     );

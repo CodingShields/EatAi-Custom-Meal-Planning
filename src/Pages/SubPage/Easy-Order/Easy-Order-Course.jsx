@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import CoursesArray from "../../../assets/dataArrays/Courses-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
+
 
 const EasyOrderCourse = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
@@ -53,7 +55,7 @@ const EasyOrderCourse = () => {
                             </li>
                         ))}
         </ul>
-        {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+        {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
         </>

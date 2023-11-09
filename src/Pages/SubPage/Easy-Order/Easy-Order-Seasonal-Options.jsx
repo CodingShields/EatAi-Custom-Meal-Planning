@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import SeasonalArray from "../../../assets/dataArrays/Seasonal-Options-Array";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
+import "../../.././css/EasyOrder.css"; 
 
 const EasyOrderSeasonalOptions = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -72,7 +73,7 @@ useEffect(() => {
         </li>
         ))}
             </ul>
-            {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+            {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
       >Make Selection
     </button>:""}
         </>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FlavoredDishes from "../../../assets/dataArrays/Flavor-Dishes-Array";
+import "../../.././css/EasyOrder.css"; 
 
 export default function EasyOrderFlavoredRecommend() {
     const initialRegion = 'Italian'; // You can set the default region here

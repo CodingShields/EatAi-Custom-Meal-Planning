@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FlavorTypeArray from "../../../assets/dataArrays/Flavor-Type-Array";
 import { useEasyOrderStoreActions } from "../../../state-store/easyOrderStore";
 import { useEasyOrderRenderStore } from "../../../state-store/RenderStore";
+import "../../.././css/EasyOrder.css"; 
 
 const HowToFlavor = () => {
     const { setFlavor } = useEasyOrderStoreActions();
@@ -79,7 +80,7 @@ const HowToFlavor = () => {
                     textAlign: "center"
                 }}  
                 className="easy-order-list">{flavorDetails}</p>
-            {isButtonDisabled ? <button className="easy-order-make-selection-btn" onClick={handleClick}
+            {isButtonDisabled ? <button className="easy-order-btn" onClick={handleClick}
             >
                 Make Selection
             </button> : ""}
