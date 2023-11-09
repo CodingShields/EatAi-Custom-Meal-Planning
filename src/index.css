@@ -538,22 +538,6 @@ main {
 	transform: scale(0.95); /* Button scale down when clicked */
 }
 
-
-/* advanced order elements */
-
-.advanced-order-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-	height: 700px;
-	width: 1200px;
-	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
-	padding: 50px 20px 50px;
-	box-shadow: #333 1px 5px 10px 5px;
-}
-
 .advanced-order-live-container {
 	display: flex;
 	flex-direction: column;
@@ -952,35 +936,3 @@ main {
 .easy-order-summary-text {
 	display: flex;
 }
-
-/* Advanced Order Pantry
-.advanced-order-pantry-container {
-	width: auto;
-	height: auto;
-}
-.advanced-order-pantry-details-container {
-	display: flex;
-	flex-direction: row;
-	width: 600px;
-	flex-direction: row;
-	justify-content: space-evenly;
-	border-bottom: 1px solid black;
-	margin: 60px;
-}
-
-.advanced-order-score-star {
-	height: 60px;
-	width: 60px;
-}
-
-.advanced-order-score-star:hover {
-	height: 80px;
-	width: 80px;
-}
-
-.advanced-order-pantry-delete-btn {
-	height: 40px;
-	width: 100px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-} */

@@ -1,47 +1,45 @@
-import React, {useState, useEffect} from "react";
-// import LiveTypingAdvancedOrder from "./Live-Typing-Pages/Live-Typing-Advanced-Order";
-import flippedchef from "../../assets/images/flippedchef.png";
-// import AdvancedStart from "./Advanced-Order-Pages/Advanced-Start";
+import React from "react";
+import flippedChef from "../../assets/images/flippedChef.png";
+import AdvancedStart from "./advancedOrderComps/advancedStart";
+import AdvancedOrderCalorieMacroSelection from "./advancedOrderComps/advancedOrderCalorieMacroSelection";
+import AdvancedOrderMealSetup from "./advancedOrderComps/advancedOrderMealSetup";
+import AdvancedOrderMealPlanner from "./advancedOrderComps/advancedOrderMealPlanner";
+
+import { useRenderStepStore } from "../../stateStore/RenderStepStore";
+//Buttons
+import AdvancedOrderBeginButton from "./advancedOrderComps/advancedOrderBeginButton";
+import AdvancedOrderResetButton from "./advancedOrderComps/advancedOrderStartOverButton";
+import AdvancedOrderPreviousButton from "./advancedOrderComps/advancedOrderPreviousButton";
 
 
-export default function AdvancedOrder() {
-    // const [renderLiveTyping, setRenderLiveTyping] = useState(true)
-    // const [renderAdvancedStart, setRenderAdvancedStart] = useState(false)
-    // const [renderBeginBtn, setRenderBeginBtn] = useState(false)
+import "../../css/advancedOrder.css";
+const AdvancedOrder = () => {
 
-    // function handleBeginBtn() {  
-    //     setRenderAdvancedStart(true)
-    //     setRenderLiveTyping(false)
-    // }
+    const step = useRenderStepStore((state) => state.step);
 
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setRenderBeginBtn(true);
-    //     }, 8000);
-    //     return () => clearTimeout(timer);
-    // }, []);
+    const renderStepMap =
+    {
+        0: <AdvancedStart />,
+        1: <AdvancedOrderCalorieMacroSelection />,
+		2: <AdvancedOrderMealSetup />,
+		3: <AdvancedOrderMealPlanner />
+    }
+    const RenderCompFromStep = renderStepMap[step];
 
-    return(
-        <div className="advanced-order-container">
-				<img className="chef-img" src={flippedchef} alt="Chef" />
-            <div className="chef-bubble-div">
-                {/* <div
-                    className="advanced-order-live-container"
-                    style={{ display: renderLiveTyping ? "flex" : "none"}}
-                > */}
-                    {/* <LiveTypingAdvancedOrder
-                    fontSize="28px"
-                    /> */}
-                    {/* <button
-                        onClick={handleBeginBtn}
-                        style={{ display: renderBeginBtn ? "flex" : "none" }}
-                        className="easy-order-begin-btn">
-                        Begin    
-                    </button> */}
-                    {/* </div> */}
-                        {/* {renderAdvancedStart ? (<AdvancedStart />) : ""} */}
-                
-            </div>
-        </div>
-    )
+
+    return (
+			<div className='advanced-order-container'>
+				<img className='advanced-order-chef-img' src={flippedChef} />
+				<div className='advanced-order-render-comp-container'>
+					{RenderCompFromStep}
+					<div className='advanced-order-button-container'>
+						
+						{step === 0 ? <AdvancedOrderBeginButton /> : null}
+						{step != 0 ? <AdvancedOrderResetButton /> : null}
+						{step != 0 ? <AdvancedOrderPreviousButton /> : null}
+					</div>
+				</div>
+			</div>
+		);
 }
+    export default AdvancedOrder

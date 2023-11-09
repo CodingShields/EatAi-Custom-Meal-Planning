@@ -4,7 +4,7 @@ import "../../../css/easyOrder.css";
 
 const EasyOrderStartOverButton = () => {
 	const resetStep = useRenderStepStore((state) => state.resetStep);
-	const { resetForm } = useEasyOrderStoreActions();
+	const { resetForm }= useEasyOrderStoreActions();
 	const clearLocalStorage = () => {
 		localStorage.clear();
 	};

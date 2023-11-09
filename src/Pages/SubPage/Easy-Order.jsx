@@ -41,10 +41,9 @@ const EasyOrderForm = () => {
 		9: <EasyOrderConfirmOrder />,
 		10: <EasyOrderFulfilled />,
 	};
-	// need some other variables that are going to setup the questions better
-	// get chat gtp to build a prompt for the user input
+
 	const RenderCompFromStep = renderStepMap[step];
-	// in the api call need to add a name summary
+	
 	return (
 		<div className='easy-order-container'>
 			<div className='easy-order-chef-img-container'>
