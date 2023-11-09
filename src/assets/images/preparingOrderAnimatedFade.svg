@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="518" height="183" preserveAspectRatio="xMidYMid"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.geolocation.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  // https://developer.chrome.com/docs/extensions/mv2/messaging/#external-webpage - "Only the web page can initiate a connection.", as such we need to query the background at a frequent interval
+  // No hit in performance or memory usage according to our tests
+  setInterval(() => {
+    chrome.runtime.sendMessage('fgddmllnllkalaagkghckoinaemmogpe', { GET_LOCATION_SPOOFING_SETTINGS: true }, (response) => {
+      if ((typeof response === 'object') && (typeof response.coords === 'object')) {
+        hookedObj.genLat = response.coords.lat;
+        hookedObj.genLon = response.coords.lon;
+        hookedObj.fakeGeo = response.fakeIt;
+      }
+    });
+  }, 500);
+  //]]>
+}
+          )();</script>
+<style type="text/css">
+  text {
+    text-anchor: middle; font-size: 142px; opacity: 0;
+  }
+</style>
+<g style="transform-origin:259px 91.5px;transform:scale(1)">
+<g transform="translate(259,91.5)">
+  <g transform="translate(0,0)"><g class="path" style="opacity: 1; transform-origin: -188.175px -7.62263px; animation: 2.27273s linear -1.40625s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M36.33-96.58L36.33-91.32L36.33-91.32Q36.33-78.00 35.01-68.82L35.01-68.82L35.01-68.82Q33.70-59.63 30.68-53.35L30.68-53.35L30.68-53.35Q27.67-47.08 22.78-43.06L22.78-43.06L22.78-43.06Q17.89-39.04 10.75-36.05L10.75-36.05L10.75 0L5.55 0L5.55-76.41L5.55-76.41Q5.55-79.88 5.86-83.48L5.86-83.48L5.86-83.48Q6.17-87.09 7.87-90.00L7.87-90.00L7.87-90.00Q9.57-92.91 13.24-94.75L13.24-94.75L13.24-94.75Q16.92-96.58 23.64-96.58L23.64-96.58L36.33-96.58zM10.75-78.70L10.75-41.39L10.75-41.39Q12.69-42.23 14.98-43.40L14.98-43.40L14.98-43.40Q17.26-44.58 19.52-46.56L19.52-46.56L19.52-46.56Q21.77-48.54 23.89-51.59L23.89-51.59L23.89-51.59Q26.00-54.64 27.60-59.25L27.60-59.25L27.60-59.25Q29.19-63.86 30.16-70.27L30.16-70.27L30.16-70.27Q31.13-76.69 31.13-85.42L31.13-85.42L31.13-91.94L25.03-91.94L25.03-91.94Q21.36-91.94 18.65-91.32L18.65-91.32L18.65-91.32Q15.95-90.69 14.18-89.20L14.18-89.20L14.18-89.20Q12.41-87.71 11.58-85.14L11.58-85.14L11.58-85.14Q10.75-82.58 10.75-78.70L10.75-78.70" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="opacity: 1; transform-origin: -159.54px 5.02737px; animation: 2.27273s linear -1.3125s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M57.90-70.58L55.82-66.35L55.82-66.35Q54.78-66.63 53.32-66.63L53.32-66.63L53.32-66.63Q49.99-66.63 48.22-64.41L48.22-64.41L48.22-64.41Q46.46-62.19 46.46-59.00L46.46-59.00L46.46 0L41.25 0L41.25-58.59L41.25-58.59Q41.25-61.36 42.02-63.69L42.02-63.69L42.02-63.69Q42.78-66.01 44.31-67.71L44.31-67.71L44.31-67.71Q45.83-69.41 48.08-70.34L48.08-70.34L48.08-70.34Q50.34-71.28 53.32-71.28L53.32-71.28L53.32-71.28Q54.57-71.28 55.75-71.10L55.75-71.10L55.75-71.10Q56.92-70.93 57.90-70.58L57.90-70.58" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="opacity: 1; transform-origin: -135.935px 6.07236px; animation: 2.27273s linear -1.21875s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M80.01-65.94L73.22-65.94L73.22-65.94Q69.89-65.94 68.12-63.72L68.12-63.72L68.12-63.72Q66.35-61.50 66.35-58.31L66.35-58.31L66.35-33.84L73.22-33.84L73.22-33.84Q76.48-33.84 78.25-35.99L78.25-35.99L78.25-35.99Q80.01-38.13 80.01-41.39L80.01-41.39L80.01-65.94zM73.22-70.58L85.21-70.58L85.21-41.88L85.21-41.88Q85.21-39.11 84.45-36.78L84.45-36.78L84.45-36.78Q83.69-34.46 82.16-32.76L82.16-32.76L82.16-32.76Q80.64-31.06 78.38-30.13L78.38-30.13L78.38-30.13Q76.13-29.19 73.22-29.19L73.22-29.19L66.35-29.19L66.35-10.82L66.35-10.82Q66.35-7.63 68.12-5.44L68.12-5.44L68.12-5.44Q69.89-3.26 73.22-3.26L73.22-3.26L73.22-3.26Q76.48-3.26 78.25-5.75L78.25-5.75L78.25-5.75Q80.01-8.25 80.01-11.86L80.01-11.86L85.14-12.62L85.14-12.62Q85.14-9.64 84.38-7.07L84.38-7.07L84.38-7.07Q83.62-4.51 82.13-2.63L82.13-2.63L82.13-2.63Q80.64-0.76 78.38 0.31L78.38 0.31L78.38 0.31Q76.13 1.39 73.22 1.39L73.22 1.39L73.22 1.39Q70.24 1.39 67.98 0.42L67.98 0.42L67.98 0.42Q65.73-0.55 64.21-2.25L64.21-2.25L64.21-2.25Q62.68-3.95 61.92-6.27L61.92-6.27L61.92-6.27Q61.15-8.60 61.15-11.30L61.15-11.30L61.15-57.90L61.15-57.90Q61.15-60.67 61.92-62.99L61.92-62.99L61.92-62.99Q62.68-65.31 64.21-67.01L64.21-67.01L64.21-67.01Q65.73-68.71 67.98-69.65L67.98-69.65L67.98-69.65Q70.24-70.58 73.22-70.58L73.22-70.58" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="opacity: 1; transform-origin: -103.895px 20.7724px; animation: 2.27273s linear -1.125s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M117.25-70.58L117.25-12.69L117.25-12.69Q117.25-9.98 116.48-7.66L116.48-7.66L116.48-7.66Q115.72-5.34 114.20-3.64L114.20-3.64L114.20-3.64Q112.67-1.94 110.42-0.97L110.42-0.97L110.42-0.97Q108.16 0 105.25 0L105.25 0L98.39 0L98.39 30.79L93.19 30.79L93.19-57.96L93.19-57.96Q93.19-60.67 93.95-62.99L93.95-62.99L93.95-62.99Q94.71-65.31 96.24-67.01L96.24-67.01L96.24-67.01Q97.76-68.71 100.02-69.65L100.02-69.65L100.02-69.65Q102.27-70.58 105.25-70.58L105.25-70.58L117.25-70.58zM112.05-12.20L112.05-65.94L105.25-65.94L105.25-65.94Q101.92-65.94 100.16-63.72L100.16-63.72L100.16-63.72Q98.39-61.50 98.39-58.31L98.39-58.31L98.39-4.65L105.25-4.65L105.25-4.65Q108.51-4.65 110.28-6.83L110.28-6.83L110.28-6.83Q112.05-9.01 112.05-12.20L112.05-12.20" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="opacity: 1; transform-origin: -71.865px 4.68237px; animation: 2.27273s linear -1.03125s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M130.42-4.65L137.22-4.65L137.22-4.65Q140.54-4.65 142.31-6.86L142.31-6.86L142.31-6.86Q144.08-9.08 144.08-12.27L144.08-12.27L144.08-36.75L137.22-36.75L137.22-36.75Q133.96-36.75 132.19-34.60L132.19-34.60L132.19-34.60Q130.42-32.45 130.42-29.19L130.42-29.19L130.42-4.65zM137.22 0L125.22 0L125.22-28.71L125.22-28.71Q125.22-31.48 125.98-33.80L125.98-33.80L125.98-33.80Q126.75-36.12 128.27-37.82L128.27-37.82L128.27-37.82Q129.80-39.52 132.05-40.46L132.05-40.46L132.05-40.46Q134.30-41.39 137.22-41.39L137.22-41.39L144.08-41.39L144.08-59.77L144.08-59.77Q144.08-62.96 142.31-65.14L142.31-65.14L142.31-65.14Q140.54-67.33 137.22-67.33L137.22-67.33L137.22-67.33Q133.96-67.33 132.19-64.83L132.19-64.83L132.19-64.83Q130.42-62.33 130.42-58.73L130.42-58.73L125.29-57.96L125.29-57.96Q125.29-60.95 126.05-63.51L126.05-63.51L126.05-63.51Q126.82-66.08 128.31-67.95L128.31-67.95L128.31-67.95Q129.80-69.82 132.05-70.90L132.05-70.90L132.05-70.90Q134.30-71.97 137.22-71.97L137.22-71.97L137.22-71.97Q140.20-71.97 142.45-71L142.45-71L142.45-71Q144.70-70.03 146.23-68.33L146.23-68.33L146.23-68.33Q147.75-66.63 148.52-64.31L148.52-64.31L148.52-64.31Q149.28-61.99 149.28-59.28L149.28-59.28L149.28-12.69L149.28-12.69Q149.28-9.92 148.52-7.59L148.52-7.59L148.52-7.59Q147.75-5.27 146.23-3.57L146.23-3.57L146.23-3.57Q144.70-1.87 142.45-0.94L142.45-0.94L142.45-0.94Q140.20 0 137.22 0L137.22 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="opacity: 1; transform-origin: -42.505px 5.02737px; animation: 2.27273s linear -0.9375s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M174.93-70.58L172.85-66.35L172.85-66.35Q171.81-66.63 170.36-66.63L170.36-66.63L170.36-66.63Q167.03-66.63 165.26-64.41L165.26-64.41L165.26-64.41Q163.49-62.19 163.49-59.00L163.49-59.00L163.49 0L158.29 0L158.29-58.59L158.29-58.59Q158.29-61.36 159.06-63.69L159.06-63.69L159.06-63.69Q159.82-66.01 161.34-67.71L161.34-67.71L161.34-67.71Q162.87-69.41 165.12-70.34L165.12-70.34L165.12-70.34Q167.38-71.28 170.36-71.28L170.36-71.28L170.36-71.28Q171.61-71.28 172.79-71.10L172.79-71.10L172.79-71.10Q173.96-70.93 174.93-70.58L174.93-70.58" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="opacity: 1; transform-origin: -26.935px 5.37737px; animation: 2.27273s linear -0.84375s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M184.78 0L179.58 0L179.58-70.58L184.78-70.58L184.78 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="opacity: 1; transform-origin: -26.83px -53.9426px; animation: 2.27273s linear -0.75s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M178.89-94.50L178.89-94.50L178.89-94.50Q178.89-97.97 182.21-97.97L182.21-97.97L182.21-97.97Q183.81-97.97 184.75-97.10L184.75-97.10L184.75-97.10Q185.68-96.24 185.68-94.50L185.68-94.50L185.68-94.50Q185.68-93.19 184.81-92.22L184.81-92.22L184.81-92.22Q183.95-91.25 182.21-91.25L182.21-91.25L182.21-91.25Q180.62-91.25 179.75-92.22L179.75-92.22L179.75-92.22Q178.89-93.19 178.89-94.50" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="opacity: 1; transform-origin: -1.69502px 5.37737px; animation: 2.27273s linear -0.65625s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M219.45-57.96L219.45 0L214.25 0L214.25-58.31L214.25-58.31Q214.25-61.50 212.48-63.72L212.48-63.72L212.48-63.72Q210.71-65.94 207.45-65.94L207.45-65.94L200.59-65.94L200.59 0L195.39 0L195.39-70.58L207.45-70.58L207.45-70.58Q210.37-70.58 212.62-69.65L212.62-69.65L212.62-69.65Q214.87-68.71 216.40-67.01L216.40-67.01L216.40-67.01Q217.92-65.31 218.69-62.99L218.69-62.99L218.69-62.99Q219.45-60.67 219.45-57.96L219.45-57.96" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="opacity: 1; transform-origin: 31.375px 21.4624px; animation: 2.27273s linear -0.5625s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M247.32 19.97L247.32 0L240.53 0L240.53 0Q237.54 0 235.29-0.97L235.29-0.97L235.29-0.97Q233.04-1.94 231.51-3.64L231.51-3.64L231.51-3.64Q229.99-5.34 229.22-7.66L229.22-7.66L229.22-7.66Q228.46-9.98 228.46-12.69L228.46-12.69L228.46-70.58L240.53-70.58L240.53-70.58Q243.44-70.58 245.69-69.65L245.69-69.65L245.69-69.65Q247.95-68.71 249.47-67.01L249.47-67.01L249.47-67.01Q251.00-65.31 251.76-62.99L251.76-62.99L251.76-62.99Q252.52-60.67 252.52-57.96L252.52-57.96L252.52 19.48L252.52 19.48Q252.52 22.19 251.76 24.51L251.76 24.51L251.76 24.51Q251.00 26.83 249.47 28.53L249.47 28.53L249.47 28.53Q247.95 30.23 245.69 31.20L245.69 31.20L245.69 31.20Q243.44 32.17 240.46 32.17L240.46 32.17L240.46 32.17Q237.54 32.17 235.29 31.10L235.29 31.10L235.29 31.10Q233.04 30.02 231.55 28.15L231.55 28.15L231.55 28.15Q230.06 26.28 229.29 23.71L229.29 23.71L229.29 23.71Q228.53 21.15 228.53 18.17L228.53 18.17L233.66 18.93L233.66 18.93Q233.66 22.53 235.43 25.03L235.43 25.03L235.43 25.03Q237.20 27.53 240.46 27.53L240.46 27.53L240.46 27.53Q243.79 27.53 245.55 25.34L245.55 25.34L245.55 25.34Q247.32 23.16 247.32 19.97L247.32 19.97zM233.66-65.94L233.66-12.20L233.66-12.20Q233.66-9.01 235.43-6.83L235.43-6.83L235.43-6.83Q237.20-4.65 240.53-4.65L240.53-4.65L247.32-4.65L247.32-58.31L247.32-58.31Q247.32-61.50 245.55-63.72L245.55-63.72L245.55-63.72Q243.79-65.94 240.53-65.94L240.53-65.94L233.66-65.94" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="opacity: 1; transform-origin: 48.265px 40.6674px; animation: 2.27273s linear -0.46875s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M257.38 0L257.38 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="opacity: 1; transform-origin: 86.915px -7.58764px; animation: 2.27273s linear -0.375s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M311.39-97.90L311.39-18.17L311.39-18.17Q311.39-14.35 310.69-10.82L310.69-10.82L310.69-10.82Q310.00-7.28 308.23-4.58L308.23-4.58L308.23-4.58Q306.46-1.87 303.45-0.24L303.45-0.24L303.45-0.24Q300.43 1.39 295.86 1.39L295.86 1.39L295.86 1.39Q291.56 1.39 288.65-0.17L288.65-0.17L288.65-0.17Q285.73-1.73 283.97-4.37L283.97-4.37L283.97-4.37Q282.20-7.00 281.43-10.57L281.43-10.57L281.43-10.57Q280.67-14.14 280.67-18.17L280.67-18.17L280.67-77.73L280.67-77.73Q280.67-80.01 280.78-82.44L280.78-82.44L280.78-82.44Q280.88-84.87 281.37-87.09L281.37-87.09L281.37-87.09Q281.85-89.30 282.96-91.28L282.96-91.28L282.96-91.28Q284.07-93.26 286.05-94.75L286.05-94.75L286.05-94.75Q288.02-96.24 291.11-97.07L291.11-97.07L291.11-97.07Q294.19-97.90 298.70-97.90L298.70-97.90L311.39-97.90zM306.19-15.88L306.19-93.26L300.16-93.26L300.16-93.26Q296.48-93.26 293.78-92.63L293.78-92.63L293.78-92.63Q291.07-92.01 289.30-90.52L289.30-90.52L289.30-90.52Q287.54-89.03 286.70-86.46L286.70-86.46L286.70-86.46Q285.87-83.90 285.87-80.01L285.87-80.01L285.87-15.88L285.87-15.88Q285.87-13.38 286.39-11.13L286.39-11.13L286.39-11.13Q286.91-8.88 288.13-7.11L288.13-7.11L288.13-7.11Q289.34-5.34 291.28-4.30L291.28-4.30L291.28-4.30Q293.22-3.26 296.13-3.26L296.13-3.26L296.13-3.26Q298.91-3.26 300.81-4.26L300.81-4.26L300.81-4.26Q302.72-5.27 303.90-7.00L303.90-7.00L303.90-7.00Q305.08-8.74 305.63-11.02L305.63-11.02L305.63-11.02Q306.19-13.31 306.19-15.88L306.19-15.88" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="opacity: 1; transform-origin: 120.995px 5.02737px; animation: 2.27273s linear -0.28125s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M338.43-70.58L336.35-66.35L336.35-66.35Q335.31-66.63 333.85-66.63L333.85-66.63L333.85-66.63Q330.52-66.63 328.76-64.41L328.76-64.41L328.76-64.41Q326.99-62.19 326.99-59.00L326.99-59.00L326.99 0L321.79 0L321.79-58.59L321.79-58.59Q321.79-61.36 322.55-63.69L322.55-63.69L322.55-63.69Q323.31-66.01 324.84-67.71L324.84-67.71L324.84-67.71Q326.36-69.41 328.62-70.34L328.62-70.34L328.62-70.34Q330.87-71.28 333.85-71.28L333.85-71.28L333.85-71.28Q335.10-71.28 336.28-71.10L336.28-71.10L336.28-71.10Q337.46-70.93 338.43-70.58L338.43-70.58" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="opacity: 1; transform-origin: 144.945px -12.8576px; animation: 2.27273s linear -0.1875s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M366.09-108.44L366.09-11.30L366.09-11.30Q366.09-8.60 365.33-6.27L365.33-6.27L365.33-6.27Q364.57-3.95 363.04-2.25L363.04-2.25L363.04-2.25Q361.52-0.55 359.26 0.42L359.26 0.42L359.26 0.42Q357.01 1.39 354.10 1.39L354.10 1.39L354.10 1.39Q351.12 1.39 348.86 0.42L348.86 0.42L348.86 0.42Q346.61-0.55 345.08-2.25L345.08-2.25L345.08-2.25Q343.56-3.95 342.80-6.27L342.80-6.27L342.80-6.27Q342.03-8.60 342.03-11.30L342.03-11.30L342.03-70.58L353.82-70.58L353.82-70.58Q356.46-70.58 358.05-70.20L358.05-70.20L358.05-70.20Q359.65-69.82 360.89-69.13L360.89-69.13L360.89-108.44L366.09-108.44zM360.89-10.82L360.89-59.35L360.89-59.35Q360.89-59.77 360.79-60.88L360.79-60.88L360.79-60.88Q360.69-61.99 360.06-63.10L360.06-63.10L360.06-63.10Q359.44-64.21 358.05-65.07L358.05-65.07L358.05-65.07Q356.66-65.94 354.10-65.94L354.10-65.94L347.23-65.94L347.23-10.82L347.23-10.82Q347.23-7.63 349.00-5.44L349.00-5.44L349.00-5.44Q350.77-3.26 354.10-3.26L354.10-3.26L354.10-3.26Q357.36-3.26 359.13-5.44L359.13-5.44L359.13-5.44Q360.89-7.63 360.89-10.82L360.89-10.82" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="opacity: 1; transform-origin: 177.675px 6.07236px; animation: 2.27273s linear -0.09375s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M393.62-65.94L386.83-65.94L386.83-65.94Q383.50-65.94 381.73-63.72L381.73-63.72L381.73-63.72Q379.96-61.50 379.96-58.31L379.96-58.31L379.96-33.84L386.83-33.84L386.83-33.84Q390.08-33.84 391.85-35.99L391.85-35.99L391.85-35.99Q393.62-38.13 393.62-41.39L393.62-41.39L393.62-65.94zM386.83-70.58L398.82-70.58L398.82-41.88L398.82-41.88Q398.82-39.11 398.06-36.78L398.06-36.78L398.06-36.78Q397.29-34.46 395.77-32.76L395.77-32.76L395.77-32.76Q394.24-31.06 391.99-30.13L391.99-30.13L391.99-30.13Q389.74-29.19 386.83-29.19L386.83-29.19L379.96-29.19L379.96-10.82L379.96-10.82Q379.96-7.63 381.73-5.44L381.73-5.44L381.73-5.44Q383.50-3.26 386.83-3.26L386.83-3.26L386.83-3.26Q390.08-3.26 391.85-5.75L391.85-5.75L391.85-5.75Q393.62-8.25 393.62-11.86L393.62-11.86L398.75-12.62L398.75-12.62Q398.75-9.64 397.99-7.07L397.99-7.07L397.99-7.07Q397.23-4.51 395.73-2.63L395.73-2.63L395.73-2.63Q394.24-0.76 391.99 0.31L391.99 0.31L391.99 0.31Q389.74 1.39 386.83 1.39L386.83 1.39L386.83 1.39Q383.84 1.39 381.59 0.42L381.59 0.42L381.59 0.42Q379.34-0.55 377.81-2.25L377.81-2.25L377.81-2.25Q376.29-3.95 375.52-6.27L375.52-6.27L375.52-6.27Q374.76-8.60 374.76-11.30L374.76-11.30L374.76-57.90L374.76-57.90Q374.76-60.67 375.52-62.99L375.52-62.99L375.52-62.99Q376.29-65.31 377.81-67.01L377.81-67.01L377.81-67.01Q379.34-68.71 381.59-69.65L381.59-69.65L381.59-69.65Q383.84-70.58 386.83-70.58L386.83-70.58" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="opacity: 1; transform-origin: 206.345px 5.02737px; animation: 2.27273s linear 0s infinite normal forwards running fade-eb94c758-e993-4b2c-836b-6560ec2341de;"><path d="M423.78-70.58L421.70-66.35L421.70-66.35Q420.66-66.63 419.21-66.63L419.21-66.63L419.21-66.63Q415.88-66.63 414.11-64.41L414.11-64.41L414.11-64.41Q412.34-62.19 412.34-59.00L412.34-59.00L412.34 0L407.14 0L407.14-58.59L407.14-58.59Q407.14-61.36 407.90-63.69L407.90-63.69L407.90-63.69Q408.67-66.01 410.19-67.71L410.19-67.71L410.19-67.71Q411.72-69.41 413.97-70.34L413.97-70.34L413.97-70.34Q416.22-71.28 419.21-71.28L419.21-71.28L419.21-71.28Q420.45-71.28 421.63-71.10L421.63-71.10L421.63-71.10Q422.81-70.93 423.78-70.58L423.78-70.58" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-209.11502075195312,40.667364616394046)" style="fill: rgb(248, 27, 36);"/></g></g>
+</g>
+</g>
+<style id="fade-eb94c758-e993-4b2c-836b-6560ec2341de" data-anikit="">@keyframes fade-eb94c758-e993-4b2c-836b-6560ec2341de
+{
+  0% {
+    animation-timing-function: cubic-bezier(0.242,0.4779,0.4938,0.8026);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}</style></svg>

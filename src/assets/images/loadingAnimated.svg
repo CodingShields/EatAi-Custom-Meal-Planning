@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="332" height="183" preserveAspectRatio="xMidYMid"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.geolocation.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  // https://developer.chrome.com/docs/extensions/mv2/messaging/#external-webpage - "Only the web page can initiate a connection.", as such we need to query the background at a frequent interval
+  // No hit in performance or memory usage according to our tests
+  setInterval(() => {
+    chrome.runtime.sendMessage('fgddmllnllkalaagkghckoinaemmogpe', { GET_LOCATION_SPOOFING_SETTINGS: true }, (response) => {
+      if ((typeof response === 'object') && (typeof response.coords === 'object')) {
+        hookedObj.genLat = response.coords.lat;
+        hookedObj.genLon = response.coords.lon;
+        hookedObj.fakeGeo = response.fakeIt;
+      }
+    });
+  }, 500);
+  //]]>
+}
+          )();</script>
+<style type="text/css">
+  text {
+    text-anchor: middle; font-size: 142px; opacity: 0;
+  }
+</style>
+<g style="transform-origin: 166px 91.5px; transform: scale(1.33962);">
+<g transform="translate(166,91.5)">
+  <g transform="translate(0,0)"><g class="path" style="transform: scale(0.91); transform-origin: -61.67px -7.79947px; animation: 1.02041s linear -0.589286s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M19.05-73.13L19.05-69.67L19.05-69.67Q16.46-69.67 14.44-69.20L14.44-69.20L14.44-69.20Q12.42-68.73 10.97-67.60L10.97-67.60L10.97-67.60Q9.52-66.46 8.77-64.54L8.77-64.54L8.77-64.54Q8.02-62.63 8.02-59.78L8.02-59.78L8.02-3.47L24.53-3.47L24.53 0L4.14 0L4.14-58.07L4.14-58.07Q4.14-59.78 4.22-61.57L4.22-61.57L4.22-61.57Q4.30-63.35 4.71-65.03L4.71-65.03L4.71-65.03Q5.12-66.72 6.00-68.19L6.00-68.19L6.00-68.19Q6.88-69.67 8.54-70.75L8.54-70.75L8.54-70.75Q10.20-71.84 12.76-72.49L12.76-72.49L12.76-72.49Q15.32-73.13 19.05-73.13L19.05-73.13" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -39.125px 2.42553px; animation: 1.02041s linear -0.505102s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M45.86-53.72L45.86-9.42L45.86-9.42Q45.86-7.14 45.29-5.23L45.29-5.23L45.29-5.23Q44.72-3.31 43.58-1.92L43.58-1.92L43.58-1.92Q42.44-0.52 40.76 0.26L40.76 0.26L40.76 0.26Q39.08 1.04 36.85 1.04L36.85 1.04L36.85 1.04Q34.63 1.04 32.94 0.34L32.94 0.34L32.94 0.34Q31.26-0.36 30.15-1.63L30.15-1.63L30.15-1.63Q29.04-2.90 28.47-4.63L28.47-4.63L28.47-4.63Q27.90-6.37 27.90-8.44L27.90-8.44L27.90-44.30L27.90-44.30Q27.90-46.32 28.47-48.06L28.47-48.06L28.47-48.06Q29.04-49.79 30.17-51.06L30.17-51.06L30.17-51.06Q31.31-52.33 33.00-53.03L33.00-53.03L33.00-53.03Q34.68-53.72 36.90-53.72L36.90-53.72L45.86-53.72zM31.78-44.56L31.78-8.13L31.78-8.13Q31.78-5.75 33.10-4.09L33.10-4.09L33.10-4.09Q34.42-2.43 36.90-2.43L36.90-2.43L36.90-2.43Q39.34-2.43 40.66-4.32L40.66-4.32L40.66-4.32Q41.98-6.21 41.98-8.90L41.98-8.90L41.98-50.26L36.90-50.26L36.90-50.26Q34.42-50.26 33.10-48.60L33.10-48.60L33.10-48.60Q31.78-46.94 31.78-44.56L31.78-44.56" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -15.215px 1.90553px; animation: 1.02041s linear -0.420918s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M55.69-3.47L60.76-3.47L60.76-3.47Q63.25-3.47 64.57-5.12L64.57-5.12L64.57-5.12Q65.89-6.78 65.89-9.16L65.89-9.16L65.89-27.43L60.76-27.43L60.76-27.43Q58.33-27.43 57.01-25.83L57.01-25.83L57.01-25.83Q55.69-24.22 55.69-21.79L55.69-21.79L55.69-3.47zM60.76 0L51.81 0L51.81-21.43L51.81-21.43Q51.81-23.50 52.38-25.23L52.38-25.23L52.38-25.23Q52.95-26.97 54.09-28.23L54.09-28.23L54.09-28.23Q55.23-29.50 56.91-30.20L56.91-30.20L56.91-30.20Q58.59-30.90 60.76-30.90L60.76-30.90L65.89-30.90L65.89-44.62L65.89-44.62Q65.89-47.00 64.57-48.63L64.57-48.63L64.57-48.63Q63.25-50.26 60.76-50.26L60.76-50.26L60.76-50.26Q58.33-50.26 57.01-48.39L57.01-48.39L57.01-48.39Q55.69-46.53 55.69-43.84L55.69-43.84L51.86-43.27L51.86-43.27Q51.86-45.50 52.43-47.41L52.43-47.41L52.43-47.41Q53-49.33 54.11-50.72L54.11-50.72L54.11-50.72Q55.23-52.12 56.91-52.92L56.91-52.92L56.91-52.92Q58.59-53.72 60.76-53.72L60.76-53.72L60.76-53.72Q62.99-53.72 64.67-53L64.67-53L64.67-53Q66.35-52.28 67.49-51.01L67.49-51.01L67.49-51.01Q68.63-49.74 69.20-48.01L69.20-48.01L69.20-48.01Q69.77-46.27 69.77-44.25L69.77-44.25L69.77-9.47L69.77-9.47Q69.77-7.40 69.20-5.67L69.20-5.67L69.20-5.67Q68.63-3.93 67.49-2.67L67.49-2.67L67.49-2.67Q66.35-1.40 64.67-0.70L64.67-0.70L64.67-0.70Q62.99 0 60.76 0L60.76 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 9.21499px -11.1895px; animation: 1.02041s linear -0.336735s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M94.20-80.95L94.20-8.44L94.20-8.44Q94.20-6.42 93.63-4.68L93.63-4.68L93.63-4.68Q93.06-2.95 91.92-1.68L91.92-1.68L91.92-1.68Q90.78-0.41 89.10 0.31L89.10 0.31L89.10 0.31Q87.42 1.04 85.25 1.04L85.25 1.04L85.25 1.04Q83.02 1.04 81.34 0.31L81.34 0.31L81.34 0.31Q79.66-0.41 78.52-1.68L78.52-1.68L78.52-1.68Q77.38-2.95 76.81-4.68L76.81-4.68L76.81-4.68Q76.24-6.42 76.24-8.44L76.24-8.44L76.24-52.69L85.04-52.69L85.04-52.69Q87.00-52.69 88.20-52.40L88.20-52.40L88.20-52.40Q89.39-52.12 90.32-51.60L90.32-51.60L90.32-80.95L94.20-80.95zM90.32-8.07L90.32-44.30L90.32-44.30Q90.32-44.62 90.24-45.44L90.24-45.44L90.24-45.44Q90.16-46.27 89.70-47.10L89.70-47.10L89.70-47.10Q89.23-47.93 88.20-48.57L88.20-48.57L88.20-48.57Q87.16-49.22 85.25-49.22L85.25-49.22L80.12-49.22L80.12-8.07L80.12-8.07Q80.12-5.69 81.44-4.06L81.44-4.06L81.44-4.06Q82.76-2.43 85.25-2.43L85.25-2.43L85.25-2.43Q87.68-2.43 89.00-4.06L89.00-4.06L89.00-4.06Q90.32-5.69 90.32-8.07L90.32-8.07" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 27.64px 2.42053px; animation: 1.02041s linear -0.252551s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M105.59 0L101.70 0L101.70-52.69L105.59-52.69L105.59 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 27.72px -41.8545px; animation: 1.02041s linear -0.168367s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M101.19-70.55L101.19-70.55L101.19-70.55Q101.19-73.13 103.67-73.13L103.67-73.13L103.67-73.13Q104.86-73.13 105.56-72.49L105.56-72.49L105.56-72.49Q106.26-71.84 106.26-70.55L106.26-70.55L106.26-70.55Q106.26-69.56 105.61-68.84L105.61-68.84L105.61-68.84Q104.96-68.11 103.67-68.11L103.67-68.11L103.67-68.11Q102.48-68.11 101.83-68.84L101.83-68.84L101.83-68.84Q101.19-69.56 101.19-70.55" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 46.475px 2.42053px; animation: 1.02041s linear -0.0841837s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M131.46-43.27L131.46 0L127.58 0L127.58-43.53L127.58-43.53Q127.58-45.91 126.26-47.57L126.26-47.57L126.26-47.57Q124.94-49.22 122.51-49.22L122.51-49.22L117.39-49.22L117.39 0L113.50 0L113.50-52.69L122.51-52.69L122.51-52.69Q124.68-52.69 126.37-51.99L126.37-51.99L126.37-51.99Q128.05-51.29 129.19-50.02L129.19-50.02L129.19-50.02Q130.33-48.76 130.90-47.02L130.90-47.02L130.90-47.02Q131.46-45.29 131.46-43.27L131.46-43.27" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 71.165px 14.4305px; animation: 1.02041s linear 0s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M152.27 14.91L152.27 0L147.20 0L147.20 0Q144.97 0 143.29-0.72L143.29-0.72L143.29-0.72Q141.61-1.45 140.47-2.72L140.47-2.72L140.47-2.72Q139.33-3.99 138.76-5.72L138.76-5.72L138.76-5.72Q138.19-7.45 138.19-9.47L138.19-9.47L138.19-52.69L147.20-52.69L147.20-52.69Q149.37-52.69 151.06-51.99L151.06-51.99L151.06-51.99Q152.74-51.29 153.88-50.02L153.88-50.02L153.88-50.02Q155.01-48.76 155.58-47.02L155.58-47.02L155.58-47.02Q156.15-45.29 156.15-43.27L156.15-43.27L156.15 14.54L156.15 14.54Q156.15 16.56 155.58 18.30L155.58 18.30L155.58 18.30Q155.01 20.03 153.88 21.30L153.88 21.30L153.88 21.30Q152.74 22.57 151.06 23.29L151.06 23.29L151.06 23.29Q149.37 24.02 147.15 24.02L147.15 24.02L147.15 24.02Q144.97 24.02 143.29 23.21L143.29 23.21L143.29 23.21Q141.61 22.41 140.50 21.01L140.50 21.01L140.50 21.01Q139.38 19.62 138.81 17.70L138.81 17.70L138.81 17.70Q138.25 15.79 138.25 13.56L138.25 13.56L142.08 14.13L142.08 14.13Q142.08 16.82 143.40 18.68L143.40 18.68L143.40 18.68Q144.71 20.55 147.15 20.55L147.15 20.55L147.15 20.55Q149.63 20.55 150.95 18.92L150.95 18.92L150.95 18.92Q152.27 17.29 152.27 14.91L152.27 14.91zM142.08-49.22L142.08-9.11L142.08-9.11Q142.08-6.73 143.40-5.10L143.40-5.10L143.40-5.10Q144.71-3.47 147.20-3.47L147.20-3.47L152.27-3.47L152.27-43.53L152.27-43.53Q152.27-45.91 150.95-47.57L150.95-47.57L150.95-47.57Q149.63-49.22 147.20-49.22L147.20-49.22L142.08-49.22" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-76.0050048828125,28.765525550842284)" style="fill: rgb(0, 149, 83);"/></g></g>
+</g>
+</g>
+<style id="breath-8a07c2ec-ea3a-407e-acd7-79a31314b294" data-anikit="">@keyframes breath-8a07c2ec-ea3a-407e-acd7-79a31314b294
+{
+  0% {
+    animation-timing-function: cubic-bezier(0.9647,0.2413,-0.0705,0.7911);
+    transform: scale(0.9099999999999999);
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.9226,0.2631,-0.0308,0.7628);
+    transform: scale(1.02994);
+  }
+  100% {
+    transform: scale(0.9099999999999999);
+  }
+}</style></svg>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore"
+import {useRenderStepStore} from "../../../stateStore/RenderStepStore"
 import "../../../css/easyOrder.css";
 
 const EasyOrderUserSelection = () => {
@@ -16,6 +17,7 @@ const EasyOrderUserSelection = () => {
 	// const seasonal = useEasyOrderStore((state) => state.Seasonal);
 	// const beverage = useEasyOrderStore((state) => state.Beverage);
 	const measure = useEasyOrderStore((state) => state.Measure);
+	const useEasyOrderRenderStore = useRenderStepStore((state) => state);
 
 	const formatCoursesOptions = () => {
 		if (Array.isArray(courses)) {
@@ -38,81 +40,81 @@ const EasyOrderUserSelection = () => {
 		<div className='easy-order-user-selection-container'>
 			<h1 className='easy-order-selection-title'>Current Selections</h1>
 			<div className='user-selection-container'>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 1 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 1 })}>
 					Event:
 				</button>
 				<>
 					<span className='user-input-text'>{event}</span>
 				</>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 2 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 2 })}>
 					Cultural:
 				</button>
 				<>
 					<span className='user-input-text'>{culture}</span>
 				</>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 3 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 3 })}>
 					HeadCount:
 				</button>
 				<>
 					<span className='user-input-text'>{headcount} </span>
 				</>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 4 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 4 })}>
 					Courses:
 				</button>
 				<>
 					<span className='user-input-text'>{formatCoursesOptions()}</span>
 				</>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 5 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 5 })}>
 					Dietary:
 				</button>
 				<>
 					<span className='user-input-text'>{formatDietaryOptions()}</span>
 				</>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 6 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 6 })}>
 					Desired Flavor:
 				</button>
 				<>
 					<span className='user-input-text'>{flavor}</span>
 				</>
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 7 })}>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 7 })}>
 					Meal Balance:
 				</button>
 				<>
 					<span className='user-input-text'>{mealBalance}</span>
 				</>
-				{/* <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 8 })}>Cook Time:</button> 
-        <>
-        <span className="user-input-text">{cookTime}</span>
-        </> */}
-				{/* <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 9 })}>How To Cook:</button>
-        <>
-        <span className="user-input-text">{howToCook}</span>
-        </> */}
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 8 })}>
+				{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 8 })}>Cook Time:</button> 
+				<>
+				<span className="user-input-text">{cookTime}</span>
+				</> */}
+						{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 9 })}>How To Cook:</button>
+				<>
+				<span className="user-input-text">{howToCook}</span>
+				</> */}
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 8 })}>
 					Measurement:
 				</button>
 				<>
 					<span className='user-input-text'>{measure}</span>
 				</>
-				{/* <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 11 })}>Seasonal:</button>
-        <>
-        <span className="user-input-text">{seasonal}</span>
-        </> */}
-				{/* <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 12 })}>Dessert:</button>
-        <>
-        <span className="user-input-text">{dessert}</span>
-        </> */}
-				{/* <button className="confirmed-selection-button" onClick={() => useEasyOrderRenderStore.setState({ step: 13 })}>Beverages:</button>
-        <>
-        <span className="user-input-text">{beverage}</span>
-        </> */}
-				<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 9 })}>
+				{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 11 })}>Seasonal:</button>
+				<>
+				<span className="user-input-text">{seasonal}</span>
+				</> */}
+						{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 12 })}>Dessert:</button>
+				<>
+				<span className="user-input-text">{dessert}</span>
+				</> */}
+						{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 13 })}>Beverages:</button>
+				<>
+				<span className="user-input-text">{beverage}</span>
+				</> */}
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 9 })}>
 					Review Order
 				</button>
 				<>
-					<button className='confirmed-selection-button' onClick={() => useEasyOrderRenderStore.setState({ step: 10 })}>
-						Order Fulfillment
-					</button>
+				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 10 })}>
+					Order Fulfillment
+				</button>
 				</>
 			</div>
 		</div>

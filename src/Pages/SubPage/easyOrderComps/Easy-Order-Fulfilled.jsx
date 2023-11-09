@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import cookingAnimated from "../../../assets/images/cookingAnimated.svg";
-import makeSureToSaveYourOrder from "../../../assets/images/makeSureToSaveYourOrder.svg";
-import waitForOrder from "../../../assets/images/waitForOrder.svg";
+import forgetToSaveAnimatedBounce from "../../.././assets/images/forgetToSaveAnimatedBounce.svg";
+import preparingOrderAnimatedFade from "../../.././assets/images/preparingOrderAnimatedFade.svg";
+import savedAnimatedFade from "../../.././assets/images/savedAnimatedFade.svg";
 import { db, auth } from "../../../Firebase/fireBaseConfig";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { UserAuth } from "../../../Context/AuthContext";
 import { nanoid } from "nanoid";
-import "../../../css/easyOrder.css";
+import "../../.././css/EasyOrder.css";
 
 const EasyOrderFulfilled = () => {
 	const [botResponse, setBotResponse] = useState({
@@ -23,7 +22,8 @@ const EasyOrderFulfilled = () => {
 	const [loading, setLoading] = useState({
 		cooking: false,
 		saveBtn: false,
-		renderResponse: false,
+        renderResponse: false,
+        renderSaved: false,
 	});
 
 	const userStateData = useEasyOrderStore((state) => state);
@@ -168,25 +168,27 @@ const EasyOrderFulfilled = () => {
 
 			await updateDoc(userDocRef, {
 				"pantry.easyOrder": arrayUnion(easyOrderItem),
-			});
+            });
+            
 			resetForm();
-			setLoading({ saveBtn: false });
+			setLoading({ saveBtn: false, renderSaved: true });
 			console.log("Document successfully updated!");
 		} catch (error) {
 			console.error("Error updating document:", error);
 		}
 	};
 
-	const formatResponse = () => {
-		const displayData = botResponse.data.replace(/(?:\r\n|\r|\n)/g, "<br>");
-		return displayData;
-	};
+	// const formatResponse = () => {
+	//     const displayData = botResponse.data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	//     return displayData;
+	// }
 
 	return (
 		<>
 			<h1 className='easy-order-bot-title'></h1>
-			<img src={loading.renderResponse ? { waitForOrder } : { makeSureToSaveYourOrder }} />
-			{loading.cooking ? <img src={cookingAnimated} className='cooking-image' /> : null}
+			<img src={loading.renderResponse ? forgetToSaveAnimatedBounce : null} />
+			{loading.renderSaved ? <img src={savedAnimatedFade} /> : null}
+			{loading.cooking ? <img src={preparingOrderAnimatedFade} className='cooking-image' /> : null}
 			{loading.saveBtn ? (
 				<button className='easy-order-btn' onClick={handleSave}>
 					Save To Pantry

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="518" height="133" preserveAspectRatio="xMidYMid"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.geolocation.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  // https://developer.chrome.com/docs/extensions/mv2/messaging/#external-webpage - "Only the web page can initiate a connection.", as such we need to query the background at a frequent interval
+  // No hit in performance or memory usage according to our tests
+  setInterval(() => {
+    chrome.runtime.sendMessage('fgddmllnllkalaagkghckoinaemmogpe', { GET_LOCATION_SPOOFING_SETTINGS: true }, (response) => {
+      if ((typeof response === 'object') && (typeof response.coords === 'object')) {
+        hookedObj.genLat = response.coords.lat;
+        hookedObj.genLon = response.coords.lon;
+        hookedObj.fakeGeo = response.fakeIt;
+      }
+    });
+  }, 500);
+  //]]>
+}
+          )();</script>
+<style type="text/css">
+  text {
+    text-anchor: middle; font-size: 106px; opacity: 0;
+  }
+</style>
+<g style="transform-origin: 259px 66.5px; transform: scale(1.325);">
+<g transform="translate(259,66.5)">
+  <g transform="translate(0,0)"><g class="path" style="transform: scale(0.91); transform-origin: -144.45px -4.196px; animation: 1.02041s linear -0.641399s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M20.47-54.41L20.47-51.45L20.47-51.45Q20.47-43.95 19.73-38.77L19.73-38.77L19.73-38.77Q18.98-33.59 17.29-30.06L17.29-30.06L17.29-30.06Q15.59-26.52 12.83-24.26L12.83-24.26L12.83-24.26Q10.08-21.99 6.05-20.31L6.05-20.31L6.05 0L3.13 0L3.13-43.05L3.13-43.05Q3.13-45 3.30-47.03L3.30-47.03L3.30-47.03Q3.48-49.06 4.43-50.70L4.43-50.70L4.43-50.70Q5.39-52.34 7.46-53.38L7.46-53.38L7.46-53.38Q9.53-54.41 13.32-54.41L13.32-54.41L20.47-54.41zM6.05-44.34L6.05-23.32L6.05-23.32Q7.15-23.79 8.44-24.45L8.44-24.45L8.44-24.45Q9.73-25.12 11.00-26.23L11.00-26.23L11.00-26.23Q12.27-27.34 13.46-29.06L13.46-29.06L13.46-29.06Q14.65-30.78 15.55-33.38L15.55-33.38L15.55-33.38Q16.45-35.98 16.99-39.59L16.99-39.59L16.99-39.59Q17.54-43.20 17.54-48.13L17.54-48.13L17.54-51.80L14.10-51.80L14.10-51.80Q12.03-51.80 10.51-51.45L10.51-51.45L10.51-51.45Q8.98-51.09 7.99-50.25L7.99-50.25L7.99-50.25Q6.99-49.41 6.52-47.97L6.52-47.97L6.52-47.97Q6.05-46.52 6.05-44.34L6.05-44.34" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -128.32px 2.929px; animation: 1.02041s linear -0.609329s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M32.62-39.77L31.45-37.38L31.45-37.38Q30.86-37.54 30.04-37.54L30.04-37.54L30.04-37.54Q28.16-37.54 27.17-36.29L27.17-36.29L27.17-36.29Q26.17-35.04 26.17-33.24L26.17-33.24L26.17 0L23.24 0L23.24-33.01L23.24-33.01Q23.24-34.57 23.67-35.88L23.67-35.88L23.67-35.88Q24.10-37.19 24.96-38.14L24.96-38.14L24.96-38.14Q25.82-39.10 27.09-39.63L27.09-39.63L27.09-39.63Q28.36-40.16 30.04-40.16L30.04-40.16L30.04-40.16Q30.74-40.16 31.41-40.06L31.41-40.06L31.41-40.06Q32.07-39.96 32.62-39.77L32.62-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -115.02px 3.514px; animation: 1.02041s linear -0.577259s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M45.08-37.15L41.25-37.15L41.25-37.15Q39.38-37.15 38.38-35.90L38.38-35.90L38.38-35.90Q37.38-34.65 37.38-32.85L37.38-32.85L37.38-19.06L41.25-19.06L41.25-19.06Q43.09-19.06 44.08-20.27L44.08-20.27L44.08-20.27Q45.08-21.48 45.08-23.32L45.08-23.32L45.08-37.15zM41.25-39.77L48.01-39.77L48.01-23.59L48.01-23.59Q48.01-22.03 47.58-20.72L47.58-20.72L47.58-20.72Q47.15-19.41 46.29-18.46L46.29-18.46L46.29-18.46Q45.43-17.50 44.16-16.97L44.16-16.97L44.16-16.97Q42.89-16.45 41.25-16.45L41.25-16.45L37.38-16.45L37.38-6.09L37.38-6.09Q37.38-4.30 38.38-3.07L38.38-3.07L38.38-3.07Q39.38-1.84 41.25-1.84L41.25-1.84L41.25-1.84Q43.09-1.84 44.08-3.24L44.08-3.24L44.08-3.24Q45.08-4.65 45.08-6.68L45.08-6.68L47.97-7.11L47.97-7.11Q47.97-5.43 47.54-3.98L47.54-3.98L47.54-3.98Q47.11-2.54 46.27-1.48L46.27-1.48L46.27-1.48Q45.43-0.43 44.16 0.18L44.16 0.18L44.16 0.18Q42.89 0.78 41.25 0.78L41.25 0.78L41.25 0.78Q39.57 0.78 38.30 0.23L38.30 0.23L38.30 0.23Q37.03-0.31 36.17-1.27L36.17-1.27L36.17-1.27Q35.31-2.23 34.88-3.54L34.88-3.54L34.88-3.54Q34.45-4.84 34.45-6.37L34.45-6.37L34.45-32.62L34.45-32.62Q34.45-34.18 34.88-35.49L34.88-35.49L34.88-35.49Q35.31-36.80 36.17-37.75L36.17-37.75L36.17-37.75Q37.03-38.71 38.30-39.24L38.30-39.24L38.30-39.24Q39.57-39.77 41.25-39.77L41.25-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -96.975px 11.794px; animation: 1.02041s linear -0.54519s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M66.05-39.77L66.05-7.15L66.05-7.15Q66.05-5.63 65.63-4.32L65.63-4.32L65.63-4.32Q65.20-3.01 64.34-2.05L64.34-2.05L64.34-2.05Q63.48-1.09 62.21-0.55L62.21-0.55L62.21-0.55Q60.94 0 59.30 0L59.30 0L55.43 0L55.43 17.34L52.50 17.34L52.50-32.66L52.50-32.66Q52.50-34.18 52.93-35.49L52.93-35.49L52.93-35.49Q53.36-36.80 54.22-37.75L54.22-37.75L54.22-37.75Q55.08-38.71 56.35-39.24L56.35-39.24L56.35-39.24Q57.62-39.77 59.30-39.77L59.30-39.77L66.05-39.77zM63.13-6.88L63.13-37.15L59.30-37.15L59.30-37.15Q57.42-37.15 56.43-35.90L56.43-35.90L56.43-35.90Q55.43-34.65 55.43-32.85L55.43-32.85L55.43-2.62L59.30-2.62L59.30-2.62Q61.13-2.62 62.13-3.85L62.13-3.85L62.13-3.85Q63.13-5.08 63.13-6.88L63.13-6.88" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -78.925px 2.734px; animation: 1.02041s linear -0.51312s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M73.48-2.62L77.30-2.62L77.30-2.62Q79.18-2.62 80.18-3.87L80.18-3.87L80.18-3.87Q81.17-5.12 81.17-6.91L81.17-6.91L81.17-20.70L77.30-20.70L77.30-20.70Q75.47-20.70 74.47-19.49L74.47-19.49L74.47-19.49Q73.48-18.28 73.48-16.45L73.48-16.45L73.48-2.62zM77.30 0L70.55 0L70.55-16.17L70.55-16.17Q70.55-17.73 70.98-19.04L70.98-19.04L70.98-19.04Q71.41-20.35 72.27-21.31L72.27-21.31L72.27-21.31Q73.13-22.27 74.39-22.79L74.39-22.79L74.39-22.79Q75.66-23.32 77.30-23.32L77.30-23.32L81.17-23.32L81.17-33.67L81.17-33.67Q81.17-35.47 80.18-36.70L80.18-36.70L80.18-36.70Q79.18-37.93 77.30-37.93L77.30-37.93L77.30-37.93Q75.47-37.93 74.47-36.52L74.47-36.52L74.47-36.52Q73.48-35.12 73.48-33.09L73.48-33.09L70.59-32.66L70.59-32.66Q70.59-34.34 71.02-35.78L71.02-35.78L71.02-35.78Q71.45-37.23 72.29-38.28L72.29-38.28L72.29-38.28Q73.13-39.34 74.39-39.94L74.39-39.94L74.39-39.94Q75.66-40.55 77.30-40.55L77.30-40.55L77.30-40.55Q78.98-40.55 80.25-40L80.25-40L80.25-40Q81.52-39.45 82.38-38.50L82.38-38.50L82.38-38.50Q83.24-37.54 83.67-36.23L83.67-36.23L83.67-36.23Q84.10-34.92 84.10-33.40L84.10-33.40L84.10-7.15L84.10-7.15Q84.10-5.59 83.67-4.28L83.67-4.28L83.67-4.28Q83.24-2.97 82.38-2.01L82.38-2.01L82.38-2.01Q81.52-1.05 80.25-0.53L80.25-0.53L80.25-0.53Q78.98 0 77.30 0L77.30 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -62.385px 2.929px; animation: 1.02041s linear -0.48105s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M98.55-39.77L97.38-37.38L97.38-37.38Q96.80-37.54 95.98-37.54L95.98-37.54L95.98-37.54Q94.10-37.54 93.11-36.29L93.11-36.29L93.11-36.29Q92.11-35.04 92.11-33.24L92.11-33.24L92.11 0L89.18 0L89.18-33.01L89.18-33.01Q89.18-34.57 89.61-35.88L89.61-35.88L89.61-35.88Q90.04-37.19 90.90-38.14L90.90-38.14L90.90-38.14Q91.76-39.10 93.03-39.63L93.03-39.63L93.03-39.63Q94.30-40.16 95.98-40.16L95.98-40.16L95.98-40.16Q96.68-40.16 97.34-40.06L97.34-40.06L97.34-40.06Q98.01-39.96 98.55-39.77L98.55-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -53.615px 3.124px; animation: 1.02041s linear -0.44898s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M104.10 0L101.17 0L101.17-39.77L104.10-39.77L104.10 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -53.555px -30.296px; animation: 1.02041s linear -0.41691s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M100.78-53.24L100.78-53.24L100.78-53.24Q100.78-55.20 102.66-55.20L102.66-55.20L102.66-55.20Q103.55-55.20 104.08-54.71L104.08-54.71L104.08-54.71Q104.61-54.22 104.61-53.24L104.61-53.24L104.61-53.24Q104.61-52.50 104.12-51.95L104.12-51.95L104.12-51.95Q103.63-51.41 102.66-51.41L102.66-51.41L102.66-51.41Q101.76-51.41 101.27-51.95L101.27-51.95L101.27-51.95Q100.78-52.50 100.78-53.24" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -39.395px 3.124px; animation: 1.02041s linear -0.38484s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M123.63-32.66L123.63 0L120.70 0L120.70-32.85L120.70-32.85Q120.70-34.65 119.71-35.90L119.71-35.90L119.71-35.90Q118.71-37.15 116.88-37.15L116.88-37.15L113.01-37.15L113.01 0L110.08 0L110.08-39.77L116.88-39.77L116.88-39.77Q118.52-39.77 119.79-39.24L119.79-39.24L119.79-39.24Q121.05-38.71 121.91-37.75L121.91-37.75L121.91-37.75Q122.77-36.80 123.20-35.49L123.20-35.49L123.20-35.49Q123.63-34.18 123.63-32.66L123.63-32.66" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -20.76px 12.189px; animation: 1.02041s linear -0.35277s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M139.34 11.25L139.34 0L135.51 0L135.51 0Q133.83 0 132.56-0.55L132.56-0.55L132.56-0.55Q131.29-1.09 130.43-2.05L130.43-2.05L130.43-2.05Q129.57-3.01 129.14-4.32L129.14-4.32L129.14-4.32Q128.71-5.63 128.71-7.15L128.71-7.15L128.71-39.77L135.51-39.77L135.51-39.77Q137.15-39.77 138.42-39.24L138.42-39.24L138.42-39.24Q139.69-38.71 140.55-37.75L140.55-37.75L140.55-37.75Q141.41-36.80 141.84-35.49L141.84-35.49L141.84-35.49Q142.27-34.18 142.27-32.66L142.27-32.66L142.27 10.98L142.27 10.98Q142.27 12.50 141.84 13.81L141.84 13.81L141.84 13.81Q141.41 15.12 140.55 16.07L140.55 16.07L140.55 16.07Q139.69 17.03 138.42 17.58L138.42 17.58L138.42 17.58Q137.15 18.13 135.47 18.13L135.47 18.13L135.47 18.13Q133.83 18.13 132.56 17.52L132.56 17.52L132.56 17.52Q131.29 16.91 130.45 15.86L130.45 15.86L130.45 15.86Q129.61 14.80 129.18 13.36L129.18 13.36L129.18 13.36Q128.75 11.91 128.75 10.23L128.75 10.23L131.64 10.66L131.64 10.66Q131.64 12.70 132.64 14.10L132.64 14.10L132.64 14.10Q133.63 15.51 135.47 15.51L135.47 15.51L135.47 15.51Q137.34 15.51 138.34 14.28L138.34 14.28L138.34 14.28Q139.34 13.05 139.34 11.25L139.34 11.25zM131.64-37.15L131.64-6.88L131.64-6.88Q131.64-5.08 132.64-3.85L132.64-3.85L132.64-3.85Q133.63-2.62 135.51-2.62L135.51-2.62L139.34-2.62L139.34-32.85L139.34-32.85Q139.34-34.65 138.34-35.90L138.34-35.90L138.34-35.90Q137.34-37.15 135.51-37.15L135.51-37.15L131.64-37.15" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: -11.25px 23.009px; animation: 1.02041s linear -0.3207s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M145 0L145 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 8.535px -4.236px; animation: 1.02041s linear -0.28863s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M166.29-26.05L166.29-0.08L163.36-0.08L163.36-26.05L163.36-26.05Q161.84-27.70 160.51-29.34L160.51-29.34L160.51-29.34Q159.18-30.98 158.16-33.28L158.16-33.28L158.16-33.28Q157.15-35.59 156.56-38.93L156.56-38.93L156.56-38.93Q155.98-42.27 155.98-47.30L155.98-47.30L155.98-54.41L158.91-54.41L158.91-47.54L158.91-47.54Q158.91-43.75 159.38-40.76L159.38-40.76L159.38-40.76Q159.84-37.77 160.66-35.49L160.66-35.49L160.66-35.49Q161.48-33.20 162.54-31.52L162.54-31.52L162.54-31.52Q163.59-29.84 164.77-28.67L164.77-28.67L164.77-28.67Q165.94-29.84 167.01-31.50L167.01-31.50L167.01-31.50Q168.09-33.16 168.89-35.45L168.89-35.45L168.89-35.45Q169.69-37.73 170.18-40.70L170.18-40.70L170.18-40.70Q170.66-43.67 170.66-47.54L170.66-47.54L170.66-54.41L173.59-54.41L173.59-47.42L173.59-47.42Q173.59-42.66 173.01-39.34L173.01-39.34L173.01-39.34Q172.42-36.02 171.43-33.61L171.43-33.61L171.43-33.61Q170.43-31.21 169.10-29.45L169.10-29.45L169.10-29.45Q167.77-27.70 166.29-26.05L166.29-26.05" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 25.88px 3.124px; animation: 1.02041s linear -0.25656s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M188.91-40.55L188.91-7.11L188.91-7.11Q188.91-5.39 188.48-3.95L188.48-3.95L188.48-3.95Q188.05-2.50 187.19-1.45L187.19-1.45L187.19-1.45Q186.33-0.39 185.06 0.20L185.06 0.20L185.06 0.20Q183.79 0.78 182.11 0.78L182.11 0.78L182.11 0.78Q180.43 0.78 179.16 0.25L179.16 0.25L179.16 0.25Q177.89-0.27 177.05-1.23L177.05-1.23L177.05-1.23Q176.21-2.19 175.78-3.50L175.78-3.50L175.78-3.50Q175.35-4.80 175.35-6.37L175.35-6.37L175.35-33.44L175.35-33.44Q175.35-34.96 175.78-36.27L175.78-36.27L175.78-36.27Q176.21-37.58 177.07-38.54L177.07-38.54L177.07-38.54Q177.93-39.49 179.20-40.02L179.20-40.02L179.20-40.02Q180.47-40.55 182.15-40.55L182.15-40.55L188.91-40.55zM178.28-33.63L178.28-6.13L178.28-6.13Q178.28-4.34 179.28-3.09L179.28-3.09L179.28-3.09Q180.27-1.84 182.15-1.84L182.15-1.84L182.15-1.84Q183.98-1.84 184.98-3.26L184.98-3.26L184.98-3.26Q185.98-4.69 185.98-6.72L185.98-6.72L185.98-37.93L182.15-37.93L182.15-37.93Q180.27-37.93 179.28-36.68L179.28-36.68L179.28-36.68Q178.28-35.43 178.28-33.63L178.28-33.63" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 44.705px 3.514px; animation: 1.02041s linear -0.22449s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M204.80-39.77L207.73-39.77L207.73-7.11L207.73-7.11Q207.73-5.39 207.30-3.95L207.30-3.95L207.30-3.95Q206.88-2.50 206.02-1.45L206.02-1.45L206.02-1.45Q205.16-0.39 203.89 0.20L203.89 0.20L203.89 0.20Q202.62 0.78 200.94 0.78L200.94 0.78L200.94 0.78Q199.26 0.78 197.99 0.25L197.99 0.25L197.99 0.25Q196.72-0.27 195.88-1.23L195.88-1.23L195.88-1.23Q195.04-2.19 194.61-3.50L194.61-3.50L194.61-3.50Q194.18-4.80 194.18-6.37L194.18-6.37L194.18-39.77L197.11-39.77L197.11-6.13L197.11-6.13Q197.11-4.34 198.11-3.09L198.11-3.09L198.11-3.09Q199.10-1.84 200.98-1.84L200.98-1.84L200.98-1.84Q202.81-1.84 203.81-3.26L203.81-3.26L203.81-3.26Q204.80-4.69 204.80-6.72L204.80-6.72L204.80-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 61.445px 2.929px; animation: 1.02041s linear -0.19242s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M222.38-39.77L221.21-37.38L221.21-37.38Q220.63-37.54 219.80-37.54L219.80-37.54L219.80-37.54Q217.93-37.54 216.93-36.29L216.93-36.29L216.93-36.29Q215.94-35.04 215.94-33.24L215.94-33.24L215.94 0L213.01 0L213.01-33.01L213.01-33.01Q213.01-34.57 213.44-35.88L213.44-35.88L213.44-35.88Q213.87-37.19 214.73-38.14L214.73-38.14L214.73-38.14Q215.59-39.10 216.86-39.63L216.86-39.63L216.86-39.63Q218.13-40.16 219.80-40.16L219.80-40.16L219.80-40.16Q220.51-40.16 221.17-40.06L221.17-40.06L221.17-40.06Q221.84-39.96 222.38-39.77L222.38-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 65.63px 23.009px; animation: 1.02041s linear -0.16035s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M221.88 0L221.88 0" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 87.4px -4.181px; animation: 1.02041s linear -0.12828s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M252.30-55.16L252.30-10.23L252.30-10.23Q252.30-8.09 251.91-6.09L251.91-6.09L251.91-6.09Q251.52-4.10 250.53-2.58L250.53-2.58L250.53-2.58Q249.53-1.05 247.83-0.14L247.83-0.14L247.83-0.14Q246.13 0.78 243.55 0.78L243.55 0.78L243.55 0.78Q241.13 0.78 239.49-0.10L239.49-0.10L239.49-0.10Q237.85-0.98 236.86-2.46L236.86-2.46L236.86-2.46Q235.86-3.95 235.43-5.96L235.43-5.96L235.43-5.96Q235-7.97 235-10.23L235-10.23L235-43.79L235-43.79Q235-45.08 235.06-46.45L235.06-46.45L235.06-46.45Q235.12-47.81 235.39-49.06L235.39-49.06L235.39-49.06Q235.66-50.31 236.29-51.43L236.29-51.43L236.29-51.43Q236.91-52.54 238.03-53.38L238.03-53.38L238.03-53.38Q239.14-54.22 240.88-54.69L240.88-54.69L240.88-54.69Q242.62-55.16 245.16-55.16L245.16-55.16L252.30-55.16zM249.38-8.95L249.38-52.54L245.98-52.54L245.98-52.54Q243.91-52.54 242.38-52.19L242.38-52.19L242.38-52.19Q240.86-51.84 239.86-51.00L239.86-51.00L239.86-51.00Q238.87-50.16 238.40-48.71L238.40-48.71L238.40-48.71Q237.93-47.27 237.93-45.08L237.93-45.08L237.93-8.95L237.93-8.95Q237.93-7.54 238.22-6.27L238.22-6.27L238.22-6.27Q238.52-5 239.20-4.00L239.20-4.00L239.20-4.00Q239.88-3.01 240.98-2.42L240.98-2.42L240.98-2.42Q242.07-1.84 243.71-1.84L243.71-1.84L243.71-1.84Q245.27-1.84 246.35-2.40L246.35-2.40L246.35-2.40Q247.42-2.97 248.09-3.95L248.09-3.95L248.09-3.95Q248.75-4.92 249.06-6.21L249.06-6.21L249.06-6.21Q249.38-7.50 249.38-8.95L249.38-8.95" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 106.6px 2.929px; animation: 1.02041s linear -0.0962099s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M267.54-39.77L266.37-37.38L266.37-37.38Q265.78-37.54 264.96-37.54L264.96-37.54L264.96-37.54Q263.09-37.54 262.09-36.29L262.09-36.29L262.09-36.29Q261.09-35.04 261.09-33.24L261.09-33.24L261.09 0L258.16 0L258.16-33.01L258.16-33.01Q258.16-34.57 258.59-35.88L258.59-35.88L258.59-35.88Q259.02-37.19 259.88-38.14L259.88-38.14L259.88-38.14Q260.74-39.10 262.01-39.63L262.01-39.63L262.01-39.63Q263.28-40.16 264.96-40.16L264.96-40.16L264.96-40.16Q265.66-40.16 266.33-40.06L266.33-40.06L266.33-40.06Q266.99-39.96 267.54-39.77L267.54-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 120.1px -7.146px; animation: 1.02041s linear -0.0641399s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M283.13-61.09L283.13-6.37L283.13-6.37Q283.13-4.84 282.70-3.54L282.70-3.54L282.70-3.54Q282.27-2.23 281.41-1.27L281.41-1.27L281.41-1.27Q280.55-0.31 279.28 0.23L279.28 0.23L279.28 0.23Q278.01 0.78 276.37 0.78L276.37 0.78L276.37 0.78Q274.69 0.78 273.42 0.23L273.42 0.23L273.42 0.23Q272.15-0.31 271.29-1.27L271.29-1.27L271.29-1.27Q270.43-2.23 270-3.54L270-3.54L270-3.54Q269.57-4.84 269.57-6.37L269.57-6.37L269.57-39.77L276.21-39.77L276.21-39.77Q277.70-39.77 278.59-39.55L278.59-39.55L278.59-39.55Q279.49-39.34 280.20-38.95L280.20-38.95L280.20-61.09L283.13-61.09zM280.20-6.09L280.20-33.44L280.20-33.44Q280.20-33.67 280.14-34.30L280.14-34.30L280.14-34.30Q280.08-34.92 279.73-35.55L279.73-35.55L279.73-35.55Q279.38-36.17 278.59-36.66L278.59-36.66L278.59-36.66Q277.81-37.15 276.37-37.15L276.37-37.15L272.50-37.15L272.50-6.09L272.50-6.09Q272.50-4.30 273.50-3.07L273.50-3.07L273.50-3.07Q274.49-1.84 276.37-1.84L276.37-1.84L276.37-1.84Q278.20-1.84 279.20-3.07L279.20-3.07L279.20-3.07Q280.20-4.30 280.20-6.09L280.20-6.09" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(248, 27, 36);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 138.535px 3.514px; animation: 1.02041s linear -0.03207s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M298.63-37.15L294.80-37.15L294.80-37.15Q292.93-37.15 291.93-35.90L291.93-35.90L291.93-35.90Q290.94-34.65 290.94-32.85L290.94-32.85L290.94-19.06L294.80-19.06L294.80-19.06Q296.64-19.06 297.64-20.27L297.64-20.27L297.64-20.27Q298.63-21.48 298.63-23.32L298.63-23.32L298.63-37.15zM294.80-39.77L301.56-39.77L301.56-23.59L301.56-23.59Q301.56-22.03 301.13-20.72L301.13-20.72L301.13-20.72Q300.70-19.41 299.84-18.46L299.84-18.46L299.84-18.46Q298.98-17.50 297.71-16.97L297.71-16.97L297.71-16.97Q296.45-16.45 294.80-16.45L294.80-16.45L290.94-16.45L290.94-6.09L290.94-6.09Q290.94-4.30 291.93-3.07L291.93-3.07L291.93-3.07Q292.93-1.84 294.80-1.84L294.80-1.84L294.80-1.84Q296.64-1.84 297.64-3.24L297.64-3.24L297.64-3.24Q298.63-4.65 298.63-6.68L298.63-6.68L301.52-7.11L301.52-7.11Q301.52-5.43 301.09-3.98L301.09-3.98L301.09-3.98Q300.66-2.54 299.82-1.48L299.82-1.48L299.82-1.48Q298.98-0.43 297.71 0.18L297.71 0.18L297.71 0.18Q296.45 0.78 294.80 0.78L294.80 0.78L294.80 0.78Q293.13 0.78 291.86 0.23L291.86 0.23L291.86 0.23Q290.59-0.31 289.73-1.27L289.73-1.27L289.73-1.27Q288.87-2.23 288.44-3.54L288.44-3.54L288.44-3.54Q288.01-4.84 288.01-6.37L288.01-6.37L288.01-32.62L288.01-32.62Q288.01-34.18 288.44-35.49L288.44-35.49L288.44-35.49Q288.87-36.80 289.73-37.75L289.73-37.75L289.73-37.75Q290.59-38.71 291.86-39.24L291.86-39.24L291.86-39.24Q293.13-39.77 294.80-39.77L294.80-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(0, 149, 83);"/></g><g class="path" style="transform: scale(0.91); transform-origin: 154.69px 2.929px; animation: 1.02041s linear 0s infinite normal forwards running breath-8a07c2ec-ea3a-407e-acd7-79a31314b294;"><path d="M315.63-39.77L314.45-37.38L314.45-37.38Q313.87-37.54 313.05-37.54L313.05-37.54L313.05-37.54Q311.17-37.54 310.18-36.29L310.18-36.29L310.18-36.29Q309.18-35.04 309.18-33.24L309.18-33.24L309.18 0L306.25 0L306.25-33.01L306.25-33.01Q306.25-34.57 306.68-35.88L306.68-35.88L306.68-35.88Q307.11-37.19 307.97-38.14L307.97-38.14L307.97-38.14Q308.83-39.10 310.10-39.63L310.10-39.63L310.10-39.63Q311.37-40.16 313.05-40.16L313.05-40.16L313.05-40.16Q313.75-40.16 314.41-40.06L314.41-40.06L314.41-40.06Q315.08-39.96 315.63-39.77L315.63-39.77" fill="#f81b24" stroke="none" stroke-width="none" transform="translate(-156.25,23.008998122442346)" style="fill: rgb(254, 93, 39);"/></g></g>
+</g>
+</g>
+<style id="breath-8a07c2ec-ea3a-407e-acd7-79a31314b294" data-anikit="">@keyframes breath-8a07c2ec-ea3a-407e-acd7-79a31314b294
+{
+  0% {
+    animation-timing-function: cubic-bezier(0.9647,0.2413,-0.0705,0.7911);
+    transform: scale(0.9099999999999999);
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.9226,0.2631,-0.0308,0.7628);
+    transform: scale(1.02994);
+  }
+  100% {
+    transform: scale(0.9099999999999999);
+  }
+}</style></svg>
