@@ -1,6 +1,6 @@
 import React from "react";
 import DietaryOptionsArray from "../../../assets/dataArrays/Dietary-Options-Array";
-import { useChefSurpriseStoreActions } from "../../../state-store/ChefSurpriseStore";
+import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
 
 const ChefSurpriseDietary = () => {

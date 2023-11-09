@@ -1,7 +1,7 @@
 import React from "react";
 import FlavorTypeArrayEasyOrder from "../../../assets/dataArrays/Flavor-Type-Array-Easy-Order";
-import { useChefSurpriseStoreActions } from "../../../state-store/ChefSurpriseStore";
-import { useChefSurpriseStore } from "../../../state-store/ChefSurpriseStore";
+import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
+import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
 
 const ChefSurpriseFlavor = () => {

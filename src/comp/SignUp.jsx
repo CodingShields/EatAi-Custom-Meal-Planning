@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import { useNewUserStore } from "../state-store/NewUserStore";
+import { useNewUserStore } from "../stateStore/NewUserStore.js";
 import Disclaimer from "./Disclaimer.jsx";
 import LoginChef from "../assets/images/LoginChef.png";
 

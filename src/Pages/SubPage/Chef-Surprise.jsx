@@ -4,8 +4,8 @@ import ChefSurpriseEntree from "./chefSurpriseComps/chefSurpriseEntree";
 import ChefSurpriseHeadCount from "./chefSurpriseComps/chefSurpriseHeadCount";
 import ChefSurpriseFlavor from "./chefSurpriseComps/chefSurpriseFlavor";
 import ChefSurpriseDietary from "./chefSurpriseComps/chefSurpriseDietary";
-import { useChefSurpriseStoreActions } from "../../state-store/ChefSurpriseStore";
-import { useChefSurpriseStore } from "../../state-store/ChefSurpriseStore";
+import { useChefSurpriseStoreActions } from "../../stateStore/ChefSurpriseStore";
+import { useChefSurpriseStore } from "../../stateStore/ChefSurpriseStore";
 import jsPDF from "jspdf";
 import "../../css/chefSurprise.css";
 

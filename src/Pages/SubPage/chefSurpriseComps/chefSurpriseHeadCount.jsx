@@ -1,6 +1,6 @@
 import React from "react";
-import { useChefSurpriseStoreActions } from "../../../state-store/ChefSurpriseStore";
-import { useChefSurpriseStore } from "../../../state-store/ChefSurpriseStore";
+import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
+import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
 const ChefSurpriseHeadCount = () => {
 	const { setHeadCount } = useChefSurpriseStoreActions();

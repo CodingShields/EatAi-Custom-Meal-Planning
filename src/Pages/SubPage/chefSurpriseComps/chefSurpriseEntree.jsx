@@ -1,6 +1,6 @@
 import React from "react";
 import MealTypeArray from "../../../assets/dataArrays/Meal-Type-Array";
-import { useChefSurpriseStoreActions } from "../../../state-store/ChefSurpriseStore";
+import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
 
 const ChefSurpriseEntree = () => {
