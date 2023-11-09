@@ -4,7 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	height: 70vh;
-	width: auto;
+	width: 80vw;
 	background-color: aquamarine;
 	border-radius: 30px 30px 0px 0px;
 	box-shadow: #333 1px 5px 10px 5px;
@@ -56,7 +56,7 @@
 	max-width: 300px;
 	height: auto;
 	padding: 8px;
-	background-color: lightcoral;
+	background-color: coral;
 	border: 0px solid white;
 	border-radius: 20px;
 	box-shadow: 3px 3px 3px 1px black;
@@ -67,7 +67,7 @@
 }
 .advanced-order-btn:hover {
 	color: white;
-	background-color: rebeccapurple;
+	background-color: blue;
 }
 
 .advanced-order-btn:active {
@@ -93,7 +93,7 @@
 	width: auto;
 }
 
-.advanced-order-meal-planner-day-container{
+.advanced-order-meal-planner-day-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -106,47 +106,45 @@
 }
 
 .advanced-order-meal-day {
-	display: flex;
+	display: inline-block;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	margin: 10px;
 	border-radius: 5px;
 	text-align: center;
-	width: auto;
+	width: 100%;
 }
 
-.advanced-order-meal-planner-container{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: auto;
-	width: 70vw;
+.advanced-order-meal-planner-container {
+	width: 50vw;
+	max-height: 60vh;
+	overflow-x: auto;
+	white-space: nowrap;
 }
 
-.advanced-order-day-container{
-	display: flex;
+.advanced-order-day-container {
+	display: inline-block;
 	flex-direction: column;
 	justify-content: center;
 	background-color: antiquewhite;
-	width: 250px;
-	height: 450px;
+	min-width: 250px;
+	height: fit-content;
 	border: #333 solid 1px;
 	border-radius: 10px;
 	box-shadow: #333 1px 3px 5px 3px;
 	margin: 5px;
-	overflow: auto;
-
+	vertical-align: top;
 }
 
-.advanced-order-day-title{
+.advanced-order-day-title {
 	font-size: 20px;
 	font-weight: bold;
-	color:black;
+	color: black;
 	text-align: center;
 }
 
-.advanced-order-day-open-btn{
+.advanced-order-day-open-btn {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -155,22 +153,130 @@
 	text-decoration: underline;
 	font-size: 12px;
 	margin-left: 15px;
+	transition: background-color 0.3s ease
 }
 
-.advanced-order-day-open-btn:hover{
+.advanced-order-day-open-btn:hover {
 	color: blue;
 	font-size: 20px;
 	font-weight: 700;
 }
+.advanced-order-day-open-btn:active {
+	background-color: green; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
 
-.advanced-order-meal-container{
+
+.advanced-order-meal-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width:100px;
+	width: 100px;
 	height: 100px;
+	
 }
-.advanced-order-meal-item-title{
+.advanced-order-meal-item-title {
 	font-size: 15px;
 	text-decoration: underline;
+	font-weight: 600;
 }
+
+.advanced-order-meal-item-modal{
+	text-align: center;
+	font-size: 16px;
+	width: 200px;
+}
+
+/* Styles for the modal container */
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	z-index: 1000; /* Ensure the modal appears on top */
+}
+
+/* Styles for the modal content */
+.modal-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: antiquewhite;
+	padding: 20px;
+	border-radius: 5px;
+	width: auto;
+	height:auto;
+	box-shadow: #333 1px 3px 5px 3px;
+	border: 2px solid brown;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+.advanced-order-meal-container-modal{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	margin: 0px;
+	
+}
+
+.advanced-order-day-title-modal{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 40px;
+	font-weight: 300;
+	color: black;
+	text-align: center;
+	text-shadow: black 1px 1px 1px;
+	gap: 15px;
+	margin-left: 20px;
+	
+}
+
+.advanced-order-meal-item-title-modal{
+	font-size: 24px;
+	font-weight: 300;
+	color: black;
+	text-decoration: underline;
+	text-shadow: darkgray 0px 0px;
+}
+
+/* Style for the close button */
+.close-modal-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: coral;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 16px;
+	margin-right: 10px;
+	box-shadow:darkgrey 2px 1px 3px 1px;
+	transition: background-color 0.3s ease
+}
+
+.close-modal-btn:hover {
+	background-color: blue;
+}
+
+.close-modal-btn:active {
+	background-color: green; /* Color change on click */
+	transform: scale(0.95); /* Button scale down when clicked */
+}
+
+/* Add any additional styles as needed for your modal content */

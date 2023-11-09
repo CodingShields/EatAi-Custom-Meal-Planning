@@ -4,17 +4,9 @@ const initializeState = {
 	macroCalorieSelection: "",
 	plannedDays: 1,
 	plannedMeals: 1,
-	protein: "",
-	carbs: "",
-	fats: "",
+	macros:[],
 	calories: "",
 	mealPlanner: [],
-	dietary: "",
-	flavor: "",
-	flavorDetails: "",
-	selectedProteins: "",
-	selectedCarbs: "",
-	selectedFats: "",
 };
 
 export const useAdvancedOrderStore = create((set, get) => ({

@@ -29,7 +29,7 @@ const AdvancedOrder = () => {
 
     return (
 			<div className='advanced-order-container'>
-				<img className='advanced-order-chef-img' src={flippedChef} />
+				{step === 3 ? "": <img className='advanced-order-chef-img' src={flippedChef} />}
 				<div className='advanced-order-render-comp-container'>
 					{RenderCompFromStep}
 					<div className='advanced-order-button-container'>
