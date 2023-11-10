@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderStore.js";
 import { useAdvancedOrderStore } from "../../../stateStore/AdvancedOrderStore.js";
-import ConfirmSelectionButton from "./confirmSelectionStepButton.jsx";
+import AdvancedOrderCalorieInput from "./calorieInput.jsx";
+//buttons
+
+
 
 const AdvancedOrderCalorieMacroSelection = () => {
 	const { setMacroCalorieSelection } = useAdvancedOrderStoreActions((actions) => actions);
 	const { macroCalorieSelection } = useAdvancedOrderStore((state) => state);
 	const [error, setError] = useState(false);
 
-	console.log(macroCalorieSelection);
 	const handleMacroCalorieSelection = (value) => {
 		if (value === "Choose One") {
 			setError(true);
@@ -18,6 +20,7 @@ const AdvancedOrderCalorieMacroSelection = () => {
 			setMacroCalorieSelection(value);
 		}
 	};
+	
 	return (
 		<div className='advanced-order-comp-container'>
 			<p>Are we setting up with Macros or Calories?</p>
@@ -37,7 +40,10 @@ const AdvancedOrderCalorieMacroSelection = () => {
 					Calories
 				</option>
 			</select>
-			{macroCalorieSelection ? <ConfirmSelectionButton /> : null}
+			{macroCalorieSelection === "calories" ? <AdvancedOrderCalorieInput /> : null}
+			<div className='advanced-order-btn-container'>
+				
+			</div>
 		</div>
 	);
 };

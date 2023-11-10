@@ -10,7 +10,7 @@ import { useRenderStepStore } from "../../stateStore/RenderStepStore";
 import AdvancedOrderBeginButton from "./advancedOrderComps/advancedOrderBeginButton";
 import AdvancedOrderResetButton from "./advancedOrderComps/advancedOrderStartOverButton";
 import AdvancedOrderPreviousButton from "./advancedOrderComps/advancedOrderPreviousButton";
-
+import ConfirmSelectionButton from "./advancedOrderComps/confirmSelectionStepButton"
 
 import "../../css/advancedOrder.css";
 const AdvancedOrder = () => {
@@ -26,17 +26,17 @@ const AdvancedOrder = () => {
     }
     const RenderCompFromStep = renderStepMap[step];
 
-
+console.log(step, "RenderCompFromStep");
     return (
 			<div className='advanced-order-container'>
-				{step === 3 ? "": <img className='advanced-order-chef-img' src={flippedChef} />}
+				{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}
 				<div className='advanced-order-render-comp-container'>
 					{RenderCompFromStep}
-					<div className='advanced-order-button-container'>
-						
-						{step === 0 ? <AdvancedOrderBeginButton /> : null}
-						{step != 0 ? <AdvancedOrderResetButton /> : null}
-						{step != 0 ? <AdvancedOrderPreviousButton /> : null}
+					<div className='advanced-order-btn-container'>
+						<AdvancedOrderBeginButton />
+						{step != 0 ? <ConfirmSelectionButton /> : ""}
+						{step != 0 ? <AdvancedOrderResetButton /> : ""}
+						{step != 0 ? <AdvancedOrderPreviousButton /> : ""}
 					</div>
 				</div>
 			</div>

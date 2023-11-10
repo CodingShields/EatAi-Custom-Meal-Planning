@@ -1,7 +1,6 @@
 import React from "react";
 import { useAdvancedOrderStore } from "../../../stateStore/AdvancedOrderStore";
 import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderStore";
-import ConfirmSelectionButton from "./confirmSelectionStepButton";
 
 const AdvancedOrderMealSetup = () => {
 	const plannedDays = useAdvancedOrderStore((state) => state.plannedDays);
@@ -97,7 +96,6 @@ const AdvancedOrderMealSetup = () => {
 				className='advanced-order-meal-setup-input'
 				onChange={(e) => handleMealsOnChange(e.target.value)}
 			/>
-			<ConfirmSelectionButton />
 		</div>
 	);
 };

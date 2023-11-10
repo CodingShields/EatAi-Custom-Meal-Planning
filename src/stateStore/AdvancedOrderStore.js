@@ -4,8 +4,38 @@ const initializeState = {
 	macroCalorieSelection: "",
 	plannedDays: 1,
 	plannedMeals: 1,
-	macros:[],
-	calories: "",
+	caloriesPerDay: 0,
+	macroBreakDown: [
+		{
+			id: 0,
+			name: "Protein Macro",
+		},
+		{
+			id: 1,
+			name: "Carbohydrate Macro",
+		},
+		{
+			id: 2,
+			name: "Fat Macro",
+		},
+	],
+	calorieBreakdown: [
+		{
+			id: 0,
+			name: "Protein Percentage",
+			percentage: 0,
+		},
+		{
+			id: 1,
+			name: "Carbohydrate Percentage",
+			percentage: 0,
+		},
+		{
+			id: 2,
+			name: "Fat Percentage",
+			percentage: 0,
+		},
+	],
 	mealPlanner: [],
 };
 
@@ -16,35 +46,19 @@ export const useAdvancedOrderStore = create((set, get) => ({
 			const state = get();
 			return {
 				macroCalorieSelection: state.macroCalorieSelection,
-				protein: state.protein,
-				carbs: state.carbs,
-				fats: state.fats,
-				calories: state.calories,
+				caloriesPerDay: state.calories,
 				mealPlanner: state.mealPlanner,
 				days: state.days,
-				dietary: state.dietary,
-				flavor: state.flavor,
-				flavorDetails: state.flavorDetails,
-				selectedProteins: state.selectedProteins,
-				selectedCarbs: state.selectedCarbs,
-				selectedFats: state.selectedFats,
+				calorieBreakdown: state.calorieBreakdown,
 			};
 		},
 		resetForm: () => set(initializeState),
 		setMacroCalorieSelection: (str) => set({ macroCalorieSelection: str }),
-		setProtein: (str) => set({ protein: str }),
-		setCarbs: (str) => set({ carbs: str }),
-		setFats: (str) => set({ fats: str }),
-		setCalories: (str) => set({ calories: str }),
+		setCaloriesPerDay: (num) => set({ caloriesPerDay: num }),
 		setMealPlanner: (arr) => set({ mealPlanner: arr }),
 		setPlannedMeals: (num) => set({ plannedMeals: num }),
 		setPlannedDays: (num) => set({ plannedDays: num }),
-		setDietary: (str) => set({ dietary: str }),
-		setFlavor: (str) => set({ flavor: str }),
-		setFlavorDetails: (str) => set({ flavorDetails: str }),
-		setSelectedProteins: (str) => set({ selectedProteins: str }),
-		setSelectedCarbs: (str) => set({ selectedCarbs: str }),
-		setSelectedFats: (str) => set({ selectedFats: str }),
+		setCalorieBreakdown: (arr) => set({ calorieBreakdown: arr }),
 	},
 }));
 export const useAdvancedOrderStoreActions = () => useAdvancedOrderStore((state) => state.actions);

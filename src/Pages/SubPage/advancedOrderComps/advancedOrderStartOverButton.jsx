@@ -4,7 +4,7 @@ import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderS
 
 const AdvancedOrderResetButton = () => {
 
-	const  resetStep  = useRenderStepStore((state) => state.resetStep);
+	const  resetStep = useRenderStepStore((state) => state.resetStep);
 	const { resetForm } = useAdvancedOrderStoreActions();
 	const clearLocalStorage = () => {
 		localStorage.clear();
