@@ -24,7 +24,7 @@ const AdvancedOrderCalorieInput = () => {
                 console.log(calorieError, "calorieError");
 				setCalorieError(true);
 			}
-		}, [totalPercentage, maxPercentage]);
+		}, [{calorieBreakdown}]);
 
 
 

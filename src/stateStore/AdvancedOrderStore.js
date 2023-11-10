@@ -52,7 +52,7 @@ export const useAdvancedOrderStore = create((set, get) => ({
 				calorieBreakdown: state.calorieBreakdown,
 			};
 		},
-		resetForm: () => set(initializeState),
+		resetForm: () =>  set({ ...initializeState }),
 		setMacroCalorieSelection: (str) => set({ macroCalorieSelection: str }),
 		setCaloriesPerDay: (num) => set({ caloriesPerDay: num }),
 		setMealPlanner: (arr) => set({ mealPlanner: arr }),
