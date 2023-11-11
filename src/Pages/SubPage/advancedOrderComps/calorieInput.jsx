@@ -6,7 +6,7 @@ const AdvancedOrderCalorieInput = () => {
 	// State
 	const { caloriesPerDay } = useAdvancedOrderStore((state) => state);
 	const { calorieBreakdown } = useAdvancedOrderStore((state) => state);
-
+	const [macroModal, setMacroModal] = useState(false);
 	//error
 	const [error, setError] = useState({
 		calorieTotalError: false,
@@ -43,14 +43,14 @@ const AdvancedOrderCalorieInput = () => {
 			setErrorMessage("Please Set a Calorie Goal");
 			setTimeout(() => {
 				setError({ caloriePerDayError: false });
-			}, 3500);
+			}, 3000);
 		}
 		else if (proteinPercentage > 50) {
 			setError({ highProteinError: true });
 			setErrorMessage("High Protein Intake Can Lead To Health and Digestion Issues");
 			setTimeout(() => {
 				setError({ highProteinError: false });
-			}, 3500);
+			}, 3000);
 		}
 	}, [totalPercentage, caloriesPerDay, proteinPercentage]);
 
@@ -95,8 +95,7 @@ console.log(proteinPercentage, "proteinPercentage");
 
 	return (
 		<div className='advanced-order-calorie-container'>
-			<p
-				className='advanced-order-calorie-input-title-text'>Daily Calorie Goal</p>
+			<p className='advanced-order-calorie-input-title-text'>Daily Calorie Goal</p>
 			<input
 				value={caloriesPerDay}
 				onChange={(e) => onChangeUserInput(e)}
@@ -144,7 +143,7 @@ console.log(proteinPercentage, "proteinPercentage");
 								-
 							</button>
 							<div className='advanced-order-calorie-percentage-input-read-only'>{item.percentage}%</div>
-								
+
 							<button
 								disabled={caloriesPerDay === 0 || totalPercentage === 105 ? true : false}
 								className='advanced-order-calorie-input-button-add'
@@ -152,11 +151,45 @@ console.log(proteinPercentage, "proteinPercentage");
 							>
 								+
 							</button>
-							
 						</div>
 					</div>
 				);
 			})}
+			<button
+				onClick={() => {
+					setMacroModal(true);
+				}}
+				className='advanced-order-macro-break-down-modal-button'
+			>
+				Macro Breakdown
+			</button>
+
+			{macroModal ? (
+				<div className='advanced-order-calorie-input-macro-view-modal-container'>
+					<div className='advanced-order-calorie-input-macro-view-modal-content'>
+						<button
+							onClick={() => {
+								setMacroModal(false);
+							}}
+							className='advanced-order-macro-break-down-modal-button'
+						>
+							X Close
+						</button>
+						<div className='macro-container'>
+							<p className='macro-text'>Protein</p>
+							<p className='macro-result'>{proteinMacro}</p>
+						</div>
+						<div className='macro-container'>
+							<p className='macro-text'>Carbs</p>
+							<p className='macro-result'>{carbMacro}</p>
+						</div>
+						<div className='macro-container'>
+							<p className='macro-text'>Fat</p>
+							<p className='macro-result'>{fatMacro}</p>
+						</div>
+					</div>
+				</div>
+			) : null}
 		</div>
 	);
 };

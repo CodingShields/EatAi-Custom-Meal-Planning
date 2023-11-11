@@ -1,4 +1,5 @@
 const vegetables = [
+    { id: 0, name: "Pick Vegetables" },
     { id: 1, name: "Onion" },
     { id: 2, name: "Carrot" },
     { id: 3, name: "Cucumber" },
