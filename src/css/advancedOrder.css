@@ -38,6 +38,13 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	border: 2px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	padding: 10px;
+	box-shadow: #333 1px 5px 10px 5px;
+	position: sticky;
+	width: auto;
 }
 
 .advanced-order-btn {
@@ -81,6 +88,21 @@
 	justify-content: center;
 }
 
+.advanced-order-calorie-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	border: 2px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	margin: 10px;
+	padding: 20px;
+	box-shadow: #333 1px 5px 10px 5px;
+}
+
 .advanced-order-calorie-user-input {
 	display: flex;
 	flex-direction: row;
@@ -117,7 +139,6 @@
 	width: 80px;
 	height: 30px;
 	margin: 0px 0px 0px 0px;
-	padding: 20px;
 	border: #333	1px solid;
 	border-radius: 10px;
 	box-shadow: #333 0px 1px 3px 1px;
@@ -128,8 +149,6 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin: 0px;
-	padding: 0px;
 	text-align: center;
 	width: 70px;
 	height: 30px;
@@ -303,6 +322,36 @@
 	font-size: 16px;
 	width: 200px;
 }
+/* Advanced Order Macro Selection Modals */
+.advanced-order-error-modal-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	z-index: 1000; /* Ensure the modal appears on top */
+}
+
+.advanced-order-error-modal-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: antiquewhite;
+	padding: 20px;
+	border-radius: 5px;
+	width: auto;
+	height: auto;
+	box-shadow: #333 1px 3px 5px 3px;
+	border: 2px solid brown;
+
+}
+
 
 /* Styles for the modal container */
 .modal {
@@ -394,3 +443,12 @@
 }
 
 /* Add any additional styles as needed for your modal content */
+
+.advanced-order-calorie-macro-result{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-left: 20px;
+	
+}

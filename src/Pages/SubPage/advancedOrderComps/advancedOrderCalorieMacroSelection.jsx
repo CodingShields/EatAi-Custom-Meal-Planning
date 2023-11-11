@@ -40,10 +40,6 @@ const AdvancedOrderCalorieMacroSelection = () => {
 					Calories
 				</option>
 			</select>
-			{macroCalorieSelection === "calories" ? <AdvancedOrderCalorieInput /> : null}
-			<div className='advanced-order-btn-container'>
-				
-			</div>
 		</div>
 	);
 };

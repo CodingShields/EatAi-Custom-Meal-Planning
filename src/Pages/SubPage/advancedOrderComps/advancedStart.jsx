@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import AdvancedOrderBeginButton from "./advancedOrderBeginButton"
 
 
 
@@ -15,6 +16,7 @@ const AdvancedStart = () => {
 				>
 					Advanced Start Home Page Need a breakdown of instructions on what is going to happen
 				</h1>
+				<AdvancedOrderBeginButton />
 			</div>
 		);
 }
