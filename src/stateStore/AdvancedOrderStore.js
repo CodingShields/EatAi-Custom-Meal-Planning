@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const initializeState = {
 	macroCalorieSelection: "",
+	statusBar: "5",
 	plannedDays: 1,
 	plannedMeals: 1,
 	caloriesPerDay: 0,
@@ -50,15 +51,17 @@ export const useAdvancedOrderStore = create((set, get) => ({
 				mealPlanner: state.mealPlanner,
 				days: state.days,
 				calorieBreakdown: state.calorieBreakdown,
+				statusBar: state.statusBar,
 			};
 		},
-		resetForm: () =>  set({ ...initializeState }),
+		resetForm: () => set({ ...initializeState }),
 		setMacroCalorieSelection: (str) => set({ macroCalorieSelection: str }),
 		setCaloriesPerDay: (num) => set({ caloriesPerDay: num }),
 		setMealPlanner: (arr) => set({ mealPlanner: arr }),
 		setPlannedMeals: (num) => set({ plannedMeals: num }),
 		setPlannedDays: (num) => set({ plannedDays: num }),
 		setCalorieBreakdown: (arr) => set({ calorieBreakdown: arr }),
+		setStatusBar: (num) => set({ statusBar: num }),
 	},
 }));
 export const useAdvancedOrderStoreActions = () => useAdvancedOrderStore((state) => state.actions);

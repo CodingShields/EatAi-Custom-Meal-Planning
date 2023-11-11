@@ -5,6 +5,7 @@ import proteinArray from "../../../assets/dataArrays/proteinArray";
 import FlavorTypeArray from "../../../assets/dataArrays/Flavor-Type-Array";
 import vegetables from "../../../assets/dataArrays/veggieArray";
 import carbs from "../../../assets/dataArrays/carbsArray";
+import fruitsArr from "../../../assets/dataArrays/fruitsArray";
 
 const AdvancedOrderMealPlanner = () => {
 	const [loading, setLoading] = useState(true); // Initially set loading to true
@@ -83,6 +84,14 @@ const AdvancedOrderMealPlanner = () => {
 								<p className='advanced-order-meal-item-title'>Carbs</p>
 								<select className='advanced-order-meal-item-modal'>
 									{carbs.map((carb) => (
+										<option key={carb.id} value={carb.name}>
+											{carb.name}
+										</option>
+									))}
+								</select>
+								<p className='advanced-order-meal-item-title'>Fruit</p>
+								<select className='advanced-order-meal-item-modal'>
+									{fruitsArr.map((carb) => (
 										<option key={carb.id} value={carb.name}>
 											{carb.name}
 										</option>

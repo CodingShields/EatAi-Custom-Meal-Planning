@@ -94,76 +94,7 @@ console.log(proteinPercentage, "proteinPercentage");
 	};
 
 	return (
-		<div className='advanced-order-calorie-container'>
-			<p className='advanced-order-calorie-input-title-text'>Daily Calorie Goal</p>
-			<input
-				value={caloriesPerDay}
-				onChange={(e) => onChangeUserInput(e)}
-				className='advanced-order-calorie-user-input'
-				required
-				placeholder='0 Calories'
-				type='text'
-			/>
-			<p className='advanced-order-calorie-input-title-text'>Percentage Total:</p>
-			{error.calorieTotalError ||
-			error.caloriePerDayError ||
-			error.highCarbError ||
-			error.highFatError ||
-			error.highProteinError ? (
-				<div className='advanced-order-error-modal-container'>
-					<h3 className='advanced-order-error-modal-content'>{errorMessage}</h3>
-				</div>
-			) : null}
-			<p
-				style={{
-					backgroundColor: totalPercentage > 100 ? "red" : "white",
-					fontSize: totalPercentage > 100 ? "30px" : "20px",
-					fontWeight: totalPercentage > 100 ? "700" : "none",
-					color: totalPercentage > 100 ? "white" : "black",
-					padding: totalPercentage > 100 ? "30px" : "20px",
-				}}
-				className='advanced-order-calorie-input-title-text-result'
-			>
-				{totalPercentage}%
-			</p>
-			{calorieBreakdown.map((item) => {
-				return (
-					<div className='advanced-order-calorie-input-container' key={item.id}>
-						<div className='advanced-order-calorie-input-title-text-container'>
-							<p className='advanced-order-calorie-input-title-text'>{item.name}</p>
-						</div>
-						<div className='advanced-order-calorie-input-button-container'>
-							<button
-								disabled={
-									error.caloriePerDayError === 0 || totalPercentage === 0 || item.percentage === 0 ? true : false
-								}
-								className='advanced-order-calorie-input-button-sub'
-								onClick={() => handleOnClickSub(item.id)}
-							>
-								-
-							</button>
-							<div className='advanced-order-calorie-percentage-input-read-only'>{item.percentage}%</div>
-
-							<button
-								disabled={caloriesPerDay === 0 || totalPercentage === 105 ? true : false}
-								className='advanced-order-calorie-input-button-add'
-								onClick={() => handleOnClickAdd(item.id)}
-							>
-								+
-							</button>
-						</div>
-					</div>
-				);
-			})}
-			<button
-				onClick={() => {
-					setMacroModal(true);
-				}}
-				className='advanced-order-macro-break-down-modal-button'
-			>
-				Macro Breakdown
-			</button>
-
+		<div className="advanced-order-modal-open">
 			{macroModal ? (
 				<div className='advanced-order-calorie-input-macro-view-modal-container'>
 					<div className='advanced-order-calorie-input-macro-view-modal-content'>
@@ -190,6 +121,77 @@ console.log(proteinPercentage, "proteinPercentage");
 					</div>
 				</div>
 			) : null}
+			<div className='advanced-order-calorie-container'>
+				<p className='advanced-order-calorie-input-title-text'>Daily Calorie Goal</p>
+				<input
+					value={caloriesPerDay}
+					onChange={(e) => onChangeUserInput(e)}
+					className='advanced-order-calorie-user-input'
+					required
+					placeholder='0 Calories'
+					type='text'
+				/>
+				<p className='advanced-order-calorie-input-title-text'>Percentage Total:</p>
+				{error.calorieTotalError ||
+				error.caloriePerDayError ||
+				error.highCarbError ||
+				error.highFatError ||
+				error.highProteinError ? (
+					<div className='advanced-order-error-modal-container'>
+						<h3 className='advanced-order-error-modal-content'>{errorMessage}</h3>
+					</div>
+				) : null}
+				<p
+					style={{
+						backgroundColor: totalPercentage > 100 ? "red" : "white",
+						fontSize: totalPercentage > 100 ? "30px" : "20px",
+						fontWeight: totalPercentage > 100 ? "700" : "none",
+						color: totalPercentage > 100 ? "white" : "black",
+						padding: totalPercentage > 100 ? "30px" : "20px",
+					}}
+					className='advanced-order-calorie-input-title-text-result'
+				>
+					{totalPercentage}%
+				</p>
+
+				{calorieBreakdown.map((item) => {
+					return (
+						<div className='advanced-order-calorie-input-container' key={item.id}>
+							<div className='advanced-order-calorie-input-title-text-container'>
+								<p className='advanced-order-calorie-input-title-text'>{item.name}</p>
+							</div>
+							<div className='advanced-order-calorie-input-button-container'>
+								<button
+									disabled={
+										error.caloriePerDayError === 0 || totalPercentage === 0 || item.percentage === 0 ? true : false
+									}
+									className='advanced-order-calorie-input-button-sub'
+									onClick={() => handleOnClickSub(item.id)}
+								>
+									-
+								</button>
+								<div className='advanced-order-calorie-percentage-input-read-only'>{item.percentage}%</div>
+
+								<button
+									disabled={caloriesPerDay === 0 || totalPercentage === 105 ? true : false}
+									className='advanced-order-calorie-input-button-add'
+									onClick={() => handleOnClickAdd(item.id)}
+								>
+									+
+								</button>
+							</div>
+						</div>
+					);
+				})}
+				<button
+					onClick={() => {
+						setMacroModal(true);
+					}}
+					className='advanced-order-macro-break-down-modal-button'
+				>
+					Macro Breakdown
+				</button>
+			</div>
 		</div>
 	);
 };

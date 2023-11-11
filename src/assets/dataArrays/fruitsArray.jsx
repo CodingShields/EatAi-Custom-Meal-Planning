@@ -1,4 +1,5 @@
 const fruitsArr = [
+	{ id: 0, name: "Pick Fruits" },
 	{ id: 1, name: "Apples" },
 	{ id: 2, name: "Bananas" },
 	{ id: 3, name: "Oranges" },
