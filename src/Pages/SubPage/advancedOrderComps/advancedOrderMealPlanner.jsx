@@ -8,7 +8,12 @@ import carbs from "../../../assets/dataArrays/carbsArray";
 import fruitsArr from "../../../assets/dataArrays/fruitsArray";
 
 const AdvancedOrderMealPlanner = () => {
-	const [loading, setLoading] = useState(true); // Initially set loading to true
+	const [state, setState] = useState({
+		loading: false,
+		error: null,
+		errorMessage: ""
+	});
+	
 	const mealPlanner = useAdvancedOrderStore((state) => state.mealPlanner);
 	const [selectedDay, setSelectedDay] = useState(null);
 

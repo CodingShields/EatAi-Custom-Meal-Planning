@@ -45,7 +45,7 @@
 	padding: 10px;
 	box-shadow: #333 1px 5px 10px 5px;
 	position: sticky;
-	width: auto;
+	width: 400px;
 }
 
 .advanced-order-btn {
@@ -354,10 +354,13 @@
 }
 
 .advanced-order-meal-planner-container {
-	width: 50vw;
+	display: flex;
+	flex-direction: column;
+	width: auto;
 	max-height: 60vh;
-	overflow-x: auto;
-	white-space: nowrap;
+	margin-top: 20px;
+	flex-wrap: wrap;
+	overflow-y: auto;
 }
 
 .advanced-order-day-container {
@@ -365,7 +368,7 @@
 	flex-direction: column;
 	justify-content: center;
 	background-color: antiquewhite;
-	min-width: 250px;
+	width: 250px;
 	height: fit-content;
 	border: #333 solid 1px;
 	border-radius: 10px;
@@ -407,13 +410,14 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100px;
-	height: 100px;
+	width: 50px;
+	height: 50px;
 }
 .advanced-order-meal-item-title {
 	font-size: 15px;
 	text-decoration: underline;
 	font-weight: 600;
+	margin-left: 10px;
 }
 
 .advanced-order-meal-item-modal {
