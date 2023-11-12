@@ -1,5 +1,5 @@
 const carbs = [
-	{ id: 0, name: "Pick Carbohydrates" },
+	{ id: 0, name: "Choose Carbohydrates" },
 	{ id: 1, name: "Beets" },
 	{ id: 2, name: "Parsnips" },
 	{ id: 3, name: "Rutabagas" },

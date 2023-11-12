@@ -51,11 +51,20 @@ const AdvancedOrderMealSetup = () => {
 				dayMeals.push({
 					id: j,
 					name: mealValues[j],
-					protein: "",
-					carbs: "",
-					fats: "",
 					calories: "",
+					dayCompleted: false,
 					flavor: "",
+					flavorCompleted: false,
+					protein: "",
+					proteinCompleted: false,
+					vegetables: "",
+					vegetablesCompleted: false,
+					carbs: "",
+					carbsCompleted: false,
+					fats: "",
+					fatsCompleted: false,
+					fruits: "",
+					fruitsCompleted: false,
 					dietary: "",
 				});
 			}
@@ -90,7 +99,7 @@ const AdvancedOrderMealSetup = () => {
 				required
 				type='number'
 				min={1}
-				max={10}
+				max={6}
 				value={plannedMeals}
 				placeholder='Number of Meals/Snacks Per Day'
 				className='advanced-order-meal-setup-input'

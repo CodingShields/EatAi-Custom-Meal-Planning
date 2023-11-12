@@ -43,9 +43,9 @@ const AdvancedOrder = () => {
 		4: <AdvancedOrderMealPlanner />,
 	};
 	const RenderCompFromStep = renderStepMap[step];
-	console.log(statusBar, "statusBar");
-	console.log(step, "RenderCompFromStep");
-	console.log(document.getElementById("ldBar"), "ldBar");
+	// console.log(statusBar, "statusBar");
+	// console.log(step, "RenderCompFromStep");
+	// console.log(document.getElementById("ldBar"), "ldBar");
 	return (
 		<div className='advanced-order-container'>
 			{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}

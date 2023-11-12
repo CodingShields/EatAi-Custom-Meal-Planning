@@ -1,5 +1,5 @@
 const proteinArray = [
-	{ id: 0, name: "Pick Proteins" },
+	{ id: 0, name: "Choose Proteins" },
 	{ id: 1, name: "Chicken breast" },
 	{ id: 2, name: "Chicken dark meat" },
 	{ id: 3, name: "Salmon" },

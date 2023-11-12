@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
 const FlavorTypeArray = [
-  { id: 0, name: "Pick One..."},
+  { id: 0, name: "Choose Flavor"},
   // { id: nanoid(), name: "Chef Surprise", details: "The Chef Will Randomly Choose a Flavor for you." },
   { id: nanoid(), name: "Italian", details: "Basil, oregano, and garlic for a classic Italian pasta sauce. Balsamic vinegar and olive oil for salads." },
   { id: nanoid(), name: "Mexican", details: "Cilantro, cumin, and chili powder for tacos. Lime and jalapeño for a zesty kick." },
