@@ -55,10 +55,7 @@ const AdvancedOrderCalorieInput = () => {
 	const onChangeUserInput = (e) => {
 		const value = e.target.value;
 		setCaloriesPerDay(value);
-		console.log(value, "value");
 	};
-
-	console.log(proteinPercentage, "proteinPercentage");
 
 	const handleOnClickSub = (itemId) => {
 		// Find the index of the item with the given itemId in calorieBreakdown

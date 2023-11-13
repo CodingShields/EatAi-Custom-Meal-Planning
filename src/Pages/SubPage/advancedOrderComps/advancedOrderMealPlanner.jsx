@@ -21,7 +21,6 @@ const AdvancedOrderMealPlanner = () => {
 		error: null,
 		errorMessage: "",
 	});
-	
 
 	const handleOnFlavorChange = (value, id) => {
 		const dayIndex = mealPlanner.findIndex((item) => item.id === id);
@@ -33,12 +32,12 @@ const AdvancedOrderMealPlanner = () => {
 			const updateFlavor = [...mealPlanner];
 			updateFlavor[dayIndex].meals[mealIndex].flavorCompleted = false;
 			setMealPlanner(updateFlavor);
-		}
-		else {
+		} else {
 			const updateFlavor = [...mealPlanner];
 			updateFlavor[dayIndex].meals[mealIndex].flavorCompleted = true;
 			setMealPlanner(updateFlavor);
 		}
+		console.log(mealPlanner);
 	};
 
 	const handleOnProteinChange = (value, id) => {
@@ -47,17 +46,71 @@ const AdvancedOrderMealPlanner = () => {
 		const newMealPlanner = [...mealPlanner];
 		newMealPlanner[dayIndex].meals[mealIndex].protein = value;
 		setMealPlanner(newMealPlanner);
-		if (value === "Choose Flavor") {
+		if (value === "Choose Proteins") {
 			const updateProtein = [...mealPlanner];
 			updateProtein[dayIndex].meals[mealIndex].proteinCompleted = false;
-			setMealPlanner(updateFlavor);
+			setMealPlanner(updateProtein);
 		} else {
-			const updateProtein= [...mealPlanner];
+			const updateProtein = [...mealPlanner];
 			updateProtein[dayIndex].meals[mealIndex].proteinCompleted = true;
-			setMealPlanner(updateFlavor);
+			setMealPlanner(updateProtein);
 		}
+		console.log(mealPlanner);
+	};
+	
+	const handleCarbChange = (value, id) => {
+		const dayIndex = mealPlanner.findIndex((item) => item.id === id);
+		const mealIndex = mealPlanner[dayIndex].meals.findIndex((item) => item.id === id);
+		const newMealPlanner = [...mealPlanner];
+		newMealPlanner[dayIndex].meals[mealIndex].carbs = value;
+		setMealPlanner(newMealPlanner);
+		if (value === "Choose Proteins") {
+			const updateCarbs = [...mealPlanner];
+			updateCarbs[dayIndex].meals[mealIndex].carbsCompleted = false;
+			setMealPlanner(updateCarbs);
+		} else {
+			const updateCarbs = [...mealPlanner];
+			updateCarbs[dayIndex].meals[mealIndex].carbsCompleted = true;
+			setMealPlanner(updateCarbs);
+		}
+		console.log(mealPlanner);
 	};
 
+	const handleFatsChange = (value, id) => {
+		const dayIndex = mealPlanner.findIndex((item) => item.id === id);
+		const mealIndex = mealPlanner[dayIndex].meals.findIndex((item) => item.id === id);
+		const newMealPlanner = [...mealPlanner];
+		newMealPlanner[dayIndex].meals[mealIndex].fats = value;
+		setMealPlanner(newMealPlanner);
+		if (value === "Choose Proteins") {
+			const updateCarbs = [...mealPlanner];
+			updateCarbs[dayIndex].meals[mealIndex].fatsCompleted = false;
+			setMealPlanner(updateCarbs);
+		} else {
+			const updateFats = [...mealPlanner];
+			updateFast[dayIndex].meals[mealIndex].fatsCompleted = true;
+			setMealPlanner(updateFats);
+		}
+		console.log(mealPlanner);
+	};
+
+	const handleVegChange = (value, id) => {
+		const dayIndex = mealPlanner.findIndex((item) => item.id === id);
+		const mealIndex = mealPlanner[dayIndex].meals.findIndex((item) => item.id === id);
+		const newMealPlanner = [...mealPlanner];
+		newMealPlanner[dayIndex].meals[mealIndex].vegetables = value;
+		setMealPlanner(newMealPlanner);
+		if (value === "Choose Proteins") {
+			const updateVeg = [...mealPlanner];
+			updateVeg[dayIndex].meals[mealIndex].vegetablesCompleted = false;
+			setMealPlanner(updateVeg);
+		} else {
+			const updateVeg= [...mealPlanner];
+			updateVeg[dayIndex].meals[mealIndex].vegetablesCompleted = true;
+			setMealPlanner(updateFVeg);
+		}
+		console.log(mealPlanner);
+	};
 	const openDay = (day) => {
 		// Set the selected day when "Open Day" button is clicked
 		setSelectedDay(day);
@@ -99,29 +152,30 @@ const AdvancedOrderMealPlanner = () => {
 			{selectedDay && (
 				<div className='modal'>
 					<div className='modal-content'>
-						{/* Render the details of the selected day here */}
 						<h1 className='advanced-order-day-title-modal'>
 							{selectedDay.day}
 							<button className='close-modal-btn' onClick={closeModal}>
 								Close
 							</button>
 						</h1>
-						{/* You can access other properties of the selected day as needed */}
 						{selectedDay.meals.map((meal) => (
 							<div className='advanced-order-meal-container-modal' key={meal.id}>
 								<h2 className='advanced-order-meal-item-title-modal'>{meal.name}</h2>
 								<div className='advanced-order-title-container-modal'>
 									<p className='advanced-order-meal-item-title'>Meal Flavor</p>
-									{meal.flavorCompleted ? (
-										<p className='advanced-order-meal-completed-text'>Completed</p>
-									) : (
-										<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-									)}
-									{meal.flavorCompleted ? (
-										<img className='advanced-order-check-box' src={completedCheckBox} />
-									) : (
-										<img src={emptyCheckBox} />
-									)}
+									<div className='advanced-order-check-box-container'>
+										{meal.flavorCompleted ? (
+											<>
+												<p className='advanced-order-meal-completed-text'>Completed</p>
+												<img className='advanced-order-check-box' src={completedCheckBox} />
+											</>
+										) : (
+											<>
+												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+												<img src={emptyCheckBox} />
+											</>
+										)}
+									</div>
 								</div>
 								<select
 									onChange={(e) => {
@@ -131,24 +185,57 @@ const AdvancedOrderMealPlanner = () => {
 								>
 									{FlavorTypeArray.map((flavor) => (
 										<option
-											key={flavor.id} value={flavor.name}>
+											disbaled={flavor.name === "Choose Flavor" ? true : false}
+											key={flavor.id}
+											value={flavor.name}
+										>
 											{flavor.name}
 										</option>
 									))}
 								</select>
-								<p className='advanced-order-meal-item-title'>Protein</p>
+
+								<div className='advanced-order-title-container-modal'>
+									<p className='advanced-order-meal-item-title'>Protein</p>
+									<div className='advanced-order-check-box-container'>
+										{meal.proteinCompleted ? (
+											<>
+												<p className='advanced-order-meal-completed-text'>Completed</p>
+												<img className='advanced-order-check-box' src={completedCheckBox} />
+											</>
+										) : (
+											<>
+												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+												<img src={emptyCheckBox} />
+											</>
+										)}
+									</div>
+								</div>
 								<select
 									onChange={(e) => handleOnProteinChange(e.target.value, meal.id)}
-									className='advanced-order-meal-item-modal'>
+									className='advanced-order-meal-item-modal'
+								>
 									{proteinArray.map((protein) => (
-										<option
-											key={protein.id}
-											value={protein.name}>
+										<option key={protein.id} value={protein.name}>
 											{protein.name}
 										</option>
 									))}
 								</select>
-								<p className='advanced-order-meal-item-title'>Carbs</p>
+								<div className='advanced-order-title-container-modal'>
+									<p className='advanced-order-meal-item-title'>Carbs</p>
+									<div className='advanced-order-check-box-container'>
+										{meal.carbsCompleted ? (
+											<>
+												<p className='advanced-order-meal-completed-text'>Completed</p>
+												<img className='advanced-order-check-box' src={completedCheckBox} />
+											</>
+										) : (
+											<>
+												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+												<img src={emptyCheckBox} />
+											</>
+										)}
+									</div>
+								</div>
 								<select className='advanced-order-meal-item-modal'>
 									{carbs.map((carb) => (
 										<option key={carb.id} value={carb.name}>
@@ -156,7 +243,22 @@ const AdvancedOrderMealPlanner = () => {
 										</option>
 									))}
 								</select>
-								<p className='advanced-order-meal-item-title'>Fats</p>
+								<div className='advanced-order-title-container-modal'>
+									<p className='advanced-order-meal-item-title'>Fats</p>
+									<div className='advanced-order-check-box-container'>
+										{meal.fatsCompleted ? (
+											<>
+												<p className='advanced-order-meal-completed-text'>Completed</p>
+												<img className='advanced-order-check-box' src={completedCheckBox} />
+											</>
+										) : (
+											<>
+												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+												<img src={emptyCheckBox} />
+											</>
+										)}
+									</div>
+								</div>
 								<select className='advanced-order-meal-item-modal'>
 									{healthyFats.map((fat) => (
 										<option key={fat.id} value={fat.name}>
@@ -164,7 +266,22 @@ const AdvancedOrderMealPlanner = () => {
 										</option>
 									))}
 								</select>
-								<p className='advanced-order-meal-item-title'>Vegetables</p>
+								<div className='advanced-order-title-container-modal'>
+									<p className='advanced-order-meal-item-title'>Vegetables</p>
+									<div className='advanced-order-check-box-container'>
+										{meal.vegetablesCompleted ? (
+											<>
+												<p className='advanced-order-meal-completed-text'>Completed</p>
+												<img className='advanced-order-check-box' src={completedCheckBox} />
+											</>
+										) : (
+											<>
+												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+												<img src={emptyCheckBox} />
+											</>
+										)}
+									</div>
+								</div>
 								<select className='advanced-order-meal-item-modal'>
 									{vegetables.map((veggie) => (
 										<option key={veggie.id} value={veggie.name}>
@@ -172,8 +289,22 @@ const AdvancedOrderMealPlanner = () => {
 										</option>
 									))}
 								</select>
-
-								<p className='advanced-order-meal-item-title'>Fruit</p>
+								<div className='advanced-order-title-container-modal'>
+									<p className='advanced-order-meal-item-title'>Fruit</p>
+									<div className='advanced-order-check-box-container'>
+										{meal.fruitsCompleted ? (
+											<>
+												<p className='advanced-order-meal-completed-text'>Completed</p>
+												<img className='advanced-order-check-box' src={completedCheckBox} />
+											</>
+										) : (
+											<>
+												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+												<img src={emptyCheckBox} />
+											</>
+										)}
+									</div>
+								</div>
 								<select className='advanced-order-meal-item-modal'>
 									{fruitsArr.map((carb) => (
 										<option key={carb.id} value={carb.name}>

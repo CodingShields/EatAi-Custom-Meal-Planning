@@ -279,26 +279,41 @@
 .advanced-order-title-container-modal{
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 200px;
+	padding: 0px;
+	margin: 0px;
+
+}
+
+.advanced-order-check-box-container{
+	display: flex;
+	width: 100px;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 
 }
 
 .advanced-order-check-box{
+	display: flex;
 	height: 20px;
 	width: 20px;
 }
 
 .advanced-order-meal-completed-text{
 	font-size: 14px;
-	margin-left:10px;
 	color: green;
+	margin: 0px;
+	padding: 0px;
 }
 
 .advanced-order-meal-incomplete-text{
 	font-size: 14px;
-	margin-left:10px;
 	color: red;
+	margin: 0px;
+	padding: 0px;
 }
 
 
@@ -387,12 +402,12 @@
 	max-width: auto;
 	max-height: 60vh;
 	margin-top: 20px;
-	/* flex-wrap: wrap; */
+	flex-wrap: wrap;
 	overflow-x: auto;
 }
 
 .advanced-order-day-container {
-	display:block;
+	display: block;
 	flex-direction: column;
 	justify-content: center;
 	background-color: antiquewhite;
@@ -461,6 +476,7 @@
 	text-decoration: underline;
 	font-weight: 600;
 	margin-top: 20px;
+	padding: 0px;
 }
 
 .advanced-order-completed-container{
@@ -543,7 +559,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	width: 100%;
+	width: 300px;
 	height: 100%;
 	padding: 20px;
 	margin: 0px;
