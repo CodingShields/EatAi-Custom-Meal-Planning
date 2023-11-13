@@ -27,3 +27,5 @@ const AdvancedOrderMacroInput = () => {
             </div>
     )
 }
+
+export default AdvancedOrderMacroInput;

@@ -11,7 +11,7 @@ import { useRenderStepStore } from "../../stateStore/RenderStepStore";
 import AdvancedOrderResetButton from "./advancedOrderComps/advancedOrderStartOverButton";
 import AdvancedOrderPreviousButton from "./advancedOrderComps/advancedOrderPreviousButton";
 import ConfirmSelectionButton from "./advancedOrderComps/confirmSelectionStepButton";
-
+import AdvancedOrderMacroInput from "./advancedOrderComps/advancedOrderMacroInput";
 import "../../css/advancedOrder.css";
 import AdvancedOrderCalorieInput from "./advancedOrderComps/calorieInput";
 import "../../assets/statusBar/loading-bar.css";
@@ -19,6 +19,7 @@ import "../../assets/statusBar/loading-bar.css";
 const AdvancedOrder = () => {
 	const step = useRenderStepStore((state) => state.step);
 	const { setStatusBar } = useAdvancedOrderStoreActions((actions) => actions);
+	const macroCalorieSelection = useAdvancedOrderStore((state) => state);
 	const statusBar = useAdvancedOrderStore((state) => state.statusBar);
 
 	useEffect(() => {
@@ -38,7 +39,7 @@ const AdvancedOrder = () => {
 	const renderStepMap = {
 		0: <AdvancedStart />,
 		1: <AdvancedOrderCalorieMacroSelection />,
-		2: <AdvancedOrderCalorieInput />,
+		2: 	macroCalorieSelection === ("macros") ? <AdvancedOrderMacroInput /> : <AdvancedOrderCalorieInput />,
 		3: <AdvancedOrderMealSetup />,
 		4: <AdvancedOrderMealPlanner />,
 	};
@@ -46,26 +47,32 @@ const AdvancedOrder = () => {
 	// console.log(statusBar, "statusBar");
 	// console.log(step, "RenderCompFromStep");
 	// console.log(document.getElementById("ldBar"), "ldBar");
+	console.log(macroCalorieSelection);
 	return (
 		<div className='advanced-order-container'>
 			{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}
 
-			<div className='advanced-order-render-comp-container'>
-				{RenderCompFromStep}
+			{/* <div className='advanced-order-render-comp-container'> */}
+			{RenderCompFromStep}
 
-				{step != 0 ? (
-					<div className='advanced-order-btn-container'>
-						<ConfirmSelectionButton />
-						<AdvancedOrderResetButton />
-						<AdvancedOrderPreviousButton />
-					</div>
-				) : (
-					""
-				)}
-				<div data-preset='stripe' data-value={statusBar}
-					id="ldBar"
-					className='ldBar'></div>
+			<div
+				style={{
+					display: "flex",
+					width: "auto",
+					marginTop: "10px",
+					justifyContent: "center",
+					flexDirection: "column",
+				}}
+			>
+				{step != 0 ? <ConfirmSelectionButton /> : null}
+				{step != 0 ? <AdvancedOrderResetButton /> : null}
+				{step != 0 ? <AdvancedOrderPreviousButton /> : null}
 			</div>
+
+			{/* <div data-preset='stripe' data-value={statusBar}
+					id="ldBar"
+					className='ldBar'></div> */}
+			{/* </div> */}
 		</div>
 	);
 };

@@ -36,19 +36,19 @@ const AdvancedOrderCalorieInput = () => {
 			setErrorMessage("Total Percentage cannot be greater than 100%. Please reduce one of the percentages.");
 			setTimeout(() => {
 				setError({ calorieTotalError: false });
-			}, 3000);
+			}, 2000);
 		} else if (caloriesPerDay === 0) {
 			setError({ caloriePerDayError: true });
 			setErrorMessage("Please Set a Calorie Goal");
 			setTimeout(() => {
 				setError({ caloriePerDayError: false });
-			}, 3000);
+			}, 2000);
 		} else if (proteinPercentage > 50) {
 			setError({ highProteinError: true });
 			setErrorMessage("High Protein Intake Can Lead To Health and Digestion Issues");
 			setTimeout(() => {
 				setError({ highProteinError: false });
-			}, 3000);
+			}, 2000);
 		}
 	}, [totalPercentage, caloriesPerDay, proteinPercentage]);
 

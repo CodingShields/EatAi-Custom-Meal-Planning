@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 const initializeState = {
 	macroCalorieSelection: "",
-	statusBar: "5",
+	statusBar: "0",
 	plannedDays: 1,
 	plannedMeals: 1,
 	caloriesPerDay: 0,
@@ -10,14 +10,17 @@ const initializeState = {
 		{
 			id: 0,
 			name: "Protein Macro",
+			data: 0,
 		},
 		{
 			id: 1,
 			name: "Carbohydrate Macro",
+			data: 0,
 		},
 		{
 			id: 2,
 			name: "Fat Macro",
+			data: 0,
 		},
 	],
 	calorieBreakdown: [
