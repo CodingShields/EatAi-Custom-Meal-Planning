@@ -7,7 +7,8 @@ import AdvancedOrderBeginButton from "./beginButton";
 //data
 import advancedOrderStartQuestions from "../../../assets/dataArrays/advancedOrderStartQuestions";
 import helpLinkData from "../../../assets/dataArrays/helpLinkData";
-
+//utilites
+import { months, daysFunction, yearsFunction, renderTextWithNewlines } from "../../../utilities/advancedUtilities";
 //css
 import "../../../css/Advanced-Order-CSS/start.css";
 
@@ -15,6 +16,7 @@ const AdvancedStart = () => {
 	const { setTdee, setBmr } = useAdvancedOrderStoreActions((actions) => actions);
 	const { tdee } = useAdvancedOrderStore((state) => state);
 	const { bmr } = useAdvancedOrderStore((state) => state);
+
 
 	const [state, setState] = useState({
 		error: false,
@@ -32,22 +34,9 @@ const AdvancedStart = () => {
 		activityValue: "",
 	});
 
-	const daysArray = () => {
-		const days = [];
-		for (let i = 1; i <= 31; i++) {
-			days.push(i);
-		}
-		return days;
-	};
 
-	const yearsArray = () => {
-		const years = [];
-		for (let i = 1900; i <= 2023; i++) {
-			years.push(i);
-		}
-		return years;
-	};
 
+	
 	///need to fix this
 	const handleHelpChange = (value) => {
 		if (value === "Yes") {
@@ -108,20 +97,12 @@ const AdvancedStart = () => {
 		}
 	};
 
-	const handleStats = (e) => {
-	};
+	// const handleStats = (e) => {
+	// };
 
 	const handleHelpClick = (e) => {
 		const bmrHelp = helpLinkData[0].message;
 		const measureHelp = helpLinkData[1].message;
-		const renderTextWithNewlines = (text) => {
-			return text.split("\n").map((line, index) => (
-				<React.Fragment key={index}>
-					<span>{line}</span>
-					<br />
-				</React.Fragment>
-			));
-		};
 		if (e === "bmrHelp") {
 			setState({ ...state, error: true, errorMessage: renderTextWithNewlines(bmrHelp) });
 		} else if (e === "measureHelp") {
@@ -208,7 +189,7 @@ const AdvancedStart = () => {
 					<select className='select-list' onChange={(e) => handleMeasurementChange(e.target.value)}>
 						{advancedOrderStartQuestions.measurements.map((item) => {
 							return (
-								<option value={item.value} key={item.id}>
+								<option key={item.id} value={item.value}>
 									{item.name}
 								</option>
 							);
@@ -253,7 +234,7 @@ const AdvancedStart = () => {
 							<div className='birthday-select-container'>
 								<p>Month</p>
 								<select className='birthday-select-list-month'>
-									{advancedOrderStartQuestions.months.map((item) => {
+									{months.map((item) => {
 										return (
 											<option key={item.id} value={item.name}>
 												{item.name}
@@ -265,7 +246,7 @@ const AdvancedStart = () => {
 							<div className='birthday-select-container'>
 								<p>Day</p>
 								<select className='birthday-select-list-day'>
-									{daysArray().map((item) => {
+									{daysFunction().map((item) => {
 										return (
 											<option key={item} value={item}>
 												{item}
@@ -277,7 +258,7 @@ const AdvancedStart = () => {
 							<div className='birthday-select-container'>
 								<p>Year</p>
 								<select className='birthday-select-list-year'>
-									{yearsArray().map((item) => {
+									{yearsFunction().map((item) => {
 										return (
 											<option key={item} value={item}>
 												{item}
