@@ -7,8 +7,17 @@ import AdvancedOrderBeginButton from "./beginButton";
 //data
 import advancedOrderStartQuestions from "../../../assets/dataArrays/advancedOrderStartQuestions";
 import helpLinkData from "../../../assets/dataArrays/helpLinkData";
-//utilites
-import { months, daysFunction, yearsFunction, renderTextWithNewlines } from "../../../utilities/advancedUtilities";
+//utilities
+import {
+	months,
+	daysFunction,
+	yearsFunction,
+	renderTextWithNewlines,
+	feetAndInchesToCm,
+	cmToFeetAndInches,
+	calculateAge,
+	handlePoundsToKg,
+} from "../../../utilities/advancedUtilities";
 //css
 import "../../../css/Advanced-Order-CSS/start.css";
 
@@ -16,35 +25,47 @@ const AdvancedStart = () => {
 	const { setTdee, setBmr } = useAdvancedOrderStoreActions((actions) => actions);
 	const { tdee } = useAdvancedOrderStore((state) => state);
 	const { bmr } = useAdvancedOrderStore((state) => state);
-
-
 	const [state, setState] = useState({
 		error: false,
 		errorMessage: "",
+		help: "",
 		renderHelp: true,
+		resetBtn: false,
 		renderGoal: false,
 		renderMeasurement: false,
+		renderStats: false,
+		weightDisable: false,
 		renderGender: false,
 		renderActivity: false,
 		renderResults: false,
 		goal: "",
 		measurement: "",
+		heightCm: 0,
+		weight: 0,
 		gender: "",
 		activity: "",
 		activityValue: "",
+		feet: 0,
+		inches: 0,
+		birthday: "",
+		month: "",
+		day: 0,
+		year: 0,
+		age: 0,
 	});
-
-
-
-	
+	const year = state.year
 	///need to fix this
 	const handleHelpChange = (value) => {
 		if (value === "Yes") {
-			setState({ ...state, renderGoal: true, renderHelp: false });
-		} else {
-			setState({ ...state, renderGoal: false });
+			setState({ ...state, renderGoal: true, renderHelp: false, resetBtn: true });
+		} else if (value === "No") {
+			setState({ ...state, help: value });
+		} else if (value === "Choose One") {
+			setState({ ...state, error: true, errorMessage: "Please Choose One" });
+			setTimeout(() => {
+				setState({ ...state, error: false, errorMessage: "" });
+			}, 1000);
 		}
-		console.log("handleHelpChange", value);
 	};
 
 	const handleGoalChange = (value) => {
@@ -55,21 +76,52 @@ const AdvancedStart = () => {
 			}, 1000);
 		} else if (value === "Maintain Weight" || value === "Weight Loss" || value === "Weight Gain") {
 			setState({ ...state, goal: value, renderGoal: false, renderMeasurement: true });
-			console.log(state.renderBmr, "handleGoalChange true");
 		}
 	};
 
 	const handleMeasurementChange = (value) => {
-		console.log(value, "value");
 		if (value === "Choose One") {
 			setState({ ...state, error: true, errorMessage: "Please Choose A Measurement" });
 			setTimeout(() => {
 				setState({ ...state, error: false, errorMessage: "" });
 			}, 1000);
-		} else if (value === "Metric" || value === "Imperial") {
-			setState({ ...state, measurement: value, renderGender: true, renderMeasurement: false });
+		} else if (value === "Metric") {
+			setState({ ...state, measurement: value, renderStats: true, renderMeasurement: false });
 			console.log("handleMeasurementChange true", value);
+			console.log(state.renderStats, "renderStats");
+		} else if (value === "Imperial") {
+			setState({ ...state, measurement: value, renderStats: true, renderMeasurement: false });
+			console.log("handleMeasurementChange true", value);
+			console.log(state.renderStats, "renderStats");
 		}
+	};
+
+	const handleWeightChange = (value) => {
+		console.log(value, "value");
+		if (!state.weightDisable) {
+			setState({ ...state, weight: value });
+		}
+	};
+
+	const handleWeightConfirm = () => {
+		setState({ ...state, weightDisable: true });
+	};
+
+	const handleHeightChange = (value) => {
+		const metric = state.measurement === "Metric";
+		const imperial = state.measurement === "Imperial";
+		if (metric) {
+			setState({ ...state, heightCm: value });
+		} else if (imperial && value.length === 1) {
+			setState({ ...state, feet: value });	
+		} else if (imperial && value.length === 2) {
+			setState({ ...state, inches: value });
+		}
+		}
+	
+
+	const handleConfirmHeight = () => {
+		setState({ ...state, renderStats: false, renderGender: true });
 	};
 
 	const handleGenderChange = (value) => {
@@ -82,23 +134,17 @@ const AdvancedStart = () => {
 			setState({ ...state, gender: value, renderActivity: true, renderGender: false });
 		}
 	};
-	0
-	
+
 	const handleActivityChange = (value) => {
-		
-		console.log(value, "value");
-		if (newValue === "Choose One") {
+		if (value === "Choose One") {
 			setState({ ...state, error: true, errorMessage: "Please Select One" });
 			setTimeout(() => {
 				setState({ ...state, error: false, errorMessage: "" });
 			}, 1000);
 		} else {
-			setState({ ...state, activity: newValue, renderActivity: false, renderResults: true });
+			setState({ ...state, activity: value, renderActivity: false, renderResults: true });
 		}
 	};
-
-	// const handleStats = (e) => {
-	// };
 
 	const handleHelpClick = (e) => {
 		const bmrHelp = helpLinkData[0].message;
@@ -110,19 +156,57 @@ const AdvancedStart = () => {
 		}
 	};
 
+	const handleBirthdayChange = (value) => {
+		console.log(value);
+		const date = {
+			month: "",
+			day: 0,
+			year: 0,
+		};
+		if (typeof value === "string") {
+			const parts = value.split("/");
+			if (parts.length === 3) {
+				const newMonth = parseInt(parts[0]);
+				date.month += newMonth;
+			}
+		} else if (value.length === 1 || value.length === 2) {
+			const newDay = parseInt(parts[1]);
+			date.day += newDay;
+		} else if (value.length === 4) {
+			const newYear = parseInt(parts[2]);
+			date.year += newYear;
+		}
+		console.log(date);
+	};
+
 	const handleCloseModal = () => {
 		setState({ ...state, error: false, errorMessage: "" });
 	};
 
 	const handleResetBtn = () => {
 		setState({
-			...state,
+			error: false,
+			errorMessage: "",
+			help: "",
 			renderHelp: true,
 			renderGoal: false,
 			renderMeasurement: false,
-			renderBmr: false,
+			renderStats: false,
+			weightDisable: false,
 			renderGender: false,
 			renderActivity: false,
+			renderResults: false,
+			goal: "",
+			measurement: "",
+			height: "",
+			feet: 0,
+			inches: 0,
+			weight: 0,
+			gender: "",
+			activity: "",
+			activityValue: "",
+			birthday: "",
+			age: 0,
 		});
 	};
 
@@ -170,16 +254,16 @@ const AdvancedStart = () => {
 			) : null}
 			{state.renderMeasurement ? (
 				<div className='start-container'>
-					<p> Next we need to figure our your BMR</p>
-					<p>
+					<p className='start-container-title-bmr'> Next we need to figure our your BMR</p>
+					<p className='start-container-title-bmr'>
 						Click{" "}
 						<span onClick={() => handleHelpClick("bmrHelp")} className='here-link'>
 							HERE
 						</span>{" "}
 						to learn more about BMR
 					</p>
-					<p>What is your preferred way to Measure?</p>
-					<p>
+					<p className='start-container-title-bmr'>What is your preferred way to Measure?</p>
+					<p className='start-container-title-bmr'>
 						If you need help, Click
 						<span onClick={() => handleHelpClick("measureHelp")} className='here-link' value={"measureHelp"}>
 							{" "}
@@ -197,6 +281,70 @@ const AdvancedStart = () => {
 					</select>
 				</div>
 			) : null}
+			{state.renderStats ? (
+				<div className='personal-stats-container'>
+					<div className='weight-container'>
+						<p className='stats-title'> What is your Current Weight?</p>
+						<input
+							type='number'
+							min={0}
+							max={1000}
+							maxLength={4}
+							className='weight-input'
+							value={state.weight}
+							onChange={(e) => handleWeightChange(e.target.value)}
+						/>
+						<button onClick={handleWeightConfirm} disabled={state.weightDisable}>
+							Confirm Weight
+						</button>
+						{state.weightDisable ? <p className='stats-title'> What is your Current Height?</p> : null}
+					</div>
+
+					{state.measurement === "Metric" && state.weightDisable ? (
+						<div className='height-input-container'>
+							<input
+								type='number'
+								placeholder='cm'
+								className='height-input-cm'
+								min={0}
+								value={state.height}
+								onChange={(e) => handleHeightChange(e.target.value)}
+							/>
+							<p className='height-text-cm'>cm</p>
+						</div>
+					) : null}
+					{state.measurement === "Imperial" && state.weightDisable ? (
+						<div className='height-input-container'>
+							<p className='height-text-left'>'</p>
+							<input
+								type='number'
+								placeholder='ft'
+								class='height-input-left'
+								min={0}
+								max={7}
+								value={state.height}
+								onChange={(e) => handleHeightChange(e.target.value)}
+							/>
+							<p className='height-text-right'>"</p>
+							<input
+								type='number'
+								placeholder='in'
+								class='height-input-right'
+								min={0}
+								max={11}
+								value={state.height}
+								onChange={(e) => handleStatsChange(e.target.value)}
+							/>
+						</div>
+					) : null}
+					{state.weightDisable ? (
+						<button className='confirm-stats-btn' onClick={handleConfirmHeight}>
+							Confirm Height
+						</button>
+					) : null}
+				</div>
+			) : null}
+
 			{state.renderGender ? (
 				<div className='start-container'>
 					<p>Are you male or female?</p>
@@ -227,13 +375,13 @@ const AdvancedStart = () => {
 						})}
 					</select>
 					<div className='birthday-container'>
-						<div className="birthday-title-container">
-							<p className="birthday-title">When is your birthday?</p>
+						<div className='birthday-title-container'>
+							<p className='birthday-title'>When is your birthday?</p>
 						</div>
-						<div className="birthday-select-container-main">
+						<div className='birthday-select-container-main'>
 							<div className='birthday-select-container'>
-								<p>Month</p>
-								<select className='birthday-select-list-month'>
+								<p className='birthday-select-list-title'>Month</p>
+								<select onChange={(e) => handleBirthdayChange(e.target.value)} className='birthday-select-list-month'>
 									{months.map((item) => {
 										return (
 											<option key={item.id} value={item.name}>
@@ -244,8 +392,8 @@ const AdvancedStart = () => {
 								</select>
 							</div>
 							<div className='birthday-select-container'>
-								<p>Day</p>
-								<select className='birthday-select-list-day'>
+								<p className='birthday-select-list-title'>Day</p>
+								<select className='birthday-select-list-day' onChange={(e) => handleBirthdayChange(e.target.value)}>
 									{daysFunction().map((item) => {
 										return (
 											<option key={item} value={item}>
@@ -256,8 +404,8 @@ const AdvancedStart = () => {
 								</select>
 							</div>
 							<div className='birthday-select-container'>
-								<p>Year</p>
-								<select className='birthday-select-list-year'>
+								<p className='birthday-select-list-title'>Year</p>
+								<select className='birthday-select-list-year' onChange={(e) => handleBirthdayChange(e.target.value)}>
 									{yearsFunction().map((item) => {
 										return (
 											<option key={item} value={item}>
@@ -274,6 +422,7 @@ const AdvancedStart = () => {
 			{state.renderResults ? (
 				<div className='start-container'>
 					<p>Here is your BMR</p>
+					{/* Men BMR */}
 					<p>Here is your TDEE</p>
 					<p>Save your personal data HERE</p>
 					<div className='start-container-modal'>
@@ -287,21 +436,25 @@ const AdvancedStart = () => {
 						</div>
 						<div>
 							<p>Gender</p>
-							<input>{state.gender}</input>
+							<p>{state.gender}</p>
 							<p>Measurement</p>
 							<p>{state.measurement}</p>
 							<p>Height</p>
-
+							{state.height}
 							<p>Weight</p>
+							<button>Change</button>
+
 							<p>Age</p>
+							{calculateAge(year)}
 							<p>Birthday</p>
+
 							<button>Save</button>
 						</div>
 					</div>
 				</div>
 			) : null}
-			<button onClick={handleResetBtn}>Reset</button>
-			<AdvancedOrderBeginButton />
+			{!state.renderHelp ? <button onClick={handleResetBtn}>Start Over</button> : null}
+			{state.renderHelp ? <AdvancedOrderBeginButton /> : null}
 		</div>
 	);
 };

@@ -5,8 +5,6 @@ const initializeState = {
 	plannedDays: 1,
 	plannedMeals: 1,
 	caloriesPerDay: 0,
-	bmr: 0,
-	tdee:0,
 	protein: 0,
 	carbohydrate: 0,
 	fat: 0,
@@ -30,8 +28,27 @@ const initializeState = {
 	mealPlanner: [],
 };
 
+const personalInfo = {
+	gender: "",
+	age: 0,
+	birthDate: "",
+	preferredUnit: "",
+	weightImperial: 0,
+	weightMetric: 0,
+	heightImperial: "",
+	weightImperial: 0,
+	heightMetric: 0,
+	weightMetric: 0,
+	bmr: 0,
+	tdee: 0,
+	activityLevel: "",
+	activityLevelValue: 0,
+	goal: "",
+};
+
 export const useAdvancedOrderStore = create((set, get) => ({
 	...initializeState,
+	...personalInfo,
 	actions: {
 		getAdvancedOrderStore: () => {
 			const state = get();
@@ -45,11 +62,24 @@ export const useAdvancedOrderStore = create((set, get) => ({
 				protein: state.protein,
 				carbohydrate: state.carbohydrate,
 				fat: state.fat,
+				// Personal Info
+				gender: state.gender,
+				age: state.age,
+				birthDate: state.birthDate,
+				preferredUnit: state.preferredUnit,
+				weightImperial: state.weightImperial,
+				weightMetric: state.weightMetric,
+				heightImperial: state.heightImperial,
+				heightMetric: state.heightMetric,
 				bmr: state.bmr,
 				tdee: state.tdee,
+				activityLevel: state.activityLevel,
+				activityLevelValue: state.activityLevelValue,
+				goal: state.goal,
 			};
 		},
 		resetForm: () => set({ ...initializeState }),
+		resetFormPersonalInfo: () => set({ ...personalInfo }),
 		setMacroCalorieSelection: (str) => set({ macroCalorieSelection: str }),
 		setCaloriesPerDay: (num) => set({ caloriesPerDay: num }),
 		setProtein: (num) => set({ protein: num }),
@@ -59,9 +89,20 @@ export const useAdvancedOrderStore = create((set, get) => ({
 		setPlannedMeals: (num) => set({ plannedMeals: num }),
 		setPlannedDays: (num) => set({ plannedDays: num }),
 		setCalorieBreakdown: (arr) => set({ calorieBreakdown: arr }),
+		// Personal Info
+		setGender: (str) => set({ gender: str }),
+		setAge: (num) => set({ age: num }),
+		setBirthDate: (str) => set({ birthDate: str }),
+		setPreferredUnit: (str) => set({ preferredUnit: str }),
+		setWeightImperial: (num) => set({ weightImperial: num }),
+		setWeightMetric: (num) => set({ weightMetric: num }),
+		setHeightImperial: (num) => set({ heightImperial: num }),
+		setHeightMetric: (num) => set({ heightMetric: num }),
 		setBmr: (num) => set({ bmr: num }),
-		setTdee: (num) => set({ tdee: num}),
-		setStatusBar: (num) => set({ statusBar: num }),
+		setTdee: (num) => set({ tdee: num }),
+		setActivityLevel: (str) => set({ activityLevel: str }),
+		setActivityLevelValue: (num) => set({ activityLevelValue: num }),
+		setGoal: (str) => set({ goal: str }),
 	},
 }));
 export const useAdvancedOrderStoreActions = () => useAdvancedOrderStore((state) => state.actions);

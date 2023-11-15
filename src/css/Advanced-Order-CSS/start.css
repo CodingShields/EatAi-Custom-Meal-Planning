@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	width: 480px;
-	height: 475px;
+	height: 500px;
 	border: 2px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
@@ -12,7 +12,7 @@
 }
 
 .start-title {
-	font-size: 20px;
+	font-size: 24px;
 	text-decoration: underline;
 	font-weight: bold;
 	text-align: center;
@@ -39,11 +39,12 @@
 	text-wrap: wrap;
 }
 
-.start-container p {
+.start-container-title-bmr{
 	font-size: 18px;
 	margin: 2px 0px 10px 0px;
 	padding: 0px;
 	text-align: center;
+    margin: 10px;
 }
 
 .here-link {
@@ -119,6 +120,119 @@
 	font-weight: 700;
 	text-decoration: underline;
 }
+
+.personal-stats-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.height-input-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+.weight-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+    padding: 0px;
+}
+
+.stats-title{
+    font-size: 20px;
+    margin: 0px;
+    padding: 10px;
+}
+
+.weight-input{
+    text-align: center;
+    width: 100px;
+    margin: 20px;
+    padding: 0px;
+ 
+}
+.height-input-container{
+    padding-bottom: 30px;
+}
+
+.height-input-cm{
+    text-align: center;
+    width:75px;
+    border-right: white 0px solid;
+    border-top: black 1px solid;
+    border-bottom: black 1px solid;
+    border-left: black 1px solid;
+    outline: none;
+}
+
+.height-text-cm{
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    border-top: black 1px solid;
+    border-left: white 0px solid;
+    border-bottom: black 1px solid;
+    border-right: black 1px solid;
+}
+
+.height-input-left{
+    width:35px;
+    border-right: white 0px solid;
+    border-top: black 1px solid;
+    border-bottom: black 1px solid;
+    border-left: none white 0px;
+    outline: none;
+    
+}
+
+.height-input-right{
+    width:40px;
+    border-right: black 1px solid;
+    border-top: black 1px solid;
+    border-bottom: black 1px solid;
+    border-left: none white 0px;
+    outline: none;
+    margin-right: 10px; 
+}
+
+.height-input-ft:active{
+    outline: none;
+}
+
+.height-text-left{
+    padding-left: 5px;
+    background-color: white;
+    border-top: black 1px solid;
+    border-left: black 1px solid;
+    border-bottom: black 1px solid;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.height-text-right{
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    border-top: black 1px solid;
+    border-left: white 0px solid;
+    border-bottom: black 1px solid;
+}
+
+
+
+
 .birthday-container {
     display: flex;
     flex-direction: column;
@@ -144,7 +258,9 @@
 .birthday-title{
     text-align: center;
     text-decoration: underline;
-    font-size: 28px;
+    font-size: 18px;
+    margin: 0px;
+    padding:0px;    
 }
 
 .birthday-select-container-main{
@@ -160,9 +276,15 @@
 .birthday-select-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+}
+
+.birthday-select-list-title{
+    font-size: 20px;
     text-align: center;
+    margin-right: 10px;
+    padding: 0px;
 }
 
 .birthday-select-list-month {

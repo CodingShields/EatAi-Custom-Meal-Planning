@@ -44,7 +44,7 @@ const EasyOrderFulfilled = () => {
 
 	useEffect(() => {
 		setLoading({ cooking: true, saveBtn: false, renderResponse: false });
-		const apiKey = "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";
+		const apiKey = none
 		const personaPrompt = "I want you to think like a 5 star chef and fulfill the following order and user requests.";
 		const titlePrompt = `Create a 'Title:" of a menu based of the user input ${promptData.flavor} flavor.`;
 		const summaryPrompt = `Create a "Summary:" that should be a short description of the menu.`;

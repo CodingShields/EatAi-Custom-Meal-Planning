@@ -38,3 +38,43 @@ export const renderTextWithNewlines = (text) => {
 		</React.Fragment>
 	));
 };
+
+export const feetAndInchesToCm = (feet, inches)=> {
+  // 1 foot = 30.48 cm
+  const feetToCm = feet * 30.48;
+
+  // 1 inch = 2.54 cm
+  const inchesToCm = inches * 2.54;
+
+  // Total centimeters
+  const totalCm = feetToCm + inchesToCm;
+
+  return totalCm;
+}
+
+export const cmToFeetAndInches = () => {
+	// 1 inch = 2.54 cm
+	const inches = cm / 2.54;
+
+	// 1 foot = 12 inches
+	const feet = Math.floor(inches / 12);
+
+	// Calculate the remaining inches
+	const remainingInches = inches % 12;
+
+	return {
+		feet: feet,
+		inches: remainingInches,
+	};
+}
+
+export const calculateAge = (year) => {
+	const currentYear = new Date().getFullYear();
+	const age = currentYear - year;
+	return age;
+}
+
+export const handlePoundsToKg = (weight) => {
+    const kg = weight * 0.45359237;
+    return kg;
+}
