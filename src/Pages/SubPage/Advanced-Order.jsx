@@ -9,6 +9,7 @@ import AdvancedOrderMealSetup from "./Advanced-Order-Comps/MealSetup.jsx";
 import AdvancedOrderMealPlanner from "./Advanced-Order-Comps/mealPlanner.jsx";
 import AdvancedOrderCalorieInput from "./Advanced-Order-Comps/calorieInput.jsx";
 import AdvancedOrderMacroInput from "./Advanced-Order-Comps/macroInput.jsx";
+import StepOnePersonal from "./Advanced-Order-Comps/Advanced-Start-Comps/stepOnePersonal.jsx";
 
 //global state
 import { useAdvancedOrderStoreActions } from "../../stateStore/AdvancedOrderStore";
@@ -47,7 +48,7 @@ const AdvancedOrder = () => {
 
 
 	const renderStepMap = {
-		0: <AdvancedStart />,
+		0: <StepOnePersonal />,
 		1: <AdvancedOrderCalorieMacroSelection />,
 		2: macroCalorieSelection === "macros" ? <AdvancedOrderMacroInput /> : <AdvancedOrderCalorieInput />,
 		3: <AdvancedOrderMealSetup />,
