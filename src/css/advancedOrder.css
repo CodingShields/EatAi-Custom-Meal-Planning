@@ -3,14 +3,14 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	height: 70vh;
-	width: 70vw;
+	height: 100%;
+	width: auto;
 	max-width: 80vw;
 	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
+	border-radius: 20px;
 	box-shadow: #333 1px 5px 10px 5px;
-	padding: 30px;
-	margin-top: 15px;
+	padding: 50px;
+	margin-top: 20px;
 }
 
 .advanced-order-chef-img {
@@ -39,12 +39,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	border: 2px solid brown;
-	border-radius: 20px;
-	background-color: antiquewhite;
 	padding: 10px;
-	box-shadow: #333 1px 5px 10px 5px;
-	position: sticky;
 	width: 400px;
 }
 
@@ -335,31 +330,6 @@
 	border: 2px solid brown;
 }
 
-.macro-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: auto;
-	height: 100px;
-	margin-left: 10px;
-	margin-bottom: 0px;
-	padding-bottom: 5px;
-	border-radius: 10px;
-	border: 1px solid black;
-	background-color: antiquewhite;
-}
-
-.macro-text {
-	margin: 5px;
-	padding: 0px;
-	text-decoration: underline;
-}
-
-.macro-result {
-	margin: 5px;
-	padding: 0px;
-}
 
 /* Meal Setup */
 .advanced-order-meal-setup-input {

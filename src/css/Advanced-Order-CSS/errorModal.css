@@ -1,0 +1,28 @@
+.error-container{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	z-index: 1010; /* Ensure the modal appears on top */
+}
+
+.error-content{
+    display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: antiquewhite;
+	padding: 20px;
+	border-radius: 5px;
+	width: auto;
+	height: 200px;
+	box-shadow: #333 1px 3px 5px 3px;
+	border: 2px solid brown;
+	margin: 0px;
+	padding: 0px;
+}

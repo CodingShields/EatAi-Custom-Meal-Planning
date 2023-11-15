@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAdvancedOrderStore } from "../../../stateStore/AdvancedOrderStore";
 import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderStore";
+import { nanoid } from "nanoid";
 import proteinArray from "../../../assets/dataArrays/proteinArray";
 import FlavorTypeArray from "../../../assets/dataArrays/Flavor-Type-Array";
 import vegetables from "../../../assets/dataArrays/veggieArray";
@@ -24,57 +25,71 @@ const AdvancedOrderMealPlanner = () => {
 	});
 
 	const handleOnFlavorChange = (value, id) => {
-		// Find the day index that contains the meal with the given id
-		const dayIndex = mealPlanner.findIndex((day) => day.meals.some((meal) => meal.id === id));
+		const updatedMealPlanner = mealPlanner.map((day) => {
+			const updatedMeals = day.meals.map((meal) => {
+				if (meal.id === id && day.id === selectedDay.id) {
+					// Clone the meal to avoid mutating state directly
+					const updatedMeal = { ...meal };
 
-		if (dayIndex !== -1) {
-			// Find the meal index within the day's meals array
-			const mealIndex = mealPlanner[dayIndex].meals.findIndex((meal) => meal.id === id);
+					// Check if updatedMeal.flavor is an array or initialize it as an empty array
+					if (!Array.isArray(updatedMeal.flavor)) {
+						updatedMeal.flavor = [];
+					}
 
-			if (mealIndex !== -1) {
-				// Clone the mealPlanner array to avoid mutating state directly
-				const newMealPlanner = [...mealPlanner];
+					// Check if the selected protein is already in the meal's protein array
+					const flavorIndex = updatedMeal.flavor.indexOf(value);
 
-				// Get the meal for which you want to update the flavor array
-				const mealToUpdate = newMealPlanner[dayIndex].meals[mealIndex];
+					if (flavorIndex === -1 && updatedMeal.flavor.includes("None")) {
+						updatedMeal.flavor.push("None");
+						updatedMeal.flavorCompleted = false;
+					} else if (flavorIndex === -1 && updatedMeal.flavor.length < 3) {
+						// Remove "None" if it exists in the flavor array
+						const noneIndex = updatedMeal.flavor.indexOf("None");
+						if (noneIndex !== -1) {
+							updatedMeal.flavor.splice(noneIndex, 1);
+						}
+						updatedMeal.flavor.push(value);
+						updatedMeal.flavorCompleted = true;
+					} else if (flavorIndex !== -1) {
+						// Remove the selected protein from the meal's protein array
+						updatedMeal.flavor.splice(flavorIndex, 1);
+					} else if (updatedMeal.flavor.length === 0) {
+						updatedMeal.flavorCompleted = false;
+					} else if (updatedMeal.flavor.length === 3) {
+						setState({ error: true, errorMessage: "You can only select up to 3 Dietary Options." });
+						setTimeout(() => {
+							setState({ error: false, message: "" });
+						}, 2000);
+						// You've reached the maximum number of selections (3)
+						// You can display a message or handle it in a way that informs the user.
+					}
 
-				// Ensure that the 'flavor' property is initialized as an array if it's not
-				if (!Array.isArray(mealToUpdate.flavor)) {
-					mealToUpdate.flavor = [];
+					// Update the proteinCompleted property
+					updatedMeal.flavorCompleted = updatedMeal.flavor.length > 0;
+
+					return updatedMeal;
 				}
+				return meal;
+			});
 
-				// Check if the selected flavor is already in the meal's flavor array
-				const flavorIndex = mealToUpdate.flavor.indexOf(value);
+			return { ...day, meals: updatedMeals };
+		});
 
-				if (flavorIndex === -1) {
-					// Remove any previously selected flavor, if any
-					mealToUpdate.flavor = [];
+		// Update the state with the modified mealPlanner
+		setMealPlanner(updatedMealPlanner);
 
-					// Add the selected flavor to the meal's flavor array
-					mealToUpdate.flavor.push(value);
-				}
-
-				// Update the flavorCompleted property
-				mealToUpdate.flavorCompleted = mealToUpdate.flavor.length > 0;
-
-				// Update the state with the modified mealPlanner
-				setMealPlanner(newMealPlanner);
-
-				console.log(newMealPlanner);
-			}
-		}
+		console.log(updatedMealPlanner);
 	};
+
 
 	const handleOnDietaryChange = (value, id) => {
 		const updatedMealPlanner = mealPlanner.map((day) => {
 			const updatedMeals = day.meals.map((meal) => {
-				if (meal.id === id) {
+				if (meal.id === id && day.id === selectedDay.id) {
 					// Clone the meal to avoid mutating state directly
 					const updatedMeal = { ...meal };
-
 					// Check if the selected protein is already in the meal's protein array
 					const dietaryIndex = updatedMeal.dietary.indexOf(value);
-
 					if (dietaryIndex === -1 && updatedMeal.dietary.value === "None") {
 						updatedMeal.dietary.push("None");
 						updatedMeal.dietaryCompleted = false;
@@ -86,8 +101,13 @@ const AdvancedOrderMealPlanner = () => {
 					} else if (dietaryIndex !== -1) {
 						// Remove the selected protein from the meal's protein array
 						updatedMeal.dietary.splice(dietaryIndex, 1);
+					} else if (updatedMeal.dietary.length === 0) {
+						updatedMeal.dietaryCompleted = false;
 					} else if (updatedMeal.dietary.length === 3) {
 						setState({ error: true, errorMessage: "You can only select up to 3 Dietary Options." });
+						setTimeout(() => {
+							setState({ error: false, message: "" });
+						}, 2000);
 						// You've reached the maximum number of selections (3)
 						// You can display a message or handle it in a way that informs the user.
 					}
@@ -112,7 +132,7 @@ const AdvancedOrderMealPlanner = () => {
 	const handleOnProteinChange = (value, id) => {
 		const updatedMealPlanner = mealPlanner.map((day) => {
 			const updatedMeals = day.meals.map((meal) => {
-				if (meal.id === id) {
+				if (meal.id === id && day.id === selectedDay.id) {
 					// Clone the meal to avoid mutating state directly
 					const updatedMeal = { ...meal };
 
@@ -154,7 +174,7 @@ const AdvancedOrderMealPlanner = () => {
 	const handleCarbChange = (value, id) => {
 		const updatedMealPlanner = mealPlanner.map((day) => {
 			const updatedMeals = day.meals.map((meal) => {
-				if (meal.id === id) {
+				if (meal.id === id && day.id === selectedDay.id) {
 					// Clone the meal to avoid mutating state directly
 					const updatedMeal = { ...meal };
 
@@ -195,7 +215,7 @@ const AdvancedOrderMealPlanner = () => {
 	const handleFatsChange = (value, id) => {
 		const updatedMealPlanner = mealPlanner.map((day) => {
 			const updatedMeals = day.meals.map((meal) => {
-				if (meal.id === id) {
+				if (meal.id === id && day.id === selectedDay.id) {
 					// Clone the meal to avoid mutating state directly
 					const updatedMeal = { ...meal };
 
@@ -237,7 +257,7 @@ const AdvancedOrderMealPlanner = () => {
 	const handleVegChange = (value, id) => {
 		const updatedMealPlanner = mealPlanner.map((day) => {
 			const updatedMeals = day.meals.map((meal) => {
-				if (meal.id === id) {
+				if (meal.id === id && day.id === selectedDay.id) {
 					// Clone the meal to avoid mutating state directly
 					const updatedMeal = { ...meal };
 
@@ -279,7 +299,7 @@ const AdvancedOrderMealPlanner = () => {
 	const handleFruitChange = (value, id) => {
 		const updatedMealPlanner = mealPlanner.map((day) => {
 			const updatedMeals = day.meals.map((meal) => {
-				if (meal.id === id) {
+				if (meal.id === id && day.id === selectedDay.id) {
 					// Clone the meal to avoid mutating state directly
 					const updatedMeal = { ...meal };
 
@@ -371,254 +391,258 @@ const AdvancedOrderMealPlanner = () => {
 								Close
 							</button>
 						</h1>
-						{selectedDay.meals.map((meal) => (
-							<div className='advanced-order-meal-container-modal' key={meal.id}>
-								<h2 className='advanced-order-meal-item-title-modal'>{meal.name}</h2>
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>Flavor: {meal.flavor.length} of 1</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.flavorCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+						{selectedDay.meals.map((meal) => {
+							const mealKey = nanoid();
+							return (
+								<div className='advanced-order-meal-container-modal' key={mealKey}>
+									<h2 className='advanced-order-meal-item-title-modal'>{meal.name}</h2>
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>Flavor: {meal.flavor.length} of 1</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.flavorCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
-								</div>
-								<select
-									onChange={(e) => {
-										handleOnFlavorChange(e.target.value, meal.id);
-									}}
-									className='advanced-order-meal-item-modal'
-								>
-									{FlavorTypeArray.map((flavor) => {
-										const isSelected = meal.flavor.includes(flavor.name);
+									<select
+										onChange={(e) => {
+											handleOnFlavorChange(e.target.value, meal.id);
+										}}
+										className='advanced-order-meal-item-modal'
+									>
+										{FlavorTypeArray.map((flavor) => {
+											const isSelected = meal.flavor.includes(flavor.name);
 
-										return (
-											<option className={isSelected ? "selected-item" : ""} key={flavor.id} value={flavor.name}>
-												{flavor.name}
-											</option>
-										);
-									})}
-								</select>
+											return (
+												<option className={isSelected ? "selected-item" : ""} key={flavor.id} value={flavor.name}>
+													{flavor.name}
+												</option>
+											);
+										})}
+									</select>
 
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>Dietary: {meal.dietary.length} of 3</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.dietaryCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>Dietary: {meal.dietary.length} of 3</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.dietaryCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
-								</div>
-								<select
-									onChange={(e) => handleOnDietaryChange(e.target.value, meal.id)}
-									className='advanced-order-meal-item-modal'
-								>
-									{DietaryOptionsArray.map((dietary) => {
-										const isSelected = meal.dietary.includes(dietary.name);
-										const isDisabled = meal.dietary.includes("None");
-										return (
-											<option
-												disable={isDisabled ? "disabled" : ""}
-												className={isSelected ? "selected-item" : ""}
-												key={dietary.id}
-												value={dietary.name}
-											>
-												{dietary.name}
-											</option>
-										);
-									})}
-								</select>
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>Protein: {meal.protein.length} of 3</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.proteinCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+									<select
+										onChange={(e) => handleOnDietaryChange(e.target.value, meal.id)}
+										className='advanced-order-meal-item-modal'
+									>
+										{DietaryOptionsArray.map((dietary) => {
+											const isSelected = meal.dietary.includes(dietary.name);
+											const isDisabled = meal.dietary.includes("None");
+											const dietaryKey = nanoid();
+											return (
+												<option
+													disable={isDisabled ? "disabled" : ""}
+													className={isSelected ? "selected-item" : ""}
+													key={dietaryKey}
+													value={dietary.name}
+												>
+													{dietary.name}
+												</option>
+											);
+										})}
+									</select>
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>Protein: {meal.protein.length} of 3</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.proteinCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
-								</div>
 
-								<select
-									onChange={(e) => handleOnProteinChange(e.target.value, meal.id)}
-									className='advanced-order-meal-item-modal'
-								>
-									{proteinArray.map((protein) => {
-										const isSelected = meal.protein.includes(protein.name); // Check if the protein is selected
+									<select
+										onChange={(e) => handleOnProteinChange(e.target.value, meal.id)}
+										className='advanced-order-meal-item-modal'
+									>
+										{proteinArray.map((protein) => {
+											const isSelected = meal.protein.includes(protein.name); // Check if the protein is selected
 
-										return (
-											<option key={protein.id} value={protein.name} className={isSelected ? "selected-item" : ""}>
-												{protein.name}
-											</option>
-										);
-									})}
-								</select>
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>
-										Carbs:
-										<span className='advanced-order-meal-item-title-span'> {meal.carbs.length} of 3</span>
-									</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.carbsCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+											return (
+												<option key={protein.id} value={protein.name} className={isSelected ? "selected-item" : ""}>
+													{protein.name}
+												</option>
+											);
+										})}
+									</select>
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>
+											Carbs:
+											<span className='advanced-order-meal-item-title-span'> {meal.carbs.length} of 3</span>
+										</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.carbsCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
-								</div>
-								<select
-									onChange={(e) => {
-										handleCarbChange(e.target.value, meal.id);
-									}}
-									className='advanced-order-meal-item-modal'
-								>
-									{carbs.map((carb) => {
-										const isSelected = meal.carbs.includes(carb.name);
-										return (
-											<option className={isSelected ? "selected-item" : ""} key={carb.id} value={carb.name}>
-												{carb.name}
-											</option>
-										);
-									})}
-								</select>
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>
-										Fats:
-										<span className='advanced-order-meal-item-title-span'> {meal.fats.length} of 3</span>
-									</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.fatsCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+									<select
+										onChange={(e) => {
+											handleCarbChange(e.target.value, meal.id);
+										}}
+										className='advanced-order-meal-item-modal'
+									>
+										{carbs.map((carb) => {
+											const isSelected = meal.carbs.includes(carb.name);
+											return (
+												<option className={isSelected ? "selected-item" : ""} key={carb.id} value={carb.name}>
+													{carb.name}
+												</option>
+											);
+										})}
+									</select>
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>
+											Fats:
+											<span className='advanced-order-meal-item-title-span'> {meal.fats.length} of 3</span>
+										</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.fatsCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
-								</div>
-								<select
-									onChange={(e) => {
-										handleFatsChange(e.target.value, meal.id);
-									}}
-									className='advanced-order-meal-item-modal'
-								>
-									{healthyFats.map((fat) => {
-										const isSelected = meal.fats.includes(fat.name);
-										return (
-											<option
-												className={meal.fats.includes(fat.name) ? "selected-item" : ""}
-												key={fat.id}
-												value={fat.name}
-											>
-												{fat.name}
-											</option>
-										);
-									})}
-								</select>
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>
-										Veggies:
-										<span className='advanced-order-meal-item-title-span'> {meal.vegetables.length} of 6</span>
-									</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.vegetablesCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+									<select
+										onChange={(e) => {
+											handleFatsChange(e.target.value, meal.id);
+										}}
+										className='advanced-order-meal-item-modal'
+									>
+										{healthyFats.map((fat) => {
+											const isSelected = meal.fats.includes(fat.name);
+											return (
+												<option
+													className={meal.fats.includes(fat.name) ? "selected-item" : ""}
+													key={fat.id}
+													value={fat.name}
+												>
+													{fat.name}
+												</option>
+											);
+										})}
+									</select>
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>
+											Veggies:
+											<span className='advanced-order-meal-item-title-span'> {meal.vegetables.length} of 6</span>
+										</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.vegetablesCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
-								</div>
-								<select
-									onChange={(e) => {
-										handleVegChange(e.target.value, meal.id);
-									}}
-									className='advanced-order-meal-item-modal'
-								>
-									{vegetables.map((veggie) => {
-										const isSelected = meal.vegetables.includes(veggie.name);
-										return (
-											<option
-												className={meal.vegetables.includes(veggie.name) ? "selected-item" : ""}
-												key={veggie.id}
-												value={veggie.name}
-											>
-												{veggie.name}
-											</option>
-										);
-									})}
-								</select>
-								<div className='advanced-order-title-container-modal'>
-									<p className='advanced-order-meal-item-title'>
-										Fruits:
-										<span className='advanced-order-meal-item-title-span'> {meal.fruits.length} of 4</span>
-									</p>
-									<div className='advanced-order-check-box-container'>
-										{meal.fruitsCompleted ? (
-											<>
-												<p className='advanced-order-meal-completed-text'>Completed</p>
-												<img className='advanced-order-check-box' src={completedCheckBox} />
-											</>
-										) : (
-											<>
-												<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
-												<img src={emptyCheckBox} />
-											</>
-										)}
+									<select
+										onChange={(e) => {
+											handleVegChange(e.target.value, meal.id);
+										}}
+										className='advanced-order-meal-item-modal'
+									>
+										{vegetables.map((veggie) => {
+											const isSelected = meal.vegetables.includes(veggie.name);
+											return (
+												<option
+													className={meal.vegetables.includes(veggie.name) ? "selected-item" : ""}
+													key={veggie.id}
+													value={veggie.name}
+												>
+													{veggie.name}
+												</option>
+											);
+										})}
+									</select>
+									<div className='advanced-order-title-container-modal'>
+										<p className='advanced-order-meal-item-title'>
+											Fruits:
+											<span className='advanced-order-meal-item-title-span'> {meal.fruits.length} of 4</span>
+										</p>
+										<div className='advanced-order-check-box-container'>
+											{meal.fruitsCompleted ? (
+												<>
+													<p className='advanced-order-meal-completed-text'>Completed</p>
+													<img className='advanced-order-check-box' src={completedCheckBox} />
+												</>
+											) : (
+												<>
+													<p className='advanced-order-meal-incomplete-text'>Incomplete</p>
+													<img src={emptyCheckBox} />
+												</>
+											)}
+										</div>
 									</div>
+									<select
+										onChange={(e) => {
+											handleFruitChange(e.target.value, meal.id);
+										}}
+										className='advanced-order-meal-item-modal'
+									>
+										{fruitsArr.map((fruit) => {
+											const isSelected = meal.fruits.includes(fruit.name);
+											return (
+												<option className={isSelected ? "selected-item" : ""} key={fruit.id} value={fruit.name}>
+													{fruit.name}
+												</option>
+											);
+										})}
+									</select>
 								</div>
-								<select
-									onChange={(e) => {
-										handleFruitChange(e.target.value, meal.id);
-									}}
-									className='advanced-order-meal-item-modal'
-								>
-									{fruitsArr.map((fruit) => {
-										const isSelected = meal.fruits.includes(fruit.name);
-										return (
-											<option className={isSelected ? "selected-item" : ""} key={fruit.id} value={fruit.name}>
-												{fruit.name}
-											</option>
-										);
-									})}
-								</select>
-							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 			)}

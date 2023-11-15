@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import flippedChef from "../../assets/images/flippedChef.png";
-import ChefSurpriseEntree from "./chefSurpriseComps/chefSurpriseEntree";
-import ChefSurpriseHeadCount from "./chefSurpriseComps/chefSurpriseHeadCount";
-import ChefSurpriseFlavor from "./chefSurpriseComps/chefSurpriseFlavor";
-import ChefSurpriseDietary from "./chefSurpriseComps/chefSurpriseDietary";
+import ChefSurpriseEntree from "./Chef-Surprise-Comps/chefSurpriseEntree";
+import ChefSurpriseHeadCount from "./Chef-Surprise-Comps/chefSurpriseHeadCount";
+import ChefSurpriseFlavor from "./Chef-Surprise-Comps/chefSurpriseFlavor";
+import ChefSurpriseDietary from "./Chef-Surprise-Comps/chefSurpriseDietary";
 import { useChefSurpriseStoreActions } from "../../stateStore/ChefSurpriseStore";
 import { useChefSurpriseStore } from "../../stateStore/ChefSurpriseStore";
 import jsPDF from "jspdf";

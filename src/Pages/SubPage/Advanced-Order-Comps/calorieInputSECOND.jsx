@@ -60,7 +60,6 @@ const AdvancedOrderCalorieInput = () => {
 		console.log(value, "value");
 	};
 
-console.log(proteinPercentage, "proteinPercentage");
 
 	const handleOnClickSub = (itemId) => {
 		// Find the index of the item with the given itemId in calorieBreakdown

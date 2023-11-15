@@ -112,7 +112,8 @@ const renderStars = (itemId, score, index) => {
 
     return (
 
-        <div className="easy-order-pantry-container">
+      <div className="easy-order-pantry-container">
+        <h1>NEED TO ADD LOADING STATE W/ ACTIVE LOADING SVG</h1>
                     {easyOrderPantry.map((item, index) => {
                         return (
                             <div

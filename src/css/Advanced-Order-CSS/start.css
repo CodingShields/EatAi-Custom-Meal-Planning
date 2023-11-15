@@ -1,0 +1,121 @@
+.start-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+	height: 475px;
+	border: 2px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: #333 1px 5px 10px 5px;
+    padding: auto;
+}
+
+.start-title{
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+.start-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+
+.start-select-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 300px;
+    height: 25px;
+    margin: 0px;
+    text-wrap:wrap;
+}
+.start-container p {
+    font-size: 18px;
+    margin: 2px 0px 10px 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.here-link{
+    color: blue;
+}
+
+.here-link:hover{
+    color: blue;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.start-btn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width:20%;
+    height: 20%;
+    margin: 10px;
+}
+
+.start-input{
+    width: 80px;
+    height: 25px;
+    margin: 0px;
+}
+
+.start-error-container-modal{
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	z-index: 1010; /* Ensure the modal appears on top */
+}
+
+.start-error-content{
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: antiquewhite;
+	padding: 20px;
+	border-radius: 5px;
+	width: auto;
+    max-width: 600px;
+	height: auto;
+	box-shadow: #333 1px 3px 5px 3px;
+	border: 2px solid brown;
+	margin: 0px;
+	padding: 20px;
+}
+.start-close-modal-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border:none 0px transparent;
+    background-color: antiquewhite;
+    top: 25;
+    left: 25;
+}
+
+.start-close-modal-btn:hover{
+    color:black;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+

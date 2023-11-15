@@ -51,7 +51,10 @@ const AdvancedOrderMealSetup = () => {
 				dayMeals.push({
 					id: j,
 					name: mealValues[j],
-					calories: "",
+					protein: 0,
+					carb: 0,
+					fat:0,
+					calories: 0,
 					dayCompleted: false,
 					error: false,
 					errorMessage: "",

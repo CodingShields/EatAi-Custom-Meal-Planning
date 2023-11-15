@@ -2,7 +2,7 @@ import React from "react";
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderStore";
 
-const AdvancedOrderResetButton = () => {
+const ResetButton = () => {
 
 	const  resetStep = useRenderStepStore((state) => state.resetStep);
 	const { resetForm } = useAdvancedOrderStoreActions();
@@ -25,4 +25,4 @@ const AdvancedOrderResetButton = () => {
 		</>
 	);
 };
-export default AdvancedOrderResetButton
+export default ResetButton

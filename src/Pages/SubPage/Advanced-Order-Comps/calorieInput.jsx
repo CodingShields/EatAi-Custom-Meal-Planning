@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderStore";
 import { useAdvancedOrderStore } from "../../../stateStore/AdvancedOrderStore";
+//buttons
+import ResetButton from "./startOverButton.jsx";
+import PreviousButton from "./previousButton.jsx";
+import ConfirmSelectionButton from "./confirmSelectionStepButton.jsx";
+
 
 const AdvancedOrderCalorieInput = () => {
 	// State
@@ -30,27 +35,27 @@ const AdvancedOrderCalorieInput = () => {
 
 	const totalPercentage = proteinPercentage + carbPercentage + fatPercentage;
 
-	useEffect(() => {
-		if (totalPercentage > 100) {
-			setError({ calorieTotalError: true });
-			setErrorMessage("Total Percentage cannot be greater than 100%. Please reduce one of the percentages.");
-			setTimeout(() => {
-				setError({ calorieTotalError: false });
-			}, 2000);
-		} else if (caloriesPerDay === 0) {
-			setError({ caloriePerDayError: true });
-			setErrorMessage("Please Set a Calorie Goal");
-			setTimeout(() => {
-				setError({ caloriePerDayError: false });
-			}, 2000);
-		} else if (proteinPercentage > 50) {
-			setError({ highProteinError: true });
-			setErrorMessage("High Protein Intake Can Lead To Health and Digestion Issues");
-			setTimeout(() => {
-				setError({ highProteinError: false });
-			}, 2000);
-		}
-	}, [totalPercentage, caloriesPerDay, proteinPercentage]);
+	// useEffect(() => {
+	// 	if (totalPercentage > 100) {
+	// 		setError({ calorieTotalError: true });
+	// 		setErrorMessage("Total Percentage cannot be greater than 100%. Please reduce one of the percentages.");
+	// 		setTimeout(() => {
+	// 			setError({ calorieTotalError: false });
+	// 		}, 2000);
+	// 	} else if (caloriesPerDay === 0) {
+	// 		setError({ caloriePerDayError: true });
+	// 		setErrorMessage("Please Set a Calorie Goal");
+	// 		setTimeout(() => {
+	// 			setError({ caloriePerDayError: false });
+	// 		}, 2000);
+	// 	} else if (proteinPercentage > 50) {
+	// 		setError({ highProteinError: true });
+	// 		setErrorMessage("High Protein Intake Can Lead To Health and Digestion Issues");
+	// 		setTimeout(() => {
+	// 			setError({ highProteinError: false });
+	// 		}, 2000);
+	// 	}
+	// }, [totalPercentage, caloriesPerDay, proteinPercentage]);
 
 	const onChangeUserInput = (e) => {
 		const value = e.target.value;
@@ -89,7 +94,7 @@ const AdvancedOrderCalorieInput = () => {
 	};
 
 	return (
-		<>
+		<div className='advanced-order-comp-container'>
 			<p className='advanced-order-calorie-input-title-text'>Daily Calorie Goal</p>
 			<input
 				value={caloriesPerDay}
@@ -154,7 +159,12 @@ const AdvancedOrderCalorieInput = () => {
 					</div>
 				);
 			})}
-		</>
+			<div className='advanced-order-btn-container'>
+				<ResetButton />
+				<PreviousButton />
+				<ConfirmSelectionButton />
+			</div>
+		</div>
 	);
 };
 
