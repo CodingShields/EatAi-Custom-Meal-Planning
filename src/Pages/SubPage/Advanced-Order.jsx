@@ -69,7 +69,7 @@ const AdvancedOrder = () => {
 				}}
 			>
 			</div>
-			<div data-preset='stripe' data-value={state.statusBar} id='ldBar' className='ldBar'></div>
+			{/* <div data-preset='stripe' data-value={state.statusBar} id='ldBar' className='ldBar'></div> */}
 		</div>
 	);
 };

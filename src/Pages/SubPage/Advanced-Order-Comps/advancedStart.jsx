@@ -32,6 +32,22 @@ const AdvancedStart = () => {
 		activityValue: "",
 	});
 
+	const daysArray = () => {
+		const days = [];
+		for (let i = 1; i <= 31; i++) {
+			days.push(i);
+		}
+		return days;
+	};
+
+	const yearsArray = () => {
+		const years = [];
+		for (let i = 1900; i <= 2023; i++) {
+			years.push(i);
+		}
+		return years;
+	};
+
 	///need to fix this
 	const handleHelpChange = (value) => {
 		if (value === "Yes") {
@@ -77,11 +93,12 @@ const AdvancedStart = () => {
 			setState({ ...state, gender: value, renderActivity: true, renderGender: false });
 		}
 	};
-
-	const handleActivityChange = (e) => {
-		const newValue = e.target.value;
-		console.log(newValue, "value");
-		if (value === "Choose One") {
+	0
+	
+	const handleActivityChange = (value) => {
+		
+		console.log(value, "value");
+		if (newValue === "Choose One") {
 			setState({ ...state, error: true, errorMessage: "Please Select One" });
 			setTimeout(() => {
 				setState({ ...state, error: false, errorMessage: "" });
@@ -92,8 +109,6 @@ const AdvancedStart = () => {
 	};
 
 	const handleStats = (e) => {
-		const newValue = e.target.value;
-		console.log(newValue, "value");
 	};
 
 	const handleHelpClick = (e) => {
@@ -147,10 +162,10 @@ const AdvancedStart = () => {
 			{state.renderHelp ? (
 				<div className='start-container'>
 					<p>Do You Need Help With Your Calories?</p>
-					<select className='start-select-list' onChange={(e) => handleHelpChange(e.target.value)}>
+					<select className='select-list' onChange={(e) => handleHelpChange(e.target.value)}>
 						{advancedOrderStartQuestions.help.map((item) => {
 							return (
-								<option className='start-select-list' key={item.id} value={item.name}>
+								<option className='select-list' key={item.id} value={item.name}>
 									{item.name}
 								</option>
 							);
@@ -161,7 +176,7 @@ const AdvancedStart = () => {
 			{state.renderGoal ? (
 				<div className='start-container'>
 					<p>What is your goal?</p>
-					<select className='start-select-list' onChange={(e) => handleGoalChange(e.target.value)}>
+					<select className='select-list' onChange={(e) => handleGoalChange(e.target.value)}>
 						{advancedOrderStartQuestions.goal.map((item) => {
 							return (
 								<option key={item.id} value={item.name}>
@@ -190,7 +205,7 @@ const AdvancedStart = () => {
 							HERE
 						</span>
 					</p>
-					<select className='start-select-list' onChange={(e) => handleMeasurementChange(e.target.value)}>
+					<select className='select-list' onChange={(e) => handleMeasurementChange(e.target.value)}>
 						{advancedOrderStartQuestions.measurements.map((item) => {
 							return (
 								<option value={item.value} key={item.id}>
@@ -204,7 +219,7 @@ const AdvancedStart = () => {
 			{state.renderGender ? (
 				<div className='start-container'>
 					<p>Are you male or female?</p>
-					<select className='start-select-list' onChange={(e) => handleGenderChange(e.target.value)}>
+					<select className='select-list' onChange={(e) => handleGenderChange(e.target.value)}>
 						{advancedOrderStartQuestions.gender.map((item) => {
 							return (
 								<>
@@ -220,24 +235,58 @@ const AdvancedStart = () => {
 			{state.renderActivity ? (
 				<div className='start-container'>
 					<p> What is your current level of Activity?</p>
-					<select className='start-select-list' onChange={(e) => handleActivityChange(e.target.value)}>
+					<select className='select-list' onChange={(e) => handleActivityChange(e.target.value)}>
 						{advancedOrderStartQuestions.activity.map((item) => {
+							const optionValue = JSON.stringify({ name: item.name, value: item.value });
 							return (
-								<option key={item.id} value={item.name}>
+								<option key={item.id} value={optionValue}>
 									{item.name}
 								</option>
 							);
 						})}
 					</select>
-					<div className='start-container'>
-						{advancedOrderStartQuestions.stats.map((item) => {
-							return (
-								<div key={item.id} className='start-container'>
-									<p>{item.name}</p>
-									<input className='start-input'></input>
-								</div>
-							);
-						})}
+					<div className='birthday-container'>
+						<div className="birthday-title-container">
+							<p className="birthday-title">When is your birthday?</p>
+						</div>
+						<div className="birthday-select-container-main">
+							<div className='birthday-select-container'>
+								<p>Month</p>
+								<select className='birthday-select-list-month'>
+									{advancedOrderStartQuestions.months.map((item) => {
+										return (
+											<option key={item.id} value={item.name}>
+												{item.name}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+							<div className='birthday-select-container'>
+								<p>Day</p>
+								<select className='birthday-select-list-day'>
+									{daysArray().map((item) => {
+										return (
+											<option key={item} value={item}>
+												{item}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+							<div className='birthday-select-container'>
+								<p>Year</p>
+								<select className='birthday-select-list-year'>
+									{yearsArray().map((item) => {
+										return (
+											<option key={item} value={item}>
+												{item}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 			) : null}
