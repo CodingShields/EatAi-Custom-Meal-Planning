@@ -78,3 +78,8 @@ export const handlePoundsToKg = (weight) => {
     const kg = weight * 0.45359237;
     return kg;
 }
+
+export const handleKgToPounds = (weight) => {
+	const pounds = weight * 2.20462262185;
+	return pounds;
+}

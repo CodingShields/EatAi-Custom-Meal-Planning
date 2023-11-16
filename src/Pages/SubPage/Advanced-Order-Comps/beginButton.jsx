@@ -10,7 +10,7 @@ const AdvancedOrderBeginButton = () => {
     return (
 			<>
 				<button className='advanced-order-btn' onClick={increaseStep}>
-					Begin
+					Begin Advanced Order
 				</button>
 			</>
 		);

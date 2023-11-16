@@ -12,7 +12,7 @@ const ConfirmSelectionButton = () => {
                     className="advanced-order-btn"
                     onClick={increaseStep}
                 >
-                    Confirm Selection
+                    Next
                 </button>
             </>
         )

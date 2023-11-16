@@ -9,7 +9,7 @@ import AdvancedOrderMealSetup from "./Advanced-Order-Comps/MealSetup.jsx";
 import AdvancedOrderMealPlanner from "./Advanced-Order-Comps/mealPlanner.jsx";
 import AdvancedOrderCalorieInput from "./Advanced-Order-Comps/calorieInput.jsx";
 import AdvancedOrderMacroInput from "./Advanced-Order-Comps/macroInput.jsx";
-import StepOnePersonal from "./Advanced-Order-Comps/Advanced-Start-Comps/stepOnePersonal.jsx";
+import CheckProfile from "./Advanced-Order-Comps/Step-1-Profile-Check/checkProfile.jsx";
 
 //global state
 import { useAdvancedOrderStoreActions } from "../../stateStore/AdvancedOrderStore";
@@ -30,7 +30,7 @@ const AdvancedOrder = () => {
 		errorMessage: "",
 	});
 
-//status bar
+	//status bar
 	useEffect(() => {
 		if (step === 0) {
 			setState({ statusBar: "5" });
@@ -45,10 +45,9 @@ const AdvancedOrder = () => {
 		}
 	}, [step]);
 
-
-
 	const renderStepMap = {
-		0: <StepOnePersonal />,
+		// Change name of StepOnePersonal to StepOneProfile
+		0: <CheckProfile />,
 		1: <AdvancedOrderCalorieMacroSelection />,
 		2: macroCalorieSelection === "macros" ? <AdvancedOrderMacroInput /> : <AdvancedOrderCalorieInput />,
 		3: <AdvancedOrderMealSetup />,
@@ -68,8 +67,7 @@ const AdvancedOrder = () => {
 					justifyContent: "center",
 					flexDirection: "column",
 				}}
-			>
-			</div>
+			></div>
 			{/* <div data-preset='stripe' data-value={state.statusBar} id='ldBar' className='ldBar'></div> */}
 		</div>
 	);

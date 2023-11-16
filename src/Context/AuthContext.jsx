@@ -8,13 +8,14 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../Firebase/fireBaseConfig";
 import { useNewUserStore } from "../stateStore/NewUserStore";
+import { useNewUserStoreActions } from "../stateStore/NewUserStore";
 import { setDoc, doc } from "firebase/firestore";
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({});
-
+	const {resetForm} = useNewUserStoreActions((actions) => actions);
 	const disclaimerState = useNewUserStore((state) => state.disclaimer);
 
 	const createUser = async ({ firstName, lastName, email, phone, password }) => {
@@ -32,13 +33,6 @@ export const AuthContextProvider = ({ children }) => {
 					last: lastName,
 					email: email,
 					phone: phone,
-					age: null,
-					weight: null,
-					height: null,
-					CurrentActivityLevel: "",
-					currentGoal: "",	
-					bmr: null,
-					tdee: null,
 					membership: false,
 					disclaimer: disclaimerState,
 					signUpDate: new Date(),
