@@ -13,16 +13,21 @@
 
 .error-content{
     display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: antiquewhite;
 	padding: 20px;
 	border-radius: 5px;
-	width: auto;
+	width: 400px;
 	height: 200px;
 	box-shadow: #333 1px 3px 5px 3px;
 	border: 2px solid brown;
 	margin: 0px;
 	padding: 0px;
+}
+.error-message{
+	text-align: center;
+	font-size: 30px;
+	color: #000;
 }

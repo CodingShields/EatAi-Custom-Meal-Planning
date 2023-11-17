@@ -9,7 +9,7 @@ import AdvancedOrderMealSetup from "./Advanced-Order-Comps/MealSetup.jsx";
 import AdvancedOrderMealPlanner from "./Advanced-Order-Comps/mealPlanner.jsx";
 import AdvancedOrderCalorieInput from "./Advanced-Order-Comps/calorieInput.jsx";
 import AdvancedOrderMacroInput from "./Advanced-Order-Comps/macroInput.jsx";
-import CheckProfile from "./Advanced-Order-Comps/Step-1-Profile-Check/checkProfile.jsx";
+import CheckProfile from "./Advanced-Order-Comps/stepOne/checkProfile.jsx";
 
 //global state
 import { useAdvancedOrderStoreActions } from "../../stateStore/AdvancedOrderStore";
@@ -32,6 +32,7 @@ const AdvancedOrder = () => {
 
 	//status bar
 	useEffect(() => {
+		setState({ step: 0 });
 		if (step === 0) {
 			setState({ statusBar: "5" });
 		} else if (step === 1) {
@@ -46,7 +47,6 @@ const AdvancedOrder = () => {
 	}, [step]);
 
 	const renderStepMap = {
-		// Change name of StepOnePersonal to StepOneProfile
 		0: <CheckProfile />,
 		1: <AdvancedOrderCalorieMacroSelection />,
 		2: macroCalorieSelection === "macros" ? <AdvancedOrderMacroInput /> : <AdvancedOrderCalorieInput />,

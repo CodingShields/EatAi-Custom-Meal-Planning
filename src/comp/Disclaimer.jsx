@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import LiveTypingDisClaimerForm from "../Pages/SubPage/Live-Typing-Pages/Live-Typing-Disclaimer-Form";
-import { useNewUserStoreActions } from "../stateStore/NewUserStore";
-import { useNewUserStore } from "../stateStore/NewUserStore";
+import { useUserStoreActions } from "../stateStore/userStore";
+import { useUserStore } from "../stateStore/userStore";
 import LiveDate from "./LiveDate";
 
 const Disclaimer = () => {
 	const [renderDisclaimer, setRenderDisclaimer] = useState(false);
 	const [renderLiveTyping, setRenderLiveTyping] = useState(true);
 	const [isChecked, setIsChecked] = useState(false);
-	const { setDisclaimer } = useNewUserStoreActions();
+	const { setDisclaimer } = useUserStoreActions();
 
-	const disclaimerState = useNewUserStore((state) => state.disclaimer);
+	const disclaimerState = useUserStore((state) => state.disclaimer);
 
 	// need to update State Names and variables
 

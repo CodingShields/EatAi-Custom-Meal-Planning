@@ -7,7 +7,7 @@ import ResetButton from "./startOverButton.jsx";
 import PreviousButton from "./previousButton.jsx";
 import ConfirmSelectionButton from "./confirmSelectionStepButton.jsx";
 //css
-import "../../../css/Advanced-Order-CSS/errorModal.css";
+import "../../../css/errorModal.css";
 import "../../../css/Advanced-Order-CSS/macroInput.css";
 
 const AdvancedOrderMacroInput = () => {

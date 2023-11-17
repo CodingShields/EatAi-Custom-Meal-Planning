@@ -6,13 +6,11 @@ import { useAdvancedOrderStoreActions } from "../../../stateStore/AdvancedOrderS
 import AdvancedOrderBeginButton from "./beginButton";
 //data
 import advancedOrderStartQuestions from "../../../assets/dataArrays/advancedOrderStartQuestions";
-import helpLinkData from "../../../assets/dataArrays/helpLinkData";
 //utilities
 import {
 	months,
 	daysFunction,
 	yearsFunction,
-	renderTextWithNewlines,
 	feetAndInchesToCm,
 	cmToFeetAndInches,
 	calculateAge,
@@ -22,37 +20,8 @@ import {
 import "../../../css/Advanced-Order-CSS/start.css";
 
 const AdvancedStart = () => {
-	const { setTdee, setBmr } = useAdvancedOrderStoreActions((actions) => actions);
-	const { tdee } = useAdvancedOrderStore((state) => state);
-	const { bmr } = useAdvancedOrderStore((state) => state);
-	const [state, setState] = useState({
-		error: false,
-		errorMessage: "",
-		help: "",
-		renderHelp: true,
-		resetBtn: false,
-		renderGoal: false,
-		renderMeasurement: false,
-		renderStats: false,
-		weightDisable: false,
-		renderGender: false,
-		renderActivity: false,
-		renderResults: false,
-		goal: "",
-		measurement: "",
-		heightCm: 0,
-		weight: 0,
-		gender: "",
-		activity: "",
-		activityValue: "",
-		feet: 0,
-		inches: 0,
-		birthday: "",
-		month: "",
-		day: 0,
-		year: 0,
-		age: 0,
-	});
+
+
 	const year = state.year
 	///need to fix this
 	const handleHelpChange = (value) => {
@@ -146,15 +115,7 @@ const AdvancedStart = () => {
 		}
 	};
 
-	const handleHelpClick = (e) => {
-		const bmrHelp = helpLinkData[0].message;
-		const measureHelp = helpLinkData[1].message;
-		if (e === "bmrHelp") {
-			setState({ ...state, error: true, errorMessage: renderTextWithNewlines(bmrHelp) });
-		} else if (e === "measureHelp") {
-			setState({ ...state, error: true, errorMessage: renderTextWithNewlines(measureHelp) });
-		}
-	};
+
 
 	const handleBirthdayChange = (value) => {
 		console.log(value);
@@ -224,20 +185,7 @@ const AdvancedStart = () => {
 					</div>
 				</div>
 			) : null}
-			{state.renderHelp ? (
-				<div className='start-container'>
-					<p>Do You Need Help With Your Calories?</p>
-					<select className='select-list' onChange={(e) => handleHelpChange(e.target.value)}>
-						{advancedOrderStartQuestions.help.map((item) => {
-							return (
-								<option className='select-list' key={item.id} value={item.name}>
-									{item.name}
-								</option>
-							);
-						})}
-					</select>
-				</div>
-			) : null}
+		
 			{state.renderGoal ? (
 				<div className='start-container'>
 					<p>What is your goal?</p>
@@ -254,22 +202,9 @@ const AdvancedStart = () => {
 			) : null}
 			{state.renderMeasurement ? (
 				<div className='start-container'>
-					<p className='start-container-title-bmr'> Next we need to figure our your BMR</p>
-					<p className='start-container-title-bmr'>
-						Click{" "}
-						<span onClick={() => handleHelpClick("bmrHelp")} className='here-link'>
-							HERE
-						</span>{" "}
-						to learn more about BMR
-					</p>
+					
 					<p className='start-container-title-bmr'>What is your preferred way to Measure?</p>
-					<p className='start-container-title-bmr'>
-						If you need help, Click
-						<span onClick={() => handleHelpClick("measureHelp")} className='here-link' value={"measureHelp"}>
-							{" "}
-							HERE
-						</span>
-					</p>
+					
 					<select className='select-list' onChange={(e) => handleMeasurementChange(e.target.value)}>
 						{advancedOrderStartQuestions.measurements.map((item) => {
 							return (

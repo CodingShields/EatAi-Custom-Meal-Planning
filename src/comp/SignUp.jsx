@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import { useNewUserStore } from "../stateStore/NewUserStore.js";
+import { useUserStore } from "../stateStore/userStore.js";
 import Disclaimer from "./Disclaimer.jsx";
 import LoginChef from "../assets/images/LoginChef.png";
 
@@ -17,7 +17,7 @@ const SignUp = () => {
   });
   const [renderSubmit, setRenderSubmit] = useState(false); 
   const [error, setError] = useState(null);
-  const disclaimerState = useNewUserStore((state) => state.disclaimer)
+  const disclaimerState = useUserStore((state) => state.disclaimer)
   const { createUser } = UserAuth();
 
   const navigate = useNavigate();

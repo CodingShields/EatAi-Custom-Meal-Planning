@@ -1,17 +1,11 @@
-import React,{useState, useEffect} from "react";
-//global state
-import { useAdvancedOrderStoreActions } from "../../../../../stateStore/AdvancedOrderStore";
-import { useAdvancedOrderStore } from "../../../../../stateStore/AdvancedOrderStore";
-
+import React, { useState, useEffect } from "react";
+import { useAdvancedOrderProfileStoreActions } from "../../../../stateStore/AdvancedOrderProfileStore";
 
 const AgeGender = () => {
-	//global state actions
-	const { setAge } = useAdvancedOrderStoreActions((actions) => actions);
-	const { setBirthDate } = useAdvancedOrderStoreActions((actions) => actions);
-	const { setGender } = useAdvancedOrderStoreActions((actions) => actions);
-	//global state
+	const { setAge } = useAdvancedOrderProfileStoreActions((actions) => actions);
+	const { setBirthDate } = useAdvancedOrderProfileStoreActions((actions) => actions);
+	const { setGender } = useAdvancedOrderProfileStoreActions((actions) => actions);
 
-	//state
 	const [state, setState] = useState({
 		error: false,
 		errorMessage: "",
@@ -22,8 +16,14 @@ const AgeGender = () => {
 	});
 
 	const handleConfirm = () => {
-	}
+		setAge(state.age);
+		setBirthDate(state.birthday);
+		setGender(state.gender);
+	};
 
+	useEffect(() => {
+		setState({ ...state, errorModal: false, errorMessage: "" });
+	}, []);
 
 	return (
 		<div className='step-container'>
@@ -53,8 +53,8 @@ const AgeGender = () => {
 				<option value='Male'>Male</option>
 				<option value='Female'>Female</option>
 			</select>
-			<button onClick={handleConfirm}>Confirm Info</button>
+			<button onClick={handleConfirm()}>Confirm Info</button>
 		</div>
 	);
-}
+};
 export default AgeGender;

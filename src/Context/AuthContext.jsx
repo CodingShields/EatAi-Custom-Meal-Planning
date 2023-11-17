@@ -7,23 +7,22 @@ import {
 	updateProfile,
 } from "firebase/auth";
 import { auth, db } from "../Firebase/fireBaseConfig";
-import { useNewUserStore } from "../stateStore/NewUserStore";
-import { useNewUserStoreActions } from "../stateStore/NewUserStore";
+import { useUserStore } from "../stateStore/userStore";
+import { useUserStoreActions } from "../stateStore/userStore";
 import { setDoc, doc } from "firebase/firestore";
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({});
-	const {resetForm} = useNewUserStoreActions((actions) => actions);
-	const disclaimerState = useNewUserStore((state) => state.disclaimer);
+	const { resetForm } = useUserStoreActions((actions) => actions);
+	const disclaimerState = useUserStore((state) => state.disclaimer);
 
 	const createUser = async ({ firstName, lastName, email, phone, password }) => {
 		try {
 			const authUser = await createUserWithEmailAndPassword(auth, email, password);
-			// Update user's display name with first and last name
 			await updateProfile(authUser.user, {
-				displayName: `${firstName} ${lastName}`,
+				displayName: `${firstName}`,
 				phoneNumber: phone,
 			});
 			const userDocRef = doc(db, "users", authUser.user.uid);
@@ -43,9 +42,9 @@ export const AuthContextProvider = ({ children }) => {
 					advancedOrder: {},
 				},
 			});
+			resetForm();
 			console.log("User document added successfully");
 		} catch (error) {
-			// Handle any errors here
 			console.error("Error creating user:", error);
 		}
 	};
@@ -55,6 +54,7 @@ export const AuthContextProvider = ({ children }) => {
 	};
 
 	const logout = () => {
+		resetForm();
 		return signOut(auth);
 	};
 
