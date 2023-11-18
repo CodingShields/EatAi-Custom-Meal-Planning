@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 //DB
-import { db, auth } from "../../../../Firebase/fireBaseConfig.js";
+import { db, auth } from "../../../Firebase/fireBaseConfig.js";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 //auth
-import { UserAuth } from "../../../../Context/AuthContext.jsx";
+import { UserAuth } from "../../../Context/AuthContext.jsx";
 // Global State
-import { useAdvancedOrderProfileStore } from "../../../../stateStore/AdvancedOrderProfileStore.js";
-import { useAdvancedOrderProfileStoreActions } from "../../../../stateStore/AdvancedOrderProfileStore.js";
-import { useRenderSmallStepStore } from "../../../../stateStore/RenderStepStore.js";
+import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore.js";
+import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore.js";
+import { useRenderSmallStepStore } from "../../../stateStore/RenderStepStore.js";
 //components
 import AgeGender from "./buildAgeGender.jsx";
 import Goal from "./buildGoal.jsx";
 import PersonalStats from "./buildPersonalStats.jsx";
 import ProfileReview from "./profileReview.jsx";
 import MealGuide from "./mealGuide.jsx";
+import BuildWeight from "./buildWeight.jsx";
+import BuildHeight from "./buildHeight.jsx";
 //buttons
-import AdvancedOrderBeginButton from "../beginButton.jsx";
+import AdvancedOrderBeginButton from "./beginButton.jsx";
 import HandleSteps from "./handleSteps.jsx";
 // import HandleSteps from "./handleSteps.jsx";
 // CSS
@@ -26,7 +28,7 @@ import "../../../../css/errorModal.css";
 import SearchingForProfileFadeIn from "../../../../assets/images/SearchingForProfileFadeIn.svg";
 import SearchingForProfileFadeOut from "../../../../assets/images/SearchingForProfileFadeOut.svg";
 
-const CheckProfile = () => {
+const ProfileSearch = () => {
 	const step = useRenderSmallStepStore((state) => state.step);
 	const resetStep = useRenderSmallStepStore((state) => state.resetStep);
 	const user = UserAuth();
@@ -58,8 +60,10 @@ const CheckProfile = () => {
 						loading: false,
 						hasProfile: false,
 						message: "No Profile was loaded yet. Let me check the DataBase.",
-					})}
-				{!state.hasProfile
+					});
+				}
+				{
+					!state.hasProfile
 						? setTimeout(() => {
 								const checkForProfileInDb = async () => {
 									try {
@@ -91,7 +95,6 @@ const CheckProfile = () => {
 				}
 			}, 3000);
 		};
-
 		checkForProfile();
 	}, []);
 
@@ -101,14 +104,14 @@ const CheckProfile = () => {
 
 	const renderStepMap = {
 		0: <PersonalStats />,
-		1: <AgeGender />,
-		2: <Goal />,
-		3: <ProfileReview />,
-		4: <MealGuide />,
+		1: <BuildWeight />,
+		2: <BuildHeight />,
+		3: <AgeGender />,
+		4: <Goal />,
+		5: <ProfileReview />,
+		6: <MealGuide />,
 	};
-	const RenderCompFromStep = renderStepMap[step]
-
-	console.log(step);
+	const RenderCompFromStep = renderStepMap[step];
 
 	return (
 		<div className='advanced-order-comp-container'>
@@ -123,14 +126,16 @@ const CheckProfile = () => {
 						</button>
 					</div>
 				</div>
-			) : ""}
+			) : (
+				""
+			)}
 
-				{state.noProfile ? [RenderCompFromStep] : ""}
+			{state.noProfile ? [RenderCompFromStep] : ""}
 
-				{<HandleSteps /> }
+			{<HandleSteps />}
 			<AdvancedOrderBeginButton />
 		</div>
 	);
 };
 
-export default CheckProfile;
+export default ProfileSearch;

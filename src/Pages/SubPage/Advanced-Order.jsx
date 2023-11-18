@@ -47,13 +47,23 @@ const AdvancedOrder = () => {
 	}, [step]);
 
 	const renderStepMap = {
-		0: <CheckProfile />,
-		1: <AdvancedOrderCalorieMacroSelection />,
-		2: macroCalorieSelection === "macros" ? <AdvancedOrderMacroInput /> : <AdvancedOrderCalorieInput />,
-		3: <AdvancedOrderMealSetup />,
-		4: <AdvancedOrderMealPlanner />,
+		0: <ProfileSearch />,
+		2:
+		3: <AdvancedOrderCalorieMacroSelection />,
+		4:
+		5: <AdvancedOrderMealPlanner />,
 	};
-	const RenderCompFromStep = renderStepMap[step];
+const renderStepMapNewProfileSetup = {
+	0: 
+		1:
+	2:
+		3:
+	4:
+	}
+const RenderCompFromStep = renderStepMap[step];
+	
+const RenderNewProfileSetup = renderStepMap[step]
+
 
 	return (
 		<div className='advanced-order-container'>

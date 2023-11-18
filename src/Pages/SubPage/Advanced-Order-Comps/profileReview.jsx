@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
-import { useAdvancedOrderProfileStore } from "../../../../stateStore/AdvancedOrderProfileStore";
-import { useAdvancedOrderProfileStoreActions } from "../../../../stateStore/AdvancedOrderProfileStore";
+import React, { useEffect, useState } from "react";
+import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
+import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import ProfileReviewModal from "./profileReviewModal";
-const ProfileReview = () => { 
-
+const ProfileReview = () => {
 	// const { setBMR } = AdvancedOrderProfileStoreActions((actions) => actions);
 	// const {	setTDEE } = AdvancedOrderProfileStoreActions((actions) => actions);
-	const { age, birthday, gender, weight, height, preferredUnit, activityLevel,bmr, tdee } = useAdvancedOrderProfileStore((state) => state);
+	const { age, birthday, gender, weight, height, preferredUnit, activityLevel, bmr, tdee } =
+		useAdvancedOrderProfileStore((state) => state);
 
 	// const [state, setState] = useState({
 	// 	error: false,
@@ -17,7 +17,6 @@ const ProfileReview = () => {
 	// 	reviewModal: false,
 	// });
 
-	
 	// useEffect(() => {
 	// 	setState({ ...state, loading: true, errorModal: false, errorMessage: "" });
 	// 	if (preferredUnit === "imperial") {
@@ -51,7 +50,7 @@ const ProfileReview = () => {
 	// 	}
 	// }
 	// 	, []);
-	
+
 	// const closeErrorModalBtn = () => {
 	// 	setState({ ...state, errorModal: false, errorMessage: "", completed: false });
 	// };
@@ -60,10 +59,10 @@ const ProfileReview = () => {
 	// 	setState({ ...state, reviewModal: false });
 	// }
 
-    return (
-			<div>
-				<h2> Profile Review</h2>
-				{/* {state.errorModal ? (
+	return (
+		<div>
+			<h2> Profile Review</h2>
+			{/* {state.errorModal ? (
 					<div className='error-container'>
 						<div className='error-content'>
 							<p className='error-message'>{state.errorMessage}</p>
@@ -75,27 +74,27 @@ const ProfileReview = () => {
 				) : (
 					""
 				)} */}
-				{/* <div>
+			{/* <div>
 					<ProfileReviewModal closeReviewModalBtn={closeReviewModalBtn} />
 				</div> */}
-				<div>
-					<p>age</p>
-					{age}
-					<p>birthday</p>
-					{birthday}
-					<p>gender</p>
-					{gender}
-					<p>weight</p>
-					{weight}
-					<p>height</p>
-					{height}
-					<p>preferred measurement</p>
-					{preferredUnit}
-					<p>current activity level</p>
-					{activityLevel}
-					<p>BMR</p>
-					{bmr}
-					{/* <p className='start-container-title-bmr'> Next we need to figure our your BMR</p>
+			<div>
+				<p>age</p>
+				{age}
+				<p>birthday</p>
+				{birthday}
+				<p>gender</p>
+				{gender}
+				<p>weight</p>
+				{weight}
+				<p>height</p>
+				{height}
+				<p>preferred measurement</p>
+				{preferredUnit}
+				<p>current activity level</p>
+				{activityLevel}
+				<p>BMR</p>
+				{bmr}
+				{/* <p className='start-container-title-bmr'> Next we need to figure our your BMR</p>
 					<p className='start-container-title-bmr'>
 						Click{" "}
 						<span onClick={() => handleHelpClick("bmrHelp")} className='here-link'>
@@ -103,12 +102,12 @@ const ProfileReview = () => {
 						</span>{" "}
 						to learn more about BMR
 					</p> */}
-					<p>TDEE</p>
-					{tdee}
-					<button>update</button>
-				</div>
+				<p>TDEE</p>
+				{tdee}
+				<button>update</button>
 			</div>
-		);
-}
+		</div>
+	);
+};
 
 export default ProfileReview;

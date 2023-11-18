@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAdvancedOrderProfileStoreActions } from "../../../../stateStore/AdvancedOrderProfileStore";
+import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 
 const AgeGender = () => {
 	const { setAge } = useAdvancedOrderProfileStoreActions((actions) => actions);
