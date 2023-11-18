@@ -25,12 +25,21 @@
 	height: 100%;
 	margin: 0px;
 }
-.build-stats-title {
-	font-size: 18px;
+.comp-title {
+	font-size: 22px;
 	margin: 2px 0px 10px 0px;
 	padding: 0px;
 	text-align: center;
-	margin: 0px;
+	padding: 10px;
+	margin: 10px;
+	text-decoration: underline;
+}
+.title{
+	font-size: 20px;
+	margin: 2px 0px 10px 0px;
+	padding: 0px;
+	text-align: center;
+	margin: 10px 0px 20px 0px;
 }
 
 .help-title {
@@ -38,7 +47,7 @@
 	margin: 2px 0px 10px 0px;
 	padding: 0px;
 	text-align: center;
-	margin: 0px;
+	margin-bottom: 5px;
 }
 .here-link {
 	color: blue;
@@ -56,6 +65,7 @@
 	width: 200px;
 	font-size: 22px;
 	border-radius: 10px;
+	margin: 5px 0px 15px 0px;
 }
 
 .weight-input-container-main {
@@ -97,6 +107,11 @@
 }
 /* Input  */
 .weight-input-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
 	text-align: center;
 	height: 60px;
 	width: 70px;
@@ -109,6 +124,11 @@
 	border-left: 2px solid black;
 }
 .weight-input-middle {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
 	text-align: center;
 	height: 60px;
 	width: 70px;
@@ -121,6 +141,11 @@
 	border-left: 0px transparent solid;
 }
 .weight-input-right {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
 	text-align: center;
 	height: 60px;
 	width: 70px;
@@ -286,7 +311,7 @@
 	margin-left: 0px;
 	padding-left: 0px;
 	border-bottom: 0px transparent solid;
-	border-left: 0px transparent solid;
+	border-left: 1px grey solid;
 	font-size: 28px;
 	border-radius: 0px 10px 0px 0px;
 }
@@ -437,4 +462,41 @@ input {
 	background-color: rgb(41, 82, 41); /* Change the background color */
 	font-weight: 600;
     transform: scale(0.95); /* Slightly scale down to simulate a press */
+}
+
+.btn-container-main-row{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin:0px;
+	padding:0px;
+}
+.btn-container-column{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 10px 10px 10px 0px;
+}
+
+.radio-button{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	text-align: center;
+	height:40px;
+	width: 40px;
+	border-radius: 1000px;
+	border:none transparent solid;
+	margin-bottom: 5px;
+	box-shadow: grey 1px 1px 3px 1px;
+	
+}
+
+.radio-button:active{
+	font-weight: 600;
+	transform: scale(0.95); /* Slightly scale down to simulate a press */
 }

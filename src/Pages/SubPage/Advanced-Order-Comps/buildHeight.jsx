@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
-import "../../../../css/Advanced-Order-CSS/stepOne.css";
-const BuildHeight = () =>
-	// { onConfirm }
-	{
+const BuildHeight = () => {
 		const preferredUnit = useAdvancedOrderProfileStore((state) => state.preferredUnit);
 		const { setHeight } = useAdvancedOrderProfileStoreActions((actions) => actions);
 
@@ -12,21 +9,59 @@ const BuildHeight = () =>
 			error: false,
 			errorMessage: "",
 			loading: false,
+			displayMetric: false,
+			displayImperial: false,
 			heightMetric: 0,
 			heightFeet: 0,
 			heightInches: 0,
+			disableConfirm: true,
+			incrementCount: 0,
+			activeIncrement1: false,
+			activeIncrement10: false,
+			activeIncrement100: false,
 		});
+		
+	const initializeState = () => {
+		setState({
+			error: false,
+			errorMessage: "",
+			loading: false,
+			displayMetric: false,
+			displayImperial: false,
+			heightMetric: 0,
+			heightFeet: 0,
+			heightInches: 0,
+			disableConfirm: true,
+			incrementCount: 0,
+			activeIncrement1: false,
+			activeIncrement10: false,
+			activeIncrement100: false,
+		});
+	}
+	
 
-		const handleIncrementMetric = () => {
-			const add = state.heightMetric + 1;
+	useEffect(() => {
+		initializeState();
+		if (preferredUnit === "Imperial") {
+			setState({ ...state, displayImperial: true, displayMetric: false });
+		} else if (preferredUnit === "Metric") {
+			setState({ ...state, displayMetric: true, displayImperial: false });
+		}
+	}, [preferredUnit]);
+
+
+	const handleIncrementMetric = () => {
+			const value = state.incrementCount;
+			const add = state.heightMetric + value;
 			setState({
 				...state,
 				heightMetric: add,
 			});
 		};
 
-		const handleDecrementMetric = () => {
-			const sub = state.heightMetric - 1;
+	const handleDecrementMetric = () => {
+			const value = state.incrementCount;
+			const sub = state.heightMetric - value;
 			if (state.heightMetric > 0) {
 				setState({
 					...state,
@@ -72,40 +107,156 @@ const BuildHeight = () =>
 					heightInches: sub,
 				});
 			}
-		};
-
+	};
+	const handleIncrementChange = (e) => {
+		const value = e
+		console.log(value, "value");
+		if (value === "1") {
+			setState({
+				...state,
+				incrementCount: 1,
+				activeIncrement1: true,
+				activeIncrement10: false,
+				activeIncrement100: false,
+			});
+		} else if (value === "10") {
+			setState({
+				...state,
+				incrementCount: 10,
+				activeIncrement1: false,
+				activeIncrement10: true,
+				activeIncrement100: false,
+			});
+		} else if (value === "100") {
+			setState({
+				...state,
+				incrementCount: 100,
+				activeIncrement1: false,
+				activeIncrement10: false,
+				activeIncrement100: true,
+			});
+		}
+	}
 		const handleConfirm = () => {
-			if (preferredUnit === "Metric") {
+			if(preferredUnit === "Imperial") {
+				const height = state.heightFeet * 12 + state.heightInches;
+				setState({
+					...state,
+					error: true,
+					disableConfirm: false,
+					errorMessage: "Your Height Data is saved. Click Next for the next step",
+				});
+				setHeight(height);
+			} else if (preferredUnit === "Metric") {
+				setState({
+					...state,
+					error: true,
+					disableConfirm: false,
+					errorMessage: "Your Height Data is saved. Click Next for the next step",
+				});
 				setHeight(state.heightMetric);
-			} else {
-				const heightInches = state.heightFeet * 12 + state.heightInches;
-				setHeight(heightInches);
-			}
-			// onConfirm();
-		};
+			}	
+	}
+	
+	const handleCloseModal = () => {
+		setState({ ...state, error: false, errorMessage: "" });
+	};
+
 
 		return (
-			<div className='weight-container-main'>
-				<h4>What is your current height?</h4>
-				{preferredUnit === "Metric" ? (
-					<div className='weight-container'>
-						<button className='button-increment-top' onClick={handleIncrementMetric}>
-							+
-						</button>
-						<input
-							className='height-input-metric'
-							readOnly={true}
-							value={state.heightMetric + " cm"}
-							onChange={(e) => setState({ ...state, heightMetric: e.target.value })}
-						/>
-						<button className='button-increment-bottom' onClick={handleDecrementMetric}>
-							-
-						</button>
+			<div className='advanced-order-comp-container'>
+				<h2 className='comp-title'>Next let's set your Height</h2>
+
+				<h4 className='title'>What is your current height?</h4>
+				{state.error ? (
+					<div className='start-error-container-modal'>
+						<div className='start-error-content'>
+							<button onClick={handleCloseModal} className='start-close-modal-btn'>
+								Close X
+							</button>
+							<p>{state.errorMessage}</p>
+						</div>
 					</div>
-				) : (
-					""
-				)}
-				<div className='weight-input-button-container '>
+				) : null}
+				<div
+					style={{
+						display: state.displayMetric ? "flex" : "none",
+					}}
+					className='weight-container'
+				>
+					<div className='btn-container-main-row'>
+						<div className='btn-container-column'>
+							<button
+								style={{
+									fontWeight: state.activeIncrement1 ? "bold" : "",
+									color: state.activeIncrement1 ? "white" : "",
+									backgroundColor: state.activeIncrement1 ? "rgb(33, 175, 5)" : "",
+								}}
+								className='radio-button'
+								type='radio'
+								value={1}
+								onClick={(e) => handleIncrementChange(e.target.value)}
+							>
+								1
+							</button>
+							<button
+								style={{
+									fontWeight: state.activeIncrement10 ? "bold" : "",
+									color: state.activeIncrement10 ? "white" : "",
+									backgroundColor: state.activeIncrement10 ? "rgb(33, 175, 5)" : "",
+								}}
+								className='radio-button'
+								type='radio'
+								value={10}
+								onClick={(e) => handleIncrementChange(e.target.value)}
+							>
+								10
+							</button>
+							<button
+								style={{
+									fontWeight: state.activeIncrement100 ? "bold" : "",
+									color: state.activeIncrement100 ? "white" : "",
+									backgroundColor: state.activeIncrement100 ? "rgb(33, 175, 5)" : "",
+								}}
+								className='radio-button'
+								type='radio'
+								value={100}
+								onClick={(e) => handleIncrementChange(e.target.value)}
+							>
+								100
+							</button>
+						</div>
+						<div className='btn-container-column'>
+							<button
+								disabled={state.incrementCount === 0 ? true : false}
+								className='button-increment-top'
+								onClick={handleIncrementMetric}
+							>
+								+
+							</button>
+							<input
+								className='height-input-metric'
+								readOnly={true}
+								value={state.heightMetric + " cm"}
+								onChange={(e) => setState({ ...state, heightMetric: e.target.value })}
+							/>
+							<button
+								disabled={state.incrementCount === 0 ? true : false}
+								className='button-increment-bottom'
+								onClick={handleDecrementMetric}
+							>
+								-
+							</button>
+						</div>
+					</div>
+				</div>
+				{/*  */}
+				<div
+					style={{
+						display: state.displayImperial ? "flex" : "none",
+					}}
+					className='weight-input-button-container '
+				>
 					<button
 						disabled={state.heightFeet === 10 ? true : false}
 						className='weight-button-increment-left'
@@ -121,7 +272,12 @@ const BuildHeight = () =>
 						+
 					</button>
 				</div>
-				<div className='weight-input-container'>
+				<div
+					style={{
+						display: state.displayImperial ? "flex" : "none",
+					}}
+					className='weight-input-container'
+				>
 					<input
 						className='weight-input-left'
 						readOnly={true}
@@ -135,7 +291,12 @@ const BuildHeight = () =>
 						onChange={(e) => setState({ ...state, heightInches: e.target.value })}
 					/>
 				</div>
-				<div className='weight-input-button-container '>
+				<div
+					style={{
+						display: state.displayImperial ? "flex" : "none",
+					}}
+					className='weight-input-button-container '
+				>
 					<button
 						disabled={state.heightFeet === 0 ? true : false}
 						className='weight-button-decrement-left'
@@ -153,7 +314,13 @@ const BuildHeight = () =>
 				</div>
 
 				<button
-					disabled={state.heightFeet === 0 && state.heightInches === 0 && state.heightMetric === 0 ? true : false}
+					disabled={
+						preferredUnit === "Imperial"
+							? state.heightFeet === 0 && state.heightInches === 0
+							: preferredUnit === "Metric"
+							? state.heightMetric === 0
+							: false
+					}
 					className='adv-order-btn'
 					onClick={handleConfirm}
 				>

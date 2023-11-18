@@ -1,36 +1,18 @@
 import React, { useState, useEffect } from "react";
 //DB
-import { db, auth } from "../../../Firebase/fireBaseConfig.js";
-import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import { db} from "../../../Firebase/fireBaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
 //auth
 import { UserAuth } from "../../../Context/AuthContext.jsx";
 // Global State
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore.js";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore.js";
-import { useRenderSmallStepStore } from "../../../stateStore/RenderStepStore.js";
-//components
-import AgeGender from "./buildAgeGender.jsx";
-import Goal from "./buildGoal.jsx";
-import PersonalStats from "./buildPersonalStats.jsx";
-import ProfileReview from "./profileReview.jsx";
-import MealGuide from "./mealGuide.jsx";
-import BuildWeight from "./buildWeight.jsx";
-import BuildHeight from "./buildHeight.jsx";
-//buttons
-import AdvancedOrderBeginButton from "./beginButton.jsx";
-import HandleSteps from "./handleSteps.jsx";
-// import HandleSteps from "./handleSteps.jsx";
-// CSS
-import "../../../../css/Advanced-Order-CSS/stepOne.css";
-import "../../../../css/Advanced-Order-CSS/start.css";
-import "../../../../css/errorModal.css";
 //images
-import SearchingForProfileFadeIn from "../../../../assets/images/SearchingForProfileFadeIn.svg";
-import SearchingForProfileFadeOut from "../../../../assets/images/SearchingForProfileFadeOut.svg";
+import SearchingForProfileFadeIn from "../../../assets/images/SearchingForProfileFadeIn.svg";
+import SearchingForProfileFadeOut from "../../../assets/images/SearchingForProfileFadeOut.svg";
+import "../../../css/Advanced-Order-CSS/stepOne.css";
 
-const ProfileSearch = () => {
-	const step = useRenderSmallStepStore((state) => state.step);
-	const resetStep = useRenderSmallStepStore((state) => state.resetStep);
+const ProfileSearch = ({ onConfirm}) => {
 	const user = UserAuth();
 	const userId = user.user.uid;
 	const { advancedProfileFound } = useAdvancedOrderProfileStoreActions((actions) => actions);
@@ -47,8 +29,7 @@ const ProfileSearch = () => {
 	});
 
 	useEffect(() => {
-		resetStep();
-		setState({ ...state, loading: false, errorModal: false, errorMessage: "" });
+		// setState({ ...state, loading: false, errorModal: false, errorMessage: "" });
 		const checkForProfile = () => {
 			setState({ ...state, loading: true, message: "Checking to see if your Profile is loaded ..." });
 			setTimeout(() => {
@@ -57,7 +38,7 @@ const ProfileSearch = () => {
 				} else {
 					setState({
 						...state,
-						loading: false,
+						loading: true,
 						hasProfile: false,
 						message: "No Profile was loaded yet. Let me check the DataBase.",
 					});
@@ -99,19 +80,19 @@ const ProfileSearch = () => {
 	}, []);
 
 	const closeModalBtn = () => {
-		setState({ ...state, errorModal: false, errorMessage: "", message: "Let's get started building you a profile!" });
+		setState({
+			...state,
+			errorModal: false,
+			loading: false,
+			errorMessage: "",
+			message: "Let's get started building you a profile!",
+		});
 	};
 
-	const renderStepMap = {
-		0: <PersonalStats />,
-		1: <BuildWeight />,
-		2: <BuildHeight />,
-		3: <AgeGender />,
-		4: <Goal />,
-		5: <ProfileReview />,
-		6: <MealGuide />,
-	};
-	const RenderCompFromStep = renderStepMap[step];
+	const handleConfirm = () => {
+		onConfirm();
+	}
+
 
 	return (
 		<div className='advanced-order-comp-container'>
@@ -124,16 +105,17 @@ const ProfileSearch = () => {
 						<button className='close-modal-btn' onClick={closeModalBtn}>
 							Close
 						</button>
+						add a navigate button on the error modal to go to support page
 					</div>
 				</div>
 			) : (
 				""
 			)}
-
-			{state.noProfile ? [RenderCompFromStep] : ""}
-
-			{<HandleSteps />}
-			<AdvancedOrderBeginButton />
+			{state.noProfile && state.message === "Let's get started building you a profile!" ? (
+				<button onClick={handleConfirm}>Lets build your profile</button>
+			) : (
+				""
+			)}
 		</div>
 	);
 };

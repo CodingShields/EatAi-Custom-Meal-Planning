@@ -3,11 +3,11 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
-	width: auto;
+	height: 70vh;
+	width: 90vw;
 	max-width: 80vw;
 	background-color: aquamarine;
-	border-radius: 20px;
+	border-radius: 20px 20px 0px 0px;
 	box-shadow: #333 1px 5px 10px 5px;
 	padding: 50px;
 	margin-top: 20px;

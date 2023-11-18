@@ -9,20 +9,34 @@ import AdvancedOrderMealSetup from "./Advanced-Order-Comps/MealSetup.jsx";
 import AdvancedOrderMealPlanner from "./Advanced-Order-Comps/mealPlanner.jsx";
 import AdvancedOrderCalorieInput from "./Advanced-Order-Comps/calorieInput.jsx";
 import AdvancedOrderMacroInput from "./Advanced-Order-Comps/macroInput.jsx";
-import CheckProfile from "./Advanced-Order-Comps/stepOne/checkProfile.jsx";
+
+//main comps
+import ProfileSearch from "./Advanced-Order-Comps/profileSearch.jsx";
+//build profile comps
+import BuildWeight from "./Advanced-Order-Comps/buildWeight.jsx";
+import BuildHeight from "./Advanced-Order-Comps/buildHeight.jsx";
+import AgeGender from "./Advanced-Order-Comps/buildAgeGender.jsx";
+import BuildGoal from "./Advanced-Order-Comps/buildGoal.jsx";
+import ProfileReview from "./Advanced-Order-Comps/profileReview.jsx";
+
 
 //global state
 import { useAdvancedOrderStoreActions } from "../../stateStore/AdvancedOrderStore";
 import { useAdvancedOrderStore } from "../../stateStore/AdvancedOrderStore";
 import { useRenderStepStore } from "../../stateStore/RenderStepStore";
+import { useRenderSmallStepStore } from "../../stateStore/RenderStepStore";
 
 //css
 import "../../css/advancedOrder.css";
 import "../../assets/statusBar/loading-bar.css";
+import "../../css/Advanced-Order-CSS/stepOne.css";
+
+//buttons
+import HandleSteps from "./Advanced-Order-Comps/handleSteps.jsx";
 
 const AdvancedOrder = () => {
-	const step = useRenderStepStore((state) => state.step);
-	const { macroCalorieSelection } = useAdvancedOrderStore((state) => state);
+	const step = useRenderSmallStepStore((state) => state.step);
+	const [buildProfile, setBuildProfile] = useState(false);
 
 	const [state, setState] = useState({
 		statusBar: 0,
@@ -30,45 +44,54 @@ const AdvancedOrder = () => {
 		errorMessage: "",
 	});
 
-	//status bar
-	useEffect(() => {
-		setState({ step: 0 });
-		if (step === 0) {
-			setState({ statusBar: "5" });
-		} else if (step === 1) {
-			setState({ statusBar: "25" });
-		} else if (step === 2) {
-			setState({ statusBar: "50" });
-		} else if (step === 3) {
-			setState({ statusBar: "75" });
-		} else if (step === 4) {
-			setState({ statusBar: "100" });
-		}
-	}, [step]);
+	// //status bar
+	// useEffect(() => {
+	// 	setState({ step: 0 });
+	// 	if (step === 0) {
+	// 		setState({ statusBar: "5" });
+	// 	} else if (step === 1) {
+	// 		setState({ statusBar: "25" });
+	// 	} else if (step === 2) {
+	// 		setState({ statusBar: "50" });
+	// 	} else if (step === 3) {
+	// 		setState({ statusBar: "75" });
+	// 	} else if (step === 4) {
+	// 		setState({ statusBar: "100" });
+	// 	}
+	// }, [step]);
 
 	const renderStepMap = {
-		0: <ProfileSearch />,
-		2:
-		3: <AdvancedOrderCalorieMacroSelection />,
-		4:
-		5: <AdvancedOrderMealPlanner />,
+		0: <ProfileReview />,
 	};
 const renderStepMapNewProfileSetup = {
-	0: 
-		1:
-	2:
-		3:
-	4:
-	}
+
+	0: <BuildWeight />,
+	1: <BuildHeight />,
+	2: <AgeGender />,
+	3: <BuildGoal />,
+	4: <ProfileReview />,
+
+
+}
 const RenderCompFromStep = renderStepMap[step];
 	
-const RenderNewProfileSetup = renderStepMap[step]
+const RenderNoProfileSetup = renderStepMapNewProfileSetup[step];
+	
+	// const handleConfirm = () => {
+	// 	console.log("clicked");
+	// 	setBuildProfile(true);
+	// }
 
+	useEffect(() => {
+		setBuildProfile(false);
+	}
+	, [])
+	
+console.log(RenderNoProfileSetup, "RenderNoProfileSetup");
 
 	return (
 		<div className='advanced-order-container'>
 			{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}
-			{RenderCompFromStep}
 			<div
 				style={{
 					display: "flex",
@@ -77,7 +100,14 @@ const RenderNewProfileSetup = renderStepMap[step]
 					justifyContent: "center",
 					flexDirection: "column",
 				}}
-			></div>
+			>
+				{/* {!buildProfile ?<ProfileSearch onConfirm={handleConfirm} /> : ""} */}
+				{/* {buildProfile ? */}
+				{RenderNoProfileSetup}
+				{/* : ""} */}
+				<HandleSteps />
+			</div>
+
 			{/* <div data-preset='stripe' data-value={state.statusBar} id='ldBar' className='ldBar'></div> */}
 		</div>
 	);

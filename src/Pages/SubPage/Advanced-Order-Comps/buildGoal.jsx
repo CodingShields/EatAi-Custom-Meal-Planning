@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 //global state
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
+import "../../../css/Advanced-Order-CSS/stepOne.css";
 
 const Goal = () => {
 	//global state actions
