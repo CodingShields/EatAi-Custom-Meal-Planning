@@ -1,4 +1,4 @@
-.advanced-order-comp-container {
+.comp-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -8,6 +8,7 @@
 	border-radius: 20px;
 	background-color: antiquewhite;
 	box-shadow: #333 1px 5px 10px 5px;
+	margin:10px 20px 10px 20px;
 }
 
 .title-container {
@@ -15,15 +16,6 @@
 	flex-direction: row;
 	align-items: center;
 	margin: 10px;
-}
-.step-container {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	margin: 0px;
 }
 .comp-title {
 	font-size: 22px;
@@ -59,7 +51,7 @@
 	font-weight: 700;
 	text-decoration: underline;
 }
-.preferred-unit-select-list {
+.select-list {
 	text-align: center;
 	height: 35px;
 	width: 200px;
@@ -347,6 +339,7 @@ select {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 	width: 200px;
 	font-size: 18px;
 }
@@ -361,6 +354,7 @@ input {
 	text-align: center;
 	width: 200px;
 	font-size: 18px;
+	border-radius: 10px;
 }
 .adv-order-btn {
 	width: auto;

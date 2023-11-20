@@ -9,7 +9,6 @@ import AdvancedOrderMealSetup from "./Advanced-Order-Comps/MealSetup.jsx";
 import AdvancedOrderMealPlanner from "./Advanced-Order-Comps/mealPlanner.jsx";
 import AdvancedOrderCalorieInput from "./Advanced-Order-Comps/calorieInput.jsx";
 import AdvancedOrderMacroInput from "./Advanced-Order-Comps/macroInput.jsx";
-
 //main comps
 import ProfileSearch from "./Advanced-Order-Comps/profileSearch.jsx";
 //build profile comps
@@ -18,7 +17,6 @@ import BuildHeight from "./Advanced-Order-Comps/buildHeight.jsx";
 import AgeGender from "./Advanced-Order-Comps/buildAgeGender.jsx";
 import BuildGoal from "./Advanced-Order-Comps/buildGoal.jsx";
 import ProfileReview from "./Advanced-Order-Comps/profileReview.jsx";
-
 
 //global state
 import { useAdvancedOrderStoreActions } from "../../stateStore/AdvancedOrderStore";
@@ -64,30 +62,21 @@ const AdvancedOrder = () => {
 		0: <ProfileReview />,
 	};
 const renderStepMapNewProfileSetup = {
-
 	0: <BuildWeight />,
 	1: <BuildHeight />,
 	2: <AgeGender />,
 	3: <BuildGoal />,
 	4: <ProfileReview />,
-
-
 }
 const RenderCompFromStep = renderStepMap[step];
 	
 const RenderNoProfileSetup = renderStepMapNewProfileSetup[step];
-	
-	// const handleConfirm = () => {
-	// 	console.log("clicked");
-	// 	setBuildProfile(true);
-	// }
 
 	useEffect(() => {
 		setBuildProfile(false);
 	}
 	, [])
 	
-console.log(RenderNoProfileSetup, "RenderNoProfileSetup");
 
 	return (
 		<div className='advanced-order-container'>

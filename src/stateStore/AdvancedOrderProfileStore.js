@@ -4,7 +4,7 @@ import { create } from "zustand";
 const initializeState = {
 	gender: "",
 	age: 0,
-	birthDate: "",
+	birthday: "",
 	preferredUnit: "",
 	weight: 0,
 	height: "",
@@ -24,7 +24,7 @@ export const useAdvancedOrderProfileStore = create((set, get) => ({
 			return {
 				gender: state.gender,
 				age: state.age,
-				birthDate: state.birthDate,
+				birthday: state.birthday,
 				preferredUnit: state.preferredUnit,
 				weight: state.weight,
 				height: state.height,
@@ -39,7 +39,7 @@ export const useAdvancedOrderProfileStore = create((set, get) => ({
 		resetForm: () => set({ ...initializeState }),
 		setGender: (str) => set({ gender: str }),
 		setAge: (num) => set({ age: num }),
-		setBirthDate: (str) => set({ birthDate: str }),
+		setBirthday: (str) => set({ birthday: str }),
 		setPreferredUnit: (str) => set({ preferredUnit: str }),
 		setWeight: (num) => set({ weight: num }),
 		setHeight: (num) => set({ height: num }),
