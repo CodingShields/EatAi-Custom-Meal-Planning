@@ -6,6 +6,9 @@ html,
 body {
 	background-color: #f9f4ee;
 	font-family: "Inter", sans-serif;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 a {
@@ -14,25 +17,31 @@ a {
 }
 
 body::-webkit-scrollbar {
-	display: none;
+	width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+	background-color: #999;
+	border-radius: 5px;
 }
 
 body {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	margin: 0;
 }
 
 .site-wrapper {
+	width: 100%;
+	min-height: 100%;
 	margin-bottom: 0px;
-	padding-bottom: 0px;
+	padding-bottom: 20px;
+	position: relative;
+	box-sizing: border-box;
 }
 
 header {
 	display: flex;
 	justify-content: center;
-	padding-block: 10px;
-	margin-top: 20px;
+	align-items: center;
 }
 
 header .site-logo {
@@ -84,7 +93,9 @@ footer {
 	font-size: 36px;
 	width: 100%;
 	bottom: 0;
-	position: fixed;
+	left: 0;
+	right: 0;
+	position: absolute;
 }
 
 .link-button:hover {
@@ -92,27 +103,21 @@ footer {
 }
 
 main {
-	flex-grow: 1; /* Allow main content to grow and push footer to the bottom */
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin: auto;
+	padding: 20px; /* Add padding to keep content from touching the edges */
+	box-sizing: border-box; /* Include padding in element's total width and height */
+	max-width: 100%; /* Ensure content doesn't exceed the width of its container */
+	margin: 0 auto; /* Center the content horizontally */
 }
+
 .dashboard-nav {
 	display: flex;
-	height: 0px;
-	padding: 0px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	margin-top: 40px;
 }
 .dashboard-nav a {
 	text-decoration: none;
 	color: #4d4d4d;
 	font-weight: 500;
 	padding: 5px 20px;
-	font-size: 30px;
+	font-size: 24px;
 }
 
 .dashboard-nav a:hover {
@@ -146,6 +151,7 @@ main {
 
 .login-form > input {
 	border: 1px solid rgba(209, 213, 219);
+	width: auto;
 	height: 40px;
 	font-size: 20px;
 	text-indent: 10px;

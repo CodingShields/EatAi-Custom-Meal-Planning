@@ -1,4 +1,4 @@
-.error-container{
+.modal-container{
     display: flex;
 	justify-content: center;
 	align-items: center;
@@ -11,39 +11,50 @@
 	z-index: 1010; /* Ensure the modal appears on top */
 }
 
-.error-content{
+.modal-side-bar{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width:200px;
+	margin: auto;
+	padding: 10px;
+	text-align: center;
+}
+
+.modal-side-bar-text{
+	font-size: 18px;
+	font-weight: 700;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 5px;
+	text-shadow: #333 1px 3px 5px 3px;
+}
+
+.modal-content{
     display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: antiquewhite;
-	padding: 20px;
 	border-radius: 5px;
 	width: auto;
 	height: auto;
 	box-shadow: #333 1px 3px 5px 3px;
 	border: 2px solid brown;
-	margin: 0px;
+	margin: 20px;
 	padding: 20px;
 }
-.error-message{
-	text-align: center;
-	width: 500px;
-	font-size: 30px;
-	color: #000;
-}
 .close-modal-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: coral;
 	color: #fff;
 	border: none;
 	border-radius: 20px;
 	padding: 10px;
 	cursor: pointer;
-	font-size: 16px;
-	margin-right: 10px;
+	font-size: 18px;
+	margin: 10px;
+	padding: 10px 20px;
 	box-shadow: darkgrey 2px 1px 3px 1px;
 	transition: background-color 0.3s ease;
 }

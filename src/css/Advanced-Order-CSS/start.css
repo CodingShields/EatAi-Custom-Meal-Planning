@@ -1,6 +1,19 @@
-.advanced-order-main-container {
+.advanced-order-main-container-column {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	width: 480px;
+	height: 500px;
+	border: 2px solid brown;
+	border-radius: 20px;
+	background-color: antiquewhite;
+	box-shadow: #333 1px 5px 10px 5px;
+	padding: auto;
+}
+
+.advanced-order-main-container-row {
+	display: flex;
+	flex-direction: row;
 	align-items: center;
 	width: 480px;
 	height: 500px;

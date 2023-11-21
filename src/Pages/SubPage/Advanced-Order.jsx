@@ -26,20 +26,21 @@ import { useRenderSmallStepStore } from "../../stateStore/RenderStepStore";
 
 //css
 import "../../css/advancedOrder.css";
-import "../../assets/statusBar/loading-bar.css";
-import "../../css/Advanced-Order-CSS/stepOne.css";
+import "../../css/errorModal.css"
 
 //buttons
 import HandleSteps from "./Advanced-Order-Comps/handleSteps.jsx";
 
 const AdvancedOrder = () => {
 	const step = useRenderSmallStepStore((state) => state.step);
-	const [buildProfile, setBuildProfile] = useState(false);
 
 	const [state, setState] = useState({
 		statusBar: 0,
 		error: false,
 		errorMessage: "",
+		buildProfile: false,
+		profileReview: false,
+		profileSearch:true,
 	});
 
 	// //status bar
@@ -72,32 +73,33 @@ const RenderCompFromStep = renderStepMap[step];
 	
 const RenderNoProfileSetup = renderStepMapNewProfileSetup[step];
 
-	useEffect(() => {
-		setBuildProfile(false);
-	}
-	, [])
 	
+	const handleConfirm = () => {
+		setState({ ...state, buildProfile: true, profileSearch: false });
+	}
 
 	return (
 		<div className='advanced-order-container'>
-			{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}
+			<div className='chef-img-container'>
+				{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}
+			</div>
 			<div
 				style={{
-					display: "flex",
-					width: "auto",
-					marginTop: "10px",
-					justifyContent: "center",
-					flexDirection: "column",
+					display: state.profileSearch ? "flex" : "none",
 				}}
+				className='comp-container-main-col'
 			>
-				{/* {!buildProfile ?<ProfileSearch onConfirm={handleConfirm} /> : ""} */}
-				{/* {buildProfile ? */}
+				<ProfileSearch handleConfirm={handleConfirm} />
+			</div>
+			<div
+				style={{
+					display: state.buildProfile ? "flex" : "none",
+				}}
+				className='comp-container-main-col'
+			>
 				{RenderNoProfileSetup}
-				{/* : ""} */}
 				<HandleSteps />
 			</div>
-
-			{/* <div data-preset='stripe' data-value={state.statusBar} id='ldBar' className='ldBar'></div> */}
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ import SearchingForProfileFadeIn from "../../../assets/images/SearchingForProfil
 import SearchingForProfileFadeOut from "../../../assets/images/SearchingForProfileFadeOut.svg";
 import "../../../css/Advanced-Order-CSS/stepOne.css";
 
-const ProfileSearch = ({ onConfirm}) => {
+const ProfileSearch = ({ handleConfirm}) => {
 	const user = UserAuth();
 	const userId = user.user.uid;
 	const { advancedProfileFound } = useAdvancedOrderProfileStoreActions((actions) => actions);
@@ -89,9 +89,7 @@ const ProfileSearch = ({ onConfirm}) => {
 		});
 	};
 
-	const handleConfirm = () => {
-		onConfirm();
-	}
+
 
 
 	return (

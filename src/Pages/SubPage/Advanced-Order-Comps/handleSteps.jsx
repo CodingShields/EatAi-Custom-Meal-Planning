@@ -35,11 +35,11 @@ const HandleSteps = () => {
 
 	useEffect(() => {
 		if (weight === 0 && preferredUnit === "") {
-			setState({ ...state, error: true, errorMessage: "Please select a preferred unit of measurement and enter a weight" });
+			setState({ ...state, error: true });
 		} else if (weight === 0) {
-			setState({ ...state, error: true, errorMessage: "Please enter a weight" });
+			setState({ ...state, error: true});
 		} else if (preferredUnit === "") {
-			setState({ ...state, error: true, errorMessage: "Please select a unit" });
+			setState({ ...state, error: true});
 		}else if (height === 0) {
 			setState({ ...state, error: true, errorMessage: "Please select a preferred unit of measurement and enter a height" });
 		} else {
@@ -81,7 +81,7 @@ const HandleSteps = () => {
 			setState({ ...state, error: false, errorMessage: "" });
 		};
 	return (
-		<div className='adv-order-handle-step-btn-container'>
+		<div className='handle-step-btn-container'>
 			{state.error ? (
 				<div className='start-error-container-modal'>
 					<div className='start-error-content'>

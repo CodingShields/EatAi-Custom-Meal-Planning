@@ -142,15 +142,15 @@ const BuildWeight = () => {
 	};
 
 	return (
-		<div className='advanced-order-comp-container'>
+		<div className='comp-container-col'>
 			<h2 className='comp-title'>Let's get started with some basic information</h2>
 			{state.error ? (
-				<div className='start-error-container-modal'>
-					<div className='start-error-content'>
-						<button onClick={handleCloseModal} className='start-close-modal-btn'>
+				<div className='error-container'>
+					<div className='error-content'>
+						<button onClick={handleCloseModal} className='close-modal-btn'>
 							Close X
 						</button>
-						<p>{state.errorMessage}</p>
+						<p className="error-message">{state.errorMessage}</p>
 					</div>
 				</div>
 			) : null}
@@ -163,16 +163,18 @@ const BuildWeight = () => {
 				</span>
 			</p>
 			<select
-				className='preferred-unit-select-list'
+				className='select-list'
 				value={state.preferredUnitSelection}
 				onChange={(e) => handleUnitOnChange(e.target.value)}
 			>
-				<option value={"Choose One"}>Choose One</option>
+				<option
+					className="select-list-option"
+					value={"Choose One"}>Choose One</option>
 				<option value={"Metric"}>Metric</option>
 				<option value={"Imperial"}>Imperial</option>
 			</select>
 			<h4 className='title'>What is your current weight?</h4>
-			<div className='weight-container'>
+			<div className='weight-height-container'>
 				<div className='weight-input-button-container'>
 					<button
 						disabled={state.weightLeft === 9 ? true : false}

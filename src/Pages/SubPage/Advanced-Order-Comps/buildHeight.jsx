@@ -110,7 +110,6 @@ const BuildHeight = () => {
 	};
 	const handleIncrementChange = (e) => {
 		const value = e
-		console.log(value, "value");
 		if (value === "1") {
 			setState({
 				...state,
@@ -140,6 +139,7 @@ const BuildHeight = () => {
 		const handleConfirm = () => {
 			if(preferredUnit === "Imperial") {
 				const height = state.heightFeet * 12 + state.heightInches;
+				console.log("compheight", height);
 				setState({
 					...state,
 					error: true,
@@ -164,14 +164,14 @@ const BuildHeight = () => {
 
 
 		return (
-			<div className='advanced-order-comp-container'>
+			<div className='comp-container-col'>
 				<h2 className='comp-title'>Next let's set your Height</h2>
 
 				<h4 className='title'>What is your current height?</h4>
 				{state.error ? (
-					<div className='start-error-container-modal'>
-						<div className='start-error-content'>
-							<button onClick={handleCloseModal} className='start-close-modal-btn'>
+					<div className='error-container'>
+						<div className='error-content'>
+							<button onClick={handleCloseModal} className='close-modal-btn'>
 								Close X
 							</button>
 							<p>{state.errorMessage}</p>
@@ -182,10 +182,10 @@ const BuildHeight = () => {
 					style={{
 						display: state.displayMetric ? "flex" : "none",
 					}}
-					className='weight-container'
+					className='weight-height-container'
 				>
-					<div className='btn-container-main-row'>
-						<div className='btn-container-column'>
+					<div className='height-btn-container'>
+						<div className='btn-container-column-increment'>
 							<button
 								style={{
 									fontWeight: state.activeIncrement1 ? "bold" : "",

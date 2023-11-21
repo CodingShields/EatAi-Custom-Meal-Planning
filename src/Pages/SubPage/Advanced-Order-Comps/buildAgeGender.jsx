@@ -85,8 +85,12 @@ const AgeGender = () => {
 				<option value='Female'>Female</option>
 			</select>
 			<button
-				disabled = {state.age === 0 && state.gender === "Choose One" && state.birthday === "" ? true : false}
-				onClick={handleConfirm}>Confirm Info</button>
+				className='adv-order-btn'
+				disabled={state.age === 0 && state.gender === "Choose One" && state.birthday === "" ? true : false}
+				onClick={handleConfirm}
+			>
+				Confirm Info
+			</button>
 		</div>
 	);
 };
