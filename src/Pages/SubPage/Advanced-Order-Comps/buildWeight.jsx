@@ -8,7 +8,7 @@ import renderTextWithNewLines from "../../../utilities/renderTextWithNewLines.js
 import helpMessages from "../../../assets/helpMessages/helpMessages.jsx";
 //css
 import "../../../css/errorModal.css"
-import "../../../css/Advanced-Order-CSS/stepOne.css";
+import "../../../css/Advanced-Order-CSS/buildHeightAndWeight.css";
 
 const BuildWeight = () => {
 
@@ -143,7 +143,7 @@ const BuildWeight = () => {
 
 	return (
 		<div className='comp-container-col'>
-			<h2 className='comp-title'>Let's get started with some basic information</h2>
+			<h2 className='comp-title'>Body Metrics</h2>
 			{state.error ? (
 				<div className='error-container'>
 					<div className='error-content'>
@@ -174,7 +174,7 @@ const BuildWeight = () => {
 				<option value={"Imperial"}>Imperial</option>
 			</select>
 			<h4 className='title'>What is your current weight?</h4>
-			<div className='weight-height-container'>
+			<div className='weight-container'>
 				<div className='weight-input-button-container'>
 					<button
 						disabled={state.weightLeft === 9 ? true : false}
@@ -202,11 +202,6 @@ const BuildWeight = () => {
 					<div className='weight-input-left'>{state.weightLeft}</div>
 					<div className='weight-input-middle'>{state.weightMiddle}</div>
 					<div className='weight-input-right'>{state.weightRight}</div>
-					<div
-						style={{
-							position: "sticky",
-						}}
-					></div>
 				</div>
 				<div className='weight-input-button-container'>
 					<button

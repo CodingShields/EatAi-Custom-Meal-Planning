@@ -8,7 +8,6 @@
 	background-color: aquamarine;
 	border-radius: 20px 20px 0px 0px;
 	box-shadow: #333 1px 5px 10px 5px;
-
 }
 
 .advanced-order-chef-img {
@@ -37,12 +36,12 @@
 	align-items: center;
 	justify-content: center;
 	width: auto;
-	height: 500px;
+	height: auto;
 	margin: 10px;
 	padding: 10px;
 }
 
-.comp-container-row{
+.comp-container-row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -53,7 +52,7 @@
 	padding: 20px;
 }
 
-.element-container-col{
+.element-container-col {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -64,7 +63,7 @@
 	padding: 10px;
 }
 
-.element-container{
+.element-container {
 	display: grid;
 	flex-direction: space-between;
 	width: auto;
@@ -72,37 +71,35 @@
 	margin: 10px;
 	padding: 10px;
 }
-.element-grid-container{
+.element-grid-container {
 	border: 1px solid black;
 	background-color: white;
 	display: grid;
-	grid-template-columns:1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	overflow: auto;
-	
 }
-.grid-container-left{
+.grid-container-left {
 	text-align: right;
 }
-.grid-container-right{
+.grid-container-right {
 	text-align: left;
 }
 
-
-.element-title-left{
-	margin-bottom:5px;
-	height:40px;
+.element-title-left {
+	margin-bottom: 5px;
+	height: 40px;
 	width: 275px;
 	font-size: 18px;
-	text-shadow: darkgray 1px 1px;	
+	text-shadow: darkgray 1px 1px;
 }
-.profile-review-element-title-left{
+.profile-review-element-title-left {
 	margin: auto;
-	height:40px;
+	height: 40px;
 	width: 275px;
 	font-size: 18px;
-	text-shadow: darkgray 1px 1px;	
+	text-shadow: darkgray 1px 1px;
 }
-.element-title-right{
+.element-title-right {
 	margin-bottom: 5px;
 	height: 40px;
 	width: 325px;
@@ -116,11 +113,10 @@
 	padding: 0px;
 	text-align: center;
 	padding: 10px;
-	margin: 10px;
 	text-decoration: underline;
 	text-shadow: darkgray 1px 1px;
 }
-.title{
+.title {
 	font-size: 20px;
 	margin: 2px 0px 10px 0px;
 	padding: 0px;
@@ -137,7 +133,6 @@
 	text-shadow: darkgray 1px 1px;
 }
 
-
 .here-link {
 	color: blue;
 	text-shadow: darkgray 1px 1px;
@@ -148,31 +143,15 @@
 	font-size: 20px;
 	font-weight: 700;
 	text-decoration: underline;
-	
 }
 
-.select-list {
-	text-align: center;
-	height: auto;
-	width: auto;
-	font-size: 24px;
-	border-radius: 10px;
-	margin: 5px 0px 5px 0px;
-	padding: 10px 20px 10px 20px;
-	box-shadow: #333 1px 2px 5px 1px;
-	text-shadow: darkgray 1px 1px;
-}
-.select-list-option{
-	padding: 10px 20px 10px 20px;
-}
-/* General Buttons / Confirmations */
 .adv-order-btn {
 	font-size: 20px;
-    width: auto;
+	width: auto;
 	height: auto;
 	margin: 5px;
 	margin-top: 10px;
-	padding:10px;
+	padding: 10px;
 	border-radius: 10px;
 	border: 1px solid black;
 	transition: background-color 0.3s, transform 0.3s;
@@ -189,11 +168,11 @@
 	background-color: white;
 	color: black;
 	font-weight: 700;
-    transform: scale(0.95); /* Slightly scale down to simulate a press */
+	transform: scale(0.95); /* Slightly scale down to simulate a press */
 }
 
 /* Handle Step Buttons */
-.handle-step-btn-container{
+.handle-step-btn-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -223,14 +202,14 @@
     transform: scale(0.95); 
 } */
 
-.adv-order-handle-step-btn-left{
+.adv-order-handle-step-btn-left {
 	font-size: 20px;
-    width: auto;
+	width: auto;
 	height: auto;
-	padding:10px;
+	padding: 10px;
 	border-radius: 10px;
 	border: 1px solid black;
-    border-radius: 10px 0px 0px 10px;
+	border-radius: 10px 0px 0px 10px;
 	transition: background-color 0.3s, transform 0.3s;
 	text-shadow: darkgray 1px 1px;
 }
@@ -242,19 +221,19 @@
 .adv-order-handle-step-btn-left:active {
 	background-color: rgb(41, 82, 41); /* Change the background color */
 	font-weight: 600;
-    transform: scale(0.95); /* Slightly scale down to simulate a press */
+	transform: scale(0.95); /* Slightly scale down to simulate a press */
 }
 
-.adv-order-handle-step-btn-middle{
+.adv-order-handle-step-btn-middle {
 	font-size: 20px;
-    width: auto;
+	width: auto;
 	height: auto;
-	padding:10px;
+	padding: 10px;
 	border-radius: 0px 0px 0px 0px;
-    border-left: 0px none transparent;;
-    border-right: 0px none transparent;
+	border-left: 0px none transparent;
+	border-right: 0px none transparent;
 	border-top: 1px solid black;
-    border-bottom: 1px solid black;
+	border-bottom: 1px solid black;
 	transition: background-color 0.3s, transform 0.3s;
 	text-shadow: darkgray 1px 1px;
 }
@@ -266,14 +245,14 @@
 .adv-order-handle-step-btn-middle:active {
 	background-color: rgb(41, 82, 41); /* Change the background color */
 	font-weight: 600;
-    transform: scale(0.95); /* Slightly scale down to simulate a press */
+	transform: scale(0.95); /* Slightly scale down to simulate a press */
 }
 
-.adv-order-handle-step-btn-right{
+.adv-order-handle-step-btn-right {
 	font-size: 20px;
-    width: auto;
+	width: auto;
 	height: auto;
-	padding:10px;
+	padding: 10px;
 	border-radius: 0px 10px 10px 0px;
 	border: 1px solid black;
 	transition: background-color 0.3s, transform 0.3s;
@@ -287,348 +266,8 @@
 .adv-order-handle-step-btn-right:active {
 	background-color: rgb(41, 82, 41); /* Change the background color */
 	font-weight: 600;
-    transform: scale(0.95); /* Slightly scale down to simulate a press */
+	transform: scale(0.95); /* Slightly scale down to simulate a press */
 }
-
-
-
-
-/* Build Weight Comp*/
-.weight-height-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	align-items: center;
-	width: fit-content;
-	height: fit-content;
-	border-radius: 10px;
-	border: 1px solid black;
-	box-shadow: #333 1px 2px 5px 2px;
-}
-.weight-input-button-container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-}
-
-.weight-input-left {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	text-align: center;
-	height: 60px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	font-size: 20px;
-	border-bottom: 1px solid grey;
-	border-top: 1px solid grey;
-	border-right: 0px transparent solid;
-	border-left: 0px transparent solid;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-input-middle {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	text-align: center;
-	height: 60px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	font-size: 20px;
-	border-bottom: 0.5px solid grey;
-	border-top: 0.1px solid grey;
-	border-right: 0px transparent solid;
-	border-left: 0px transparent solid;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-input-right {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	text-align: center;
-	height: 60px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	font-size: 20px;
-	border-bottom: 0.5px solid grey;
-	border-top: 0.5px solid grey;
-	border-right: 0px transparent solid;
-	border-left: 0px transparent solid;
-	text-shadow: darkgray 1px 1px;
-	
-}
-
-.weight-button-decrement-left {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-right: 1px grey solid;
-	border-top: 0px transparent solid;
-	border-left: 0px transparent solid;
-	border-bottom: 0px transparent solid;;
-	font-size: 28px;
-	outline: none;
-	border-radius: 0px 0px 0px 10px;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-button-decrement-middle {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-right: 0px transparent solid;
-	border-left: 0px transparent solid;
-	border-top: 0px transparent solid;
-	border-bottom: 0px transparent solid;
-	font-size: 28px;
-	outline: none;
-	border-radius: 0px 0px 0px 0px;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-button-decrement-right {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-left: 1px solid grey;
-	border-top: 0px transparent solid;
-	border-right: 0px transparent solid;
-	border-bottom: 0px transparent solid;
-	font-size: 28px;
-	outline: none;
-	border-radius: 0px 0px 10px 0px;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-button-decrement-right:hover {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	color: white;
-	background-color: rgb(174, 98, 98);
-	box-shadow: 0 0 10px rgb(131, 32, 32);
-}
-.weight-button-decrement-middle:hover {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	color: white;
-	background-color: rgb(174, 98, 98);
-	box-shadow: 0 0 10px rgb(131, 32, 32);
-}
-.weight-button-decrement-left:hover {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	color: white;
-	background-color: rgb(174, 98, 98);
-	box-shadow: 0 0 10px rgb(131, 32, 32);
-}
-.weight-button-increment-left {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-bottom: 0px transparent solid;
-	border-top: 0px transparent solid;
-	border-left: 0px transparent solid;
-	border-right: 1px grey solid;
-	font-size: 28px;
-	border-radius: 10px 0px 0px 0px;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-button-increment-middle {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border: 0px transparent solid;
-	font-size: 28px;
-	border-radius: 0px 0px 0px 0px;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-button-increment-right {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-bottom: 0px transparent solid;
-	border-top: 0px transparent solid;
-	border-right: 0px transparent solid;
-	border-left: 1px grey solid;
-	font-size: 28px;
-	border-radius: 0px 10px 0px 0px;
-	text-shadow: darkgray 1px 1px;
-}
-.weight-button-increment-middle:hover {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	color: white;
-	background-color: rgb(73, 148, 73);
-	box-shadow: 0 0 10px rgb(33, 93, 33);
-}
-.weight-button-increment-left:hover {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	color: white;
-	background-color: rgb(73, 148, 73);
-	box-shadow: 0 0 10px rgb(33, 93, 33);
-}
-.weight-button-increment-right:hover {
-	height: 40px;
-	width: 70px;
-	margin: 0px;
-	padding: 0px;
-	color: white;
-	background-color: rgb(73, 148, 73);
-	box-shadow: 0 0 10px rgb(33, 93, 33);
-}
-
-/* Build Height */
-.height-btn-container{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	margin:20px;
-	padding:10px;
-	border: 0px none transparent;
-}
-.btn-container {
-	display: flex;
-	flex-direction: row;
-	width: auto;
-	height: auto;
-}
-
-.btn-container-column{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 10px 10px 10px 0px;
-	border-radius: 10px;
-	box-shadow: #333 1px 2px 5px 1px;
-}
-
-.btn-container-column-increment{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 10px 10px 10px 0px;
-}
-.button-increment-top{
-	height: 40px;
-	width: 125px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-top:black 2px solid;
-	border-left:black 2px solid;
-	border-right:black 2px solid;
-	border-bottom: 0px transparent solid;
-	font-size: 28px;
-	border-radius: 10px 10px 0px 0px;
-}
-.height-input-metric{
-	height: 40px;
-	width: 125px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-top: 0px transparent solid;
-	border-bottom: 0px transparent solid;
-	border-left:black 2px solid;
-	border-right:black 2px solid;
-	border-radius: 0px;
-	font-size: 28px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -930,7 +569,6 @@
 	border: 2px solid brown;
 }
 
-
 /* Meal Setup */
 .advanced-order-meal-setup-input {
 	display: flex;
@@ -948,7 +586,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	
+
 	margin: 10px;
 	border-radius: 5px;
 	text-align: center;
@@ -1062,7 +700,7 @@
 	padding: 0px;
 }
 
-.advanced-order-meal-item-title-span{
+.advanced-order-meal-item-title-span {
 	text-align: left;
 	font-size: 15px;
 	font-weight: 600;
@@ -1088,7 +726,6 @@
 	width: 200px;
 }
 /* Advanced Order Macro Selection Modals */
-
 
 .modal {
 	display: flex;
@@ -1153,7 +790,6 @@
 }
 
 /* Style for the close button */
-
 
 /* Add any additional styles as needed for your modal content */
 

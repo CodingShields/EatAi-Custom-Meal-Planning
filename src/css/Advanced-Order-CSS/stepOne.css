@@ -14,7 +14,7 @@
 }
 
 
-.comp-container-column {
+/* .comp-container-col {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -26,7 +26,7 @@
 	box-shadow: #333 1px 5px 10px 5px;
 	margin:10px 20px 10px 20px;
 	padding: 20px;
-}
+} */
 
 
 .title-container {
@@ -60,57 +60,12 @@
 .here-link {
 	color: blue;
 }
-
 .here-link:hover {
 	color: blue;
 	font-size: 20px;
 	font-weight: 700;
 	text-decoration: underline;
 }
-
-
-.weight-input-container-main {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-}
-
-
-
-
-.weight-input-container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-}
-/* Input  */
-
-
-.button-increment-bottom{
-	height: 40px;
-	width: 125px;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	margin-left: 0px;
-	padding-left: 0px;
-	border-top:1px grey solid;
-	border-left:black 2px solid;
-	border-right:black 2px solid;
-	border-bottom: 2px black solid;
-	font-size: 28px;
-	border-radius: 0px 0px 10px 10px;
-}
-
-
-
 select {
 	display: flex;
 	align-items: center;
@@ -123,39 +78,8 @@ option {
 	font-size: 18px;
 	width: 200px;
 }
-input {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	width: 200px;
-	font-size: 18px;
-	border-radius: 10px;
-}
 
 
 
 
 
-
-
-.radio-button{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	text-align: center;
-	height:40px;
-	width: 40px;
-	border-radius: 1000px;
-	border:none transparent solid;
-	margin-bottom: 5px;
-	box-shadow: grey 1px 1px 3px 1px;
-	
-}
-
-.radio-button:active{
-	font-weight: 600;
-	transform: scale(0.95); /* Slightly scale down to simulate a press */
-}

@@ -2,13 +2,13 @@
     display: flex;
 	justify-content: center;
 	align-items: center;
-	position: relative;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-	z-index: 1010; /* Ensure the modal appears on top */
+	z-index: 9999; /* Ensure the modal appears on top */
 }
 
 .modal-side-bar{
@@ -17,12 +17,9 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-    width: 100%;
 }
 
-.modal-side-bar-text{
-    width: 100%;
-    height: 20px;
+.modal-text{
 	font-size: 18px;
 	font-weight: 700;
 }
@@ -34,14 +31,11 @@
 	align-items: center;
 	background-color: antiquewhite;
 	border-radius: 5px;
-	width: 90%; /* Adjust as needed */
-    max-width: 900px;
 	height: auto;
 	box-shadow: #333 1px 3px 5px 3px;
 	border: 2px solid brown;
-	margin: 20px;
 	padding: 20px;
-    position: absolute;
+    position: relative;
 }
 .preview-profile-close-modal-btn {
     background-color: transparent;
@@ -93,10 +87,10 @@
 	height: auto;
 	box-shadow: #333 1px 3px 5px 3px;
 	border: 2px solid brown;
-	padding: 40px;
+	padding: 10px;
     left: 200px;
-    top: 0px;
-    position: relative;
+    top: 150px;
+    position: absolute;
 }
 
 .close-update-btn{

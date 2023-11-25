@@ -142,32 +142,29 @@ const ProfileReview = ({ closeModal }) => {
 		});
 	};
 
-
 	return (
 		<div className='modal-container'>
 			<div className='modal-content'>
 				<button className='preview-profile-close-modal-btn' onClick={closeModal}>
 					x
 				</button>
-				<div className='modal-side-bar'>
 					<h2> Update Profile</h2>
 
-					<p className='modal-side-bar-text'>
+					<p className='modal-side-text'>
 						To update any field, click on the incorrect value you would like to change
 					</p>
-				</div>
 
 				<div className='modal-container-profile-update'>
 					<div
 						style={{
-							display: state.renderPopUp ? "flex" : "none",
+							display: state.renderPopUp ? "inline-flex" : "none",
 						}}
 						className='modal-profile-update-container'
 					>
 						<div className='modal-profile-update-content'>
-							<button
-								className="close-update-btn"
-								onClick={closeModalUpdate}>x</button>
+							<button className='close-update-btn' onClick={closeModalUpdate}>
+								x
+							</button>
 							<p></p>
 							{state.renderBuildGoal ? <BuildGoal /> : ""}
 							{state.renderAgeGender ? <AgeGender /> : ""}

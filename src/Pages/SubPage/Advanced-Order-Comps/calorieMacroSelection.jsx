@@ -13,7 +13,6 @@ import PreviousButton from "./previousButton.jsx";
 import ConfirmSelectionButton from "./confirmSelectionStepButton.jsx";
 //css
 import "../../../css/errorModal.css";
-import "../../../css/Advanced-Order-CSS/calorieMacroSelection.css";
 
 const AdvancedOrderCalorieMacroSelection = () => {
 	const { setMacroCalorieSelection } = useAdvancedOrderStoreActions((actions) => actions);

@@ -1,0 +1,31 @@
+.comp-title {
+	font-size: 26px;
+	margin: 2px 0px 10px 0px;
+	padding: 0px;
+	text-align: center;
+	padding: 10px;
+	text-decoration: underline;
+	text-shadow: darkgray 1px 1px;
+}
+.title {
+	font-size: 20px;
+	margin: 2px 0px 10px 0px;
+	padding: 0px;
+	text-align: center;
+	margin: 10px 0px 20px 0px;
+	text-shadow: darkgray 1px 1px;
+}
+.select-list {
+	text-align: center;
+	height: auto;
+	width: auto;
+	font-size: 24px;
+	border-radius: 10px;
+	margin: 5px 0px 5px 0px;
+	padding: 10px 20px 10px 20px;
+	box-shadow: #333 1px 2px 5px 1px;
+	text-shadow: darkgray 1px 1px;
+}
+.select-list-option {
+	padding: 10px 20px 10px 20px;
+}

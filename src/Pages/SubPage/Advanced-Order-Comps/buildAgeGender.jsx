@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
-
 import "../../../css/errorModal.css";
-import "../../../css/Advanced-Order-CSS/stepOne.css";
+import "../../../css/Advanced-Order-CSS/buildAgeGenderGoal.css";
 
 const AgeGender = () => {
 	const age = useAdvancedOrderProfileStore((state) => state.age);
@@ -47,7 +46,7 @@ const AgeGender = () => {
 		setState({ ...state, errorModal: false, errorMessage: "" });
 	};
 	return (
-		<div className='comp-container'>
+		<div className='comp-container-col'>
 			{state.error ? (
 				<div className='error-container'>
 					<div className='error-content'>
@@ -58,16 +57,17 @@ const AgeGender = () => {
 					</div>
 				</div>
 			) : null}
+			<p className="comp-title"> Personal Stats</p>
 			<p className='title'>What is your age?</p>
 			<input
-				className='input'
-				type='number'
+				className='input-age'
+				type='text'
 				value={state.age}
 				onChange={(e) => setState({ ...state, age: e.target.value })}
 			/>
 			<p className='title'>When is your birthday?</p>
 			<input
-				className='input'
+				className='input-birthday'
 				type='date'
 				name='birthDate'
 				min={"01/01/1900"}
@@ -76,7 +76,7 @@ const AgeGender = () => {
 			/>
 			<p className='title'>What is your Gender?</p>
 			<select
-				className='select-list '
+				className='select-list'
 				value={state.gender}
 				onChange={(e) => setState({ ...state, gender: e.target.value })}
 			>

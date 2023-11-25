@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-//global state
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
-import "../../../css/Advanced-Order-CSS/stepOne.css";
+import "../../../css/Advanced-Order-CSS/buildAgeGenderGoal.css";
+import "../../../css/errorModal.css";
 
-const Goal = ({ handleGoalModalClose }) => {
-	//global state actions
+const Goal = () => {
 	const goal = useAdvancedOrderProfileStore((state) => state.goal);
 	const activityLevel = useAdvancedOrderProfileStore((state) => state.activityLevel);
 	const activityLevelValue = useAdvancedOrderProfileStore((state) => state.activityLevelValue);
@@ -39,12 +38,10 @@ const Goal = ({ handleGoalModalClose }) => {
 		} else {
 			setGoal(state.selectedGoal);
 			setActivityLevel(state.selectedActivityLevel);
-
-			// initializeState();
+			initializeState();
 		}
 	};
-	// 	console.log(state.selectedActivityLevel, "state.selectedActivityLevel");
-	// console.log(activityLevelValue, "activityLevelValue");
+
 	useEffect(() => {
 		if (state.selectedActivityLevel === "Sedentary (little or no exercise)") {
 			setActivityLevelValue(1.2);
@@ -66,15 +63,13 @@ const Goal = ({ handleGoalModalClose }) => {
 		}
 	}, [state.selectedActivityLevel]);
 
-	console.log(state.selectedGoal, "state.goal onchange");
-	console.log(state.selectedActivityLevel, "state.activityLevel onchange");
 	const closeModalBtn = () => {
 		setState({ ...state, errorModal: false, errorMessage: "" });
 	};
 
 	return (
-		<div className='step-container'>
-			<p>What is your current goal?</p>
+		<div className='comp-container-col'>
+			<p className='title'>What is your current goal?</p>
 			{state.error ? (
 				<div className='error-container'>
 					<div className='error-content'>
@@ -85,7 +80,11 @@ const Goal = ({ handleGoalModalClose }) => {
 					</div>
 				</div>
 			) : null}
-			<select value={state.selectedGoal} onChange={(e) => setState({ ...state, selectedGoal: e.target.value })}>
+			<select
+				className='select-list'
+				value={state.selectedGoal}
+				onChange={(e) => setState({ ...state, selectedGoal: e.target.value })}
+			>
 				<option value='Choose One'>Choose One</option>
 				<option value='Maintain Weight'>Maintain Weight</option>
 				<option value='Weight Loss'>Weight Loss</option>
