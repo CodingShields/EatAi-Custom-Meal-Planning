@@ -1,17 +1,23 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import FlavorTypeArrayEasyOrder from "../../../assets/dataArrays/Flavor-Type-Array-Easy-Order";
 import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
 import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
 
 const ChefSurpriseFlavor = () => {
-	const { flavor, setFlavor } = useChefSurpriseStoreActions();
-	const { setFlavorDetails } = useChefSurpriseStoreActions();
-	const { flavorDetails } = useChefSurpriseStore();
+	const { flavorDetails } = useChefSurpriseStore((state) => state);
+	const { setFlavor } = useChefSurpriseStoreActions((actions) => actions);
+	const { setFlavorDetails } = useChefSurpriseStoreActions((actions) => actions);
+	const [selectedFlavor, setSelectedFlavor] = useState("");
+
+	useEffect(() => {
+		setSelectedFlavor("");
+	}, []);
 
 	function handleFlavorChange(event) {
 		const selectedValue = event.target.value;
-		setFlavor("selected", selectedValue);
+		setSelectedFlavor(selectedValue);
+		setFlavor(selectedValue);
 		const flavorDetail = FlavorTypeArrayEasyOrder.find((item) => item.name === selectedValue);
 		if (flavorDetail) {
 			setFlavorDetails(flavorDetail.details);
@@ -23,7 +29,7 @@ const ChefSurpriseFlavor = () => {
 		<>
 			<div className='chef-surprise-menu-items-container'>
 				<h2 className='chef-surprise-menu-item-text'>Flavor:</h2>
-				<select onChange={handleFlavorChange} value={flavor} className='chef-surprise-drop-down-text'>
+				<select onChange={handleFlavorChange} value={selectedFlavor} className='chef-surprise-drop-down-text'>
 					{FlavorTypeArrayEasyOrder.map((item) => (
 						<option value={item.name} key={item.id}>
 							{item.name}

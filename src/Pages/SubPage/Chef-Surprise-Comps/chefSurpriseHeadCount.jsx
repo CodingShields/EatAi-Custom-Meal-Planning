@@ -1,13 +1,12 @@
-import React from "react";
 import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
 import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
+
 const ChefSurpriseHeadCount = () => {
-	const { setHeadCount } = useChefSurpriseStoreActions();
-	const { headCount } = useChefSurpriseStore();
+	const headCount = useChefSurpriseStore((state) => state.headCount);
+	const { setHeadCount } = useChefSurpriseStoreActions((actions) => actions);
 
 	const handleHeadCount = (value) => {
-		console.log(value);
 		setHeadCount(value);
 	};
 

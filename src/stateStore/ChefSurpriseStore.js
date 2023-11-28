@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 const initializeState = {
 	entree: "",
-	headCount: "1",
+	headCount: 0,
 	dietary: "",
 	dietaryDetails: "",
 	flavor: "",

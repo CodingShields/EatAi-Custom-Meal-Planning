@@ -27,15 +27,28 @@ export default function Welcome() {
     error: false,
     errorMessage: "",
     message: "",
+    modal: false, 
     searchingForProfile: false,
     loading: false,
     hasProfile: false,
-    liveText: false,  
   });
+
+  const initializeState = () => {
+    setState({
+      error: false,
+      errorMessage: "",
+      message: "",
+      modal: false, 
+      searchingForProfile: false,
+      loading: false,
+      hasProfile: false,
+    });
+  };
   
 
   useEffect(() => {
-    setState({ ...state, liveText: false, message: "Checking for profile..." });
+    initializeState();
+    setState({ ...state,errorMessage: "Checking for profile..." });
     setTimeout(() => {
       setState({ ...state, loading: true });
   
@@ -50,10 +63,24 @@ export default function Welcome() {
 
 
   return (
-		<div className='welcome-page-container'>
+    <div className="welcome-page-container-main">
+      <div className='welcome-page-container'>
+        <div
+          style={{
+            display: state.modal ? "flex" : "none",  
+          }}
+          className='modal-container'>
+          <div className='modal-content'>
+
+          </div>
+        </div>
 			<img className='welcome-page-chef-img' src={flippedchef} alt='Chef' />
-			<div className='welcome-page-live-text-container'>
-				<h1>Welcome {displayName}!</h1>
+			<div className='welcome-page-text-container'>
+          <h1
+          className="welcome-page-text"
+          >Welcome {displayName}!
+          still need to set modal
+          </h1>
         <p className='state-message'>{state.message}</p>
 				{state.error ? (
 					<div className='error-modal'>
@@ -63,6 +90,7 @@ export default function Welcome() {
 				{state.loading ? <img className='searchingForProfile' src={state.loading ? SearchingForProfileFadeIn : SearchingForProfileFadeOut} /> : null}
           {state.liveText ? <LiveTypingWelcome /> : null }
         </div>
-		</div>
+      </div>
+    </div>
 	);
 }

@@ -10,6 +10,7 @@ import { auth, db } from "../Firebase/fireBaseConfig";
 import { useUserStore } from "../stateStore/userStore";
 import { useUserStoreActions } from "../stateStore/userStore";
 import { setDoc, doc } from "firebase/firestore";
+import { Navigate } from "react-router-dom";
 
 const UserContext = createContext();
 
@@ -55,6 +56,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	const logout = () => {
 		resetForm();
+		Navigate("/");
 		return signOut(auth);
 	};
 

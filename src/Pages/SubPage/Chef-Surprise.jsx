@@ -1,36 +1,52 @@
-import React, { useState } from "react";
-import flippedChef from "../../assets/images/flippedChef.png";
+import { useState, useEffect } from "react";
+import { useChefSurpriseStoreActions } from "../../stateStore/ChefSurpriseStore";
+import { useChefSurpriseStore } from "../../stateStore/ChefSurpriseStore";
 import ChefSurpriseEntree from "./Chef-Surprise-Comps/chefSurpriseEntree";
 import ChefSurpriseHeadCount from "./Chef-Surprise-Comps/chefSurpriseHeadCount";
 import ChefSurpriseFlavor from "./Chef-Surprise-Comps/chefSurpriseFlavor";
 import ChefSurpriseDietary from "./Chef-Surprise-Comps/chefSurpriseDietary";
-import { useChefSurpriseStoreActions } from "../../stateStore/ChefSurpriseStore";
-import { useChefSurpriseStore } from "../../stateStore/ChefSurpriseStore";
+import preparingOrderAnimatedFade from "../../assets/images/preparingOrderAnimatedFade.svg";
+import flippedChef from "../../assets/images/flippedChef.png";
+import windowCloseBtn from "../../assets/images/windowCloseBtn.svg";
 import jsPDF from "jspdf";
 import "../../css/chefSurprise.css";
+import "../../css/errorModal.css";
 
-export default function ChefSurprise() {
-	const { entree, headCount, selectedFlavor, dietaryDetails } = useChefSurpriseStore();
-
+const ChefSurprise = () => {
+	const entree = useChefSurpriseStore((state) => state.entree);
+	const headCount = useChefSurpriseStore((state) => state.headCount);
+	const flavor = useChefSurpriseStore((state) => state.selectedFlavor);
+	const dietary = useChefSurpriseStore((state) => state.dietary);
 	const { resetForm } = useChefSurpriseStoreActions();
-
-	const clearLocalStorage = () => {
-		localStorage.clear();
-	};
-
-	const [mainState, setMainState] = useState({
-		loading: false,
-		renderMenu: false,
-		removeMenu: false,
-	});
-
 	const [chatBotReply, setChatBotReply] = useState("");
+	const [state, setState] = useState({
+		error: false,
+		errorMessage: "",
+		loading: false,
+		cookingOrderImage: false,
+		renderMenuSelection: true,
+		renderBotResponseOrder: false,
+	});
+	const apiKey = import.meta.env.VITE_API_KEY;
 
-	async function handleOrder() {
-		setMainState({ loading: true, renderMenu: true, removeMenu: true });
-		const test = `I'd like to order an ${entree} for ${
+	// useEffect(() => {
+	// 	setState({ loading: true, renderMenuSelection: true, renderBotResponseOrder: false, cookingOrderImage: false });
+	// }, []);
+
+	console.log(entree, "entree");
+	console.log(headCount, "headCount");
+	console.log(flavor, "flavor");
+	console.log(dietary, "dietary");
+	
+	const handleOrder = async () => {
+		if (entree === "" || headCount === 0 || flavor === "" || dietary === "") {
+			setState({ error: true, errorMessage: "Please fill out all fields." });
+			return;
+		}else{
+		setState({ loading: true, renderMenuSelection:false, cookingOrderImage: true });
+		const test = `I'd like to order an ${entree} with a title for ${
 			headCount !== 1 ? "people" : "person"
-		}, that has a ${selectedFlavor} and it should have a dietary restriction of ${dietaryDetails}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal. Have the reponse start by saying the title of the dish generated, and not like it is a conversation.`;
+		}, that has a ${flavor} and it should have a dietary restriction of ${dietary}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal. Have the response start by saying the title of the dish generated, and not like it is a conversation.`;
 		const data = {
 			model: "gpt-3.5-turbo",
 			messages: [{ role: "user", content: test }],
@@ -47,18 +63,16 @@ export default function ChefSurprise() {
 			});
 			const result = await response.json();
 			if (response.ok) {
-				// console.log("Response object:", result)
-				setMainState({ loading: false, renderMenu: true });
 				setChatBotReply(result.choices[0].message.content);
-				// console.log(result.choices[0].message.content);
+				setState({ loading: false, renderBotResponseOrder:true, cookingOrder: false });
 			} else {
 				console.error(result);
 			}
 		} catch (error) {
 			console.error(error);
+			}
 		}
-	}
-	console.log(chatBotReply);
+	};
 
 	function downloadData() {
 		if (chatBotReply && typeof chatBotReply === "string") {
@@ -107,46 +121,81 @@ export default function ChefSurprise() {
 		}
 	}
 
-	function resetData() {
-		setMainState({ loading: false, renderMenu: false, removeMenu: false });
-		clearLocalStorage();
+	const  resetData = () => {
+		setState({ loading: false, renderMenuSelection: true });
 		resetForm();
+	}
+
+	const handleModal = () => {
+		setState({ error: false, errorMessage: "", renderMenuSelection: true  });
 	}
 
 	return (
 		<div className='chef-surprise-container-main'>
-			<img className='chef-surprise-chef-img' src={flippedChef} />
-			<div className='chef-surprise-menu-container'>
-				<div style={{ display: mainState.renderMenu ? "flex" : "none" }} className='bot-response-container'>
-					<h2 className='bot-response-text'>{chatBotReply}</h2>
-				</div>
-				<div className='chef-surprise-menu-title-text-container'>
-					<h3 className='chef-surprise-menu-title-text'>Menu</h3>
-				</div>
-				{mainState.removeMenu ? (
-					<>
-						<ChefSurpriseEntree />
-						<ChefSurpriseHeadCount />
-						<ChefSurpriseFlavor />
-						<ChefSurpriseDietary />
-					</>
-				) : null}
-				<div className='order-btn-div'>
-					<button className='order-btn' onClick={handleOrder}>
-						Order
-					</button>
-				</div>
-				<button
-					style={{ display: mainState.renderMenu ? "flex" : "none" }}
-					className='download-btn'
-					onClick={downloadData}
+			<div className='chef-surprise-container'>
+				<img className='chef-surprise-chef-img' src={flippedChef} />
+				<div
+					style={{
+						display: state.error ? "flex" : "none",
+					}}
+					className='error-container'
 				>
-					Download
-				</button>
-				<button style={{ display: mainState.renderMenu ? "flex" : "none" }} className='reset-btn' onClick={resetData}>
-					Start Over
-				</button>
+					<div className='error-content'>
+						<p className='error-message'>Cannot place order:{state.errorMessage}</p>
+						<img src={windowCloseBtn} className='error-btn' onClick={handleModal} />
+					</div>
+				</div>
+
+				<div className='chef-surprise-menu-container'>
+					{state.cookingOrderImage ? <img className='easy-order-cooking-img' src={preparingOrderAnimatedFade} /> : ""}
+					{state.renderBotResponseOrder ? (
+						<div className='bot-response-container-main'>
+							{/* <div className="bot-response-btn-container"> */}
+							<img
+								src={windowCloseBtn}
+								className='error-btn'
+								onClick={() => setState({ renderBotResponseOrder: false })}
+							/>
+							{/* </div> */}
+							<div className='bot-response-container'>
+								<h2 className='bot-response-text'>{chatBotReply}</h2>
+							</div>
+						</div>
+					) : (
+						""
+					)}
+					<div className='chef-surprise-menu-title-text-container'>
+						{state.renderMenuSelection ? <h3 className='chef-surprise-menu-title-text'>Menu</h3> : ""}
+					</div>
+					{state.renderMenuSelection ? (
+						<>
+							<ChefSurpriseEntree />
+							<ChefSurpriseHeadCount />
+							<ChefSurpriseFlavor />
+							<ChefSurpriseDietary />
+						</>
+					) : null}
+					<div
+						style={{
+							display: state.renderMenuSelection ? "flex" : "none",	
+						}}
+						className='easy-order-btn-container'>
+							<button className='order-btn' onClick={handleOrder}>
+								Order
+							</button>
+						<button
+							// disabled={!chatBotReply}
+							className='download-btn' onClick={downloadData}>
+								Download
+							</button>
+							<button className='reset-btn' onClick={resetData}>
+								Start Over
+							</button>
+						</div>
+				</div>
 			</div>
 		</div>
 	);
-}
+};
+
+export default ChefSurprise;

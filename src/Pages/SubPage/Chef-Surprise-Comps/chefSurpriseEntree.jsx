@@ -1,10 +1,11 @@
-import React from "react";
 import MealTypeArray from "../../../assets/dataArrays/Meal-Type-Array";
 import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
+import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
 import "../../../css/chefSurprise.css";
 
 const ChefSurpriseEntree = () => {
-	const { entree, setEntree } = useChefSurpriseStoreActions();
+	const entree = useChefSurpriseStore((state) => state.entree);
+	const { setEntree } = useChefSurpriseStoreActions((actions) => actions);
 
 	function handleEntree(event) {
 		const selectedValue = event.target.value;
