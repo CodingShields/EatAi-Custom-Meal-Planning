@@ -6,9 +6,10 @@ html,
 body {
 	background-color: #f9f4ee;
 	font-family: "Inter", sans-serif;
-
+	height: 100vh;
+	width: 100vw;
 	margin: 0;
-	padding: 10;
+	padding: 0;
 }
 
 a {
@@ -30,8 +31,12 @@ body {
 }
 
 .site-wrapper {
+	width: 100vw;
+	height: 100vh;
 	margin: 0px;
-	padding: 0px;
+	padding:0px;
+	position: relative;
+	box-sizing: border-box;
 }
 
 header {
@@ -95,11 +100,13 @@ footer {
 }
 
 main {
-	padding: 20px; /* Add padding to keep content from touching the edges */
+	padding: 40px; /* Add padding to keep content from touching the edges */
 	box-sizing: border-box;
-	max-height: 100%; /* Include padding in element's total width and height */
-	max-width: 100%; /* Ensure content doesn't exceed the width of its container */
-	margin: 0 auto; /* Center the content horizontally */
+	height: auto;
+	 /* Include padding in element's total width and height */
+	width: auto; /* Ensure content doesn't exceed the width of its container */
+	margin: 0px auto 0px 0px; /* Center the content horizontally */
+	flex-grow: 1;
 }
 
 .dashboard-nav {
