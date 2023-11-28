@@ -1,122 +1,102 @@
 import React from "react";
-import { useEasyOrderStore } from "../../../stateStore/easyOrderStore"
-import {useRenderStepStore} from "../../../stateStore/RenderStepStore"
+import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
+import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import "../../../css/easyOrder.css";
+import "../../../css/errorModal.css";
+import windowCloseBtn from "../../../assets/images/windowCloseBtn.svg";
 
 const EasyOrderUserSelection = () => {
-	const culture = useEasyOrderStore((state) => state.Culture);
-	const event = useEasyOrderStore((state) => state.Event);
-	const headcount = useEasyOrderStore((state) => state.HeadCount);
-	const courses = useEasyOrderStore((state) => state.Courses);
-	const dietary = useEasyOrderStore((state) => state.Dietary);
-	const flavor = useEasyOrderStore((state) => state.Flavor);
-	const mealBalance = useEasyOrderStore((state) => state.Balance);
-	// const cookTime = useEasyOrderStore((state) => state.CookTime);
-	// const howToCook = useEasyOrderStore((state) => state.HowToCook);
-	// const dessert = useEasyOrderStore((state) => state.Dessert);
-	// const seasonal = useEasyOrderStore((state) => state.Seasonal);
-	// const beverage = useEasyOrderStore((state) => state.Beverage);
-	const measure = useEasyOrderStore((state) => state.Measure);
-	const useEasyOrderRenderStore = useRenderStepStore((state) => state);
+	const culture = useEasyOrderStore((state) => state.culture);
+	const event = useEasyOrderStore((state) => state.event);
+	const headCount = useEasyOrderStore((state) => state.headCount);
+	const courses = useEasyOrderStore((state) => state.courses);
+	const dietary = useEasyOrderStore((state) => state.dietary);
+	const flavor = useEasyOrderStore((state) => state.flavor);
+	const mealBalance = useEasyOrderStore((state) => state.balance);
+	const measure = useEasyOrderStore((state) => state.measure);
+	const step = useRenderStepStore((state) => state.step);
+
+	const [state, setState] = React.useState({
+		error: false,
+		errorMessage: "",
+		confirmOrder: false,
+	});
 
 	const formatCoursesOptions = () => {
 		if (Array.isArray(courses)) {
-			// Join the selected options into a comma-separated string
 			return courses.join(", ");
 		} else {
-			return ""; // or some other default value if courses is not an array
+			return "";
 		}
 	};
 	const formatDietaryOptions = () => {
 		if (Array.isArray(dietary)) {
-			// Join the selected options into a comma-separated string
 			return dietary.join(", ");
 		} else {
-			return ""; // or some other default value if courses is not an array
+			return "";
 		}
 	};
-
+	const handleCompleteOrder = () => {
+		setState({ ...state, confirmOrder: true });
+	};
 	return (
 		<div className='easy-order-user-selection-container'>
 			<h1 className='easy-order-selection-title'>Current Selections</h1>
-			<div className='user-selection-container'>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 1 })}>
-					Event:
-				</button>
-				<>
-					<span className='user-input-text'>{event}</span>
-				</>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 2 })}>
-					Cultural:
-				</button>
-				<>
-					<span className='user-input-text'>{culture}</span>
-				</>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 3 })}>
-					HeadCount:
-				</button>
-				<>
-					<span className='user-input-text'>{headcount} </span>
-				</>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 4 })}>
-					Courses:
-				</button>
-				<>
-					<span className='user-input-text'>{formatCoursesOptions()}</span>
-				</>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 5 })}>
-					Dietary:
-				</button>
-				<>
-					<span className='user-input-text'>{formatDietaryOptions()}</span>
-				</>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 6 })}>
-					Desired Flavor:
-				</button>
-				<>
-					<span className='user-input-text'>{flavor}</span>
-				</>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 7 })}>
-					Meal Balance:
-				</button>
-				<>
-					<span className='user-input-text'>{mealBalance}</span>
-				</>
-				{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 8 })}>Cook Time:</button> 
-				<>
-				<span className="user-input-text">{cookTime}</span>
-				</> */}
-						{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 9 })}>How To Cook:</button>
-				<>
-				<span className="user-input-text">{howToCook}</span>
-				</> */}
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 8 })}>
-					Measurement:
-				</button>
-				<>
-					<span className='user-input-text'>{measure}</span>
-				</>
-				{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 11 })}>Seasonal:</button>
-				<>
-				<span className="user-input-text">{seasonal}</span>
-				</> */}
-						{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 12 })}>Dessert:</button>
-				<>
-				<span className="user-input-text">{dessert}</span>
-				</> */}
-						{/* <button className="confirmed-selection-button" onClick={() => useRenderStepStore.setState({ step: 13 })}>Beverages:</button>
-				<>
-				<span className="user-input-text">{beverage}</span>
-				</> */}
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 9 })}>
-					Review Order
-				</button>
-				<>
-				<button className='confirmed-selection-button' onClick={() => useRenderStepStore.setState({ step: 10 })}>
-					Order Fulfillment
-				</button>
-				</>
+			{state.error ? (
+				<div className='error-container'>
+					<div className='error-content'>
+						<p className='error-message'>{state.errorMessage}</p>
+						<img
+							className='error-btn'
+							src={windowCloseBtn}
+							onClick={() => setState({ ...state, error: false, errorMessage: "" })}
+						/>
+					</div>
+				</div>
+			) : (
+				""
+			)}
+			<div className='easy-order-user-selection-container-main'>
+				<div className='easy-order-list-single-col-left '>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 1 })}>
+						Event:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 2 })}>
+						Cultural:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 3 })}>
+						HeadCount:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 4 })}>
+						Courses:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 5 })}>
+						Dietary:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 6 })}>
+						Desired Flavor:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 7 })}>
+						Meal Balance:
+					</p>
+					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 8 })}>
+						Measurement:
+					</p>
+				</div>
+				<div className='easy-order-list-single-col-right'>
+					<p className='user-input-text'>{event}</p>
+					<p className='user-input-text'>{culture}</p>
+					<p className='user-input-text'>{headCount} </p>
+					<p className='user-input-text'>{formatCoursesOptions()}</p>
+					<p className='user-input-text'>{formatDietaryOptions()}</p>
+					<p className='user-input-text'>{flavor}</p>
+					<p className='user-input-text'>{mealBalance}</p>
+					<p className='user-input-text'>{measure}</p>
+				</div>
 			</div>
+			{!state.confirmOrder ? <button className='easy-order-fulfill-order-button' onClick={handleCompleteOrder}>
+				Complete Order
+			</button>: ""}
 		</div>
 	);
 };

@@ -13,7 +13,7 @@ const EasyOrderConfirmOrder = () => {
 					Option Title to go back and change. If You are ready to send it off to the Chef, just click "Order Now".
 				</h4>
 				{/* <h1> Need To Add Option to exclude previous searches??</h1> */}
-				<button className='easy-order-btn' onClick={() => increaseStep()}>
+				<button className='easy-order-fulfill-order-button' onClick={() => increaseStep()}>
 					Order Now
 				</button>
 			</div>

@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 const MealBalance = [
     {
         id: nanoid(),
-        name:"None"
+        name:"No Preference"
     },
     {
         id: nanoid(),

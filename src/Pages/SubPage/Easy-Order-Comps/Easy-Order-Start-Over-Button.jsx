@@ -4,20 +4,16 @@ import "../../../css/easyOrder.css";
 
 const EasyOrderStartOverButton = () => {
 	const resetStep = useRenderStepStore((state) => state.resetStep);
-	const { resetForm }= useEasyOrderStoreActions();
-	const clearLocalStorage = () => {
-		localStorage.clear();
+	const { resetForm } = useEasyOrderStoreActions();
+
+	const handleOnClick = () => {
+		resetStep();
+		resetForm();
 	};
+
 	return (
-		<button
-			className='easy-order-btn'
-			onClick={() => {
-				resetStep();
-				resetForm();
-				clearLocalStorage();
-			}}
-		>
-			Start Over
+		<button className='easy-order-reset-btn' onClick={handleOnClick}>
+			Reset
 		</button>
 	);
 };

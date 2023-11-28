@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FlavoredDishes from "../../../assets/dataArrays/Flavor-Dishes-Array";
+import FlavoredDishes from "../../../../assets/dataArrays/Flavor-Dishes-Array";
 import "../../../css/easyOrder.css";
 
 export default function EasyOrderFlavoredRecommend() {

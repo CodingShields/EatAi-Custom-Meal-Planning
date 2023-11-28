@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import CookTimes from "../../../assets/dataArrays/Cook-Times-Array";
-import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
+import CookTimes from "../../../../assets/dataArrays/Cook-Times-Array";
+import { useRenderStepStore } from "../../../../stateStore/RenderStepStore";
+import { useEasyOrderStoreActions } from "../../../../stateStore/easyOrderStore";
 import "../../../css/easyOrder.css";
 
 const EasyOrderCookTime = () => {

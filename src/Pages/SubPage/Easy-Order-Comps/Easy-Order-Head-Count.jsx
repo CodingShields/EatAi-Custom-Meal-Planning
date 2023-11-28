@@ -5,31 +5,12 @@ import "../../../css/easyOrder.css";
 
 const EasyOrderHeadCount = () => {
 	const [count, setCount] = useState(0);
-	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 	const { setHeadCount } = useEasyOrderStoreActions();
-	const increaseStep = useRenderStepStore((state) => state.increaseStep);
-
 
 	const handleHeadCount = (value) => {
-		setIsButtonDisabled(true);
 		setCount(value);
 		setHeadCount(value);
 	};
-
-	const handleClick = () => {
-		setHeadCount(count);
-		increaseStep();
-		setIsButtonDisabled(false);
-		localStorage.setItem("selectedCount", count);
-	};
-
-	useEffect(() => {
-		const savedCheckedItem = localStorage.getItem("selectedCount");
-		if (savedCheckedItem) {
-			setCount(savedCheckedItem);
-			setIsButtonDisabled(true);
-		}
-	}, []);
 
 	return (
 		<>
@@ -50,13 +31,6 @@ const EasyOrderHeadCount = () => {
 					HeadCount: <span className='head-count-data-text'>{count}</span>
 				</p>
 			</div>
-			{isButtonDisabled ? (
-				<button className='easy-order-btn' onClick={handleClick}>
-					Make Selection
-				</button>
-			) : (
-				""
-			)}
 		</>
 	);
 };

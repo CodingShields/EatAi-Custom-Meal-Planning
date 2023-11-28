@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import DietaryOptionsArray from "../../../assets/dataArrays/Dietary-Options-Array";
+import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
+import easyOrderDietaryOptionsArray from "../../../assets/dataArrays/Easy-Order-Dietary-Options-Array";
 import "../../../css/easyOrder.css";
 
 const EasyOrderDietary = () => {
 	const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([]);
-	const dietary = useRenderStepStore((state) => state.dietary);
+	const dietary = useEasyOrderStore((state) => state.dietary);
 	const { setDietary } = useEasyOrderStoreActions();
 	const maxCheckedOptions = 3;
-
 	const isNoDietaryRestrictionsSelected = checkedDietaryOptions.includes("No Dietary Restrictions");
-
+	useEffect(() => {
+		setDietary(checkedDietaryOptions);
+	}, [checkedDietaryOptions]);
 
 	const handleCheckbox = (item) => {
 		if (item === "No Dietary Restrictions") {
@@ -27,37 +29,37 @@ const EasyOrderDietary = () => {
 			} else if (checkedDietaryOptions.length < maxCheckedOptions) {
 				setCheckedDietaryOptions([...checkedDietaryOptions, item]);
 				if (isNoDietaryRestrictionsSelected) {
-					const updatedOptions = checkedDietaryOptions.filter((option) => option !== "No Dietary Restrictions");
-					setCheckedDietaryOptions(updatedOptions);
+					setCheckedDietaryOptions([item]);
 				}
 			}
 		}
 	};
-
-
 	return (
 		<>
 			<div className='easy-order-menu-title-container'>
 				<h2 className='easy-order-menu-text'>Please Choose Up to 3 Dietary Options</h2>
 			</div>
 			<div className='easy-order-list-big'>
-				<select>
-					{DietaryOptionsArray.map((item) => (
-						<li>
-							<option
+				<ul className='easy-order-list-two-col'>
+					{easyOrderDietaryOptionsArray.map((item) => (
+						<li key={item.id}>
+							<input
 								type='checkbox'
 								key={item.id}
 								value={item.name}
-								isChecked={checkedDietaryOptions.includes(item.name)}
+								checked={checkedDietaryOptions.includes(item.name)}
 								onChange={() => handleCheckbox(item.name)}
 								disabled={
-									item === "No Dietary Restrictions" && checkedDietaryOptions.includes("No Dietary Restrictions")
+									(item.name !== "No Dietary Restrictions" && isNoDietaryRestrictionsSelected) ||
+									(checkedDietaryOptions.length === maxCheckedOptions &&
+										!isNoDietaryRestrictionsSelected &&
+										!checkedDietaryOptions.includes(item.name))
 								}
 							/>
 							{item.name}
 						</li>
 					))}
-				</select>
+				</ul>
 			</div>
 		</>
 	);

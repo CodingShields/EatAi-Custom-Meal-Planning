@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-const LiveTypingEasyOrder = ({ fontSize }) => {
+const LiveTypingEasyOrder = () => {
   const [displayedText, setDisplayedText] = useState('');
-  const defaultMessage = 'Welcome \nto Easy Ordering!\n I am ChefAi!\n To Place and Order,\n just follow the Menu guide after\n clicking the "Begin" button below.';
+  const defaultMessage = 'Welcome to Easy Ordering!\n I am ChefAi!\n To Place and Order,\n just click the "Start" button \n and follow the menu guide.';
 
   useEffect(() => {
     let charIndex = 0;
@@ -14,7 +14,7 @@ const LiveTypingEasyOrder = ({ fontSize }) => {
       } else {
         clearInterval(typingInterval);
       }
-    }, 50); // Adjust the delay for typing speed
+    }, 35); // Adjust the delay for typing speed
 
     return () => {
       clearInterval(typingInterval);
@@ -32,16 +32,16 @@ const LiveTypingEasyOrder = ({ fontSize }) => {
 
   return (
     <div
-      className="live-text-container"
+      className="easy-order-live-text-container"
       style={{
         display: "flex",
-        fontSize: fontSize || '48px',
+        fontSize: '24px',
         fontWeight: 'bold',
-        width: "500px",
-        height: "450px",
-        paddingTop: '30px',
+        width: "auto",
+        height: "425px",
+        paddingTop: '10px',
         position: 'relative',
-        justifyContent: "start",
+        justifyContent: "center",
         alignContent: "center",
         textAlign: "center",
         flexDirection: "column",

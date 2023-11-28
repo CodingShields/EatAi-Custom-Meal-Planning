@@ -18,21 +18,25 @@
 	margin-top: 20px;
 }
 
-.chef-img {
-	height: 660px;
+.chef-surprise-chef-img {
+	height: auto;
+	height: 600px;
+	margin: 20px 20px 0px 0px;
 }
 
 .chef-surprise-menu-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
-	height: auto;
+	height: 90%;
 	width: auto;
 	border: 4px solid brown;
 	border-radius: 10px;
 	background-color: antiquewhite;
 	box-shadow: #333 1px 3px 10px 3px;
+	margin:auto;
+	padding: 10px;
 }
 
 .chef-surprise-menu-title-text-container {
@@ -40,30 +44,32 @@
 	align-items: center;
 	padding: 0px;
 	margin: 10px 0px 0px 0px;
+	border-bottom: #333 1px solid;
+	width: 100%;
 }
 
 .chef-surprise-menu-title-text {
 	text-align: center;
 	font-size: 42px;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-	text-decoration: underline;
 	padding: 0px;
 	margin: 0px;
 }
 .chef-surprise-flavor-details-text {
-	font-size: 14px;
+	font-size: 16px;
 	width: 300px;
+	font-style: italic;
+	color: #333;
 }
 
 .chef-surprise-menu-items-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: first baseline;
+	justify-content: flex-start;
 	text-align: left;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin: 20px;
+	padding: 10px;
+	margin: auto;
 	height: auto;
 	width: 500px;
 	border-bottom: #333 1px solid;
@@ -92,7 +98,7 @@
 	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 
-.easy-order-headcount-container {
+.chef-surprise-headcount-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -102,7 +108,7 @@
 	padding: 0px 0px 0px 0px;
 }
 
-.easy-order-headcount-text {
+.chef-surprise-headcount-text {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -115,12 +121,12 @@
 	margin: 0px 20px 0px 0px;
 }
 
-.easy-oder-headcount-slider {
+.chef-surprise-headcount-slider {
 	width: 160px;
 	height: 30px;
 }
 
-.easy-oder-headcount-slider[type="range"] {
+.chef-surprise-headcount-slider[type="range"] {
 	--track-color: #ccc; /* Change to your desired color */
 	--track-height: 15px; /* Change to your desired height */
 	--track-width: 100px; /* Change to your desired width */
@@ -135,7 +141,7 @@
 }
 
 /* Customize the track */
-.easy-oder-headcount-slider[type="range"]::-webkit-slider-runnable-track {
+.chef-surprise-headcount-slider[type="range"]::-webkit-slider-runnable-track {
 	background-color: var(--track-color);
 	height: var(--track-height);
 	width: var(--track-width);
@@ -143,7 +149,7 @@
 }
 
 /* Customize the thumb (button) */
-.easy-oder-headcount-slider[type="range"]::-webkit-slider-thumb {
+.chef-surprise-headcount-slider[type="range"]::-webkit-slider-thumb {
 	background-color: var(--thumb-color);
 	height: var(--thumb-height);
 	width: var(--thumb-width);
@@ -155,23 +161,27 @@
 }
 
 /* Handle range input when in focus */
-.easy-oder-headcount-slider[type="range"]:focus {
+.chef-surprise-headcount-slider[type="range"]:focus {
 	outline: none; /* Remove the focus outline (adjust as needed) */
 }
 
 /* Handle range input hover state */
-.easy-oder-headcount-slider[type="range"]:hover::-webkit-slider-thumb {
+.chef-surprise-headcount-slider[type="range"]:hover::-webkit-slider-thumb {
 	background-color: #ff0000; /* Change thumb color on hover (adjust as needed) */
 }
 
 .chef-surprise-btn-container {
+	background-color: #f08080;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: auto;
 	height: auto;
-	margin: 10px;
+	border-radius: 10px;
+	margin: 20px 0px 20px 0px;
+	box-shadow: #333 0px 1px 3px 1px;
+	
 }
 .order-btn {
 	background-color: #f08080;
@@ -182,17 +192,17 @@
 	border-bottom-left-radius: 10px;
 	font-size: 16px;
 	font-weight: 700;
+	border:0px solid transparent;
+	border-right:1px solid #333;
 }
 
 .order-btn:hover {
 	color: white;
-	background-color: rebeccapurple;
 	font-weight: 700;
 	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 
 .order-btn:active {
-	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
 }
 .download-btn {
@@ -202,6 +212,8 @@
 	padding: 10px;
 	font-size: 16px;
 	font-weight: 700;
+	border:0px solid transparent;
+	
 }
 .download-btn:hover {
 	color: white;
@@ -210,7 +222,6 @@
 	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 .download-btn:active {
-	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
 }
 .reset-btn {
@@ -222,6 +233,8 @@
 	border-top-right-radius: 10px;
 	font-size: 16px;
 	font-weight: 700;
+	border:0px solid transparent;
+	border-left: 1px solid #333;
 }
 
 .reset-btn:hover {
@@ -232,7 +245,6 @@
 }
 
 .reset-btn:active {
-	background-color: #003580; /* Color change on click */
 	transform: scale(0.95); /* Button scale down when clicked */
 }
 

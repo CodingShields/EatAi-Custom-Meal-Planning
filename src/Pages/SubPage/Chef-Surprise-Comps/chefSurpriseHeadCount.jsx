@@ -13,10 +13,10 @@ const ChefSurpriseHeadCount = () => {
 	return (
 		<div className='chef-surprise-menu-items-container'>
 			<h2 className='chef-surprise-menu-item-text'>HeadCount:</h2>
-			<div className='easy-order-headcount-container'>
-				<h2 className='easy-order-headcount-text '>{headCount}</h2>
+			<div className='chef-surprise-headcount-container'>
+				<h2 className='chef-surprise-headcount-text '>{headCount}</h2>
 				<input
-					className='easy-oder-headcount-slider'
+					className='chef-surprise-headcount-slider'
 					type='range'
 					id='volume'
 					name='volume'
