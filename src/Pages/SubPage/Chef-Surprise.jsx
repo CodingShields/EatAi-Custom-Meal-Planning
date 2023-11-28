@@ -33,43 +33,39 @@ const ChefSurprise = () => {
 	// 	setState({ loading: true, renderMenuSelection: true, renderBotResponseOrder: false, cookingOrderImage: false });
 	// }, []);
 
-	console.log(entree, "entree");
-	console.log(headCount, "headCount");
-	console.log(flavor, "flavor");
-	console.log(dietary, "dietary");
-	
 	const handleOrder = async () => {
 		if (entree === "" || headCount === 0 || flavor === "" || dietary === "") {
 			setState({ error: true, errorMessage: "Please fill out all fields." });
 			return;
-		}else{
-		setState({ loading: true, renderMenuSelection:false, cookingOrderImage: true });
-		const test = `I'd like to order an ${entree} with a title for ${
-			headCount !== 1 ? "people" : "person"
-		}, that has a ${flavor} and it should have a dietary restriction of ${dietary}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal. Have the response start by saying the title of the dish generated, and not like it is a conversation.`;
-		const data = {
-			model: "gpt-3.5-turbo",
-			messages: [{ role: "user", content: test }],
-			temperature: 0.7,
-		};
-		try {
-			const response = await fetch("https://api.openai.com/v1/chat/completions", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${apiKey}`,
-				},
-				body: JSON.stringify(data),
-			});
-			const result = await response.json();
-			if (response.ok) {
-				setChatBotReply(result.choices[0].message.content);
-				setState({ loading: false, renderBotResponseOrder:true, cookingOrder: false });
-			} else {
-				console.error(result);
-			}
-		} catch (error) {
-			console.error(error);
+		} else {
+			setState({ loading: true, renderMenuSelection: false, cookingOrderImage: true });
+			const test = `I'd like to order an ${entree} with a title for ${
+				headCount !== 1 ? "people" : "person"
+			}, that has a ${flavor} and it should have a dietary restriction of ${dietary}. Can you also give me a specific grocery list, cook time, and a detailed summary of how to prepare the meal. Have the response start by saying the title of the dish generated, and not like it is a conversation.`;
+			const data = {
+				model: "gpt-3.5-turbo",
+				messages: [{ role: "user", content: test }],
+				temperature: 0.7,
+			};
+			try {
+				const response = await fetch("https://api.openai.com/v1/chat/completions", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${apiKey}`,
+					},
+					body: JSON.stringify(data),
+				});
+				const result = await response.json();
+				console.log(result, "result");
+				if (response.ok) {
+					setChatBotReply(result.choices[0].message.content);
+					setState({ loading: false, renderBotResponseOrder: true, cookingOrder: false });
+				} else {
+					console.error(result);
+				}
+			} catch (error) {
+				console.error(error);
 			}
 		}
 	};
@@ -121,19 +117,20 @@ const ChefSurprise = () => {
 		}
 	}
 
-	const  resetData = () => {
-		setState({ loading: false, renderMenuSelection: true });
+	const resetData = () => {
+		setState({ loading: false, renderMenuSelection: true, renderBotResponseOrder: false, cookingOrderImage: false });
+		setChatBotReply("");
 		resetForm();
-	}
+	};
 
 	const handleModal = () => {
-		setState({ error: false, errorMessage: "", renderMenuSelection: true  });
-	}
+		setState({ error: false, errorMessage: "", renderMenuSelection: true });
+	};
 
 	return (
 		<div className='chef-surprise-container-main'>
 			<div className='chef-surprise-container'>
-				<img className='chef-surprise-chef-img' src={flippedChef} />
+				<img className='chef-img' src={flippedChef} />
 				<div
 					style={{
 						display: state.error ? "flex" : "none",
@@ -147,18 +144,19 @@ const ChefSurprise = () => {
 				</div>
 
 				<div className='chef-surprise-menu-container'>
-					{state.cookingOrderImage ? <img className='easy-order-cooking-img' src={preparingOrderAnimatedFade} /> : ""}
+					{state.cookingOrderImage ? <img className='cooking-img' src={preparingOrderAnimatedFade} /> : ""}
 					{state.renderBotResponseOrder ? (
 						<div className='bot-response-container-main'>
-							{/* <div className="bot-response-btn-container"> */}
-							<img
-								src={windowCloseBtn}
-								className='error-btn'
-								onClick={() => setState({ renderBotResponseOrder: false })}
-							/>
+							{/* <div className='bot-response-btn-container'> */}
+
 							{/* </div> */}
 							<div className='bot-response-container'>
 								<h2 className='bot-response-text'>{chatBotReply}</h2>
+								<img
+									src={windowCloseBtn}
+									className='close-btn'
+									onClick={() => setState({ renderBotResponseOrder: false, renderMenuSelection: true })}
+								/>
 							</div>
 						</div>
 					) : (
@@ -177,21 +175,20 @@ const ChefSurprise = () => {
 					) : null}
 					<div
 						style={{
-							display: state.renderMenuSelection ? "flex" : "none",	
+							display: state.cookingOrderImage ? "none" : "flex",
 						}}
-						className='easy-order-btn-container'>
-							<button className='order-btn' onClick={handleOrder}>
-								Order
-							</button>
-						<button
-							// disabled={!chatBotReply}
-							className='download-btn' onClick={downloadData}>
-								Download
-							</button>
-							<button className='reset-btn' onClick={resetData}>
-								Start Over
-							</button>
-						</div>
+						className='chef-surprise-btn-container'
+					>
+						<button className='order-btn' onClick={handleOrder}>
+							Order
+						</button>
+						<button disabled={!chatBotReply} className='download-btn' onClick={downloadData}>
+							Download
+						</button>
+						<button className='reset-btn' onClick={resetData}>
+							Start Over
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -6,10 +6,9 @@ html,
 body {
 	background-color: #f9f4ee;
 	font-family: "Inter", sans-serif;
-	height: 100vh;
-	width: 100vw;
+
 	margin: 0;
-	padding: 0;
+	padding: 10;
 }
 
 a {
@@ -31,12 +30,8 @@ body {
 }
 
 .site-wrapper {
-	width: 100vw;
-	height: 100vh;
 	margin: 0px;
-	padding:0px;
-	position: relative;
-	box-sizing: border-box;
+	padding: 0px;
 }
 
 header {
@@ -87,15 +82,12 @@ footer {
 	background-color: #161616;
 	color: #aaaaaa;
 	height: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	text-align: center;
 	font-weight: 500;
 	font-size: 36px;
 	width: 100%;
 	position: fixed;
-	bottom:0px;
-
+	bottom: 0px;
 }
 
 .link-button:hover {
@@ -104,7 +96,8 @@ footer {
 
 main {
 	padding: 20px; /* Add padding to keep content from touching the edges */
-	box-sizing: border-box; /* Include padding in element's total width and height */
+	box-sizing: border-box;
+	max-height: 100%; /* Include padding in element's total width and height */
 	max-width: 100%; /* Ensure content doesn't exceed the width of its container */
 	margin: 0 auto; /* Center the content horizontally */
 }
@@ -133,9 +126,8 @@ main {
 	align-items: center;
 	height: auto;
 	width: auto;
-	margin:0px;
-	padding:0px;
-
+	margin: 0px;
+	padding: 0px;
 }
 
 .login-container {
@@ -146,10 +138,10 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin:0px;
-	padding:40px;
+	margin: 0px;
+	padding: 40px;
 	background-color: antiquewhite;
-	box-shadow:grey 4px 4px 8px 8px;
+	box-shadow: grey 4px 4px 8px 8px;
 }
 
 .login-form {
@@ -437,18 +429,6 @@ main {
 		opacity: 1;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .advanced-order-live-container {
 	display: flex;

@@ -39,7 +39,7 @@ const ChefSurpriseFlavor = () => {
 			</div>
 			<div className='chef-surprise-menu-items-container'>
 				<h2 className='chef-surprise-menu-item-text'>Flavor Details:</h2>
-				<h3 className='easy-order-flavor-details-text'>
+				<h3 className='chef-surprise-flavor-details-text'>
 					{flavorDetails ? flavorDetails : "Flavor Details Will Show Here"}
 				</h3>
 			</div>

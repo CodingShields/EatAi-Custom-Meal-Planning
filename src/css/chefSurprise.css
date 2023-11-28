@@ -2,27 +2,26 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
 	width: auto;
-	height: auto;
+	height: 100%;
 }
 
 .chef-surprise-container {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
-	min-width: 75vw;
-	max-width: auto;
-	height: auto;
+	width: auto;
+	height: 100%;
 	background-color: aquamarine;
-	border-radius: 30px 30px 0px 0px;
-	padding: 20px 50px;
-	box-shadow: #333 0px 5px 10px 1px;
-	margin-top: 20px;
+	border-radius: 30px;
+	padding: 20px;
+	margin: 20px auto;
+	box-shadow: #333 5px 5px 10px 5px;
 }
 
-.chef-surprise-chef-img {
-	height: 660px;
+.chef-img {
+	height: 650px;
+	margin: 0px;
 }
 
 .chef-surprise-menu-container {
@@ -30,8 +29,9 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	height: 100%;
 	width: auto;
-	height: 600px;
+	max-width: 800px;
 	border: 4px solid brown;
 	border-radius: 20px;
 	background-color: antiquewhite;
@@ -53,22 +53,30 @@
 	padding: 0px;
 	margin: 0px;
 }
+.chef-surprise-flavor-details-text {
+	font-size: 14px;
+	width: 300px;
+}
 
 .chef-surprise-menu-items-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: first baseline;
+	text-align: left;
 	padding-left: 10px;
 	padding-right: 10px;
-	height: 200px;
-	width: 400px;
+	margin: auto;
+	height: auto;
+	width: 500px;
 	border-bottom: #333 1px solid;
+	gap: 60px;
 }
 
 .chef-surprise-menu-item-text {
 	font-size: 20px;
 	font-weight: 600;
-	width: 200px;
+	width: 175px;
 	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 
@@ -159,30 +167,30 @@
 	background-color: #ff0000; /* Change thumb color on hover (adjust as needed) */
 }
 
-.easy-order-flavor-details-text {
-	font-size: 17px;
-	font-style: italic;
-	color: black;
-	text-shadow: none;
-	width: 200px;
-	text-align: center;
-}
-.easy-order-btn-container {
+.chef-surprise-btn-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
 	height: 100%;
-	margin: 0px;
-	padding: 0px 0px 0px 0px;
-	white-space: wrap;
+	margin: 10px;
 }
 .order-btn {
-	background-color: lightcoral;
-	flex-grow: 1;
-	
+	background-color: #f08080;
+	height: auto;
+	width: 150px;
+	padding: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	font-size: 16px;
 }
 
 .order-btn:hover {
 	color: white;
 	background-color: rebeccapurple;
+	font-weight: 700;
+	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 
 .order-btn:active {
@@ -191,11 +199,16 @@
 }
 .download-btn {
 	background-color: lightcoral;
-	flex-grow: 1;
+	height: auto;
+	width: 150px;
+	padding: 10px;
+	font-size: 16px;
 }
 .download-btn:hover {
 	color: white;
 	background-color: rebeccapurple;
+	font-weight: 700;
+	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 .download-btn:active {
 	background-color: #003580; /* Color change on click */
@@ -203,12 +216,19 @@
 }
 .reset-btn {
 	background-color: lightcoral;
-	
+	height: auto;
+	width: 150px;
+	padding: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	font-size: 16px;
 }
 
 .reset-btn:hover {
 	color: white;
 	background-color: rebeccapurple;
+	font-weight: 700;
+	text-shadow: #333 0.25px 0.25px 0.25px;
 }
 
 .reset-btn:active {
@@ -216,35 +236,42 @@
 	transform: scale(0.95); /* Button scale down when clicked */
 }
 
-.easy-order-cooking-img {
+.cooking-img {
 	width: 380px;
 	height: auto;
 }
 
 .bot-response-container-main {
 	display: flex;
-	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
-	border: 8px solid brown;
 	border-radius: 10px;
-	height: 400px;
-	width: 470px;
-	z-index: 103;
+	height: 370px;
+	width: 450px;
 	overflow-y: auto;
-	overflow-x: auto;
 	background-color: white;
 	margin-top: 20px;
+	border: #333 1px solid;
 }
+
 .bot-response-container {
 	display: flex;
+	flex-direction: row;
 	width: auto;
 	height: auto;
-	max-height: 400px;
-	max-width: 470px;
+	padding: 20px;
 	overflow-y: auto;
 	overflow-x: auto;
 	margin-top: 20px;
+}
+
+.close-btn {
+	height: 40px;
+	position: relative;
+}
+
+.close-btn:active {
+	translate: scale(1);
 }
 
 .bot-response-text {
@@ -253,18 +280,5 @@
 	white-space: pre-wrap;
 	padding-left: 30px;
 	padding-right: 30px;
-}
-
-.window-close-btn {
-	height: 50px;
-	position: absolute;
-	right: 120px;
-	top: 380px;
-}
-.window-close-btn:hover {
-	height: 55px;
-}
-
-.window-close-btn:active {
-	translate: scale(0.95);
+	text-shadow: #333 0.25px 0.25px 0.25px;
 }
