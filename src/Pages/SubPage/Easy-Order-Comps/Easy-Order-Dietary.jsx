@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
 import easyOrderDietaryOptionsArray from "../../../assets/dataArrays/Easy-Order-Dietary-Options-Array";
@@ -7,10 +6,10 @@ import "../../../css/easyOrder.css";
 
 const EasyOrderDietary = () => {
 	const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([]);
-	const dietary = useEasyOrderStore((state) => state.dietary);
 	const { setDietary } = useEasyOrderStoreActions();
 	const maxCheckedOptions = 3;
 	const isNoDietaryRestrictionsSelected = checkedDietaryOptions.includes("No Dietary Restrictions");
+	
 	useEffect(() => {
 		setDietary(checkedDietaryOptions);
 	}, [checkedDietaryOptions]);
@@ -34,12 +33,13 @@ const EasyOrderDietary = () => {
 			}
 		}
 	};
+
 	return (
 		<>
 			<div className='easy-order-menu-title-container'>
-				<h2 className='easy-order-menu-text'>Please Choose Up to 3 Dietary Options</h2>
+				<h2 className='easy-order-menu-text'>Choose Up to 3 Dietary Options</h2>
 			</div>
-			<div className='easy-order-list-big'>
+			<div className='easy-order-list-container'>
 				<ul className='easy-order-list-two-col'>
 					{easyOrderDietaryOptionsArray.map((item) => (
 						<li key={item.id}>

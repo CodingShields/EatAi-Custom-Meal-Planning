@@ -28,7 +28,7 @@ const SignIn = () => {
   return (
     <div className="login-container-main">
     <div className="login-container">
-      <h1>Welcome Back!</h1>
+      <h1>Welcome!</h1>
       <img className="login-chef-img" src={LoginChef} alt="Chef" />
 
       <form onSubmit={handleSubmit} className="login-form">

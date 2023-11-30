@@ -2,7 +2,8 @@ import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import "../../../css/easyOrder.css";
 
-const EasyOrderStartOverButton = () => {
+const resetBtn = () => {
+	const step = useRenderStepStore((state) => state.step);
 	const resetStep = useRenderStepStore((state) => state.resetStep);
 	const { resetForm } = useEasyOrderStoreActions();
 
@@ -12,9 +13,11 @@ const EasyOrderStartOverButton = () => {
 	};
 
 	return (
-		<button className='easy-order-reset-btn' onClick={handleOnClick}>
+		<button
+			disabled={step === 0 ? true : false}
+			className='easy-order-reset-btn' onClick={handleOnClick}>
 			Reset
 		</button>
 	);
 };
-export default EasyOrderStartOverButton;
+export default resetBtn

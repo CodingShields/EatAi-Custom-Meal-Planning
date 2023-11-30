@@ -4,12 +4,10 @@
 
 html,
 body {
-	background-color: #f9f4ee;
-	font-family: "Inter", sans-serif;
 	height: 100%;
-	width: 100%;
-	margin: auto;
-	padding: auto;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 a {
@@ -68,7 +66,7 @@ header a {
 }
 
 header a:hover {
-	color: #161616;
+	color: white;
 	text-decoration: underline;
 	font-size: 36px;
 }
@@ -105,13 +103,11 @@ footer {
 }
 
 main {
-	padding: 40px; /* Add padding to keep content from touching the edges */
-	box-sizing: border-box;
-	height: auto;
-	/* Include padding in element's total width and height */
-	width: auto; /* Ensure content doesn't exceed the width of its container */
-	margin: 0px auto 0px 0px; /* Center the content horizontally */
+	padding: 40px;
+	height: 100%;
+	width: 100%;
 	flex-grow: 1;
+	margin: 0px;
 }
 
 .dashboard-nav {
@@ -127,7 +123,7 @@ main {
 }
 
 .dashboard-nav a:hover {
-	color:coral;
+	color: white;
 	text-decoration: underline;
 	font-weight: 600;
 }
@@ -137,10 +133,10 @@ main {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	height: auto;
-	width: auto;
-	margin: 0px;
-	padding: 0px;
+	height: 100%;
+	width: 100%;
+	margin: auto;
+	padding: auto;
 }
 
 .login-container {

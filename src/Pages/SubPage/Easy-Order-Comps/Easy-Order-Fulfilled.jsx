@@ -4,98 +4,90 @@ import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import forgetToSaveAnimatedBounce from "../../.././assets/images/forgetToSaveAnimatedBounce.svg";
 import preparingOrderAnimatedFade from "../../.././assets/images/preparingOrderAnimatedFade.svg";
 import savedAnimatedFade from "../../.././assets/images/savedAnimatedFade.svg";
-import { db} from "../../../Firebase/fireBaseConfig";
+import windowCloseBtn from "../../../assets/images/windowCloseBtn.svg";
+import { db } from "../../../Firebase/fireBaseConfig";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { UserAuth } from "../../../Context/AuthContext";
 import { nanoid } from "nanoid";
 import "../../.././css/EasyOrder.css";
+import "../../.././css/errorModal.css";
 
 const EasyOrderFulfilled = () => {
-	const [botResponse, setBotResponse] = useState({
-		id: "",
-		title: "",
-		summary: "",
-		menu: "",
-		groceryList: "",
-		data: "",
-	});
-	const [loading, setLoading] = useState({
-		cooking: false,
-		saveBtn: false,
-        renderResponse: false,
-        renderSaved: false,
+	const apiKey = import.meta.env.VITE_API_KEY;
+	const [botResponse, setBotResponse] = useState("");
+	const [state, setState] = useState({
+		error: false,
+		errorMessage: "",
+		cookingOrder: false,
+		orderResponse: false,
+		saveBtnVisible: false,
+		successOrderSave: false,
+		viewOrderModal: false,
 	});
 
 	const userStateData = useEasyOrderStore((state) => state);
+	const flavor = userStateData.Flavor;
+	const culture = userStateData.Culture;
+	const event = userStateData.Event;
+	const headCount = userStateData.HeadCount;
+	const courses = userStateData.Courses;
+	const mealBalance = userStateData.Balance;
+	const dietary = userStateData.Dietary;
+	const measure = userStateData.Measure;
 
-	const promptData = {
-		flavor: userStateData.Flavor,
-		culture: userStateData.Culture,
-		event: userStateData.Event,
-		headCount: userStateData.HeadCount,
-		courses: userStateData.Courses,
-		mealBalance: userStateData.Balance,
-		dietary: userStateData.Dietary,
-		measure: userStateData.Measure,
-	};
 	const user = UserAuth();
 
 	const { resetForm } = useEasyOrderStoreActions((actions) => actions);
 
+	const newPrompt = `Design a gourmet menu for a special event titled '[Menu Title]' with the following details:
+
+							Flavor preference: ${flavor}
+							Type of event: ${event}
+							Cultural preferences to consider: ${culture}
+							Number of guests: ${headCount}
+							Courses to include: ${courses}
+							Desired balance of protein, carbs, and fats: ${mealBalance}
+							Dietary preferences: ${dietary}
+							Create a menu title and provide a brief summary of the meal. List the groceries needed based on the headcount, and explain how to prepare each course, including prep time, prep steps that include measurements for all ingredients in ${measure}, also cooking temps, cooking times, and serving suggestions.
+
+							Menu Title: [Title]
+							Summary: [Brief summary of the meal]
+							Grocery List for [Number of Guests] people]:
+
+							[Grocery item 1 (quantity)]
+							[Grocery item 2 (quantity)]
+							...repeat for each grocery item
+							[Detailed grocery list and quantities for each item]
+							Course 1: [Course 1 title]
+
+							Prep Time: [Prep time]
+							Prep Steps: [List of prep steps]
+							Cooking Temperature: [Cooking temp]
+							Cooking Time: [Cooking time]
+							Serving Suggestions: [Serving suggestions]
+							Course 2: [Course 2 title]
+
+							Prep Time: [Prep time]
+							Prep Steps: [List of prep steps]
+							Cooking Temperature: [Cooking temp]
+							Cooking Time: [Cooking time]
+							Serving Suggestions: [Serving suggestions]
+							[Repeat for each course]`;
+
 	useEffect(() => {
-		setLoading({ cooking: true, saveBtn: false, renderResponse: false });
-		const apiKey = import.meta.env.VITE_API_KEY;
-		const personaPrompt = "I want you to think like a 5 star chef and fulfill the following order and user requests.";
-		const titlePrompt = `Create a 'Title:" of a menu based of the user input ${promptData.flavor} flavor.`;
-		const summaryPrompt = `Create a "Summary:" that should be a short description of the menu.`;
-		const eventPrompt = `This menu is for a ${promptData.event}.`;
-		const culturePrompt = `When creating the menu, it should reflect and respect ${promptData.culture} culture.`;
-		const coursesPrompt = `The menu should include a ${promptData.courses}.}`;
-		const mealBalancePrompt = `The menu should have a ${promptData.balance} balance of food.`;
-		const dietaryPrompt = `The menu should have a dietary preference of ${promptData.dietary}.`;
-		const headcountPrompt = `Create a "Grocery List:" Needs to be detailed in how much food and ingredients based on the menu to feed ${promptData.headCount} people attending.`;
-		const instructionsPrompt = `Create "Menu Guide" should list each course with step by step instructions on cook temperatures, time and list all food and ingredient measurements in ${promptData.measure}.`;
-		const endingPrompt = `Create a "Ending:" that states the user should check with all guests about food allergies and dietary restrictions.`;
-		const promptsToInclude = [];
-		console.log(apiKey);
-		if (culturePrompt !== "none") {
-		} else {
-			promptsToInclude.push(culturePrompt);
-		}
-
-		if (coursesPrompt) {
-			promptsToInclude.push(coursesPrompt);
-		}
-
-		if (eventPrompt !== "none") {
-		} else {
-			promptsToInclude.push(eventPrompt);
-		}
-
-		if (mealBalancePrompt !== "none") {
-		} else {
-			promptsToInclude.push(mealBalancePrompt);
-		}
-
-		if (dietaryPrompt !== "none") {
-		} else {
-			promptsToInclude.push(dietaryPrompt);
-		}
-		if (headcountPrompt) {
-			promptsToInclude.push(headcountPrompt);
-		}
-
+		setState({
+			cookingOrder: true,
+			error: false,
+			errorMessage: "",
+			orderResponse: false,
+			saveBtnVisible: false,
+			successOrderSave: false,
+			viewOrderModal: false,
+		});
 		const fetchData = async () => {
 			const data = {
 				model: "gpt-3.5-turbo",
-				messages: [
-					{ role: "system", content: personaPrompt },
-					{ role: "user", content: titlePrompt },
-					{ role: "user", content: summaryPrompt },
-					{ role: "user", content: promptsToInclude.join(" ") },
-					{ role: "user", content: instructionsPrompt },
-					{ role: "user", content: endingPrompt },
-				],
+				messages: [{ role: "system", content: newPrompt }],
 				temperature: 0.7,
 			};
 
@@ -109,33 +101,39 @@ const EasyOrderFulfilled = () => {
 					body: JSON.stringify(data),
 				});
 				const result = await response.json();
-
+				console.log(result);
 				if (response.ok) {
-					const messageContent = result.choices[0].message.content;
-					console.log("messageContent", messageContent);
-					// Use regular expressions to extract information
-					const titleMatch = messageContent.match(/Title:(.*?)Summary:/s);
-					const summaryMatch = messageContent.match(/Summary:(.*?)Grocery List:/s);
-					const groceryListMatch = messageContent.match(/Grocery List:(.*?)Menu Guide:/s);
-					const menuMatch = messageContent.match(/Menu Guide:(.*?)Ending:/s);
-
-					// Extract the matched content and trim whitespace
-					const titleResponse = titleMatch ? titleMatch[1].trim() : "";
-					const summaryResponse = summaryMatch ? summaryMatch[1].trim() : "";
-					const menuResponse = menuMatch ? menuMatch[1].trim() : "";
-					const groceryListResponse = groceryListMatch ? groceryListMatch[1].trim() : "";
-					// console.log(result.choices[0].message.content);
-					setLoading({ cooking: false, saveBtn: true, renderResponse: true });
-					setBotResponse((prevResponse) => ({
-						...prevResponse,
-						title: titleResponse,
-						summary: summaryResponse,
-						menu: menuResponse,
-						groceryList: groceryListResponse,
-						score: 0,
-						data: result.choices[0].message.content,
-					}));
-					console.log(botResponse);
+					const linesArray = result.choices[0].message.content
+					console.log(linesArray);
+					const titleSplit = linesArray.split("\n\n")
+					const title = titleSplit[0]
+					const summary = titleSplit[1]
+					const menu = titleSplit[2]
+					const groceryList = titleSplit[3]
+					const appetizer = titleSplit[4]
+					const salad = titleSplit[5]
+					const soup = titleSplit[6]
+					const mainCourse = titleSplit[7]
+					const sideDishes = titleSplit[8]
+					const dessert = titleSplit[9]
+					const beverages = titleSplit[10]
+		
+					setBotResponse({
+						id: nanoid(),
+						date: new Date().toLocaleString(),
+						title: title,
+						summary: summary,
+						menu: menu,
+						groceryList: groceryList,
+						appetizer: appetizer,
+						salad: salad,
+						soup: soup,
+						mainCourse: mainCourse,
+						sideDishes: sideDishes,
+						dessert: dessert,
+						beverages: beverages,
+					});
+					setState({ cookingOrder: false, saveBtnVisible: true, orderResponse: true });
 				} else {
 					console.error(result);
 				}
@@ -145,16 +143,11 @@ const EasyOrderFulfilled = () => {
 		};
 
 		fetchData();
-	}, []);
-
-	console.log(botResponse);
+	}, []);;
 	const handleSave = async () => {
 		try {
-			// Create a reference to the user's document
 			const userDocRef = doc(db, "users", user.user.uid);
-
 			const newIdValue = nanoid();
-
 			const easyOrderItem = {
 				id: newIdValue,
 				date: new Date().toLocaleString(),
@@ -165,45 +158,55 @@ const EasyOrderFulfilled = () => {
 				score: 0,
 				data: botResponse.data,
 			};
-
 			await updateDoc(userDocRef, {
 				"pantry.easyOrder": arrayUnion(easyOrderItem),
-            });
-            
+			});
 			resetForm();
-			setLoading({ saveBtn: false, renderSaved: true });
+			setState({ saveBtn: false, renderSaved: true, successOrderSave: true });
 			console.log("Document successfully updated!");
 		} catch (error) {
 			console.error("Error updating document:", error);
 		}
 	};
 
-	// const formatResponse = () => {
-	//     const displayData = botResponse.data.replace(/(?:\r\n|\r|\n)/g, '<br>');
-	//     return displayData;
-	// }
-
 	return (
 		<>
 			<h1 className='easy-order-bot-title'></h1>
-			<img src={loading.renderResponse ? forgetToSaveAnimatedBounce : null} />
-			{loading.renderSaved ? <img src={savedAnimatedFade} /> : null}
-			{loading.cooking ? <img src={preparingOrderAnimatedFade} className='cooking-image' /> : null}
-			{loading.saveBtn ? (
-				<button className='easy-order-btn' onClick={handleSave}>
-					Save To Pantry
-				</button>
-			) : null}
-			<div style={{ display: loading.renderResponse ? "flex" : "none" }} className='easy-order-bot-response-container'>
-				<h4 className='easy-order-bot-response-title'>Title:</h4>
-				<h3 className='easy-order-bot-response-data'>{botResponse.title}</h3>
-				<h4 className='easy-order-bot-response-title'>Summary:</h4>
-				<p className='easy-order-bot-response-data'>{botResponse.summary}</p>
-				<h4 className='easy-order-bot-response-title'>Menu Guide:</h4>
-				<p className='easy-order-bot-response-data'>{botResponse.menu}</p>
-				<h4 className='easy-order-bot-response-title'>Grocery List:</h4>
-				<p className='easy-order-bot-response-data'>{botResponse.groceryList}</p>
+			<img src={state.orderResponse ? forgetToSaveAnimatedBounce : ""} />
+			{state.successOrderSave ? <img src={savedAnimatedFade} /> : ""}
+			{state.cookingOrder ? <img src={preparingOrderAnimatedFade} className='cooking-image' /> : ""}
+			<div className='easy-order-btn-container'>
+				{state.saveBtnVisible ? (
+					<button className='easy-order-btn' onClick={handleSave}>
+						Save To Pantry
+					</button>
+				) : null}
+				{state.orderResponse ? (
+					<button onClick={() => setState({ ...state, viewOrderModal: true })}> View Menu Order</button>
+				) : (
+					""
+				)}
 			</div>
+			{state.viewOrderModal ? (
+				<div className='error-container'>
+					<div className='error-content'>
+						<img
+							src={windowCloseBtn}
+							onClick={() => setState({ ...state, viewOrderModal: false })}
+							className='error-btn'
+						/>
+						<div className='easy-order-bot-response-container'>
+							<p className='easy-order-bot-response-data'>{botResponse.title}</p>
+							<p className='easy-order-bot-response-data'>{botResponse.summary}</p>
+							<p className='easy-order-bot-response-data'>{botResponse.menu}</p>
+							<p className='easy-order-bot-response-data'>{botResponse.groceryList}</p>
+							<p className='easy-order-bot-response-data'>{botResponse.data}</p>
+						</div>
+					</div>
+				</div>
+			) : (
+				""
+			)}
 		</>
 	);
 };

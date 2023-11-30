@@ -10,10 +10,10 @@
 	flex-direction: row;
 	align-items: center;
 	width: 100%;
-	background-color: aquamarine;
+	/* background-color: aquamarine; */
 	border-radius: 20px;
 	padding: 10px;
-	box-shadow: #333 5px 5px 10px 5px;
+	/* box-shadow: #333 5px 5px 10px 5px; */
 	margin: 20px;
 	flex-grow: 1;
 }
@@ -26,6 +26,16 @@
 	height: 600px;
 
 	margin: auto;
+}
+.easy-order-list-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: auto;
+	margin: 0px;
+	padding: 0px;
 }
 
 .easy-order-btn-container {
@@ -160,6 +170,10 @@
 	width: auto;
 }
 .easy-order-menu-title-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 	width: 100%;
 	height: auto;
@@ -360,21 +374,7 @@ volume {
 	font-weight: 700;
 }
 
-.easy-order-confirm-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 400px;
-}
 
-
-.easy-order-confirm-order-text {
-	text-align: center;
-	font-size: 24px;
-	font-weight: 600;
-	margin-top: 60px;
-}
 /* Change the color and size of the range input */
 input[type="range"] {
 	/* Set the track color and size */
@@ -448,6 +448,7 @@ input[type="checkbox"] {
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
+	width: 900px;
 	height: 300px;
 	overflow: auto;
 	padding: 20px 20px 20px 20px;
@@ -475,5 +476,20 @@ input[type="checkbox"] {
 	text-decoration: underline;
 }
 
+.easy-order-confirm-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 400px;
+}
+
+
+.easy-order-confirm-order-text {
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+	margin-top: 60px;
+}
 
 

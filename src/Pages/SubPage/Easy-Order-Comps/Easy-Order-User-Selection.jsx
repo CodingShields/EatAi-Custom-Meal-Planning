@@ -20,6 +20,7 @@ const EasyOrderUserSelection = () => {
 		error: false,
 		errorMessage: "",
 		confirmOrder: false,
+		renderUserSelections: true,
 	});
 
 	const formatCoursesOptions = () => {
@@ -37,25 +38,15 @@ const EasyOrderUserSelection = () => {
 		}
 	};
 	const handleCompleteOrder = () => {
-		setState({ ...state, confirmOrder: true });
+		setState({ ...state, confirmOrder: true, renderUserSelections: false });
 	};
 	return (
-		<div className='easy-order-user-selection-container'>
+		<div
+			style={{
+				display: state.renderUserSelections ? "flex" : "none",
+			}}
+			className='easy-order-user-selection-container'>
 			<h1 className='easy-order-selection-title'>Current Selections</h1>
-			{state.error ? (
-				<div className='error-container'>
-					<div className='error-content'>
-						<p className='error-message'>{state.errorMessage}</p>
-						<img
-							className='error-btn'
-							src={windowCloseBtn}
-							onClick={() => setState({ ...state, error: false, errorMessage: "" })}
-						/>
-					</div>
-				</div>
-			) : (
-				""
-			)}
 			<div className='easy-order-user-selection-container-main'>
 				<div className='easy-order-list-single-col-left '>
 					<p className='user-input-text-click' onClick={() => useRenderStepStore.setState({ step: 1 })}>
@@ -94,9 +85,28 @@ const EasyOrderUserSelection = () => {
 					<p className='user-input-text'>{measure}</p>
 				</div>
 			</div>
-			{!state.confirmOrder ? <button className='easy-order-fulfill-order-button' onClick={handleCompleteOrder}>
-				Complete Order
-			</button>: ""}
+			{/* Error Modal */}
+			{!state.confirmOrder ? (
+				<button className='easy-order-fulfill-order-button' onClick={handleCompleteOrder}>
+					Complete Order
+				</button>
+			) : (
+				""
+			)}
+			{state.error ? (
+				<div className='error-container'>
+					<div className='error-content'>
+						<p className='error-message'>{state.errorMessage}</p>
+						<img
+							className='error-btn'
+							src={windowCloseBtn}
+							onClick={() => setState({ ...state, error: false, errorMessage: "" })}
+						/>
+					</div>
+				</div>
+			) : (
+				""
+			)}
 		</div>
 	);
 };

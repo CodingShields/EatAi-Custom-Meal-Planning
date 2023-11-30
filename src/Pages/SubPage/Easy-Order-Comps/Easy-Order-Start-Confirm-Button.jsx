@@ -23,8 +23,18 @@ export const EasyOrderStartConfirmButton = () => {
 		disableConfirm: false,
 	});
 
+	const initializeState = () => {
+		setState({
+			error: false,
+			errorMessage: "",
+			selectedOption: false,
+			disableConfirm: false,
+		});
+	};
+
 	useEffect(() => {
-		if (event !== "" || event !== undefined) {
+		initializeState();
+		if (event !== "") {
 			setState({ selectedOption: true });
 		}
 		if (courses !== "" || courses !== undefined) {
@@ -53,40 +63,33 @@ export const EasyOrderStartConfirmButton = () => {
 		}
 	}, [event, culture, headCount, courses, dietary, flavor, balance, measure, step]);
 
-	console.log(state.selectedOption, "selectedOption");
-	console.log(culture, "culture");
 	const handleClick = () => {
 		if (step === 0) {
 			return increaseStep();
+		} else if (event === "" || event === undefined) {
+			return setState({ error: true, errorMessage: "Please select an Event or None" });
+		} else if ((culture === "" && step === 2) || (culture === undefined && step === 2)) {
+			return setState({ error: true, errorMessage: "Please select a Cultural Option or None" });
+		} else if ((headCount === "" && step === 3) || (headCount === undefined && step === 3)) {
+			return setState({ error: true, errorMessage: "Please select a Head Count" });
+		} else if ((courses === "" && step === 4) || (courses === undefined && step === 4)) {
+			return setState({ error: true, errorMessage: "Please select 1 or more Courses" });
+		} else if ((dietary.length === 0 && step === 5) || (dietary === undefined && step === 5)) {
+			return setState({ error: true, errorMessage: "Please select a Dietary Preference" });
+		} else if ((flavor === "" && step === 6) || (flavor === undefined && step === 6)) {
+			return setState({ error: true, errorMessage: "Please select a Flavor" });
+		} else if ((balance === "" && step === 7) || (balance === undefined && step === 7)) {
+			return setState({ error: true, errorMessage: "Please select how to Balance the Meal" });
+		} else if ((measure === "" && step === 8) || (measure === undefined && step === 8)) {
+			return setState({ error: true, errorMessage: "Please select how you would like the directions of your food Measurements to be" });
 		} else if (state.selectedOption) {
-			increaseStep();
-			setState({ error: false, errorMessage: "", selectedOption: false });
-		} else {
-			if (event === "" || (event === undefined && step === 1)) {
-				setState({ error: true, errorMessage: "Please select an event" });
-			} else if ((culture === "" && step === 2) || (culture === undefined && step === 2)) {
-				setState({ error: true, errorMessage: "Please select a cultural option" });
-			} else if (headCount === 0 ||headCount === undefined ) {
-				setState({ error: true, errorMessage: "Please select a Head Count" });
-			} else if ((courses === "" && step === 4) || (courses === undefined && step === 4)) {
-				setState({ error: true, errorMessage: "Please select 1 or more Courses" });
-			} else if ((dietary === "" && step === 5) || (dietary === undefined && step === 5)) {
-				setState({ error: true, errorMessage: "Please select a Dietary Preference" });
-			} else if ((flavor === "" && step === 6) || (flavor === undefined && step === 6)) {
-				setState({ error: true, errorMessage: "Please select a Flavor" });
-			} else if ((balance === "" && step === 7) || (balance === undefined && step === 7)) {
-				setState({ error: true, errorMessage: "Please select how to Balance the Meal" });
-			} else if ((measure === "" && step === 8) || (measure === undefined && step === 8)) {
-				setState({ error: true, errorMessage: "Please select a measure" });
-			}
+			return increaseStep(), setState({ error: false, errorMessage: "", selectedOption: false });
 		}
 	};
 
 	return (
 		<>
-			<button
-				disabled={state.disableConfirm}
-				className='easy-order-start-confirm-btn' onClick={handleClick}>
+			<button disabled={state.disableConfirm || step === 10 ? true : false} className='easy-order-start-confirm-btn' onClick={handleClick}>
 				{step === 0 ? "Start" : "Confirm"}
 			</button>
 			{state.error ? (

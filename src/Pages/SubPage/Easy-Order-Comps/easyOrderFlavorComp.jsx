@@ -31,7 +31,7 @@ const HowToFlavor = () => {
 					);
 				})}
 			</select>
-			<div className='easy-order-menu-title-container'>
+			<div>
 				<h2 className='easy-order-menu-text'> Flavor Description </h2>
 				<p className='easy-order-menu-text'>{flavorDetails}</p>
 			</div>
