@@ -9,22 +9,27 @@ export default function Header() {
     }
     
     return (
-        <header>
-            <Link  to="/" className="site-logo">EatAi</Link>
-            <nav>
-                <NavLink
-                    to="/About"
-                    style={({ isActive }) => isActive ? activeStyles : null}
-                >
-                    About
-                </NavLink>
-                <NavLink
-                    to="/Support"
-                    style={({ isActive }) => isActive ? activeStyles : null}
-                >
-                    Support
-                </NavLink>
-            </nav>
-        </header>
-    )
+
+				<header class='flex justify-between items-center text-black w-fit mx-auto mt-4'>
+					<Link to='/' className='text-7xl'>
+						EatAi
+					</Link>
+					<nav>
+							<NavLink
+								className='items-center justify-end object-right mr-8 text-3xl ml-72'
+								to='/About'
+								style={({ isActive }) => (isActive ? activeStyles : null)}
+							>
+								About
+							</NavLink>
+							<NavLink
+								className='justify-end object-right text-3xl'
+								to='/Support'
+								style={({ isActive }) => (isActive ? activeStyles : null)}
+							>
+								Support
+							</NavLink>
+					</nav>
+				</header>
+		);
 }

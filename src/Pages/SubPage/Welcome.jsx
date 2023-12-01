@@ -9,11 +9,10 @@ import { db } from "../../Firebase/fireBaseConfig.js";
 //images
 import flippedchef from "../../assets/images/flippedchef.png"
 import LiveTypingWelcome from "./Live-Typing-Pages/Live-Typing-Welcome";
-import spinnderLoad from "../../assets/images/spinnerLoad.svg"
+import spinnerLoad from "../../assets/images/spinnerLoad.svg"
 import SearchingForProfileFadeIn from "../../assets/images/SearchingForProfileFadeIn.svg"
 import SearchingForProfileFadeOut from "../../assets/images/SearchingForProfileFadeOut.svg"
 import searching from "../../assets/images/searching.svg"
-import "../.././css/welcomePage.css"
 
 export default function Welcome() {
   const user = UserAuth();
@@ -63,34 +62,27 @@ export default function Welcome() {
 
 
   return (
-    <div className="welcome-page-container-main">
-      <div className='welcome-page-container'>
-        <div
-          style={{
-            display: state.modal ? "flex" : "none",  
-          }}
-          className='modal-container'>
-          <div className='modal-content'>
+		<div className='flex flex-col content-center justify-center w-full h-full'>
+			<div className="border-border">
+				<img className='w-auto h-auto m-32 mr-4 grow' src={flippedchef} alt='Chef' />
+			</div>
 
-          </div>
-        </div>
-			<img className='welcome-page-chef-img' src={flippedchef} alt='Chef' />
-			<div className='welcome-page-text-container'>
-          <h1
-          className="welcome-page-text"
-          >Welcome {displayName}!
-          still need to set modal
-          </h1>
-        <p className='state-message'>{state.message}</p>
+			<div className='pl-20 pr-20 m-0 bg-orange-100 border-4 shadow-lg w-fit h-fit rounded-xl border-amber-800 shadow-black'>
+				<h1 className='mb-4 text-4xl font-bold text-center'>Welcome {displayName}! still need to set modal</h1>
+				<p className='state-message'>{state.message}</p>
 				{state.error ? (
 					<div className='error-modal'>
 						<p className='error-content'>{state.errorMessage}</p>
 					</div>
 				) : null}
-				{state.loading ? <img className='searchingForProfile' src={state.loading ? SearchingForProfileFadeIn : SearchingForProfileFadeOut} /> : null}
-          {state.liveText ? <LiveTypingWelcome /> : null }
-        </div>
-      </div>
-    </div>
+				{state.loading ? (
+					<img
+						className='searchingForProfile'
+						src={state.loading ? SearchingForProfileFadeIn : SearchingForProfileFadeOut}
+					/>
+				) : null}
+				{/* {state.liveText ? <LiveTypingWelcome /> : null} */}
+			</div>
+		</div>
 	);
 }
