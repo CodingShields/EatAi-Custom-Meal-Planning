@@ -9,8 +9,8 @@ export default function HomeLayout() {
 
 	return (
 		<>
-			<Header/>
-			<main>
+			<Header />
+			<main className='flex items-center justify-center flex-grow'>
 				<Outlet />
 			</main>
 			<Footer />

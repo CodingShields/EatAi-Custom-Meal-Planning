@@ -4,7 +4,7 @@ export default function Footer() {
     
     return (
         <footer
-        className="flex w-full justify-center content-center bg-black text-white h-10 bottom-0 fixed text-lg "
+        className="fixed bottom-0 flex content-center justify-center w-full h-16 text-lg text-white bg-black"
         >&#169; 2023 EatAi</footer>
     )
 }

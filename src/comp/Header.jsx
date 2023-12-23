@@ -10,13 +10,13 @@ export default function Header() {
     
     return (
 
-				<header class='flex justify-between items-center text-black w-fit mx-auto mt-4'>
+				<header class='flex flex-row justify-between items-center text-black w-fit mx-auto '>
 					<Link to='/' className='text-7xl'>
 						EatAi
 					</Link>
 					<nav>
 							<NavLink
-								className='items-center justify-end object-right mr-8 text-3xl ml-72'
+								className='items-center justify-end mr-8 text-3xl ml-72'
 								to='/About'
 								style={({ isActive }) => (isActive ? activeStyles : null)}
 							>

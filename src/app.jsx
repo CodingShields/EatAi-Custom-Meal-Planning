@@ -28,33 +28,35 @@ import "./index.css";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<AuthContextProvider>
-				<Routes>
-					<Route path='/' element={<HomeLayout />}>
-						<Route index element={<SignIn />} />
-						<Route path='About' element={<About />} />
-						<Route path='Support' element={<Support />} />
-						<Route path='SignUp' element={<SignUp />} />
-						<Route element={<ProtectedRoute />}>
-							<Route path='MembersArea' element={<DashBoardLayout />}>
-								<Route path='Welcome' element={<Welcome />} />
-								<Route path='ChefSurprise' element={<ChefSurprise />} />
-								<Route path='EasyOrder' element={<EasyOrder />} />
-								<Route path='AdvancedOrder' element={<AdvancedOrder />} />
-								<Route path='Pantry' element={<Pantry />} />
-								<Route path='AccountHome' element={<AccountNavBar />}>
-									<Route index element={<AccountHome />} />
-									<Route path='Profile' element={<Profile />} />
-									<Route path='EasyOrderPantry' element={<EasyOrderPantry />} />
-									<Route path='AdvancedOrderPantry' element={<AdvancedOrderPantry />} />
+		<div class='flex h-screen flex-col'>
+			<BrowserRouter>
+				<AuthContextProvider>
+					<Routes>
+						<Route path='/' element={<HomeLayout />}>
+							<Route index element={<SignIn />} />
+							<Route path='About' element={<About />} />
+							<Route path='Support' element={<Support />} />
+							<Route path='SignUp' element={<SignUp />} />
+							<Route element={<ProtectedRoute />}>
+								<Route path='MembersArea' element={<DashBoardLayout />}>
+									<Route path='Welcome' element={<Welcome />} />
+									<Route path='ChefSurprise' element={<ChefSurprise />} />
+									<Route path='EasyOrder' element={<EasyOrder />} />
+									<Route path='AdvancedOrder' element={<AdvancedOrder />} />
+									<Route path='Pantry' element={<Pantry />} />
+									<Route path='AccountHome' element={<AccountNavBar />}>
+										<Route index element={<AccountHome />} />
+										<Route path='Profile' element={<Profile />} />
+										<Route path='EasyOrderPantry' element={<EasyOrderPantry />} />
+										<Route path='AdvancedOrderPantry' element={<AdvancedOrderPantry />} />
+									</Route>
 								</Route>
 							</Route>
 						</Route>
-					</Route>
-				</Routes>
-			</AuthContextProvider>
-		</BrowserRouter>
+					</Routes>
+				</AuthContextProvider>
+			</BrowserRouter>
+		</div>
 	);
 }
 

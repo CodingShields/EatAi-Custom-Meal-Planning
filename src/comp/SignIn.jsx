@@ -34,53 +34,56 @@ const SignIn = () => {
 
 	useEffect(() => {
 		setState({ error: false, errorMessage: "" });
-	}
-		, [email, password]);
-	
+	}, [email, password]);
 
 	return (
-		<div className='flex w-auto h-full p-12 m-auto'>
-			{state.error ? <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50">
-				<div 
-					className="fixed flex flex-row bg-orange-100 border-4 rounded-lg shadow-lg re t-lg w-fit h-fit border-amber-800 shadow-black">
-					<p className="w-auto h-auto p-4 text-center ">{state.errorMessage}</p>
+		<div className='m-auto basis-auto'>
+			<div className=''>
+				{state.error ? (
+					<div className='fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50'>
+						<div className='fixed flex flex-row bg-orange-100 border-4 rounded-lg shadow-lg re t-lg w-fit h-fit border-amber-800 shadow-black'>
+							<p className='w-auto h-auto p-4 text-center '>{state.errorMessage}</p>
+						</div>
 					</div>
-				</div> : ""}
-			<div className='p-4 pl-20 pr-20 m-auto bg-orange-100 border-4 shadow-lg w-fit h-fit rounded-xl border-amber-800 shadow-black'>
-				<h1 className='mb-4 text-4xl font-bold text-center'>Welcome!</h1>
-				<img className='w-auto m-auto mb-4 h-72' src={LoginChef} alt='Login Chef' />
-				<form onSubmit={handleSubmit} className='flex flex-col content-start justify-start'>
-					<input
-						className='w-auto h-auto p-2 m-2 text-gray-700 placeholder-gray-600 border rounded-lg shadow-md shadow-black '
-						name='email'
-						onChange={(e) => setEmail(e.target.value)}
-						type='email'
-						placeholder='Email address'
-						required
-					/>
-					<input
-						className='w-auto h-auto p-2 m-2 text-gray-700 placeholder-gray-600 border rounded-lg shadow-md shadow-black'
-						name='password'
-						onChange={(e) => setPassword(e.target.value)}
-						type='password'
-						placeholder='Password'
-						required
-					/>
+				) : (
+					""
+				)}
+				<div className='p-4 pl-20 pr-20 m-auto bg-orange-100 border-4 shadow-lg w-fit h-fit rounded-xl border-amber-800 shadow-black'>
+					<h1 className='mb-4 text-4xl font-bold text-center'>Welcome!</h1>
+					<img className='w-auto m-auto mb-4 h-72' src={LoginChef} alt='Login Chef' />
+					<form onSubmit={handleSubmit} className='flex flex-col content-start justify-start'>
+						<input
+							className='w-auto h-auto p-2 m-2 text-gray-700 placeholder-gray-600 border rounded-lg shadow-md shadow-black '
+							name='email'
+							onChange={(e) => setEmail(e.target.value)}
+							type='email'
+							placeholder='Email address'
+							required
+						/>
+						<input
+							className='w-auto h-auto p-2 m-2 text-gray-700 placeholder-gray-600 border rounded-lg shadow-md shadow-black'
+							name='password'
+							onChange={(e) => setPassword(e.target.value)}
+							type='password'
+							placeholder='Password'
+							required
+						/>
+						<button
+							className='w-auto h-auto p-2 m-2 mb-4 text-black bg-red-400 border-0 rounded-lg shadow-md shadow-black hover:bg-red-700 hover:text-white hover:font-bold active:translate-y-1 '
+							type='submit'
+						>
+							Sign In
+						</button>
+						{state.error ? <p className='error-message'>{state.errorMessage}</p> : ""}
+					</form>
 					<button
-						className='w-auto h-auto p-2 m-2 mb-4 text-black bg-red-400 border-0 rounded-lg shadow-md shadow-black hover:bg-red-700 hover:text-white hover:font-bold active:translate-y-1 '
-						type='submit'
+						onClick={() => navigate("/SignUp")}
+						className='m-auto mb-4 text-blue-500 hover:text-blue-700 hover:font-bold active:translate-y-1'
+						style={{ textDecoration: "underline" }}
 					>
-						Sign In
+						Not A Member? Sign-Up for Free!
 					</button>
-					{state.error ? <p className='error-message'>{state.errorMessage}</p> : ""}
-				</form>
-				<button
-					onClick={() => navigate("/SignUp")}
-					className='m-auto mb-4 text-blue-500 hover:text-blue-700 hover:font-bold active:translate-y-1'
-					style={{ textDecoration: "underline" }}
-				>
-					Not A Member? Sign-Up for Free!
-				</button>
+				</div>
 			</div>
 		</div>
 	);
