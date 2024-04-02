@@ -6,7 +6,7 @@ import ChefSurpriseHeadCount from "./Chef-Surprise-Comps/chefSurpriseHeadCount";
 import ChefSurpriseFlavor from "./Chef-Surprise-Comps/chefSurpriseFlavor";
 import ChefSurpriseDietary from "./Chef-Surprise-Comps/chefSurpriseDietary";
 import preparingOrderAnimatedFade from "../../assets/images/preparingOrderAnimatedFade.svg";
-import flippedChef from "../../assets/images/flippedChef.png";
+// import flippedChef from "../../assets/images/flippedChef.png";
 import windowCloseBtn from "../../assets/images/windowCloseBtn.svg";
 import jsPDF from "jspdf";
 import "../../css/chefSurprise.css";
@@ -130,7 +130,7 @@ const ChefSurprise = () => {
 	return (
 		<div className='chef-surprise-container-main'>
 			<div className='chef-surprise-container'>
-				<img className='chef-surprise-chef-img' src={flippedChef} />
+				{/* <img className='chef-surprise-chef-img' src={flippedChef} /> */}
 				<div
 					style={{
 						display: state.error ? "flex" : "none",
