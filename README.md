@@ -1,4 +1,4 @@
-## EatAi - Custom Meal Planning
+# EatAi - Custom Meal Planning
 Welcome to EatAi, the forefront of personalized meal planning innovation. With a foundation deeply rooted in artificial intelligence, EatAi is dedicated to transforming your meal planning experience by offering bespoke solutions that cater to your individual dietary preferences, nutritional needs, and culinary desires. Whether your goal is to maintain a vibrant lifestyle, explore the vast world of recipes, or simplify your meal planning routines, EatAi is poised to change the way you interact with your diet.
 
 ## Features
