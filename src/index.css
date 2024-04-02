@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
 	box-sizing: border-box;
 }
@@ -188,7 +192,9 @@ main {
 	margin-top: 22px;
 	color: white;
 	font-family: "Inter", sans-serif;
-	transition: background-color 0.3s, transform 0.2s;
+	transition:
+		background-color 0.3s,
+		transform 0.2s;
 }
 
 .login-form > button:hover {
@@ -343,7 +349,9 @@ main {
 	margin-bottom: 15px;
 	color: white;
 	font-family: "Inter", sans-serif;
-	transition: background-color 0.3s, transform 0.2s;
+	transition:
+		background-color 0.3s,
+		transform 0.2s;
 }
 .logout-btn:hover {
 	color: white;
@@ -474,7 +482,9 @@ main {
 	box-shadow: 3px 3px 3px 1px black;
 	font-size: 30px;
 	cursor: pointer;
-	transition: background-color 0.3s, transform 0.2s;
+	transition:
+		background-color 0.3s,
+		transform 0.2s;
 	animation: fadeIn 0.75s ease-in-out;
 	padding: 15px 10px;
 	margin-bottom: 25px;
@@ -532,7 +542,9 @@ main {
 	box-shadow: 2px 1px 2px 1px black;
 	font-size: 30px;
 	cursor: pointer;
-	transition: background-color 0.3s, transform 0.2s;
+	transition:
+		background-color 0.3s,
+		transform 0.2s;
 	animation: fadeIn 0.75s ease-in-out;
 	padding: 15px 10px;
 	margin-top: 10px;
@@ -587,7 +599,9 @@ main {
 	box-shadow: 2px 1px 2px 1px black;
 	font-size: 30px;
 	cursor: pointer;
-	transition: background-color 0.3s, transform 0.2s;
+	transition:
+		background-color 0.3s,
+		transform 0.2s;
 	animation: fadeIn 0.75s ease-in-out;
 	padding: 15px 10px;
 	margin-top: 10px;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 //images
-import flippedChef from "../../assets/images/flippedChef.png";
+// import flippedChef from "../../assets/images/flippedChef.png";
 
 //components
 import AdvancedStart from "./Advanced-Order-Comps/advancedStart.jsx";
@@ -80,9 +80,9 @@ const RenderNoProfileSetup = renderStepMapNewProfileSetup[step];
 
 	return (
 		<div className='advanced-order-container'>
-			<div className='chef-img-container'>
+			{/* <div className='chef-img-container'>
 				{step === 3 ? "" : <img className='advanced-order-chef-img' src={flippedChef} />}
-			</div>
+			</div> */}
 			<div
 				style={{
 					display: state.profileSearch ? "flex" : "none",
