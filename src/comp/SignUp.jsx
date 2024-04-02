@@ -1,50 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../Context/AuthContext";
-import { useUserStore } from "../stateStore/userStore.js";
-import Disclaimer from "./Disclaimer.jsx";
-import LoginChef from "../assets/images/LoginChef.png";
-
-
+// import { useNavigate } from "react-router-dom";
+// import { UserAuth } from "../Context/AuthContext";
+// import { useUserStore } from "../stateStore/userStore.js";
+// import Disclaimer from "./Disclaimer.jsx";
+// import LoginChef from "../assets/images/LoginChef.png";
 
 const SignUp = () => {
-  const [form, setForm] = useState({
-    firstName:"",
-    lastName:"",
-    phone:"",
-    email:"",
-    password:"",
-  });
-  const [renderSubmit, setRenderSubmit] = useState(false); 
-  const [error, setError] = useState(null);
-  const disclaimerState = useUserStore((state) => state.disclaimer)
-  const { createUser } = UserAuth();
+	//   const [form, setForm] = useState({
+	//     firstName:"",
+	//     lastName:"",
+	//     phone:"",
+	//     email:"",
+	//     password:"",
+	//   });
+	//   const [renderSubmit, setRenderSubmit] = useState(false);
+	//   const [error, setError] = useState(null);
+	//   const disclaimerState = useUserStore((state) => state.disclaimer)
+	//   const { createUser } = UserAuth();
 
-  const navigate = useNavigate();
+	//   const navigate = useNavigate();
 
-  const handleClick = () => {
-    setRenderSubmit(true)
-  };
+	//   const handleClick = () => {
+	//     setRenderSubmit(true)
+	//   };
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError("");
+	//   const handleSubmit = async (e) => {
+	//   e.preventDefault();
+	//   setError("");
 
-  if (disclaimerState) {
-    try {
-      await createUser(form);
-          navigate("/MembersArea/Welcome");
-    } catch (e) {
-      setError(e.message);
-    }
-  } else {
-    setError("Please accept the disclaimer before signing up.");
-  }
-  };
+	//   if (disclaimerState) {
+	//     try {
+	//       await createUser(form);
+	//           navigate("/MembersArea/Welcome");
+	//     } catch (e) {
+	//       setError(e.message);
+	//     }
+	//   } else {
+	//     setError("Please accept the disclaimer before signing up.");
+	//   }
+	//   };
 
-  return (
+	return (
 		<div className='login-container'>
-			{renderSubmit ? <Disclaimer /> : ""}
+			<h1>
+				{" "}
+				This App is currently going under major construction to better the user desktop and mobile experience. Stay Tuned. Current Members will still
+				have Ai access.
+			</h1>
+
+			{/* {renderSubmit ? <Disclaimer /> : ""}
 			<h1 className='sign-up-title'>Sign Up for a FREE Account</h1>
 			<img src={LoginChef} className='login-chef-img' alt='Chef' />
 			<form
@@ -117,7 +121,7 @@ const SignUp = () => {
 			</form>
 			<button onClick={() => navigate("/")} className='current-member-link' style={{ textDecoration: "underline" }}>
 				Already A Member? Login
-			</button>
+			</button> */}
 		</div>
 	);
 };
