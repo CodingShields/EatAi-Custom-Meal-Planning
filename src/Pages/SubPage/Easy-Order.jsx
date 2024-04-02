@@ -18,7 +18,6 @@ import EasyOrderStartOverButton from "./Easy-Order-Comps/resetBtn";
 import EasyOrderPreviousButton from "./Easy-Order-Comps/Easy-Order-Previous-Button";
 import EasyOrderStartConfirmButton from "./Easy-Order-Comps/Easy-Order-Start-Confirm-Button";
 //images
-import flippedChef from "../../assets/images/flippedChef.png";
 
 const EasyOrderForm = () => {
 	const [state, setState] = useState({
