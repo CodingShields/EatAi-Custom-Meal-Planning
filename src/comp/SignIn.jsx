@@ -1,37 +1,41 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
 
 import LoginChef from "../assets/images/LoginChef.png";
 
-
 const SignIn = () => {
-  const {signIn} = UserAuth();
+	const { signIn } = UserAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState(null);
+	const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await signIn(email, password);
-      navigate("/MembersArea/Welcome");
-    } catch (e) {
-      setError("Invalid credentials. Please try again.");
-      console.log("Invalid credentials. Please try again.");
-    }
-  };
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setError("");
+		try {
+			await signIn(email, password);
+			navigate("/MembersArea/Welcome");
+		} catch (e) {
+			setError("Invalid credentials. Please try again.");
+			console.log("Invalid credentials. Please try again.");
+		}
+	};
 
-  return (
-    <div className="login-container-main">
-    <div className="login-container">
-      <h1>Welcome Back!</h1>
-      <img className="login-chef-img" src={LoginChef} alt="Chef" />
+	return (
+		<div className='login-container-main'>
+			<div className='login-container'>
+				<h1>Welcome Back!</h1>
+				<img className='login-chef-img' src={LoginChef} alt='Chef' />
+				<h1 className='text-center'>
+					{" "}
+					This App is currently going under major construction to better the user desktop and mobile experience. Stay Tuned. Current Members will
+					still have Ai access.
+				</h1>
 
-      <form onSubmit={handleSubmit} className="login-form">
+				{/* <form onSubmit={handleSubmit} className="login-form">
         <input
           name="email"
           onChange={(e) => setEmail(e.target.value)}
@@ -55,10 +59,10 @@ const SignIn = () => {
         style={{ textDecoration: "underline" }}
       >
         Not A Member? Sign-Up for Free!
-      </button>
-      </div>
-      </div>
-  );
+      </button> */}
+			</div>
+		</div>
+	);
 };
 
 export default SignIn;
