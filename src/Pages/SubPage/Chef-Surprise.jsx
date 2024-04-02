@@ -130,7 +130,7 @@ const ChefSurprise = () => {
 	return (
 		<div className='chef-surprise-container-main'>
 			<div className='chef-surprise-container'>
-				<img className='chef-img' src={flippedChef} />
+				<img className='chef-surprise-chef-img' src={flippedChef} />
 				<div
 					style={{
 						display: state.error ? "flex" : "none",
@@ -186,7 +186,7 @@ const ChefSurprise = () => {
 							Download
 						</button>
 						<button className='reset-btn' onClick={resetData}>
-							Start Over
+							Reset Order
 						</button>
 					</div>
 				</div>

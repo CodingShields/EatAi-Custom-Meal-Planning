@@ -18,7 +18,6 @@ export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({});
 	const { resetForm } = useUserStoreActions((actions) => actions);
 	const disclaimerState = useUserStore((state) => state.disclaimer);
-
 	const createUser = async ({ firstName, lastName, email, phone, password }) => {
 		try {
 			const authUser = await createUserWithEmailAndPassword(auth, email, password);

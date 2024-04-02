@@ -7,13 +7,16 @@ const EasyOrderConfirmOrder = () => {
 
 	return (
 		<>
-			<div className="easy-order-confirm-container">
-				<h4 className='easy-order-confirm-order-text'>
-					Double Check Your Order Details On The Right. If you see anything you would like to change, just click on the
-					Option Title to go back and change. If You are ready to send it off to the Chef, just click "Order Now".
-				</h4>
-				{/* <h1> Need To Add Option to exclude previous searches??</h1> */}
-				<button className='easy-order-btn' onClick={() => increaseStep()}>
+			<div className='easy-order-confirm-container'>
+				<p className='easy-order-confirm-order-text'>
+					Please double check your order. If you need to make an a change, just click on the Title of the item to go
+					back and change your answer.
+				</p>
+				<p className='easy-order-confirm-order-text'>
+					If You are ready to send it off to the Chef, just click "Order Now".
+				</p>
+
+				<button className='easy-order-fulfill-order-button' onClick={() => increaseStep()}>
 					Order Now
 				</button>
 			</div>

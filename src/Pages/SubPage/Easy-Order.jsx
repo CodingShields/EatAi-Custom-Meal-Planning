@@ -1,62 +1,81 @@
-import React from "react";
-import flippedChef from "../../assets/images/flippedChef.png";
+import { useEffect, useState } from "react";
+import { useRenderStepStore } from "../../stateStore/RenderStepStore";
+//components
 import EasyOrderBegin from "./Easy-Order-Comps/Easy-Order-Begin";
-import EasyOrderCourse from "./Easy-Order-Comps/Easy-Order-Course";
-import EasyOrderDietary from "./Easy-Order-Comps/Easy-Order-Dietary";
-import EasyOrderHeadCount from "./Easy-Order-Comps/Easy-Order-Head-Count";
 import EasyOrderEvents from "./Easy-Order-Comps/Easy-Order-Events";
-// import EasyOrderBeverage from "./easyOrderComps/Easy-Order-Beverage";
-// import EasyOrderCookTime from "./easyOrderComps/Easy-Order-Cook-Time";
-// import EasyOrderDessertFlavor from "./easyOrderComps/Easy-Order-Dessert-Flavor";
-import EasyOrderMealBalance from "./Easy-Order-Comps/Easy-Order-Meal-Balance";
-// import EasyOrderHowToCook from "./easyOrderComps/Easy-Order-How-To-Cook";
-// import EasyOrderSeasonalOptions from "./easyOrderComps/Easy-Order-Seasonal-Options";
 import EasyOrderCulturalOptions from "./Easy-Order-Comps/Easy-Order-Cultural-Options";
-import EasyOrderStartOverButton from "./Easy-Order-Comps/Easy-Order-Start-Over-Button";
-import EasyOrderBackButton from "./Easy-Order-Comps/Easy-Order-Back-Button";
-import EasyOrderUserSelection from "./Easy-Order-Comps/Easy-Order-User-Selection";
+import EasyOrderHeadCount from "./Easy-Order-Comps/Easy-Order-Head-Count";
+import EasyOrderCourses from "./Easy-Order-Comps/Easy-Order-Courses";
+import EasyOrderDietary from "./Easy-Order-Comps/Easy-Order-Dietary";
+import EasyOrderHowToFlavor from "./Easy-Order-Comps/easyOrderFlavorComp";
+import EasyOrderMealBalance from "./Easy-Order-Comps/Easy-Order-Meal-Balance";
 import EasyOrderMeasure from "./Easy-Order-Comps/Easy-Order-Measure";
-import EasyOrderHowToFlavor from "./Easy-Order-Comps/Easy-Order-How-To-Flavor";
 import EasyOrderConfirmOrder from "./Easy-Order-Comps/Easy-Order-Confirm-Order";
 import EasyOrderFulfilled from "./Easy-Order-Comps/Easy-Order-Fulfilled";
-import { useRenderStepStore } from "../../stateStore/RenderStepStore";
+import EasyOrderUserSelection from "./Easy-Order-Comps/Easy-Order-User-Selection";
+//buttons
+import EasyOrderStartOverButton from "./Easy-Order-Comps/resetBtn";
+import EasyOrderPreviousButton from "./Easy-Order-Comps/Easy-Order-Previous-Button";
+import EasyOrderStartConfirmButton from "./Easy-Order-Comps/Easy-Order-Start-Confirm-Button";
+//images
+import flippedChef from "../../assets/images/flippedChef.png";
+
 const EasyOrderForm = () => {
+	const [state, setState] = useState({
+		error: false,
+		errorMessage: "",
+		reviewOrder: false,
+	});
 	const step = useRenderStepStore((state) => state.step);
+
+	useEffect(() => {
+		if(step === 9){
+			setState({...state, reviewOrder: true})
+		} else if (step === 10){
+			setState({...state, reviewOrder: false})
+		}
+	}, [step]);
 
 	const renderStepMap = {
 		0: <EasyOrderBegin />,
 		1: <EasyOrderEvents />,
 		2: <EasyOrderCulturalOptions />,
 		3: <EasyOrderHeadCount />,
-		4: <EasyOrderCourse />,
+		4: <EasyOrderCourses />,
 		5: <EasyOrderDietary />,
 		6: <EasyOrderHowToFlavor />,
 		7: <EasyOrderMealBalance />,
-		// 8: <EasyOrderCookTime />,
-		// 9: <EasyOrderHowToCook />,
 		8: <EasyOrderMeasure />,
-		// 11: <EasyOrderSeasonalOptions />,
-		// 12: <EasyOrderDessertFlavor />,
-		// 13: <EasyOrderBeverage />,
 		9: <EasyOrderConfirmOrder />,
 		10: <EasyOrderFulfilled />,
 	};
 
 	const RenderCompFromStep = renderStepMap[step];
-	
+
 	return (
-		<div className='easy-order-container'>
-			<div className='easy-order-chef-img-container'>
-				<img className='chef-img' src={flippedChef} alt='Chef' />
-			</div>
-			<div className='easy-order-chef-bubble-container'>
-				{RenderCompFromStep}
-				<div className='easy-order-btn-container'>
-					<EasyOrderStartOverButton />
-					<EasyOrderBackButton />
+		<div className='easy-order-container-main'>
+			<div className='easy-order-comp-container'>
+				{/* <div className='easy-order-chef-img-container'>
+					<img className='easy-order-chef-img' src={flippedChef} alt='Chef' />
+				</div> */}
+				<div className='easy-order-menu-container'>
+					{RenderCompFromStep}
+					<div className='easy-order-btn-container'>
+						<EasyOrderPreviousButton />
+						<EasyOrderStartOverButton />
+						<EasyOrderStartConfirmButton />
+					</div>
+				</div>
+				<div>
+					{state.reviewOrder ? (
+						<div className='easy-order-user-selection-container-main'>
+							<EasyOrderUserSelection />
+						</div>
+					) : (
+						""
+					)}
 				</div>
 			</div>
-			<EasyOrderUserSelection />
 		</div>
 	);
 };

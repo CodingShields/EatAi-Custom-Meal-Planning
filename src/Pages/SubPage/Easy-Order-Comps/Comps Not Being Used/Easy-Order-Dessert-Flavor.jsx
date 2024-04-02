@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import DessertFlavor from "../../../assets/dataArrays/Dessert-Flavor-Array";
-import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
+import DessertFlavor from "../../../../assets/dataArrays/Dessert-Flavor-Array";
+import { useRenderStepStore } from "../../../../stateStore/RenderStepStore";
+import { useEasyOrderStoreActions } from "../../../../stateStore/easyOrderStore";
 import "../../../css/easyOrder.css";
 
 const EasyOrderDessertFlavor = () => {

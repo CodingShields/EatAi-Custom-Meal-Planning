@@ -1,11 +1,13 @@
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import "../../../css/easyOrder.css";
 
-export const EasyOrderBackButton = () => {
+export const EasyOrderPreviousButton = () => {
 	const previousStep = useRenderStepStore((state) => state.previousStep);
+	const step = useRenderStepStore((state) => state.step);
 	return (
 		<button
-			className='easy-order-btn'
+			disabled={step === 10 || step === 0 ? true : false}
+			className='easy-order-previous-btn'
 			onClick={() => {
 				previousStep();
 			}}
@@ -14,4 +16,4 @@ export const EasyOrderBackButton = () => {
 		</button>
 	);
 };
-export default EasyOrderBackButton;
+export default EasyOrderPreviousButton;

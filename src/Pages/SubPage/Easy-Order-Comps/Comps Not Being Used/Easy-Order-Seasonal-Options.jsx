@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SeasonalArray from "../../../assets/dataArrays/Seasonal-Options-Array";
-import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
+import SeasonalArray from "../../../../assets/dataArrays/Seasonal-Options-Array";
+import { useRenderStepStore } from "../../../../stateStore/RenderStepStore";
+import { useEasyOrderStoreActions } from "../../../../stateStore/easyOrderStore";
 import "../../../css/easyOrder.css";
 
 const EasyOrderSeasonalOptions = () => {

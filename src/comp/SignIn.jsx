@@ -29,37 +29,16 @@ const SignIn = () => {
 			<div className='login-container'>
 				<h1>Welcome Back!</h1>
 				<img className='login-chef-img' src={LoginChef} alt='Chef' />
-				<h1 className='text-center'>
-					{" "}
-					This App is currently going under major construction to better the user desktop and mobile experience. Stay Tuned. Current Members will
-					still have Ai access.
-				</h1>
-
-				{/* <form onSubmit={handleSubmit} className="login-form">
-        <input
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Email address"
-          required
-        />
-        <input
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Sign In</button>
-      {error && <p className="error-message">{error}</p>}
-      </form>
-      <button
-        onClick={() => navigate("/SignUp")}
-        className="current-member-link"
-        style={{ textDecoration: "underline" }}
-      >
-        Not A Member? Sign-Up for Free!
-      </button> */}
+				<form onSubmit={handleSubmit} className='login-form'>
+					<input name='email' onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email address' required />
+					<input name='password' onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' required />
+					<button type='submit'>Sign In</button>
+					{error && <p className='error-message'>{error}</p>}
+				</form>
+				<button onClick={() => navigate("/SignUp")} className='current-member-link' style={{ textDecoration: "underline" }}>
+					Not A Member? Sign-Up for Free!
+				</button>{" "}
+				*/}
 			</div>
 		</div>
 	);
