@@ -8,7 +8,7 @@ Welcome to EatAi, the forefront of personalized meal planning innovation. With a
 #### Convenient PDF Export: Easily export your meal plans and shopping lists to PDF, making meal preparation seamless and straightforward.
 #### Secure Firebase Integration: Enjoy a personalized experience every time, with your preferences and meal history safely stored for future recommendations.
 #### Universal Responsive Design: Whether on a phone, tablet, or desktop, experience EatAi’s full functionality without compromise.
-####Cutting-edge AI Integration: Powered by OpenAI, EatAi offers meal plans that are as unique as you are.
+#### Cutting-edge AI Integration: Powered by OpenAI, EatAi offers meal plans that are as unique as you are.
 #### Technology Stack EatAi is built on a modern web development framework, ensuring not just performance and scalability, but also a seamless user experience:
 
 ## Frontend: Utilizes React for dynamic user interfaces, enriched by Tailwind CSS for responsive and modern styling.
