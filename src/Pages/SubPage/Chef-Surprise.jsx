@@ -9,8 +9,6 @@ import preparingOrderAnimatedFade from "../../assets/images/preparingOrderAnimat
 // import flippedChef from "../../assets/images/flippedChef.png";
 import windowCloseBtn from "../../assets/images/windowCloseBtn.svg";
 import jsPDF from "jspdf";
-import "../../css/chefSurprise.css";
-import "../../css/errorModal.css";
 
 const ChefSurprise = () => {
 	const entree = useChefSurpriseStore((state) => state.entree);

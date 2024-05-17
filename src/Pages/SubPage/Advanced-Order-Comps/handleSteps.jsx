@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRenderSmallStepStore } from "../../../stateStore/RenderStepStore";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
-import "../../../css/errorModal.css";
 
 const HandleSteps = () => {
 	const preferredUnit = useAdvancedOrderProfileStore((state) => state.preferredUnit);

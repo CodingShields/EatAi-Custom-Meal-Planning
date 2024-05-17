@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
-import "../../../css/errorModal.css";
-import "../../../css/Advanced-Order-CSS/buildAgeGenderGoal.css";
+
 
 const AgeGender = () => {
 	const age = useAdvancedOrderProfileStore((state) => state.age);

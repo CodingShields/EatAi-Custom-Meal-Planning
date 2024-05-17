@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import BeverageOptionsArray from "../../../../assets/dataArrays/Beverage-Options-Array";
 import { useEasyOrderRenderStore } from "../../../stateStore/RenderStore";
 import { useEasyOrderStoreActions } from "../../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 export default function EasyOrderBeverage() {
 	const [checkedBeverage, setCheckedBeverage] = useState("");

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import HowToCook from "../../../../assets/dataArrays/How-To-Cook-Array";
 import { useRenderStepStore } from "../../../../stateStore/RenderStepStore";
 import { useEasyOrderStoreActions } from "../../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 const EasyOrderHowToCook = () => {
 	const [isButtonDisabled, setIsButtonDisabled] = useState(false);

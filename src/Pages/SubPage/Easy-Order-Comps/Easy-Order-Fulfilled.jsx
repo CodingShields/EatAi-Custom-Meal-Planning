@@ -9,8 +9,7 @@ import { db } from "../../../Firebase/fireBaseConfig";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { UserAuth } from "../../../Context/AuthContext";
 import { nanoid } from "nanoid";
-import "../../.././css/EasyOrder.css";
-import "../../.././css/errorModal.css";
+
 
 const EasyOrderFulfilled = () => {
 	const apiKey = import.meta.env.VITE_API_KEY;

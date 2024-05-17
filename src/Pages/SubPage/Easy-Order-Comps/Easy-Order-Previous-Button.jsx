@@ -1,5 +1,4 @@
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import "../../../css/easyOrder.css";
 
 export const EasyOrderPreviousButton = () => {
 	const previousStep = useRenderStepStore((state) => state.previousStep);

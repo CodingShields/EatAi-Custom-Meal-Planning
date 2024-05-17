@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 //DB
-import { db} from "../../../Firebase/fireBaseConfig.js";
+import { db } from "../../../Firebase/fireBaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
 //auth
 import { UserAuth } from "../../../Context/AuthContext.jsx";
 // Global State
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore.js";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore.js";
-//images
-import SearchingForProfileFadeIn from "../../../assets/images/SearchingForProfileFadeIn.svg";
-import SearchingForProfileFadeOut from "../../../assets/images/SearchingForProfileFadeOut.svg";
-import "../../../css/Advanced-Order-CSS/stepOne.css";
-
-const ProfileSearch = ({ handleConfirm}) => {
+import SearchingIcon from "../../../comp/SearchingIcon.jsx";
+import Modal from "../../../comp/Modal.jsx";
+import closeButtonIcon from "../../../assets/icons/closeButtonIcon.svg";
+const ProfileSearch = ({ handleConfirm, updateMessage }) => {
 	const user = UserAuth();
 	const userId = user.user.uid;
 	const { advancedProfileFound } = useAdvancedOrderProfileStoreActions((actions) => actions);
@@ -20,100 +18,65 @@ const ProfileSearch = ({ handleConfirm}) => {
 	const [state, setState] = useState({
 		error: false,
 		errorMessage: "",
-		welcome: false,
-		message: "Checking to see if your Profile is loaded ...",
 		loading: false,
-		hasProfile: false,
-		noProfile: false,
 		errorModal: false,
 	});
 
-	useEffect(() => {
-		// setState({ ...state, loading: false, errorModal: false, errorMessage: "" });
-		const checkForProfile = () => {
-			setState({ ...state, loading: true, message: "Checking to see if your Profile is loaded ..." });
-			setTimeout(() => {
-				if (advancedProfileFound === true) {
-					setState({ ...state, loading: false, hasProfile: true, message: "Profile Found!" });
-				} else {
-					setState({
-						...state,
-						loading: true,
-						hasProfile: false,
-						message: "No Profile was loaded yet. Let me check the DataBase.",
-					});
-				}
-				{
-					!state.hasProfile
-						? setTimeout(() => {
-								const checkForProfileInDb = async () => {
-									try {
-										const userDocRef = doc(db, "users", userId);
-										const userDocSnap = await getDoc(userDocRef);
-										const userDocData = userDocSnap.data();
-										if (userDocData.advancedOrderProfile) {
-											setState({ ...state, hasProfile: true, error: false, errorMessage: "", loading: false });
-											console.log("success");
-										} else {
-											console.log("no profile");
-											setState({
-												...state,
-												hasProfile: false,
-												noProfile: true,
-												error: true,
-												errorModal: true,
-												errorMessage:
-													"No Personal Stats file found. If this is not right, please go to the support and submit a request.",
-											});
-										}
-									} catch (error) {
-										console.log(error);
-									}
-								};
-								checkForProfileInDb();
-						  }, 4000)
-						: null;
-				}
-			}, 3000);
-		};
-		checkForProfile();
-	}, []);
-
-	const closeModalBtn = () => {
-		setState({
-			...state,
-			errorModal: false,
-			loading: false,
-			errorMessage: "",
-			message: "Let's get started building you a profile!",
-		});
+	const CheckForProfile = async () => {
+		try {
+			const userDocRef = doc(db, "users", userId);
+			const userDocSnap = await getDoc(userDocRef);
+			const userDocData = userDocSnap.data();
+			console.log(userDocData);
+			if (userDocData.advancedOrder) {
+				setState({ ...state, loading: false });
+				updateMessage("Awesome, you're all set !");
+				console.log("success");
+			} else {
+				setState({ ...state, loading: false });
+				updateMessage("No profile found, lets create one. If you believe this is an error, please contact support.");
+				console.log("no profile");
+			}
+		} catch (error) {
+			console.log(error);
+			setState({ ...state, loading: false, error: true, errorModal: true, errorMessage: error.message });
+		}
 	};
 
+	const HandleProfileSearch = (e) => {
+		if (e.target.value === "Yes" || e.target.value === "I am not sure ?") {
+			setState({ ...state, loading: true });
+			CheckForProfile();
+		}
+	};
 
+	const HandleModalClose = () => {
+		console.log("test");
+		setState({ ...state, error: false, errorModal: false, errorMessage: "" });
+	};
 
-
+	const errorModalStyle = [
+		"flex justify-between items-center text-white bg-red-500/80 text-3xl mx-auto my-auto w-fit h-fit px-12 py-4 rounded-2xl shadow-2xl shadow-white/50 space-x-12 fill-white stroke-white",
+	];
+	const errorModalCloseButtonStyle = ["w-10 h-10 text-white hover:animate-pulse cursor-pointer"];
 	return (
-		<div className='advanced-order-comp-container'>
-			<h4> {state.message}</h4>
-			{state.loading ? <img src={SearchingForProfileFadeIn} alt='Looking for Profile' /> : ""}
-			{state.errorModal ? (
-				<div className='error-container'>
-					<div className='error-content'>
-						<p className='error-message'>{state.errorMessage}</p>
-						<button className='close-modal-btn' onClick={closeModalBtn}>
-							Close
-						</button>
-						add a navigate button on the error modal to go to support page
-					</div>
-				</div>
-			) : (
-				""
-			)}
-			{state.noProfile && state.message === "Let's get started building you a profile!" ? (
-				<button onClick={handleConfirm}>Lets build your profile</button>
-			) : (
-				""
-			)}
+		<div className='h-[200px] w-full flex flex-col justify-center items-center text-white bg-black/70 py-8 px-24 rounded-2xl shadow-2xl shadow-white/50'>
+			<Modal
+				open={state.error}
+				message={state.errorMessage}
+				onClick={HandleModalClose}
+				modalStyle={errorModalStyle}
+				icon={closeButtonIcon}
+				modalButtonStyle={errorModalCloseButtonStyle}
+			/>
+			<h1 className='text-white text-3xl text-left py-4 mt-12'> Have you setup and advanced profile yet?</h1>
+			<select onChange={HandleProfileSearch} className='w-1/3 rounded-2xl text-2xl text-center my-2 shadow-lg shadow-zinc-500 text-black'>
+				<option>Select</option>
+				<option>Yes</option>
+				<option>No</option>
+				<option>I am not sure ?</option>
+			</select>{" "}
+			<SearchingIcon open={state.loading} />
 		</div>
 	);
 };

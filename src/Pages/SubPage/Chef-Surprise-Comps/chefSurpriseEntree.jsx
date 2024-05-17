@@ -1,7 +1,6 @@
 import MealTypeArray from "../../../assets/dataArrays/Meal-Type-Array";
 import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
 import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
-import "../../../css/chefSurprise.css";
 
 const ChefSurpriseEntree = () => {
 	const entree = useChefSurpriseStore((state) => state.entree);

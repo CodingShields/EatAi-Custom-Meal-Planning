@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import "../../../css/easyOrder.css";
 
 const EasyOrderHeadCount = () => {
 	const [count, setCount] = useState(0);

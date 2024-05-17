@@ -1,6 +1,5 @@
 import { useChefSurpriseStoreActions } from "../../../stateStore/ChefSurpriseStore";
 import { useChefSurpriseStore } from "../../../stateStore/ChefSurpriseStore";
-import "../../../css/chefSurprise.css";
 
 const ChefSurpriseHeadCount = () => {
 	const headCount = useChefSurpriseStore((state) => state.headCount);

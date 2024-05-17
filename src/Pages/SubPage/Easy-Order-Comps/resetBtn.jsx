@@ -1,6 +1,5 @@
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 const resetBtn = () => {
 	const step = useRenderStepStore((state) => state.step);

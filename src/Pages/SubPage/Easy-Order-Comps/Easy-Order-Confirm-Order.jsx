@@ -1,6 +1,5 @@
 import React from "react";
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import "../../../css/easyOrder.css";
 
 const EasyOrderConfirmOrder = () => {
 	const increaseStep = useRenderStepStore((state) => state.increaseStep);

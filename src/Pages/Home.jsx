@@ -4,8 +4,8 @@ import LiveTypingHomePage from "../Pages/SubPage/Live-Typing-Pages/Live-Typing-H
 import flippedchef from "../assets/images/flippedchef.png";
 export default function Home() {
 	return (
-		<div className='home-page-container'>
-			<div className='home-page-chef-img-container'>
+		<div >
+			<div >
 				<img className='home-page-chef-img' src={flippedchef}></img>
 			</div>
 			<h1> test </h1>

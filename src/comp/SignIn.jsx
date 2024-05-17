@@ -17,7 +17,7 @@ const SignIn = () => {
 		setError("");
 		try {
 			await signIn(email, password);
-			navigate("/MembersArea/Welcome");
+			navigate("/members-area/welcome");
 		} catch (e) {
 			setError("Invalid credentials. Please try again.");
 			console.log("Invalid credentials. Please try again.");

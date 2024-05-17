@@ -11,8 +11,7 @@ import AdvancedOrderMacroInput from "./macroInput.jsx";
 import ResetButton from "./startOverButton.jsx";
 import PreviousButton from "./previousButton.jsx";
 import ConfirmSelectionButton from "./confirmSelectionStepButton.jsx";
-//css
-import "../../../css/errorModal.css";
+
 
 const AdvancedOrderCalorieMacroSelection = () => {
 	const { setMacroCalorieSelection } = useAdvancedOrderStoreActions((actions) => actions);

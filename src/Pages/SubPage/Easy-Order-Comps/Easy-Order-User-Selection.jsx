@@ -1,8 +1,7 @@
 import React from "react";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
-import "../../../css/easyOrder.css";
-import "../../../css/errorModal.css";
+
 import windowCloseBtn from "../../../assets/images/windowCloseBtn.svg";
 
 const EasyOrderUserSelection = () => {

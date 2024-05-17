@@ -16,8 +16,6 @@ import {
 	calculateAge,
 	handlePoundsToKg,
 } from "../../../utilities/advancedUtilities";
-//css
-import "../../../css/Advanced-Order-CSS/start.css";
 
 const AdvancedStart = () => {
 

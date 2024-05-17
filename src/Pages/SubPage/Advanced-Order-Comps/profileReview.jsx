@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import ProfileReviewModal from "./profileReviewModal";
-import "../../../css/modal.css";
-import "../../../css/Advanced-Order-CSS/previewProfileModal.css";
 
 const ProfileReview = () => {
 	const { setBmr } = useAdvancedOrderProfileStoreActions((actions) => actions);

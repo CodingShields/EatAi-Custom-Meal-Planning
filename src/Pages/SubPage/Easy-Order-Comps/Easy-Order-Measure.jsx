@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Measure from "../../../assets/dataArrays/Measure-Options";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 const EasyOrderMeasure = () => {
 	const { setMeasure } = useEasyOrderStoreActions();

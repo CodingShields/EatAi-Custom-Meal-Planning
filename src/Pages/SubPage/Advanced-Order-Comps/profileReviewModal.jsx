@@ -5,7 +5,6 @@ import BuildHeight from "./buildHeight";
 import BuildWeight from "./buildWeight";
 import BuildGoal from "./buildGoal";
 import AgeGender from "./buildAgeGender";
-import "../../../css/Advanced-Order-CSS/previewProfileModal.css";
 
 const ProfileReview = ({ closeModal }) => {
 	const { setAge } = useAdvancedOrderProfileStoreActions((actions) => actions);

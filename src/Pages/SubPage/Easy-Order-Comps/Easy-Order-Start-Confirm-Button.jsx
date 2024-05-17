@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useRenderStepStore } from "../../../stateStore/RenderStepStore";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
 import windowCloseBtn from "../../../assets/images/windowCloseBtn.svg";
-import "../../../css/easyOrder.css";
-import "../../../css/errorModal.css";
+
 
 export const EasyOrderStartConfirmButton = () => {
 	const event = useEasyOrderStore((state) => state.event);

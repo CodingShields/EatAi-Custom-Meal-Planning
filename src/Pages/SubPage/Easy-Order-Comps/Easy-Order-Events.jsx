@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import EventsArray from "../../../assets/dataArrays/Events-Array";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 const EasyOrderEvents = () => {
 	const { setEvent } = useEasyOrderStoreActions();

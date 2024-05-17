@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import CulturalHolidayArray from "../../../assets/dataArrays/Cultural-Holiday-Array";
-import "../../../css/easyOrder.css";
 
 const EasyOrderCulturalOptions = () => {
 	const { setCulture } = useEasyOrderStoreActions();

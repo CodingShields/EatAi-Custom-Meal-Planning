@@ -1,7 +1,6 @@
 import { useState } from "react";
 import MealBalance from "../../../assets/dataArrays/Meal-Balance-Array";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 const EasyOrderMealBalance = () => {
 	const [selectedBalance, setSelectedBalance] = useState("");

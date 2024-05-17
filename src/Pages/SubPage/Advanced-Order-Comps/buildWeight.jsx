@@ -6,9 +6,7 @@ import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderP
 import renderTextWithNewLines from "../../../utilities/renderTextWithNewLines.jsx";
 //help messages
 import helpMessages from "../../../assets/helpMessages/helpMessages.jsx";
-//css
-import "../../../css/errorModal.css"
-import "../../../css/Advanced-Order-CSS/buildHeightAndWeight.css";
+
 
 const BuildWeight = () => {
 

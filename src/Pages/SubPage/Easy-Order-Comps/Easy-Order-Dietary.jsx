@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import { useEasyOrderStore } from "../../../stateStore/easyOrderStore";
 import easyOrderDietaryOptionsArray from "../../../assets/dataArrays/Easy-Order-Dietary-Options-Array";
-import "../../../css/easyOrder.css";
 
 const EasyOrderDietary = () => {
 	const [checkedDietaryOptions, setCheckedDietaryOptions] = useState([]);

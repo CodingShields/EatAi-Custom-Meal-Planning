@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAdvancedOrderProfileStoreActions } from "../../../stateStore/AdvancedOrderProfileStore";
 import { useAdvancedOrderProfileStore } from "../../../stateStore/AdvancedOrderProfileStore";
-import "../../../css/Advanced-Order-CSS/buildHeightAndWeight.css";
 
 const BuildHeight = () => {
 	const preferredUnit = useAdvancedOrderProfileStore((state) => state.preferredUnit);

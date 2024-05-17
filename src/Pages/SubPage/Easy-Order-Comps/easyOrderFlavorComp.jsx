@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FlavorTypeArray from "../../../assets/dataArrays/Flavor-Type-Array";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
-import "../../../css/easyOrder.css";
 
 const HowToFlavor = () => {
 	const { setFlavor } = useEasyOrderStoreActions();

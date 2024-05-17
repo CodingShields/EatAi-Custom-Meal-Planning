@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useEasyOrderStoreActions } from "../../../stateStore/easyOrderStore";
 import CoursesArray from "../../../assets/dataArrays/Courses-Array";
-import "../../../css/easyOrder.css";
-import "../../../css/errorModal.css";
+
 import windowCloseBtn from "../../../assets/images/windowCloseBtn.svg";
 
 const EasyOrderCourses = () => {
